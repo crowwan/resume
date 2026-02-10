@@ -112,12 +112,13 @@ E2E 테스트 자동화 체계 구축, 분산 프로젝트 모노레포 통합, 
 
 치과 CAD 크라운 배치 처리 Electron 앱을 아키텍처 설계부터 v1.0.13 프로덕션 릴리즈까지 전체 개발을 주도.
 
-**기술**: Electron, React, TypeScript, Recoil, VTK.js, Webpack, i18next
+**기술**: Electron, React, TypeScript, Recoil, VTK.js, Webpack, Jest, MSW, Datadog
 
+- Electron + React + TypeScript 기반 데스크톱 앱을 초기 세팅부터 구축하고, 라우팅/SNB/페이지 공통 컴포넌트 등 프로젝트 구조를 설계
 - Main/Renderer 프로세스 IPC 통신 아키텍처를 설계하고, Deep Link(dentbird://) 커스텀 프로토콜 및 자동 업데이트 시스템을 구현
-- VTK.js Manipulator를 커스터마이징하여 Windows/Mac 간 마우스 인터랙션(Rotate, Pan, Zoom)을 통일하고, Model Tree 슬라이더 UX를 개선
-- Axios 인터셉터 기반 토큰 자동 갱신 및 글로벌 에러 처리 아키텍처를 구축, JWT 디코딩으로 불필요한 API 호출 제거 및 API Gateway 마이그레이션 완료
-- Webpack Main 프로세스 번들링, Windows/Mac 코드 서명, Datadog RUM 모니터링, Crash Reporter까지 빌드/배포/모니터링 파이프라인 구축
+- Webpack Main 프로세스 번들링, Windows/Mac 코드 서명, 환경별(dev/qa/prod) 빌드 분리, Artifact 버전 관리까지 빌드/배포 파이프라인을 구축
+- 테스트 문화가 없는 환경에서 Jest + MSW 기반 단위 테스트 인프라를 도입하고, 주요 모듈 테스트 코드를 작성
+- Datadog RUM 연동(환경별 설정 분리, 빌드 시 환경변수 주입) 및 Electron Crash Reporter를 구축하여 프로덕션 에러 추적 체계 확립
 
 ---
 
