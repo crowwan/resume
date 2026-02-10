@@ -92,15 +92,15 @@ iframe 기반 마이크로 프론트엔드 5개 모듈을 운영하며 개별 �
 
 ### 4. DentBird Linker Desktop - CAM 연동 데스크톱 앱
 
-이마고웍스 | 2025.11 ~ 현재
+이마고웍스 | 2024.08 ~ 현재 | 223+ 커밋, 8개 버전 릴리즈
 
-16개+ CAM 소프트웨어를 Electron 기반 데스크톱 앱으로 연동하는 시스템을 설계/구축.
+치과 CAM 소프트웨어 연동 Electron 데스크톱 앱을 0→1로 설계/구축하고, Chrome PNA 대응 Custom Protocol 아키텍처 전환을 주도.
 
-**기술**: Electron, React, TypeScript, Nx Monorepo, Azure Pipelines, Datadog, Jest
+**기술**: Electron, React, TypeScript, Vite, Express, Nx Monorepo, Azure Pipelines, Datadog, Jest, draco3d
 
-- 16개+ CAM 소프트웨어별 좌표계 차이를 변환 매트릭스 알고리즘으로 해결하여 Protocol/HTTP 방식별 좌표계 변환 구현
-- Export Session 방식 Protocol Handler 아키텍처를 설계하고 `dentbird-linker://` 딥링크 기반 데이터 전달 구조 구축
-- Chrome 142 LNA 규제를 Custom Protocol 아키텍처 전환으로 선제 대응, Electron 인스톨러 854MB → 78MB (91% 감소), TDD 기반 단위 테스트 18개 작성
+- Electron + Vite + React 기반 데스크톱 앱을 0부터 설계하고, 내장 Express 서버로 웹↔데스크톱 통신, Config 클래스 기반 동적 소프트웨어 관리 시스템 구축, v1.0.0 ~ v1.0.2 프로덕션 릴리즈
+- 16개+ CAM 소프트웨어별 좌표계 차이를 변환 매트릭스 알고리즘으로 해결하고, Export Session 방식 Protocol Handler 아키텍처 설계
+- Chrome PNA 규제를 Custom Protocol 아키텍처 전환으로 선제 대응 (WebSocket/Protocol POC → dentbird-linker:// 채택), Electron 인스톨러 854MB → 78MB (91% 감소)
 - Azure Pipelines 기반 Windows/macOS 크로스 플랫폼 빌드 자동화 (EV 코드 서명 포함) 및 Datadog RUM/Logs 모니터링 통합
 
 ---

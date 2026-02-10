@@ -247,17 +247,30 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2025.11 ~ 현재 |
-| **역할** | 설계 및 구현 전담 |
-| **기술** | Electron, React, TypeScript, NX Monorepo, Azure Pipelines, Datadog, Jest |
+| **기간** | 2024.08 ~ 현재 (약 18개월) |
+| **역할** | 설계 및 구현 전담 (주 개발자, 전체 커밋의 78%) |
+| **기술** | Electron, React, TypeScript, Vite, Express, NX Monorepo, Azure Pipelines, Datadog, Jest, draco3d |
+| **규모** | 223+ 커밋, +44K LOC, 8개 버전 릴리즈 (v1.0.0 ~ v1.0.3) |
 
 ### 프로젝트 설명
 
-치과 CAD/CAM 워크플로우에서 16개+ CAM 소프트웨어를 Electron 기반 데스크톱 앱으로 연동하는 시스템을 설계하고 구축했습니다. Protocol/HTTP 방식별 좌표계 변환 알고리즘 구현, Chrome LNA 규제 선제 대응을 위한 Custom Protocol 아키텍처 전환, Windows EV 코드 서명 파이프라인 구축을 주도했습니다.
+치과 CAD/CAM 워크플로우에서 웹 브라우저와 로컬 CAM 소프트웨어를 연동하는 Electron 기반 데스크톱 앱을 0→1로 설계하고 구축했습니다. 내장 Express 서버 기반 통신에서 Chrome PNA 규제 대응을 위한 Custom Protocol 아키텍처로 전환하고, 16개+ CAM 소프트웨어 좌표계 변환 시스템, Windows EV 코드 서명 파이프라인, Datadog 모니터링을 구축했습니다.
 
 ### 담당 업무
 
-#### 4-1. Linker Desktop - CAM 소프트웨어 연동 시스템 (2025.11 ~ 2026.02)
+#### 4-1. Electron 앱 아키텍처 설계 및 프로덕션 릴리즈 (2024.08 ~ 2025.07)
+
+- Electron + Vite + React + TypeScript 프로젝트 아키텍처를 설계하고 **1개월 집중 개발로 113개 커밋** 구현
+  - Main/Renderer 프로세스 분리, Context Bridge 기반 IPC 통신 구조
+  - 내장 Express 서버로 웹 ↔ 데스크톱 HTTP 통신 (CORS, Multer 파일 업로드)
+  - Config 클래스 기반 동적 소프트웨어 관리 시스템 (userData JSON, 세션 당 1회 초기화)
+- CAM 소프트웨어 순차 연동: Go2dental, AccuWare, hyperDent, nauta
+  - Child Process 기반 소프트웨어 실행/종료 관리, 5분 주기 Health Check
+  - 소프트웨어별 Config 설정 (openType, Die 모델 제외 옵션)
+- 자동 업데이트 시스템 (electron-updater), Custom TitleBar, System Tray, OS 자동 실행
+- v1.0.0 ~ v1.0.2 **8개 버전 릴리즈**, cross-env 기반 환경별(dev/qa/prod) 빌드, Windows Code Signing
+
+#### 4-2. CAM Export 좌표계 변환 시스템 (2025.11 ~ 2026.02)
 
 - 16개+ CAM 소프트웨어별 좌표계 차이를 `constructionInfo.transformMat` 변환 매트릭스 알고리즘으로 해결
   - STL/PLY 파일 3D 좌표계 변환 로직 구현 (MillBox, D+CAM, ALPHA AI, hyperDENT, PreForm 등)
@@ -267,19 +280,23 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Azure Pipelines 기반 Windows/macOS 크로스 플랫폼 빌드 자동화 (EV 코드 서명 포함)
 - Datadog RUM/Logs 통합으로 Main/Renderer 프로세스 에러 추적 체계 구축
 
-#### 4-2. Chrome LNA 규제 대응 - Custom Protocol 전환 (2025.12, 5일)
+#### 4-3. Chrome PNA 대응 - Custom Protocol 아키텍처 전환 (2025.11 ~ 2026.02)
 
-- Chrome 142 localhost 차단 규제를 Custom Protocol 아키텍처 전환으로 선제 대응
-  - 3개 CAM SW(MillBox, D+CAM, ALPHA AI)를 `dentbird-linker://` 딥링크 방식으로 마이그레이션
+- Chrome Private Network Access 정책으로 웹 → localhost HTTP 요청 차단 문제를 Custom Protocol 아키텍처 전환으로 선제 대응
+  - WebSocket / Custom Protocol 2가지 접근법 **POC 수행** 후 Custom Protocol 채택
+  - 기술 의사결정 문서 **4,000줄+** 작성 (Chrome PNA 솔루션 분석, Spike 계획 및 결과)
+- `dentbird-linker://` 프로토콜 핸들러 구현 및 Deep Link 처리 (앱 미실행 시 URL 저장 → 실행 후 처리)
+- draco3d 기반 **DRC → STL 실시간 파일 변환** 파이프라인 구축 (복수 파일 동시 변환)
 - 분산된 Electron 앱을 NX 모노레포로 마이그레이션 (Git Subtree로 히스토리 보존)
 - Feature Flag 설계: localStorage 기반 → Datadog 연동 점진적 롤아웃 전략
 - TDD 기반 구현: INI/XML 생성, HTTP 통신 로직 단위 테스트 18개 작성 (INI 5 + HTTP 8 + config 5)
 
 ### 성과
 
+- **0→1 개발**: 아키텍처 설계부터 v1.0.3까지 **8개 버전 프로덕션 릴리즈**, 223+ 커밋
 - Electron 인스톨러 크기 **854MB → 78MB (91% 감소)** (webpack DefinePlugin 환경변수 빌드 시점 주입)
-- 16개 마이그레이션 체크리스트 100% 완료
-- Task 완료율 83% (6개 중 5개)
+- Chrome PNA 대응 Custom Protocol 아키텍처로 **브라우저 독립적 통신** 확보
+- 16개+ CAM SW 좌표계 변환, DRC→STL 실시간 변환 파이프라인 구축
 
 ---
 
