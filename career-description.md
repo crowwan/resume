@@ -75,22 +75,56 @@
 
 ---
 
-## 프로젝트 2. Micro Frontend 모듈 시스템 설계 및 개발
+## 프로젝트 2. Micro Frontend 아키텍처 설계 및 운영
 
 | 항목 | 내용 |
 |------|------|
 | **기간** | 2024.11 ~ 2025.07 (8개월) |
 | **역할** | 아키텍처 설계 및 구현 전담 |
 | **기술** | React 18, TypeScript, NX, Module Federation, pnpm, VTK.js, TanStack Query, MSW, MUI |
-| **규모** | 196 커밋 (87+109), 4개 원격 모듈 신규 + 5개 기존 모듈 유지보수 |
+| **규모** | 196 커밋 (109+87), 5개 iframe 모듈 운영 + 4개 원격 모듈 신규 개발 |
 
 ### 프로젝트 설명
 
-모놀리식 프론트엔드의 확장성 한계를 Module Federation 기반 Micro Frontend 아키텍처로 전환하여 독립 배포 체계를 확립했습니다. FSD 아키텍처 도입으로 확장 가능한 코드 구조를 구축하고, 3주 내 4개 원격 모듈 신규 개발을 완료했습니다 (87 커밋, 58K+ LOC).
+iframe 기반 마이크로 프론트엔드 5개 모듈을 운영하며 개별 도메인/빌드 파이프라인 분산의 한계를 경험하고, Module Federation 기반 아키텍처로 전환하여 독립 배포 체계와 중앙화된 모듈 관리를 확립했습니다. 사내 백오피스(Console Client)용 모듈 개발 시 Module Federation을 도입하고, FSD 아키텍처로 확장 가능한 코드 구조를 구축, 3주 내 4개 원격 모듈 신규 개발을 완료했습니다 (87 커밋, 58K+ LOC).
 
 ### 담당 업무
 
-#### 2-1. Micro Frontend 아키텍처 설계 및 구축 (2025.06.18 ~ 2025.07.09, 3주)
+#### Phase 1. iframe 기반 MFE 모듈 운영 (2024.11 ~ 2025.07, 109 커밋)
+
+여러 솔루션에서 공통으로 사용하는 5개 모듈(explorer, export, viewer, setting, mobile)을 iframe 기반 마이크로 프론트엔드로 운영하며 기능 개발, 외부 연동, 인프라 개선을 담당했습니다.
+
+##### 2-1. 외부 스캐너 연동 시스템 (2025.03 ~ 2025.05)
+
+- **Medit 스캐너**: Legacy API 변경 대응, OAuth 콜백 페이지 redirect URL, 환경별 도메인 분기
+- **Shining 3D**: 자동 로그인 버그 수정, QMS 환경변수 관리, 인증 플로우 안정화
+- **Connect 도메인**: Allow origin 설정, 크로스 도메인 API 요청 처리
+
+##### 2-2. 서브 도메인 마이그레이션 (2025.03, PR #21245)
+
+- 전체 모듈 (explorer, export, viewer, setting, mobile) 도메인 변경
+- 환경변수 기반 도메인 관리 체계 구축 (dev/qa/prod)
+- mobile, milling 도메인 추가 대응
+
+**성과**: 5개 모듈 **동시 무중단 배포 성공**
+
+##### 2-3. SDK 및 패키지 버전 관리 (2025.04 ~ 2025.06)
+
+- File API SDK 버전업 대응, axios 헤더 설정 방식 개선
+- pnpm 9 마이그레이션: lockfile 포맷 변경, 버전 요구사항 설정
+- 전체 모듈 axios **v1.7.8 통일**, 공통 인스턴스 관리
+
+##### iframe 기반 MFE의 한계
+
+- 각 모듈별 **개별 도메인 필요** → 도메인/SSL 관리 비용 증가
+- **개별 빌드 파이프라인** 운영 → 중앙화된 배포 관리 불가
+- iframe 통신 제약으로 호스트-모듈 간 상태 공유 어려움
+
+#### Phase 2. Module Federation 기반 아키텍처 전환 (2025.06 ~ 2025.07, 87 커밋)
+
+iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모듈 개발 시 Module Federation을 도입하고, 4개 원격 모듈을 신규 개발했습니다.
+
+##### 2-4. Micro Frontend 아키텍처 설계 및 구축 (2025.06.18 ~ 2025.07.09, 3주)
 
 - NX 모노레포 + Module Federation 기반 호스트-리모트 아키텍처 설계
   - `@module-federation/enhanced` 공유 의존성 최적화
@@ -104,14 +138,14 @@
   - 타입 정의 ZIP 압축 후 배포 (`generate:types`)
 - 개발 환경 CORS 해결: devServer headers, Access-Control-Allow-Origin, historyApiFallback
 
-#### 2-2. 시스템 알림 FO(Front Office) 개발 (2025.06.19 ~ 2025.07.07)
+##### 2-5. 시스템 알림 FO(Front Office) 개발 (2025.06.19 ~ 2025.07.07)
 
 - 알림 목록/상세: Notification Bell, 빈 알림 상태 UI, 알림 Dialog, Markdown Viewer 연동
 - 읽음 처리: Mark as Read (개별), Mark All as Read, Unread Count API 연동, invalidate 갱신
 - HTTP Client 인터페이스 설계: Cloud Center Server Type 대응, API URL 구조 변경 (cloud/v4)
 - i18n 초기 세팅: App 컴포넌트 props로 언어 값 주입, 알림 시간 표시 로컬라이징
 
-#### 2-3. 시스템 알림 BO(Back Office) 개발 (2025.06.26 ~ 2025.07.09)
+##### 2-6. 시스템 알림 BO(Back Office) 개발 (2025.06.26 ~ 2025.07.09)
 
 - 알림 CRUD 관리 페이지, React Router DOM 라우팅
 - Status Filter (All/Active/Inactive), Date Range Picker (MUI X Date Pickers)
@@ -119,37 +153,17 @@
 - Markdown Editor (React MD Editor) 연동
 - MSW Mock API 구현, Bootstrap 초기화 로직 설계, React Query DevTools
 
-#### 2-4. 기타 원격 모듈
+##### 2-7. 기타 원격 모듈
 
 - Feature Toggle 관리 UI 원격 모듈 (PR #22206)
 - Tenant Change 원격 모듈 (PR #21637): Type 선언 파일 자동 생성 스크립트, ZIP 자동화
 
-#### 2-5. 외부 스캐너 연동 시스템 (2025.03 ~ 2025.05)
-
-- **Medit 스캐너**: Legacy API 변경 대응, OAuth 콜백 페이지 redirect URL, 환경별 도메인 분기
-- **Shining 3D**: 자동 로그인 버그 수정, QMS 환경변수 관리, 인증 플로우 안정화
-- **Connect 도메인**: Allow origin 설정, 크로스 도메인 API 요청 처리
-
-#### 2-6. 서브 도메인 마이그레이션 (2025.03, PR #21245)
-
-- 전체 모듈 (explorer, export, viewer, setting, mobile) 도메인 변경
-- 환경변수 기반 도메인 관리 체계 구축 (dev/qa/prod)
-- mobile, milling 도메인 추가 대응
-
-**성과**: 5개 모듈 **동시 무중단 배포 성공**
-
-#### 2-7. SDK 및 패키지 버전 관리 (2025.04 ~ 2025.06)
-
-- File API SDK 버전업 대응, axios 헤더 설정 방식 개선
-- pnpm 9 마이그레이션: lockfile 포맷 변경, 버전 요구사항 설정
-- 전체 모듈 axios **v1.7.8 통일**, 공통 인스턴스 관리
-
 ### 성과
 
+- iframe 기반 MFE에서 Module Federation 기반으로 전환하여 **중앙화된 모듈 관리** 확립
 - **3주 내 4개 독립 모듈 개발 완료** (87 커밋, 58K+ LOC)
-- Module Federation 기반 **독립 배포 체계** 구축
 - FSD 아키텍처 도입으로 **확장 가능한 코드 구조** 확립
-- 3개 외부 스캐너 서비스 연동
+- 3개 외부 스캐너 서비스 연동, 5개 모듈 무중단 도메인 전환
 - 22건 버그 수정 (Critical 포함)
 
 ---

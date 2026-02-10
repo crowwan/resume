@@ -60,18 +60,18 @@ AI 기반 치과 CAD/CAM SaaS 기업(DentBird)에서 프론트엔드 시스템 �
 
 ---
 
-### 2. Micro Frontend 모듈 시스템 설계 및 개발
+### 2. Micro Frontend 아키텍처 설계 및 운영
 
-이마고웍스 | 2024.11 ~ 2025.07 (8개월) | 196 커밋
+이마고웍스 | 2024.11 ~ 2025.07 (8개월) | 196 커밋 (109 + 87)
 
-모놀리식 프론트엔드의 확장성 한계를 Module Federation 기반 Micro Frontend 아키텍처로 전환하고, 3주 내 4개 원격 모듈을 신규 개발 (87 커밋, 58K+ LOC).
+iframe 기반 마이크로 프론트엔드 5개 모듈을 운영하며 개별 도메인/빌드 파이프라인 분산의 한계를 경험하고, Module Federation 기반 아키텍처로 전환하여 독립 배포 체계와 중앙화된 모듈 관리를 확립.
 
 **기술**: React 18, TypeScript, Nx, Module Federation, pnpm, VTK.js, TanStack Query, MSW, MUI
 
-- Nx 모노레포 + Module Federation 기반 호스트-리모트 아키텍처를 설계하고, FSD(Feature-Sliced Design) 아키텍처 도입 및 ESLint 커스텀 규칙으로 레이어 간 import 방향 강제
-- 시스템 알림 FO/BO 풀스택 프론트엔드를 개발 (CRUD, 상태별/날짜별 필터링, React Query 서버 상태 관리, i18n 다국어 지원)
-- Medit, Shining 3D 등 외부 치과 스캐너 3개 서비스의 OAuth 인증 플로우를 구현하여 워크플로우 통합
-- 5개 모듈의 서브 도메인 마이그레이션을 동시 수행하여 무중단 전환 완료
+- iframe 기반 MFE 5개 모듈(explorer, export, viewer, setting, mobile)을 운영하며 외부 스캐너 3개 서비스(Medit, Shining 3D, Connect) OAuth 연동 및 서브 도메인 마이그레이션을 수행하여 무중단 전환 완료
+- iframe 방식의 개별 도메인/빌드 파이프라인 분산 문제를 해결하기 위해 Module Federation 기반 호스트-리모트 아키텍처를 설계하고, FSD 아키텍처 도입 및 ESLint 커스텀 규칙으로 레이어 간 import 방향 강제
+- 사내 백오피스(Console Client)용 시스템 알림 FO/BO 등 4개 원격 모듈을 3주 내 신규 개발 (87 커밋, 58K+ LOC)
+- 호스트-리모트 간 타입 공유 자동화 스크립트를 구현하고, MSW Mock API 환경을 구축
 
 ---
 
