@@ -243,18 +243,17 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 4. DentBird Solutions - Electron CAM 연동 및 플랫폼 개발
+## 프로젝트 4. DentBird Linker Desktop - CAM 연동 데스크톱 앱
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2024.06 ~ 현재 (약 20개월) |
-| **역할** | Frontend Engineer / QA Automation Engineer |
-| **기술** | Electron, React, TypeScript, Playwright, NX Monorepo, Azure Pipelines, Datadog, K8s |
-| **규모** | 307 커밋, 275 PR, +269,930줄 / -32,911줄 |
+| **기간** | 2025.11 ~ 현재 |
+| **역할** | 설계 및 구현 전담 |
+| **기술** | Electron, React, TypeScript, NX Monorepo, Azure Pipelines, Datadog, Jest |
 
 ### 프로젝트 설명
 
-치과 CAD/CAM SaaS 플랫폼의 확장성과 안정성을 확보하기 위해 핵심 프론트엔드 시스템을 설계하고 구축했습니다. 16개+ CAM 소프트웨어 연동 자동화, 80+ E2E 테스트로 회귀 테스트 자동화, 5개+ 프로젝트 모노레포 통합을 주도하여 개발 생산성과 배포 효율성을 향상시켰습니다.
+치과 CAD/CAM 워크플로우에서 16개+ CAM 소프트웨어를 Electron 기반 데스크톱 앱으로 연동하는 시스템을 설계하고 구축했습니다. Protocol/HTTP 방식별 좌표계 변환 알고리즘 구현, Chrome LNA 규제 선제 대응을 위한 Custom Protocol 아키텍처 전환, Windows EV 코드 서명 파이프라인 구축을 주도했습니다.
 
 ### 담당 업무
 
@@ -276,12 +275,30 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Feature Flag 설계: localStorage 기반 → Datadog 연동 점진적 롤아웃 전략
 - TDD 기반 구현: INI/XML 생성, HTTP 통신 로직 단위 테스트 18개 작성 (INI 5 + HTTP 8 + config 5)
 
-**성과**:
+### 성과
+
 - Electron 인스톨러 크기 **854MB → 78MB (91% 감소)** (webpack DefinePlugin 환경변수 빌드 시점 주입)
 - 16개 마이그레이션 체크리스트 100% 완료
 - Task 완료율 83% (6개 중 5개)
 
-#### 4-3. E2E 테스트 자동화 시스템 구축 (2025.08 ~ 2025.12)
+---
+
+## 프로젝트 5. DentBird Solutions - 플랫폼 모듈 개발 및 품질 자동화
+
+| 항목 | 내용 |
+|------|------|
+| **기간** | 2024.06 ~ 현재 (약 20개월) |
+| **역할** | Frontend Engineer / QA Automation Engineer |
+| **기술** | React, TypeScript, Playwright, NX Monorepo, Azure Pipelines, Datadog, K8s |
+| **규모** | 307 커밋, 275 PR |
+
+### 프로젝트 설명
+
+치과 CAD/CAM SaaS 플랫폼(DentBird Solutions)의 NX 모노레포 환경에서 플랫폼 모듈 개발과 품질 자동화를 담당했습니다. 분산된 5개+ 프론트엔드 프로젝트를 모노레포로 통합하고, Playwright 기반 E2E 테스트 80+ TC 자동화, Export/Viewer 모듈 기능 고도화를 주도했습니다.
+
+### 담당 업무
+
+#### 5-1. E2E 테스트 자동화 시스템 구축 (2025.08 ~ 2025.12)
 
 - Playwright 기반 E2E 테스트 프레임워크를 구축하여 80+ 테스트 케이스 자동화
   - Page Object 패턴 적용으로 테스트 코드 재사용성 향상
@@ -300,7 +317,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - 로그인 중복 코드 **93% 감소** (auth 헬퍼 함수 추출)
 - 테스트 실행 성능 **39% 개선** (테스트별 로그인 세션 공유)
 
-#### 4-4. Export 기능 개선 및 API 마이그레이션 (2025.12 ~ 2026.02)
+#### 5-2. Export 기능 개선 및 API 마이그레이션 (2025.12 ~ 2026.02)
 
 - Modeler Export v5 API 마이그레이션 (solutionPayload 기반)
 - productDisplayType 기반 Die/Base 분류 로직 개선
@@ -310,14 +327,14 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 **성과**: v5 API 마이그레이션으로 Legacy fallback 코드 제거, 순수 함수 추출로 테스트 용이성 향상
 
-#### 4-5. Viewer Module 기능 개선 (2024.09 ~ 2025.08)
+#### 5-3. Viewer Module 기능 개선 (2024.09 ~ 2025.08)
 
 - 3D 모델 뷰어 기능 개선: Bridge 생성일자 표기, Model tree 정렬 로직 수정
 - RGBA PLY 파일 텍스처 지원
 - Case Share 기능: 공유 링크 생성 시 치식 표기법(notation) 적용, 만료 링크 처리
 - 모바일 최적화: 파일명 말줄임, 스크롤 영역 버그 수정
 
-#### 4-6. Cloud/Module 클라이언트 모노레포 마이그레이션 (2024.06 ~ 2025.01)
+#### 5-4. Cloud/Module 클라이언트 모노레포 마이그레이션 (2024.06 ~ 2025.01)
 
 - 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합
   - Cloud Desktop/Mobile, Viewer/Export/Explorer 모듈, Dealer Backoffice
@@ -328,7 +345,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 5. DentBird Batch Client - Electron 데스크톱 앱
+## 프로젝트 6. DentBird Batch Client - Electron 데스크톱 앱
 
 | 항목 | 내용 |
 |------|------|
@@ -343,7 +360,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 5-1. Electron 앱 아키텍처 설계 및 초기 구축 (2023.12 ~ 2024.04)
+#### 6-1. Electron 앱 아키텍처 설계 및 초기 구축 (2023.12 ~ 2024.04)
 
 - Main/Renderer 프로세스 분리 IPC 통신 구조 설계
 - React + TypeScript + CRACO 기반 프로젝트 세팅
@@ -353,7 +370,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Jest 테스트 환경, MSW(Mock Service Worker) 연동
 - i18n 초기 세팅 (영어/일본어)
 
-#### 5-2. 3D Viewer UX 개선 (2024.06)
+#### 6-2. 3D Viewer UX 개선 (2024.06)
 
 - VTK.js 기반 3D Viewer 마우스 인터랙션 Windows/Mac 통일
   - VTK Pan/Rotate/Zoom Manipulator 타입 선언 및 커스터마이징
@@ -363,14 +380,14 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Opacity 상태 유지 버그 수정
 - 다국어 적용 (3D Viewer P002, Additional Model)
 
-#### 5-3. API Gateway 마이그레이션 (2024.08)
+#### 6-3. API Gateway 마이그레이션 (2024.08)
 
 - Axios 인터셉터 기반 토큰 자동 갱신 시스템 구축
 - Access Token Decode 함수 구현: JWT 디코딩으로 불필요한 API 호출 제거
 - API Gateway URL 전환, 환경별 (dev/qa/prod) 환경변수 분리
 - 로그아웃 후 재로그인 시 토큰 클리어 처리
 
-#### 5-4. 에러 핸들링 시스템 고도화 (2024.05 ~ 2024.06)
+#### 6-4. 에러 핸들링 시스템 고도화 (2024.05 ~ 2024.06)
 
 - Crown Module Network Error Retry 버튼 구현
 - Axios Interceptor 글로벌 에러 처리 (`processOnLocal`/`processOnServer`)
@@ -378,7 +395,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Axios Header 공유 방지 (크로스 도메인 인증 이슈)
 - Unknown 에러 처리: Failed List Unknown Description 추가
 
-#### 5-5. Crown Module 프로세서 (2024.03 ~ 2024.10)
+#### 6-5. Crown Module 프로세서 (2024.03 ~ 2024.10)
 
 - Crown Core Module Initialize
 - WASM Memory Checker 컴포넌트: 메모리 상태 모니터링
@@ -386,7 +403,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Crown Window 생성/관리, Dev Tools 환경별 표시
 - 15분 Timeout Failed 처리, Uncaught Error Handler
 
-#### 5-6. Import/Export 기능 (2024.01 ~ 2024.02)
+#### 6-6. Import/Export 기능 (2024.01 ~ 2024.02)
 
 - File Upload UI + Drag & Drop 기능 구현
 - 폴더 재귀 탐색 구현 (중첩 폴더 내 파일 자동 감지)
@@ -394,13 +411,13 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Export Module 연동, Case Validate API, Storage 용량 확인 API
 - Case/Project 로컬 DB 관리 (앱 종료 시 Case 정리, 순서 변경/삭제)
 
-#### 5-7. Design Case API 대응 (2024.09)
+#### 6-7. Design Case API 대응 (2024.09)
 
 - 백엔드 Design Case API 전면 변경에 따른 클라이언트 마이그레이션 (11개 커밋)
 - Design Case 타입 재정의, Filtering/Query Option 수정
 - Teeth Label 컴포넌트 추가, i18n 영어/일본어 지원
 
-#### 5-8. 모니터링 및 빌드/배포 (2024.03 ~ 2025.01)
+#### 6-8. 모니터링 및 빌드/배포 (2024.03 ~ 2025.01)
 
 - Electron Crash Reporter 초기 설정 (크래시 리포트 자동 전송)
 - Datadog RUM 연동 (환경별 설정 분리, 빌드 시 환경변수 주입)
@@ -417,7 +434,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 6. 기업 랜딩 페이지 풀스택 개발
+## 프로젝트 7. 기업 랜딩 페이지 풀스택 개발
 
 | 항목 | 내용 |
 |------|------|
@@ -432,7 +449,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 6-1. Landing Page Client - v3 전면 리뉴얼 (2023.09 ~ 2023.11)
+#### 7-1. Landing Page Client - v3 전면 리뉴얼 (2023.09 ~ 2023.11)
 
 - Next.js 기반 기업 랜딩 페이지 10+ 페이지 신규 구현
   - Main, Crown Product, Studio Product, Business Overview, Company About, Career, Pricing 등
@@ -440,7 +457,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
   - 언어 변경 시 AOS inline 컴포넌트 사라짐 해결: `_app` 초기화 중앙화, 컨테이너 패턴 적용
 - 인터랙티브 UI 컴포넌트: Carousel, Modal, Accordion 등
 
-#### 6-2. 다국어(i18n) 시스템 구축 (2023.10 ~ 2023.11)
+#### 7-2. 다국어(i18n) 시스템 구축 (2023.10 ~ 2023.11)
 
 - i18next + react-i18next 기반 타입 안전한 다국어 시스템 설계
 - `i18next-resources-for-ts` 도입으로 자동 타입 생성 스크립트 구현
@@ -452,31 +469,31 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 **성과**: 타입 안전한 다국어 키 관리로 런타임 오류 방지, 일본 시장 진출 현지화 기반 마련
 
-#### 6-3. 반응형 웹 디자인
+#### 7-3. 반응형 웹 디자인
 
 - 데스크탑/태블릿/모바일 3단계 반응형 디자인
 - 모바일 터치 인터랙션 최적화: 스와이프 제스처 지원
   - 터치 이벤트 threshold 추가, 상하 스크롤과 좌우 스와이프 분리
 - 크로스 브라우저 호환: Chrome, Safari, Firefox, 모바일 브라우저
 
-#### 6-4. 성능 최적화
+#### 7-4. 성능 최적화
 
 - Lighthouse 성능 점수 개선 (PR #105)
 - LCP(Largest Contentful Paint) 이미지 프리로드
 - Next.js Image 컴포넌트 활용, 4x 고해상도 대응, quality 설정
 - webm, woff 파일 캐시 설정
 
-#### 6-5. 프로모션 배너 시스템 (2024.04 ~ 2024.07)
+#### 7-5. 프로모션 배너 시스템 (2024.04 ~ 2024.07)
 
 - HOC(Higher-Order Component) 패턴 적용 재사용 배너 컴포넌트 설계
 - 다국어 지원 배너: SIDEX 전시회, Crown CBT 베타 테스트, Credit Promotion
 
-#### 6-6. API 연동
+#### 7-6. API 연동
 
 - 회사 멤버 데이터 API 연동: 실제 imago member 데이터 반영 UI
 - `imago-cloud/action-log` 라이브러리 연동: 페이지 진입 이벤트 추적
 
-#### 6-7. Backoffice - 조직 관리 시스템 구축 (2023.12, 1주, 53 커밋)
+#### 7-7. Backoffice - 조직 관리 시스템 구축 (2023.12, 1주, 53 커밋)
 
 - **Company 페이지 Groups → Teams → Members 3계층 조직 구조 설계 및 구현** [LANDING-129]
 - React Query 캐시 전략: 계층별 쿼리 키 관리 및 무효화 전략 (IMAGO_KEY)
@@ -490,7 +507,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 **성과**: 1주 53 커밋으로 3계층 CRUD 기능 전체 구현 (9개 신규 컴포넌트, 3개 API 모듈)
 
-#### 6-8. Backend - Patch Tag API (2023.12, 5 커밋)
+#### 7-8. Backend - Patch Tag API (2023.12, 5 커밋)
 
 - Recruit Tag/Affiliation 일괄 수정 API 설계 및 구현 [LANDING-134]
 - PATCH `/patch-tag` 엔드포인트: MongoDB `updateMany` 활용 효율적 일괄 업데이트
@@ -502,7 +519,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 7. Imago Cloud Design System 기여
+## 프로젝트 8. Imago Cloud Design System 기여
 
 | 항목 | 내용 |
 |------|------|
@@ -513,20 +530,20 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 7-1. React 19 마이그레이션 (2025.04.23)
+#### 8-1. React 19 마이그레이션 (2025.04.23)
 
 - 19개 파일 수정, package-lock.json 10,311줄 변경
 - Storybook 7 호환성 확보: main.js, preview.js 수정
 - ESLint 설정 React 19 규칙 대응
 - 10개 이상 Stories 파일 업데이트, 의존성 버전 충돌 해결
 
-#### 7-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
+#### 8-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
 
 - placeholder props 추가: 사용자 정의 텍스트 지원 (v3.0.0-13 릴리즈)
 - onClick handler props 추가: 외부 클릭 이벤트 제어 가능 (v3.0.0-15 릴리즈)
 - Optional props 설계로 기존 코드 **하위 호환성 100% 유지**
 
-#### 7-3. 프로덕션 버그 긴급 대응 (2025.08.06)
+#### 8-3. 프로덕션 버그 긴급 대응 (2025.08.06)
 
 - DatePicker onClose props가 내부 로직에 의해 덮어 씌워지는 버그
 - onClose 호출 순서 조정, 외부 props 콜백 호출 보장

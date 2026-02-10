@@ -90,23 +90,37 @@ iframe 기반 마이크로 프론트엔드 5개 모듈을 운영하며 개별 �
 
 ---
 
-### 4. DentBird Solutions - Electron CAM 연동 및 플랫폼 개발
+### 4. DentBird Linker Desktop - CAM 연동 데스크톱 앱
 
-이마고웍스 | 2024.06 ~ 현재 | 307 커밋, 275 PR
+이마고웍스 | 2025.11 ~ 현재
 
-E2E 테스트 자동화 체계 구축, 분산 프로젝트 모노레포 통합, Electron 기반 CAM 연동 시스템 개발을 주도.
+16개+ CAM 소프트웨어를 Electron 기반 데스크톱 앱으로 연동하는 시스템을 설계/구축.
 
-**기술**: Electron, React, TypeScript, Playwright, Nx Monorepo, Azure Pipelines, Datadog, K8s
+**기술**: Electron, React, TypeScript, Nx Monorepo, Azure Pipelines, Datadog, Jest
 
-- Playwright 기반 E2E 테스트 프레임워크를 설계하여 80+ 테스트 케이스 구축, Page Object 패턴으로 로그인 중복 코드 93% 감소, 세션 공유 전략으로 테스트 실행 성능 39% 개선
-- Kubernetes CronJob 기반 일일 자동 테스트 실행 환경을 구축하고, Claude Code CLI 기반 AI 변경 감지 시스템을 개발하여 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행
-- Electron 기반 Linker Desktop 앱으로 16개+ CAM 소프트웨어 연동 시스템을 구축, Protocol/HTTP 방식별 좌표계 변환 알고리즘 구현
-- Chrome LNA 규제 대응으로 Custom Protocol 전환, Electron 인스톨러 854MB → 78MB (91% 감소), TDD 기반 단위 테스트 18개 작성
-- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합하고, Azure DevOps Pipeline CI/CD 구성 및 Datadog RUM 모니터링 전사 적용
+- 16개+ CAM 소프트웨어별 좌표계 차이를 변환 매트릭스 알고리즘으로 해결하여 Protocol/HTTP 방식별 좌표계 변환 구현
+- Export Session 방식 Protocol Handler 아키텍처를 설계하고 `dentbird-linker://` 딥링크 기반 데이터 전달 구조 구축
+- Chrome 142 LNA 규제를 Custom Protocol 아키텍처 전환으로 선제 대응, Electron 인스톨러 854MB → 78MB (91% 감소), TDD 기반 단위 테스트 18개 작성
+- Azure Pipelines 기반 Windows/macOS 크로스 플랫폼 빌드 자동화 (EV 코드 서명 포함) 및 Datadog RUM/Logs 모니터링 통합
 
 ---
 
-### 5. DentBird Batch Client - Electron 데스크톱 앱
+### 5. DentBird Solutions - 플랫폼 모듈 개발 및 품질 자동화
+
+이마고웍스 | 2024.06 ~ 현재 | 307 커밋, 275 PR
+
+NX 모노레포 환경에서 플랫폼 모듈 개발, E2E 테스트 자동화, 분산 프로젝트 통합을 주도.
+
+**기술**: React, TypeScript, Playwright, Nx Monorepo, Azure Pipelines, Datadog, K8s
+
+- Playwright 기반 E2E 테스트 프레임워크를 설계하여 80+ 테스트 케이스 구축, Page Object 패턴으로 로그인 중복 코드 93% 감소, 세션 공유 전략으로 테스트 실행 성능 39% 개선
+- Kubernetes CronJob 기반 일일 자동 테스트 실행 환경을 구축하고, Claude Code CLI 기반 AI 변경 감지 시스템을 개발하여 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행
+- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합하고, Azure DevOps Pipeline CI/CD 구성 및 Datadog RUM 모니터링 전사 적용
+- Export v5 API 마이그레이션 및 crown-io 모듈 리팩토링, Viewer Module 기능 고도화 (3D 모델 뷰어, Case Share, 모바일 최적화)
+
+---
+
+### 6. DentBird Batch Client - Electron 데스크톱 앱
 
 이마고웍스 | 2023.12 ~ 2025.01 (13개월) | 347 커밋, 1인 전담 개발
 
@@ -122,7 +136,7 @@ E2E 테스트 자동화 체계 구축, 분산 프로젝트 모노레포 통합, 
 
 ---
 
-### 6. 기업 랜딩 페이지 풀스택 개발
+### 7. 기업 랜딩 페이지 풀스택 개발
 
 이마고웍스 | 2023.09 ~ 2025.10 (약 2년) | 568 커밋
 
@@ -137,7 +151,7 @@ Next.js 기반 기업 랜딩 페이지 v3 전면 리뉴얼과 관리자 Backoffi
 
 ---
 
-### 7. Imago Cloud Design System
+### 8. Imago Cloud Design System
 
 이마고웍스 | 2025.04 ~ 2025.08 (4개월) | 9 커밋
 
