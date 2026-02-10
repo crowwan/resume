@@ -45,18 +45,19 @@ AI 기반 치과 CAD/CAM SaaS 기업(DentBird)에서 프론트엔드 시스템 �
 
 ## 프로젝트
 
-### 1. 공통 아키텍처 개선
+### 1. DentBird Solutions - 플랫폼 아키텍처 및 품질 자동화
 
-이마고웍스 | 2025.09 ~ 현재
+이마고웍스 | 2024.06 ~ 현재 | 307 커밋, 275 PR
 
-플랫폼 전반의 공통 아키텍처를 개선하여 코드 품질과 운영 효율성을 향상.
+NX 모노레포 환경에서 플랫폼 아키텍처 개선, E2E 테스트 자동화, 모듈 기능 고도화를 주도.
 
-**기술**: TypeScript, React, Axios, Kotlin/Spring, Nginx, Azure, TDD
+**기술**: React, TypeScript, Playwright, Nx Monorepo, Azure Pipelines, Datadog, K8s, Kotlin/Spring, TDD
 
-- Facade 패턴으로 토큰 관리 아키텍처를 리팩토링하여 코드 200줄 → 33줄 (85% 감소), Race Condition/Stale Closure 해결, 22개 단위 테스트 작성
-- Graceful Dual-Mode 전략 기반 통합 도메인 전환을 설계하여 도메인 33→10개(70%↓), SSL 33→1개(97%↓), 환경변수 67→5개(92%↓) 달성 예상, urlHelper 라이브러리를 TDD로 개발 (22개 테스트)
-- 레거시 모노레포 마이그레이션을 수행하여 TypeScript 에러 688개 → 0개 해결, Git Subtree로 히스토리 보존, NX 빌드/배포 파이프라인 통합
-- i18n 스크립트 6개를 단일 스크립트로 중앙화 (Lokalise API)
+- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합하고, Azure DevOps Pipeline CI/CD 구성 및 Datadog RUM 모니터링 전사 적용
+- Playwright 기반 E2E 테스트 프레임워크를 설계하여 80+ 테스트 케이스 구축, Page Object 패턴으로 로그인 중복 코드 93% 감소, 세션 공유 전략으로 테스트 실행 성능 39% 개선
+- Kubernetes CronJob 기반 일일 자동 테스트 실행 환경을 구축하고, Claude Code CLI 기반 AI 변경 감지 시스템을 개발하여 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행
+- 레거시 모노레포 마이그레이션으로 TypeScript 에러 688→0개 해결, Facade 패턴 토큰 관리 리팩토링으로 코드 200→33줄(85%↓), 통합 도메인 전환 설계로 도메인 33→10개(70%↓)
+- Export v5 API 마이그레이션 및 crown-io 모듈 리팩토링, Viewer Module 기능 고도화 (3D 모델 뷰어, Case Share, 모바일 최적화)
 
 ---
 
@@ -105,22 +106,7 @@ iframe 기반 마이크로 프론트엔드 5개 모듈을 운영하며 개별 �
 
 ---
 
-### 5. DentBird Solutions - 플랫폼 모듈 개발 및 품질 자동화
-
-이마고웍스 | 2024.06 ~ 현재 | 307 커밋, 275 PR
-
-NX 모노레포 환경에서 플랫폼 모듈 개발, E2E 테스트 자동화, 분산 프로젝트 통합을 주도.
-
-**기술**: React, TypeScript, Playwright, Nx Monorepo, Azure Pipelines, Datadog, K8s
-
-- Playwright 기반 E2E 테스트 프레임워크를 설계하여 80+ 테스트 케이스 구축, Page Object 패턴으로 로그인 중복 코드 93% 감소, 세션 공유 전략으로 테스트 실행 성능 39% 개선
-- Kubernetes CronJob 기반 일일 자동 테스트 실행 환경을 구축하고, Claude Code CLI 기반 AI 변경 감지 시스템을 개발하여 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행
-- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합하고, Azure DevOps Pipeline CI/CD 구성 및 Datadog RUM 모니터링 전사 적용
-- Export v5 API 마이그레이션 및 crown-io 모듈 리팩토링, Viewer Module 기능 고도화 (3D 모델 뷰어, Case Share, 모바일 최적화)
-
----
-
-### 6. DentBird Batch Client - Electron 데스크톱 앱
+### 5. DentBird Batch Client - Electron 데스크톱 앱
 
 이마고웍스 | 2023.12 ~ 2025.01 (13개월) | 347 커밋, 1인 전담 개발
 
@@ -136,7 +122,7 @@ NX 모노레포 환경에서 플랫폼 모듈 개발, E2E 테스트 자동화, �
 
 ---
 
-### 7. 기업 랜딩 페이지 풀스택 개발
+### 6. 기업 랜딩 페이지 풀스택 개발
 
 이마고웍스 | 2023.09 ~ 2025.10 (약 2년) | 568 커밋
 
@@ -151,7 +137,7 @@ Next.js 기반 기업 랜딩 페이지 v3 전면 리뉴얼과 관리자 Backoffi
 
 ---
 
-### 8. Imago Cloud Design System
+### 7. Imago Cloud Design System
 
 이마고웍스 | 2025.04 ~ 2025.08 (4개월) | 9 커밋
 

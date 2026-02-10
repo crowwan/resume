@@ -22,56 +22,72 @@
 
 ---
 
-## 프로젝트 1. 공통 아키텍처 개선
-
-### 1-1. 토큰 관리 아키텍처 리팩토링 (2025.10, 3일)
+## 프로젝트 1. DentBird Solutions - 플랫폼 아키텍처 및 품질 자동화
 
 | 항목 | 내용 |
 |------|------|
-| **기술** | TypeScript, React, Axios, EventSource, TDD |
+| **기간** | 2024.06 ~ 현재 (약 20개월) |
+| **역할** | Frontend Engineer / QA Automation Engineer |
+| **기술** | React, TypeScript, Playwright, NX Monorepo, Azure Pipelines, Datadog, K8s, Kotlin/Spring, TDD |
+| **규모** | 307 커밋, 275 PR |
 
-**문제**: Promise Race Condition, SSE Stale Closure, Axios 강결합으로 인한 단위 테스트 불가
+### 프로젝트 설명
 
-**해결**:
-- **Facade 패턴** 적용: AuthService를 HTTP 클라이언트 비의존적인 토큰 상태 관리자로 분리
-- **Single Source of Truth**: 토큰 저장소를 AuthService 내부로 일원화, getter로 최신 토큰 보장
-- **책임 분리**: 인터셉터 로직을 각 Axios 인스턴스로 이동, 의존성 역전
+치과 CAD/CAM SaaS 플랫폼(DentBird Solutions)의 NX 모노레포 환경에서 플랫폼 아키텍처 개선과 품질 자동화를 주도했습니다. 분산된 5개+ 프론트엔드 프로젝트를 모노레포로 통합하고, Playwright 기반 E2E 테스트 80+ TC 자동화, 공통 아키텍처 리팩토링(토큰 관리, 도메인 통합), Export/Viewer 모듈 기능 고도화를 담당했습니다.
 
-**성과**: 코드 **200줄 → 33줄 (85% 감소)**, Race Condition/Stale Closure 해결, **22개 단위 테스트** 통과
+### 담당 업무
 
-### 1-2. 통합 도메인 전환 프로젝트 (2025.11 ~ 현재, Phase 0 완료)
+#### 1-1. Cloud/Module 클라이언트 모노레포 마이그레이션 (2024.06 ~ 2025.01)
 
-| 항목 | 내용 |
-|------|------|
-| **기술** | TypeScript, Kotlin/Spring, Nginx, Azure, TDD |
+- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합
+  - Cloud Desktop/Mobile, Viewer/Export/Explorer 모듈, Dealer Backoffice
+- Azure DevOps Pipeline CI/CD 구성 (dev/qa/prod 환경)
+- 공통 라이브러리 추출 및 모듈화 (cloud-hooks, cloud-states, cloud-i18n)
+- Datadog RUM 모니터링 전사 적용
+- i18n 다운로드/업로드 로직 중앙화
 
-**문제**: 도메인 33개, SSL 인증서 33개, 환경변수 67개 관리, 19개 Azure Static Web Apps 독립 배포
+#### 1-2. Viewer Module 기능 개선 (2024.09 ~ 2025.08)
 
-**해결**:
-- **Graceful Dual-Mode 전략**: 기존 도메인 유지 + 신규 통합 도메인 점진적 추가
-- **urlHelper 라이브러리**: 런타임 환경 자동 감지, 통합/레거시 양쪽 호환 (TDD, 22개 테스트)
-- Backend CookieUtil **67% 간소화**
-- 로컬 개발환경: localhost 포트 방식, Webpack Proxy Same-Origin
+- 3D 모델 뷰어 기능 개선: Bridge 생성일자 표기, Model tree 정렬 로직 수정
+- RGBA PLY 파일 텍스처 지원
+- Case Share 기능: 공유 링크 생성 시 치식 표기법(notation) 적용, 만료 링크 처리
+- 모바일 최적화: 파일명 말줄임, 스크롤 영역 버그 수정
 
-**Phase 0 완료 성과**:
-- urlHelper 라이브러리 TDD 개발 (22개 테스트, 런타임 환경 자동 감지)
-- Backend CookieUtil **67% 간소화**
-- Graceful Dual-Mode 전략으로 무중단 전환 기반 마련
-- **예상 효과**: 도메인 33→10개(70%↓), SSL 33→1개(97%↓), 환경변수 67→5개(92%↓), 배포 45→10분(78%↓)
+#### 1-3. E2E 테스트 자동화 시스템 구축 (2025.08 ~ 2025.12)
 
-### 1-3. 레거시 모노레포 마이그레이션 (2025.09, 2주)
+- Playwright 기반 E2E 테스트 프레임워크를 구축하여 80+ 테스트 케이스 자동화
+  - Page Object 패턴 적용으로 테스트 코드 재사용성 향상
+  - beforeAll + describe.serial 패턴으로 Docker/K8s 환경 안정성 확보
+  - EC2 기반 SSH 접근 방식으로 K8s 브라우저 불안정 문제 해결
+- 테스트 시나리오: 로그인/인증 (멀티 브라우저 동시 로그인 감지), 사용자 CRUD (8개 TC), 구독 관리, 세션 관리
+- K8s CronJob 기반 일일 자동 테스트 환경 구축 (Phase 1, 2 완료)
+- **Claude Code CLI 기반 AI 변경 감지 시스템** 구축 (2025.12, 3일)
+  - 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행 (10분 주기)
+  - Lockfile 기반 동시 실행 방지, State tracking으로 중복 분석 방지
+- Teams 웹훅 연동 (Power Automate): 테스트 결과 실시간 알림
+- Playwright HTML 리포트 서빙 (Nginx COEP/COOP 헤더)
 
-- 8단계 마이그레이션 계획 수립 및 실행
-- Git Subtree 활용 히스토리 보존
-- **TypeScript 에러 688개 → 0개 (100% 해결)**
-- MUI v7 런타임 이슈 해결, 순환 의존성 해결
-- NX 빌드/배포 파이프라인 통합
+**성과**:
+- **80+ E2E 테스트 케이스**로 회귀 테스트 자동화
+- 로그인 중복 코드 **93% 감소** (auth 헬퍼 함수 추출)
+- 테스트 실행 성능 **39% 개선** (테스트별 로그인 세션 공유)
 
-### 1-4. i18n 스크립트 중앙화 (2025.10, 1일)
+#### 1-4. 공통 아키텍처 개선 (2025.09 ~ 현재)
 
-- **6개 분산 스크립트 → 단일 스크립트** 통합 (Lokalise API)
-- 업로드/다운로드 스크립트 분리
-- 4개 커밋으로 완료
+- 레거시 모노레포 마이그레이션: **TypeScript 에러 688개 → 0개 (100% 해결)**, Git Subtree 히스토리 보존, MUI v7/순환 의존성 해결
+- Facade 패턴 기반 토큰 관리 아키텍처 리팩토링: 코드 **200줄 → 33줄 (85% 감소)**, Race Condition/Stale Closure 해결, **22개 단위 테스트**
+- Graceful Dual-Mode 전략 기반 통합 도메인 전환 설계: 도메인 33→10개(70%↓), SSL 33→1개(97%↓), 환경변수 67→5개(92%↓), urlHelper TDD 개발
+- i18n 스크립트 **6개 → 단일 스크립트** 중앙화 (Lokalise API)
+
+#### 1-5. Export 기능 개선 및 API 마이그레이션 (2025.12 ~ 2026.02)
+
+- Modeler Export v5 API 마이그레이션 (solutionPayload 기반)
+- productDisplayType 기반 Die/Base 분류 로직 개선
+- crown-io 모듈 리팩토링: 순수 함수 추출, 기능별 파일 분리 (`getCAMProtocolExportData`), 타입 안전성 강화
+- Bridge Export CI 파일 통합 생성 및 Progress 개선
+- D+CAM export INI 파일 치아 정보 누락 버그 수정
+
+**성과**: v5 API 마이그레이션으로 Legacy fallback 코드 제거, 순수 함수 추출로 테스트 용이성 향상
 
 ---
 
@@ -300,69 +316,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 5. DentBird Solutions - 플랫폼 모듈 개발 및 품질 자동화
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2024.06 ~ 현재 (약 20개월) |
-| **역할** | Frontend Engineer / QA Automation Engineer |
-| **기술** | React, TypeScript, Playwright, NX Monorepo, Azure Pipelines, Datadog, K8s |
-| **규모** | 307 커밋, 275 PR |
-
-### 프로젝트 설명
-
-치과 CAD/CAM SaaS 플랫폼(DentBird Solutions)의 NX 모노레포 환경에서 플랫폼 모듈 개발과 품질 자동화를 담당했습니다. 분산된 5개+ 프론트엔드 프로젝트를 모노레포로 통합하고, Playwright 기반 E2E 테스트 80+ TC 자동화, Export/Viewer 모듈 기능 고도화를 주도했습니다.
-
-### 담당 업무
-
-#### 5-1. E2E 테스트 자동화 시스템 구축 (2025.08 ~ 2025.12)
-
-- Playwright 기반 E2E 테스트 프레임워크를 구축하여 80+ 테스트 케이스 자동화
-  - Page Object 패턴 적용으로 테스트 코드 재사용성 향상
-  - beforeAll + describe.serial 패턴으로 Docker/K8s 환경 안정성 확보
-  - EC2 기반 SSH 접근 방식으로 K8s 브라우저 불안정 문제 해결
-- 테스트 시나리오: 로그인/인증 (멀티 브라우저 동시 로그인 감지), 사용자 CRUD (8개 TC), 구독 관리, 세션 관리
-- K8s CronJob 기반 일일 자동 테스트 환경 구축 (Phase 1, 2 완료)
-- **Claude Code CLI 기반 AI 변경 감지 시스템** 구축 (2025.12, 3일)
-  - 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행 (10분 주기)
-  - Lockfile 기반 동시 실행 방지, State tracking으로 중복 분석 방지
-- Teams 웹훅 연동 (Power Automate): 테스트 결과 실시간 알림
-- Playwright HTML 리포트 서빙 (Nginx COEP/COOP 헤더)
-
-**성과**:
-- **80+ E2E 테스트 케이스**로 회귀 테스트 자동화
-- 로그인 중복 코드 **93% 감소** (auth 헬퍼 함수 추출)
-- 테스트 실행 성능 **39% 개선** (테스트별 로그인 세션 공유)
-
-#### 5-2. Export 기능 개선 및 API 마이그레이션 (2025.12 ~ 2026.02)
-
-- Modeler Export v5 API 마이그레이션 (solutionPayload 기반)
-- productDisplayType 기반 Die/Base 분류 로직 개선
-- crown-io 모듈 리팩토링: 순수 함수 추출, 기능별 파일 분리 (`getCAMProtocolExportData`), 타입 안전성 강화
-- Bridge Export CI 파일 통합 생성 및 Progress 개선
-- D+CAM export INI 파일 치아 정보 누락 버그 수정
-
-**성과**: v5 API 마이그레이션으로 Legacy fallback 코드 제거, 순수 함수 추출로 테스트 용이성 향상
-
-#### 5-3. Viewer Module 기능 개선 (2024.09 ~ 2025.08)
-
-- 3D 모델 뷰어 기능 개선: Bridge 생성일자 표기, Model tree 정렬 로직 수정
-- RGBA PLY 파일 텍스처 지원
-- Case Share 기능: 공유 링크 생성 시 치식 표기법(notation) 적용, 만료 링크 처리
-- 모바일 최적화: 파일명 말줄임, 스크롤 영역 버그 수정
-
-#### 5-4. Cloud/Module 클라이언트 모노레포 마이그레이션 (2024.06 ~ 2025.01)
-
-- 분산된 5개+ 프론트엔드 프로젝트를 NX 모노레포로 통합
-  - Cloud Desktop/Mobile, Viewer/Export/Explorer 모듈, Dealer Backoffice
-- Azure DevOps Pipeline CI/CD 구성 (dev/qa/prod 환경)
-- 공통 라이브러리 추출 및 모듈화 (cloud-hooks, cloud-states, cloud-i18n)
-- Datadog RUM 모니터링 전사 적용
-- i18n 다운로드/업로드 로직 중앙화
-
----
-
-## 프로젝트 6. DentBird Batch Client - Electron 데스크톱 앱
+## 프로젝트 5. DentBird Batch Client - Electron 데스크톱 앱
 
 | 항목 | 내용 |
 |------|------|
@@ -377,7 +331,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 6-1. Electron 앱 아키텍처 설계 및 초기 구축 (2023.12 ~ 2024.04)
+#### 5-1. Electron 앱 아키텍처 설계 및 초기 구축 (2023.12 ~ 2024.04)
 
 - Main/Renderer 프로세스 분리 IPC 통신 구조 설계
 - React + TypeScript + CRACO 기반 프로젝트 세팅
@@ -387,7 +341,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Jest 테스트 환경, MSW(Mock Service Worker) 연동
 - i18n 초기 세팅 (영어/일본어)
 
-#### 6-2. 3D Viewer UX 개선 (2024.06)
+#### 5-2. 3D Viewer UX 개선 (2024.06)
 
 - VTK.js 기반 3D Viewer 마우스 인터랙션 Windows/Mac 통일
   - VTK Pan/Rotate/Zoom Manipulator 타입 선언 및 커스터마이징
@@ -397,14 +351,14 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Opacity 상태 유지 버그 수정
 - 다국어 적용 (3D Viewer P002, Additional Model)
 
-#### 6-3. API Gateway 마이그레이션 (2024.08)
+#### 5-3. API Gateway 마이그레이션 (2024.08)
 
 - Axios 인터셉터 기반 토큰 자동 갱신 시스템 구축
 - Access Token Decode 함수 구현: JWT 디코딩으로 불필요한 API 호출 제거
 - API Gateway URL 전환, 환경별 (dev/qa/prod) 환경변수 분리
 - 로그아웃 후 재로그인 시 토큰 클리어 처리
 
-#### 6-4. 에러 핸들링 시스템 고도화 (2024.05 ~ 2024.06)
+#### 5-4. 에러 핸들링 시스템 고도화 (2024.05 ~ 2024.06)
 
 - Crown Module Network Error Retry 버튼 구현
 - Axios Interceptor 글로벌 에러 처리 (`processOnLocal`/`processOnServer`)
@@ -412,7 +366,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Axios Header 공유 방지 (크로스 도메인 인증 이슈)
 - Unknown 에러 처리: Failed List Unknown Description 추가
 
-#### 6-5. Crown Module 프로세서 (2024.03 ~ 2024.10)
+#### 5-5. Crown Module 프로세서 (2024.03 ~ 2024.10)
 
 - Crown Core Module Initialize
 - WASM Memory Checker 컴포넌트: 메모리 상태 모니터링
@@ -420,7 +374,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Crown Window 생성/관리, Dev Tools 환경별 표시
 - 15분 Timeout Failed 처리, Uncaught Error Handler
 
-#### 6-6. Import/Export 기능 (2024.01 ~ 2024.02)
+#### 5-6. Import/Export 기능 (2024.01 ~ 2024.02)
 
 - File Upload UI + Drag & Drop 기능 구현
 - 폴더 재귀 탐색 구현 (중첩 폴더 내 파일 자동 감지)
@@ -428,13 +382,13 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Export Module 연동, Case Validate API, Storage 용량 확인 API
 - Case/Project 로컬 DB 관리 (앱 종료 시 Case 정리, 순서 변경/삭제)
 
-#### 6-7. Design Case API 대응 (2024.09)
+#### 5-7. Design Case API 대응 (2024.09)
 
 - 백엔드 Design Case API 전면 변경에 따른 클라이언트 마이그레이션 (11개 커밋)
 - Design Case 타입 재정의, Filtering/Query Option 수정
 - Teeth Label 컴포넌트 추가, i18n 영어/일본어 지원
 
-#### 6-8. 모니터링 및 빌드/배포 (2024.03 ~ 2025.01)
+#### 5-8. 모니터링 및 빌드/배포 (2024.03 ~ 2025.01)
 
 - Electron Crash Reporter 초기 설정 (크래시 리포트 자동 전송)
 - Datadog RUM 연동 (환경별 설정 분리, 빌드 시 환경변수 주입)
@@ -451,7 +405,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 7. 기업 랜딩 페이지 풀스택 개발
+## 프로젝트 6. 기업 랜딩 페이지 풀스택 개발
 
 | 항목 | 내용 |
 |------|------|
@@ -466,7 +420,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 7-1. Landing Page Client - v3 전면 리뉴얼 (2023.09 ~ 2023.11)
+#### 6-1. Landing Page Client - v3 전면 리뉴얼 (2023.09 ~ 2023.11)
 
 - Next.js 기반 기업 랜딩 페이지 10+ 페이지 신규 구현
   - Main, Crown Product, Studio Product, Business Overview, Company About, Career, Pricing 등
@@ -474,7 +428,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
   - 언어 변경 시 AOS inline 컴포넌트 사라짐 해결: `_app` 초기화 중앙화, 컨테이너 패턴 적용
 - 인터랙티브 UI 컴포넌트: Carousel, Modal, Accordion 등
 
-#### 7-2. 다국어(i18n) 시스템 구축 (2023.10 ~ 2023.11)
+#### 6-2. 다국어(i18n) 시스템 구축 (2023.10 ~ 2023.11)
 
 - i18next + react-i18next 기반 타입 안전한 다국어 시스템 설계
 - `i18next-resources-for-ts` 도입으로 자동 타입 생성 스크립트 구현
@@ -486,31 +440,31 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 **성과**: 타입 안전한 다국어 키 관리로 런타임 오류 방지, 일본 시장 진출 현지화 기반 마련
 
-#### 7-3. 반응형 웹 디자인
+#### 6-3. 반응형 웹 디자인
 
 - 데스크탑/태블릿/모바일 3단계 반응형 디자인
 - 모바일 터치 인터랙션 최적화: 스와이프 제스처 지원
   - 터치 이벤트 threshold 추가, 상하 스크롤과 좌우 스와이프 분리
 - 크로스 브라우저 호환: Chrome, Safari, Firefox, 모바일 브라우저
 
-#### 7-4. 성능 최적화
+#### 6-4. 성능 최적화
 
 - Lighthouse 성능 점수 개선 (PR #105)
 - LCP(Largest Contentful Paint) 이미지 프리로드
 - Next.js Image 컴포넌트 활용, 4x 고해상도 대응, quality 설정
 - webm, woff 파일 캐시 설정
 
-#### 7-5. 프로모션 배너 시스템 (2024.04 ~ 2024.07)
+#### 6-5. 프로모션 배너 시스템 (2024.04 ~ 2024.07)
 
 - HOC(Higher-Order Component) 패턴 적용 재사용 배너 컴포넌트 설계
 - 다국어 지원 배너: SIDEX 전시회, Crown CBT 베타 테스트, Credit Promotion
 
-#### 7-6. API 연동
+#### 6-6. API 연동
 
 - 회사 멤버 데이터 API 연동: 실제 imago member 데이터 반영 UI
 - `imago-cloud/action-log` 라이브러리 연동: 페이지 진입 이벤트 추적
 
-#### 7-7. Backoffice - 조직 관리 시스템 구축 (2023.12, 1주, 53 커밋)
+#### 6-7. Backoffice - 조직 관리 시스템 구축 (2023.12, 1주, 53 커밋)
 
 - **Company 페이지 Groups → Teams → Members 3계층 조직 구조 설계 및 구현** [LANDING-129]
 - React Query 캐시 전략: 계층별 쿼리 키 관리 및 무효화 전략 (IMAGO_KEY)
@@ -524,7 +478,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 **성과**: 1주 53 커밋으로 3계층 CRUD 기능 전체 구현 (9개 신규 컴포넌트, 3개 API 모듈)
 
-#### 7-8. Backend - Patch Tag API (2023.12, 5 커밋)
+#### 6-8. Backend - Patch Tag API (2023.12, 5 커밋)
 
 - Recruit Tag/Affiliation 일괄 수정 API 설계 및 구현 [LANDING-134]
 - PATCH `/patch-tag` 엔드포인트: MongoDB `updateMany` 활용 효율적 일괄 업데이트
@@ -536,7 +490,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 8. Imago Cloud Design System 기여
+## 프로젝트 7. Imago Cloud Design System 기여
 
 | 항목 | 내용 |
 |------|------|
@@ -547,20 +501,20 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 8-1. React 19 마이그레이션 (2025.04.23)
+#### 7-1. React 19 마이그레이션 (2025.04.23)
 
 - 19개 파일 수정, package-lock.json 10,311줄 변경
 - Storybook 7 호환성 확보: main.js, preview.js 수정
 - ESLint 설정 React 19 규칙 대응
 - 10개 이상 Stories 파일 업데이트, 의존성 버전 충돌 해결
 
-#### 8-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
+#### 7-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
 
 - placeholder props 추가: 사용자 정의 텍스트 지원 (v3.0.0-13 릴리즈)
 - onClick handler props 추가: 외부 클릭 이벤트 제어 가능 (v3.0.0-15 릴리즈)
 - Optional props 설계로 기존 코드 **하위 호환성 100% 유지**
 
-#### 8-3. 프로덕션 버그 긴급 대응 (2025.08.06)
+#### 7-3. 프로덕션 버그 긴급 대응 (2025.08.06)
 
 - DatePicker onClose props가 내부 로직에 의해 덮어 씌워지는 버그
 - onClose 호출 순서 조정, 외부 props 콜백 호출 보장
