@@ -108,6 +108,11 @@ code {
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 20mm 15mm;
+  }
+
   body {
     padding: 0;
     font-size: 12px;
@@ -124,9 +129,4 @@ code {
   table {
     page-break-inside: avoid;
   }
-}
-
-@page {
-  size: A4;
-  margin: 20mm 15mm;
 }

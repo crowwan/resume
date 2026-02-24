@@ -1,0 +1,62 @@
+name: Deploy Resume to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.md'
+      - 'templates/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Build HTML files
+        run: |
+          mkdir -p output
+          pandoc resume.md \
+            -o output/resume.html \
+            --standalone \
+            --css=resume-style.css \
+            --metadata title="김진완 이력서"
+          pandoc career-description.md \
+            -o output/career-description.html \
+            --standalone \
+            --css=resume-style.css \
+            --metadata title="김진완 경력기술서"
+
+      - name: Copy assets
+        run: |
+          cp templates/resume-style.css output/
+          cp templates/index.html output/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
