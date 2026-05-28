@@ -8,11 +8,25 @@
 
 ## 현재 상태
 
-- **Current Phase**: **Phase 0 — 일관성 오류 정리** 진입 대기
+- **Current Phase**: **Phase 0A — Findings 수집** 진입 대기
 - **Active Card**: (없음)
-- **다음 Phase**: Phase 2A (DentBird Solutions 4축 인터뷰)
+- **다음 Phase**: Phase 0B (일관성 오류 정리 — Findings 산물 기반)
 
 > Claude는 작업 시작 시 이 줄을 먼저 확인하고, 다음 Phase로 진입 시 이 블록을 갱신합니다.
+
+---
+
+## 3단계 흐름 (한눈에)
+
+```
+findings/0X-*.md          (raw 사실 — Phase 0A에서 채움)
+    ↓
+interviews/0X-*.md        (4축 서사 — Phase 2에서 채움)
+    ↓
+resume.md / career-description.md   (형식화 — Phase 2~4)
+```
+
+각 단계는 다음 단계의 **유일한 입력원**입니다. findings를 건너뛰고 인터뷰로 가면 4축의 사실 정보가 사용자 기억에만 의존하게 됩니다.
 
 ---
 
@@ -30,24 +44,47 @@
 
 ---
 
-## Phase 0 — 일관성 오류 정리 (인터뷰 없이)
+## Phase 0A — Findings 수집 (★ 시작 지점)
 
-**목표**: 명백한 사실 오류와 두 문서 간 불일치를 1 PR로 정리. 가장 빠르게 신뢰도 회복.
+**목표**: 본문/인터뷰 작업 전에, 실제 작업 레포·vault·기억에서 **의미있는 사실만** 카드별로 발굴해 `findings/0X-*.md`에 누적합니다. 등급/그룹화는 여기서 안 함.
+
+**왜 이 단계가 먼저인가**:
+- 현재 이력서·career에 **임의 수치·모호 표현**이 일부 박혀 있음 (Phase 0B 항목 = 그 증거)
+- 4축 인터뷰의 사실 정보를 사용자 기억에만 의존하면, 또 같은 오류가 재생산됨
+- vault `projects/dentbird-solutions/`에 이미 풍부한 자료(`log`/`learnings`/`decisions`/`bugs`)가 있어 발굴 비용이 낮음
+
+**수집 기준**: [findings/README.md](./findings/README.md) — 4가지 시그널(의사결정 / 측정 / 후속 영향 / 운영 패턴) 중 하나라도 걸리면 수집. 출처 태그 강제.
+
+**진행 순서**:
+
+| 순 | 카드 | 발굴 대상 | Status |
+|----|------|----------|--------|
+| 1 | 01. Solutions | `dentbird-solutions`, vault 풍부 | ⬜ |
+| 2 | 02. Linker | `dentbird-linker-app`, vault 확인 필요 | ⬜ |
+| 3 | 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ |
+| 4 | 04. Account | `dentbird-account-client` | ⬜ |
+| 5 | 05. Batch | 모노레포 통합 전 별도 레포 확인 필요 | ⬜ |
+| 6 | 06. Landing | `landing-page-client`, `landing-page-server` | ⬜ |
+| 7 | 07. Design System | `imago-design-system` | ⬜ |
+| 8 | 99. Misc | Datadog 스터디 등 카드 외 경험 | ⬜ |
+
+**완료 기준**: 카드별 4시그널 섹션이 어느 정도 채워지고, `[측정필요]`/`[기억]` 중 본문 박을 항목은 별도 확인 완료. 이때 Phase 0B의 3가지 의문(Linker 종료·버전·LCP)은 자동 해결될 가능성 큼.
+
+---
+
+## Phase 0B — 일관성 오류 정리 (Findings 산물 기반)
+
+**목표**: Phase 0A에서 확인된 정확값으로 두 문서 간 불일치를 1 PR로 정리.
 
 | 항목 | 위치 | 해야 할 일 | Status |
 |------|------|------------|--------|
 | Chrome LNA → PNA | `resume.md:11` | `LNA` → `PNA`. career는 이미 PNA로 통일됨 | ⬜ |
 | 연차 표현 | `resume.md:7` `3년차` | 2023.09 입사 → 2026.05 기준 **2년 8개월**. 정확값으로 교체 | ⬜ |
-| Linker 기간 | resume `2024.08 ~ 2026.02` vs career `~ 현재` | 사용자에 정확한 종료 시점 확인 후 통일 | ⬜ |
-| Linker 버전 수 | career `v1.0.0~v1.0.3` + `8개 버전` | 4 메이저 vs 8 릴리즈 모순. 사용자에 실수 확인 | ⬜ |
-| 랜딩페이지 정량값 | resume.md 6번, career 6-4 | LCP/Lighthouse 실수치 확인 또는 표현 완화 | ⬜ |
+| Linker 기간 | resume `2024.08 ~ 2026.02` vs career `~ 현재` | Phase 0A 산물(`findings/02-linker.md`)에서 확인된 종료 시점으로 통일 | ⬜ |
+| Linker 버전 수 | career `v1.0.0~v1.0.3` + `8개 버전` | Phase 0A에서 git tag 발굴 결과로 확정 | ⬜ |
+| 랜딩페이지 정량값 | resume.md 6번, career 6-4 | Phase 0A 산물에서 확인된 LCP/Lighthouse 실수치 또는 표현 완화 | ⬜ |
 
 **PR 제목 예시**: `docs: 이력서/경력기술서 일관성 오류 정리 (LNA→PNA, 연차, Linker 기간)`
-
-**진입 시 사용자에게 물을 것**:
-1. Linker 종료 시점 (현재 진행 중 / 2026.02 종료 중 어느 쪽)
-2. Linker 버전 수 (v1.0.0~v1.0.3 + 8개 버전 중 어느 쪽이 정확)
-3. 랜딩페이지 LCP/Lighthouse 점수 기억하는 수치 있는지
 
 ---
 
@@ -66,7 +103,7 @@ Phase 0과 묶어도 됨 (사용자 선택).
 
 ## Phase 2 — 메인 카드 3개 깊은 4축 인터뷰
 
-각 1 PR. 인터뷰 → `interviews/0X-*.md` 저장 → career 압축 → resume 정렬.
+각 1 PR. **입력: `findings/0X-*.md`** → 4축 빈칸은 사용자 기억으로 보강 → `interviews/0X-*.md` 저장 → career 압축 → resume 정렬.
 
 ### Phase 2A — DentBird Solutions ★ (시작 지점)
 
@@ -165,9 +202,10 @@ Phase 0과 묶어도 됨 (사용자 선택).
 
 ## 진행 규칙 요약
 
-1. **순서대로 진행** (Phase 0 → 1 → 2A → 2B → 2C → 3 → 4 → 5).
+1. **순서대로 진행** (Phase 0A → 0B → 1 → 2A → 2B → 2C → 3 → 4 → 5).
 2. 사용자가 명시적으로 점프하라고 하면 점프 가능.
 3. 각 Phase 완료 시 이 PLAN.md 상단의 **Current Phase** 줄을 갱신.
-4. 인터뷰 진행은 [interviews/README.md](./interviews/README.md)의 4축 템플릿을 따름.
-5. Phase 2부터는 **한 PR = 한 카드**.
-6. **새 사실/수치를 본문에 박을 때마다** "이거 사용자가 답했나, 내가 만들었나" 자체 검증.
+4. **사실 발굴은** [findings/README.md](./findings/README.md)의 4시그널 기준을 따름.
+5. **인터뷰 진행은** [interviews/README.md](./interviews/README.md)의 4축 템플릿을 따름. 입력은 해당 카드의 `findings/0X-*.md`.
+6. Phase 2부터는 **한 PR = 한 카드**.
+7. **새 사실/수치를 본문에 박을 때마다** "이거 사용자가 답했나, 내가 만들었나" 자체 검증. findings에 출처 없는 항목은 본문 못 박음.

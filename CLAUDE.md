@@ -83,8 +83,15 @@ Claude Code(=메인 Claude in CLI)는 이 룰에 따라 동작합니다.
 ## 5. 워크플로우 (프로젝트 1건 처리 단위)
 
 ```
+0. findings/0X-<slug>.md 사실 발굴 (작업 레포 + vault + 기억 → 4시그널 기준)
+   - 등급/그룹화 X. 출처 태그 강제.
+   - 자세한 룰: findings/README.md
+   ↓
 1. interviews/0X-<slug>.md 파일 생성 (없으면)
-2. 4축 인터뷰 진행 — 사용자 답변을 그대로 기록
+   ↓
+2. findings 산물을 입력 삼아 4축 인터뷰 진행
+   - 사실 정보는 findings에서 가져옴 (재발굴 X)
+   - 4축 빈칸(WHY/HOW/지속성)만 사용자 기억으로 보강
    ↓
 3. 인터뷰 원본을 4축 구조로 정리 (interviews/0X-<slug>.md 본문)
    ↓
@@ -170,7 +177,10 @@ git config --local user.email "32172056+crowwan@users.noreply.github.com"
 | `claude-project-instructions.md` | 모바일 Claude.ai Project Instructions | 모바일 Claude.ai |
 | `STRATEGY.md` | 채널별 워크플로우 (PC/모바일/자동화) | 사용자 (참고용) |
 | `PLAN.md` | 현재 작업 순서와 Phase 상태 | Claude + 사용자 |
+| `findings/README.md` | **사실 발굴 룰** — 4시그널·출처 태그·카드별 레포 지도 | Claude + 사용자 |
+| `findings/0X-*.md` | 카드별 발굴된 raw 사실 (서사 X). 인터뷰의 입력원 | Claude + 사용자 |
 | `interviews/README.md` | 인터뷰 진행 룰과 면접 답변 스크립트 변환 가이드 | Claude + 사용자 |
+| `interviews/0X-*.md` | 4축 서사 + 면접 답변 스크립트. findings를 입력으로 받음 | Claude + 사용자 |
 | `resume.md` | 짧은 이력서 (1~2 페이지) | 채용 담당자, Pages |
 | `career-description.md` | 상세 경력기술서 | 채용 담당자, 면접관 |
 
