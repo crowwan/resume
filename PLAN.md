@@ -8,9 +8,9 @@
 
 ## 현재 상태
 
-- **Current Phase**: **Phase 0A — Findings 수집** 진입 대기
-- **Active Card**: (없음)
-- **다음 Phase**: Phase 0B (일관성 오류 정리 — Findings 산물 기반)
+- **Current Phase**: 카드별 발굴→인터뷰→재작성 진행 중 (사용자 지정 순서)
+- **완료 카드**: ✅ 06 랜딩 (findings + 4축 인터뷰 + career/resume 압축, 2026-05-31)
+- **다음**: 사용자 지정 다음 카드
 
 > Claude는 작업 시작 시 이 줄을 먼저 확인하고, 다음 Phase로 진입 시 이 블록을 갱신합니다.
 
@@ -64,7 +64,7 @@ resume.md / career-description.md   (형식화 — Phase 2~4)
 | 3 | 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ |
 | 4 | 04. Account | `dentbird-account-client` | ⬜ |
 | 5 | 05. Batch | 모노레포 통합 전 별도 레포 확인 필요 | ⬜ |
-| 6 | 06. Landing | `landing-page-client`, `landing-page-server` | ⬜ |
+| 6 | 06. Landing | `landing-page-client`, `landing-page-server` | ✅ (devops/workspace 발굴 완료) |
 | 7 | 07. Design System | `imago-design-system` | ⬜ |
 | 8 | 99. Misc | Datadog 스터디 등 카드 외 경험 | ⬜ |
 
@@ -167,7 +167,7 @@ Phase 0과 묶어도 됨 (사용자 선택).
 |------|-------------|--------|
 | DentBird Account (구독/계정) | `04-account.md` | ⬜ |
 | DentBird Batch (Electron 1인 개발) | `05-batch.md` | ⬜ |
-| 기업 랜딩 페이지 (Next.js 풀스택) | `06-landing.md` | ⬜ |
+| 기업 랜딩 페이지 (Next.js 풀스택) | `06-landing.md` | ✅ 완료 |
 | Imago Cloud Design System | `07-design-system.md` | ⬜ |
 
 각 카드의 4축 답이 얕더라도 OK. 핵심은 "이게 작업 나열이 아니라 결정 서사로 보이는가"입니다.

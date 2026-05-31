@@ -405,88 +405,41 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 6. 기업 랜딩 페이지 풀스택 개발
+## 프로젝트 6. 기업 랜딩 페이지 (Next.js 풀스택)
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2023.09 ~ 2025.10 (약 2년) |
-| **역할** | 프론트엔드 개발 (주도) + 백엔드 API 일부 |
-| **기술** | Next.js, React, TypeScript, i18next, AOS, MUI v5, React Query, React Hook Form, Fastify, MongoDB |
-| **규모** | 568 커밋 (Client 510 + BO 53 + Server 5), 30+ PR |
+| **기간** | 2023.09 ~ 2025.10 (입사 첫 업무, 이후 유지보수) |
+| **역할** | v3 리뉴얼 주도 + Backoffice/서버 풀스택 |
+| **기술** | Next.js 13(Pages Router), React 18, TypeScript, i18next, AOS, TanStack Query, Fastify 3, MongoDB |
 
 ### 프로젝트 설명
 
-이마고웍스 기업 랜딩 페이지를 Next.js 기반으로 전면 재구축하고, 관리자 Backoffice와 서버 API를 함께 개발한 풀스택 프로젝트입니다.
+입사 첫 업무로 이마고웍스 기업 랜딩 페이지를 v3로 전면 리뉴얼하고, 관리자 Backoffice와 서버 API까지 함께 개발한 풀스택 프로젝트입니다. 회사 개발 프로세스를 익히며 v3 리뉴얼을 거의 단독으로 수행했습니다.
 
 ### 담당 업무
 
-#### 6-1. Landing Page Client - v3 전면 리뉴얼 (2023.09 ~ 2023.11)
+#### v3 전면 리뉴얼 주도 (디자인 개편 + 한/영/일 다국어)
 
-- Next.js 기반 기업 랜딩 페이지 10+ 페이지 신규 구현
-  - Main, Crown Product, Studio Product, Business Overview, Company About, Career, Pricing 등
-- AOS(Animate On Scroll) 애니메이션 시스템 통합
-  - 언어 변경 시 AOS inline 컴포넌트 사라짐 해결: `_app` 초기화 중앙화, 컨테이너 패턴 적용
-- 인터랙티브 UI 컴포넌트: Carousel, Modal, Accordion 등
+- 구버전 랜딩을 Next.js 기반 v3로 전면 리뉴얼, 10+ 페이지 신규 구현 (Main, Crown/Studio Product, Company, Career, Pricing 등)
+- **i18n 타입 안정성 확보**: `i18next-resources-for-ts`로 번역 리소스의 타입을 자동 생성하여, 존재하지 않는 i18n 키 사용을 **컴파일 타임에 검출**하고 키 노출 버그를 구조적으로 차단
+- 한/영/일 3개 언어 지원 (이후 동일 구조 기반으로 11개 언어까지 확장)
 
-#### 6-2. 다국어(i18n) 시스템 구축 (2023.10 ~ 2023.11)
+#### Backoffice 조직 관리 풀스택 (Company 페이지 3계층)
 
-- i18next + react-i18next 기반 타입 안전한 다국어 시스템 설계
-- `i18next-resources-for-ts` 도입으로 자동 타입 생성 스크립트 구현
-- 3개 언어 지원: 한국어, 영어, 일본어
-- 언어별 레이아웃 최적화
-  - Noto Sans JP 폰트 weight 600 추가
-  - `useI18nStyle` 커스텀 훅 개발 (언어별 줄바꿈 처리)
-  - 고정 너비 대신 flexible 레이아웃 적용
+- 관리자용 **Groups → Teams → Members 3계층 조직 CRUD**를 프론트엔드 + 서버 PATCH API까지 직접 구현 (FE·BE 동시 개발)
+- FormDialog 재사용 패턴(계층적 필드 연동), 계층별 React Query 캐시 무효화 전략
+- 서버: MongoDB `updateMany` 기반 Tag/Affiliation 일괄 수정 API, 방어적 요청 검증 [LANDING-134]
 
-**성과**: 타입 안전한 다국어 키 관리로 런타임 오류 방지, 일본 시장 진출 현지화 기반 마련
+#### 성능 / SEO 최적화
 
-#### 6-3. 반응형 웹 디자인
+- LCP·폰트(Inter/Noto) preload, 이미지 4x 고해상도·quality 대응, webm/woff 정적 자원 캐시
+- Open Graph·HeaderSEO 적용 (Lighthouse로 측정하며 개선 — 점수는 측정 환경차로 본문 미기재)
 
-- 데스크탑/태블릿/모바일 3단계 반응형 디자인
-- 모바일 터치 인터랙션 최적화: 스와이프 제스처 지원
-  - 터치 이벤트 threshold 추가, 상하 스크롤과 좌우 스와이프 분리
-- 크로스 브라우저 호환: Chrome, Safari, Firefox, 모바일 브라우저
+### 성과
 
-#### 6-4. 성능 최적화
-
-- Lighthouse 성능 점수 개선 (PR #105)
-- LCP(Largest Contentful Paint) 이미지 프리로드
-- Next.js Image 컴포넌트 활용, 4x 고해상도 대응, quality 설정
-- webm, woff 파일 캐시 설정
-
-#### 6-5. 프로모션 배너 시스템 (2024.04 ~ 2024.07)
-
-- HOC(Higher-Order Component) 패턴 적용 재사용 배너 컴포넌트 설계
-- 다국어 지원 배너: SIDEX 전시회, Crown CBT 베타 테스트, Credit Promotion
-
-#### 6-6. API 연동
-
-- 회사 멤버 데이터 API 연동: 실제 imago member 데이터 반영 UI
-- `imago-cloud/action-log` 라이브러리 연동: 페이지 진입 이벤트 추적
-
-#### 6-7. Backoffice - 조직 관리 시스템 구축 (2023.12, 1주, 53 커밋)
-
-- **Company 페이지 Groups → Teams → Members 3계층 조직 구조 설계 및 구현** [LANDING-129]
-- React Query 캐시 전략: 계층별 쿼리 키 관리 및 무효화 전략 (IMAGO_KEY)
-- FormDialog 패턴: 재사용 가능한 생성/수정 다이얼로그 컴포넌트
-  - Group/Team/Member FormDialog (계층적 필드 연동, 상위 미선택 시 하위 disable)
-  - Member Autocomplete (이미지/정보 포함)
-  - Leader 지정, 순서 변경, Department Tag 관리
-- API 모듈 분리: groups, teams, members 각각 독립 모듈, axios config 패턴 적용
-- News/Recruit Tag 관리: 소문자 Tag 전송, EditTagDialog 컴포넌트
-- 16건 버그 수정, 컴포넌트 책임 분리 리팩토링
-
-**성과**: 1주 53 커밋으로 3계층 CRUD 기능 전체 구현 (9개 신규 컴포넌트, 3개 API 모듈)
-
-#### 6-8. Backend - Patch Tag API (2023.12, 5 커밋)
-
-- Recruit Tag/Affiliation 일괄 수정 API 설계 및 구현 [LANDING-134]
-- PATCH `/patch-tag` 엔드포인트: MongoDB `updateMany` 활용 효율적 일괄 업데이트
-- 방어적 요청 검증: 필드 쌍(old/new) 동시 존재 여부 검증, 에러 메시지 구체화
-- 레거시 필드 정리 (`isGreetingLinkExist` 제거)
-- PR #3 코드 리뷰 3명 승인 후 병합
-
-**성과**: 프론트엔드(Backoffice)와 **동시 풀스택 개발**
+- 입사 첫 업무를 단독 수행하며 FE·서버 풀스택 개발 경험 확보
+- 직접 도입한 i18n 타입 안정성 구조가 이후 11개 언어 확장의 토대가 됨
 
 ---
 

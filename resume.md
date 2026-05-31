@@ -181,27 +181,19 @@ iframe 기반 MFE 4개 모듈 운영의 한계를 경험하고, Module Federatio
 
 ---
 
-### 6. 기업 랜딩 페이지
+### 6. 기업 랜딩 페이지 (Next.js 풀스택)
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2023.09 ~ 2023.12 |
-| **기술** | Next.js, React, TypeScript, i18next, Node.js, Fastify, MongoDB |
+| **기간** | 2023.09 ~ 2025.10 (입사 첫 업무) |
+| **기술** | Next.js, React, TypeScript, i18next, Fastify, MongoDB |
 
-Next.js 기반 기업 랜딩 페이지 v3 전면 리뉴얼과 관리자 Backoffice, 서버 API를 함께 개발한 풀스택 프로젝트.
+입사 첫 업무로 기업 랜딩 페이지를 v3로 전면 리뉴얼하고, 관리자 Backoffice·서버 API까지 개발한 풀스택 프로젝트.
 
 **주요 성과**
-- UI/UX 구현
-  - **Next.js** 기반 **10+ 페이지** 신규 구현 및 AOS 애니메이션 시스템 통합
-  - 데스크탑/태블릿/모바일 3단계 반응형 UI
-- 다국어 시스템
-  - **i18next + TypeScript** 타입 안전한 다국어 시스템 설계
-  - **3개 언어**(한/영/일) 지원, 타입 자동 생성 패키지 도입
-- 성능 최적화
-  - **LCP 이미지 프리로드**, Next.js Image 최적화, 캐싱 전략으로 **Lighthouse 성능 점수** 개선
-- 백오피스 시스템
-  - **Backoffice 조직 관리** 3계층 CRUD를 1주 53커밋으로 구현
-  - **Fastify/MongoDB** 기반 일괄 수정 API 설계/개발
+- **i18n 타입 안정성**: `i18next-resources-for-ts`로 번역 리소스 타입을 자동 생성, 존재하지 않는 키 사용을 컴파일 타임에 검출해 키 노출 버그 차단
+- **풀스택 구현**: 관리자 조직 관리 3계층(Groups→Teams→Members) CRUD를 프론트엔드 + 서버 PATCH API까지 직접 개발
+- **성능/SEO**: LCP·폰트 preload, 이미지 4x·quality, 정적 자원 캐시, SEO 개선
 
 ---
 
