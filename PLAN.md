@@ -10,8 +10,8 @@
 
 - **Current Phase**: 카드별 발굴→인터뷰→재작성 진행 중 (사용자 지정 순서)
 - **완료 카드**: ✅ 06 랜딩 (findings+인터뷰+career/resume, 2026-05-31)
-- **발굴 완료·career 보류**: 🔶 05 Batch — findings 완료(2026-06-01). 빌드/자동업데이트 인프라가 Linker와 공통 → **Linker 발굴 후 통합 정리**
-- **다음**: 02 Linker 발굴
+- **발굴 완료·career 보류**: 🔶 05 Batch + 🔶 02 Linker — findings 완료(2026-06-01). 빌드/자동업데이트가 공통 → **Electron 인프라 통합 정리** 후 각 career
+- **다음**: batch+linker Electron 인프라 통합 career 정리 (또는 남은 카드 발굴: 01 Solutions / 03 MFE / 04 Account)
 
 > Claude는 작업 시작 시 이 줄을 먼저 확인하고, 다음 Phase로 진입 시 이 블록을 갱신합니다.
 
@@ -61,7 +61,7 @@ resume.md / career-description.md   (형식화 — Phase 2~4)
 | 순 | 카드 | 발굴 대상 | Status |
 |----|------|----------|--------|
 | 1 | 01. Solutions | `dentbird-solutions`, vault 풍부 | ⬜ |
-| 2 | 02. Linker | `dentbird-linker-app`, vault 확인 필요 | ⬜ |
+| 2 | 02. Linker | `workspace/dentbird-linker`(초기) + `dentbird-linker-app`(Azure) + `solutions/apps/linker-desktop`(현재) | ✅ |
 | 3 | 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ |
 | 4 | 04. Account | `dentbird-account-client` | ⬜ |
 | 5 | 05. Batch | `workspace/dentbird-batch-client`(초기 v1) + `dentbird-solutions/apps/batch`(P004) | ✅ |
