@@ -263,14 +263,14 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2024.08 ~ 현재 (약 18개월) |
+| **기간** | 2024.07 ~ 2025.12 (이후 Solutions로 통합) |
 | **역할** | 설계 및 구현 전담 (주 개발자, 전체 커밋의 78%) |
 | **기술** | Electron, React, TypeScript, Vite, Express, NX Monorepo, Azure Pipelines, Datadog, Jest, draco3d |
-| **규모** | 223+ 커밋, +44K LOC, 8개 버전 릴리즈 (v1.0.0 ~ v1.0.3) |
+| **규모** | 223+ 커밋, +44K LOC, 8개 태그 (메이저 v1.0.0 ~ v1.0.3) |
 
 ### 프로젝트 설명
 
-치과 CAD/CAM 워크플로우에서 웹 브라우저와 로컬 CAM 소프트웨어를 연동하는 Electron 기반 데스크톱 앱을 0→1로 설계하고 구축했습니다. 내장 Express 서버 기반 통신에서 Chrome PNA 규제 대응을 위한 Custom Protocol 아키텍처로 전환하고, 16개+ CAM 소프트웨어 좌표계 변환 시스템, Windows EV 코드 서명 파이프라인, Datadog 모니터링을 구축했습니다.
+치과 CAD/CAM 워크플로우에서 웹 브라우저와 로컬 CAM 소프트웨어를 연동하는 Electron 기반 데스크톱 앱을 0→1로 설계하고 구축했습니다. 내장 Express 서버 기반 통신에서 Chrome LNA(Local Network Access) 규제 대응을 위한 Custom Protocol 아키텍처로 전환하고, 16개+ CAM 소프트웨어 연동과 Datadog 모니터링을 구축했습니다. (빌드·코드 서명·자동 업데이트 인프라는 프로젝트 6 참조)
 
 ### 담당 업무
 
@@ -283,8 +283,8 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - CAM 소프트웨어 순차 연동: Go2dental, AccuWare, hyperDent, nauta
   - Child Process 기반 소프트웨어 실행/종료 관리, 5분 주기 Health Check
   - 소프트웨어별 Config 설정 (openType, Die 모델 제외 옵션)
-- 자동 업데이트 시스템 (electron-updater), Custom TitleBar, System Tray, OS 자동 실행
-- v1.0.0 ~ v1.0.2 **8개 버전 릴리즈**, cross-env 기반 환경별(dev/qa/prod) 빌드, Windows Code Signing
+- Custom TitleBar, System Tray, OS 자동 실행 (자동 업데이트 인프라는 프로젝트 6 참조)
+- v1.0.0 ~ v1.0.3 **8개 태그(메이저 4개) 릴리즈**, cross-env 기반 환경별(dev/qa/prod) 빌드
 
 #### 4-2. CAM Export 좌표계 변환 시스템 (2025.11 ~ 2026.02)
 
@@ -293,14 +293,15 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Export Session 방식 Protocol Handler 아키텍처 설계
   - `dentbird-linker://` 딥링크 기반 데이터 전달 구조 구축
   - embed-modules 리팩토링으로 모듈 구조 개선
-- Azure Pipelines 기반 Windows/macOS 크로스 플랫폼 빌드 자동화 (EV 코드 서명 포함)
 - Datadog RUM/Logs 통합으로 Main/Renderer 프로세스 에러 추적 체계 구축
 
-#### 4-3. Chrome PNA 대응 - Custom Protocol 아키텍처 전환 (2025.11 ~ 2026.02)
+> 빌드·EV 코드 서명·자동 업데이트는 **프로젝트 6(Electron 인프라)** 으로 통합 정리
 
-- Chrome Private Network Access 정책으로 웹 → localhost HTTP 요청 차단 문제를 Custom Protocol 아키텍처 전환으로 선제 대응
-  - WebSocket / Custom Protocol 2가지 접근법 **POC 수행** 후 Custom Protocol 채택
-  - 기술 의사결정 문서 **4,000줄+** 작성 (Chrome PNA 솔루션 분석, Spike 계획 및 결과)
+#### 4-3. Chrome LNA 대응 - Custom Protocol 아키텍처 전환 (2025.11 ~ 2026.02)
+
+- Chrome Local Network Access(LNA) 정책으로 웹 → 로컬 서버 통신이 권한 승인 없이는 차단되는 문제를 Custom Protocol 아키텍처 전환으로 선제 대응 (권한 팝업을 놓친 사용자의 CS 문의가 다수 발생)
+  - **AI 도구를 활용해 20여 가지 우회 방안**(HTTPS 로컬 서버, WebSocket, Chrome Extension, WebRTC, mDNS 등)을 분석하고 **장기 안정성 기준으로 Custom Protocol 채택**
+  - WebSocket은 구현이 빠르고 성능이 우수하나 향후 LNA 적용 대상이라 다시 막힐 단기 해법으로 판단해 탈락 / Custom Protocol은 HTTP 요청이 아니어서 LNA 영향을 받지 않는 영구적 우회로 선택
 - `dentbird-linker://` 프로토콜 핸들러 구현 및 Deep Link 처리 (앱 미실행 시 URL 저장 → 실행 후 처리)
 - draco3d 기반 **DRC → STL 실시간 파일 변환** 파이프라인 구축 (복수 파일 동시 변환)
 - 분산된 Electron 앱을 NX 모노레포로 마이그레이션 (Git Subtree로 히스토리 보존)
@@ -309,10 +310,9 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 성과
 
-- **0→1 개발**: 아키텍처 설계부터 v1.0.3까지 **8개 버전 프로덕션 릴리즈**, 223+ 커밋
-- Electron 인스톨러 크기 **854MB → 78MB (91% 감소)** (webpack DefinePlugin 환경변수 빌드 시점 주입)
-- Chrome PNA 대응 Custom Protocol 아키텍처로 **브라우저 독립적 통신** 확보
-- 16개+ CAM SW 좌표계 변환, DRC→STL 실시간 변환 파이프라인 구축
+- **0→1 개발**: 아키텍처 설계부터 v1.0.3까지 8개 태그(메이저 4개) 프로덕션 릴리즈, 223+ 커밋
+- Chrome LNA 대응 Custom Protocol 아키텍처로 **브라우저 독립적 통신** 확보 (20여 가지 방안 탐색 후 장기 안정성 기준 의사결정)
+- 16개+ CAM SW 연동, DRC→STL 실시간 변환 파이프라인 구축
 
 ---
 
@@ -321,7 +321,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 | 항목 | 내용 |
 |------|------|
 | **기간** | 2023.12 ~ 2025.01 (13개월) |
-| **역할** | 설계 및 구현 전담 (1인 개발) |
+| **역할** | 설계 및 구현 주도 (팀 개발, 최다 기여자) |
 | **기술** | Electron, React, TypeScript, Recoil, VTK.js, Axios, i18next, Webpack, CRACO |
 | **규모** | 347 커밋, +34,918줄 / -12,387줄, 13개 버전 릴리즈 |
 
@@ -336,7 +336,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Main/Renderer 프로세스 분리 IPC 통신 구조 설계
 - React + TypeScript + CRACO 기반 프로젝트 세팅
 - Deep Link 연동: `dentbird://` 커스텀 프로토콜로 웹에서 앱 실행
-- 자동 업데이트 시스템: Electron Builder 기반, 업데이트 단계 UI 구현
+- 자동 업데이트 단계 UI 구현 (빌드·배포·자동 업데이트 인프라는 프로젝트 6 참조)
 - React Router 기반 라우팅, SNB(Side Navigation Bar), Page Header 공통 컴포넌트
 - Jest 테스트 환경, MSW(Mock Service Worker) 연동
 - i18n 초기 세팅 (영어/일본어)
@@ -388,24 +388,66 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 - Design Case 타입 재정의, Filtering/Query Option 수정
 - Teeth Label 컴포넌트 추가, i18n 영어/일본어 지원
 
-#### 5-8. 모니터링 및 빌드/배포 (2024.03 ~ 2025.01)
+#### 5-8. 모니터링 (2024.03 ~ 2025.01)
 
 - Electron Crash Reporter 초기 설정 (크래시 리포트 자동 전송)
 - Datadog RUM 연동 (환경별 설정 분리, 빌드 시 환경변수 주입)
-- Webpack Main 프로세스 번들링 (Preload 스크립트/loadURL 경로 변경)
-- CRACO 환경변수 주입, 환경별 ENV 파일 분리
-- Windows/Mac Code Signing 설정
-- QA/Prod 브랜치 분리, 빌드 스크립트, Artifact 버전 관리
+- Webpack Main 프로세스 번들링, CRACO 환경변수 주입, 환경별 ENV 파일 분리
+
+> 빌드 파이프라인·코드 서명·QA/Prod 배포 채널은 **프로젝트 6(Electron 인프라)** 으로 통합 정리
 
 ### 성과
 
-- **347개 커밋**, v0.0.1 → v1.0.13 (**13개 버전 릴리즈**)
+- **347개 커밋** (팀 내 최다 기여), v1.0.13까지 **13개 버전 릴리즈**
 - Windows/Mac **크로스 플랫폼** 지원 완성
 - 영어/일본어 다국어 지원
 
 ---
 
-## 프로젝트 6. 기업 랜딩 페이지 (Next.js 풀스택)
+## 프로젝트 6. Electron 데스크톱 빌드·배포·자동 업데이트 인프라
+
+| 항목 | 내용 |
+|------|------|
+| **기간** | 초기 Batch 배포 설계(2024) ~ GitHub Actions 이관(2026.04) ~ 진행 중 |
+| **역할** | 빌드·배포·자동 업데이트 파이프라인 설계 및 GitHub Actions 이관 주도 (Batch·Linker 공통) |
+| **대상** | DentBird Batch, DentBird Linker (두 Electron 데스크톱 앱) |
+| **기술** | electron-builder, electron-updater, GitHub Actions(self-hosted runner), Azure Pipelines, Azure Storage→S3, NAS, xcrun notarytool, signtool, blue-green |
+
+### 프로젝트 설명
+
+두 Electron 데스크톱 앱(Batch·Linker)의 빌드·배포·자동 업데이트를 담당했습니다. 초기에는 빌드가 담당자 개인 PC와 인프라팀에 의존하던 구조였고, 그 한계를 직접 겪은 뒤 self-hosted 러너 기반 자동화 파이프라인으로 재설계하고 GitHub Actions 이관을 주도했습니다.
+
+### 담당 업무
+
+#### 6-1. 빌드 파이프라인 재설계 — 담당자·인프라팀 의존 제거 (성장 서사)
+
+- **초기 한계(당시 미해결)**: 빌드를 담당자 로컬 PC에서 직접 수행한 뒤 Azure Storage에 업로드하는 구조였습니다. 담당 PC를 못 쓰면 빌드가 멈추고, 빌드 방법을 아는 사람이 담당자뿐이라 빌드/배포 요청이 한 사람에게 몰렸습니다. Windows는 코드사인 USB를 인프라팀이 관리해 매번 인프라팀을 거쳐야 빌드할 수 있었습니다.
+- **재설계(팀 개편 후 P004)**: Mac은 notarize에 필요한 파일을 Azure DevOps Library에 등록해 빌드를 자동화하고, Windows는 본인 PC를 빌드머신으로 구성해 코드사인 USB·인프라팀 의존을 제거했습니다.
+- **Azure Pipelines → GitHub Actions + self-hosted 러너 이관 주도**(#7689): macOS는 self-hosted ARM64 러너에 영구 캐시 경로로 BrokerServer 부하를 회피하고 `xcrun notarytool`로 공증, Windows는 self-hosted 러너에서 `signtool` 서명 검증 후 NAS에 직접 업로드하도록 구성했습니다. Phase 단위로 단계적으로 이관하고 macOS universal 빌드·버전 전파 회귀 등 후속 안정화를 진행했습니다(#7861, #7884, #7929, #8195).
+- **결과**: Azure 클라우드 러너 대비 빌드 시간이 **약 20분 → 약 6분**으로 단축되고(직접 비교), 빌드의 담당자·인프라팀 의존을 제거했습니다.
+
+#### 6-2. 자동 업데이트 시스템 설계
+
+- **electron-forge vs electron-builder**: 커스터마이징 용이성과 레퍼런스를 기준으로 electron-builder를 채택했습니다.
+- **라이브러리 내부 분석·패치**: 기본 Publisher가 환경에 맞지 않아, electron-builder의 `BitbucketPublisher` 클래스를 직접 분석해 hostname 누락 버그·timeout(120s→20분)·Bearer 토큰 인증을 패치했습니다(issue #6192 기반). 운영에는 유지보수 부담을 고려해 클래스 교체 대신 업데이트용 yaml만 커스텀하는 방향으로 단순화했습니다.
+- **QA/PROD 채널 분리**: `publish.channel`로 채널별 `latest.yml`을 분리해, 사용자가 QA 빌드를 잘못 수신하는 사고를 방지했습니다.
+- **checksum mismatch 원인 파악(개발 중 학습)**: 코드 서명 없이 빌드한 아티팩트를 나중에 따로 서명하면 바이너리 checksum이 바뀌어 `latest.yml`의 sha512와 불일치해 자동 업데이트가 실패한다는 점을 확인했습니다. 코드 서명을 빌드 과정에 포함하면 생기지 않는 문제로, 실제 배포 파이프라인에 코드 서명을 통합하는 근거가 됐습니다.
+
+#### 6-3. 배포 경로 설계 + 진행 중 과제 (trade-off 판단)
+
+- 배포 저장소를 Azure Storage에서 S3로 전환하고, **QA 빠른 설치 경로**를 설계했습니다. 빌드머신(NAS 마운트)이 사내 NAS에 직접 업로드해, QA팀이 자동 업데이트를 기다리지 않고 최신 버전을 즉시 설치할 수 있습니다.
+- **blue-green 배포 + 의도적 보류**: S3에 직접 업로드하면 자동 업데이트가 즉시 발동돼 검증 전 배포 위험이 있어 blue-green으로 구성하고, green 검증은 앱 실행 시 플래그 명령어로 수행합니다. green 검증 자동화는 운영 비용(환경별 green 환경·환경변수 관리·추가 빌드, 데스크톱은 아티팩트 교체 방식이라 green은 되고 blue에서 실패할 가능성)을 고려해 **의도적으로 보류**하고 있습니다.
+
+### 성과
+
+- 빌드의 담당자 개인·인프라팀 의존 제거 (담당자 PC·코드사인 USB → self-hosted 파이프라인 자동화)
+- 빌드 시간 약 20분 → 약 6분 (Azure 클라우드 러너 대비 직접 비교)
+- QA 자가 설치 경로 확보 (NAS 직접 업로드)
+- 자동 업데이트 안정화 (라이브러리 내부 패치·채널 분리·checksum 원인 파악) + 운영 비용 기준의 trade-off 판단
+
+---
+
+## 프로젝트 7. 기업 랜딩 페이지 (Next.js 풀스택)
 
 | 항목 | 내용 |
 |------|------|
@@ -443,7 +485,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ---
 
-## 프로젝트 7. Imago Cloud Design System 기여
+## 프로젝트 8. Imago Cloud Design System 기여
 
 | 항목 | 내용 |
 |------|------|
@@ -454,20 +496,20 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 
 ### 담당 업무
 
-#### 7-1. React 19 마이그레이션 (2025.04.23)
+#### 8-1. React 19 마이그레이션 (2025.04.23)
 
 - 19개 파일 수정, package-lock.json 10,311줄 변경
 - Storybook 7 호환성 확보: main.js, preview.js 수정
 - ESLint 설정 React 19 규칙 대응
 - 10개 이상 Stories 파일 업데이트, 의존성 버전 충돌 해결
 
-#### 7-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
+#### 8-2. DatePicker 컴포넌트 API 확장 (2025.08.26 ~ 08.28)
 
 - placeholder props 추가: 사용자 정의 텍스트 지원 (v3.0.0-13 릴리즈)
 - onClick handler props 추가: 외부 클릭 이벤트 제어 가능 (v3.0.0-15 릴리즈)
 - Optional props 설계로 기존 코드 **하위 호환성 100% 유지**
 
-#### 7-3. 프로덕션 버그 긴급 대응 (2025.08.06)
+#### 8-3. 프로덕션 버그 긴급 대응 (2025.08.06)
 
 - DatePicker onClose props가 내부 로직에 의해 덮어 씌워지는 버그
 - onClose 호출 순서 조정, 외부 props 콜백 호출 보장
@@ -498,8 +540,9 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 | 분류 | 기술 |
 |------|------|
 | Framework | Electron |
-| Build | electron-builder, Webpack, CRACO |
+| Build | electron-builder, electron-updater, Webpack, CRACO |
 | Protocol | Custom Protocol Handler (`dentbird://`, `dentbird-linker://`) |
+| Deploy | GitHub Actions(self-hosted), Azure Storage→S3, NAS, notarytool/signtool, blue-green |
 
 ### Testing
 | 분류 | 기술 |
@@ -519,7 +562,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 ### DevOps
 | 분류 | 기술 |
 |------|------|
-| CI/CD | Azure DevOps, Azure Pipelines |
+| CI/CD | GitHub Actions(self-hosted runner), Azure DevOps, Azure Pipelines |
 | Infrastructure | Azure (Static Web Apps, VM), Nginx |
 | Monitoring | Datadog (RUM, Logs), Electron Crash Reporter |
 | Automation | K8s CronJob, Claude CLI, Power Automate |
@@ -541,7 +584,7 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 | **코드 기여** | 총 커밋 | 1,500+ |
 | | 총 PR | 300+ |
 | | 총 코드 변경 | 500K+ LOC |
-| **빌드 최적화** | Electron 인스톨러 감소 | 854MB → 78MB (91%) |
+| **빌드 인프라** | 빌드 시간 단축 (Electron) | 약 20분 → 약 6분 (Azure 러너 대비, 직접 비교) |
 | **코드 품질** | TypeScript 에러 해결 | 688개 → 0개 (100%) |
 | | 토큰 관리 코드 감소 | 200줄 → 33줄 (85%) |
 | | CookieUtil 간소화 | 67% |
@@ -556,6 +599,6 @@ iframe 한계를 해결하기 위해 사내 백오피스(Console Client)용 모�
 | | 배포 시간 단축 설계 | 45분 → 10분 (78%) |
 | **제품** | CAM SW 연동 | 16개+ |
 | | 외부 스캐너 연동 | 3개 (Medit, Shining 3D, Connect) |
-| | Batch Client 릴리즈 | 13개 (v0.0.1 ~ v1.0.13) |
+| | Batch Client 릴리즈 | 13개 (~ v1.0.13) |
 | | Micro Frontend 모듈 | 4개 신규 + 5개 유지보수 |
 | | 랜딩 페이지 | 10+ 페이지, 3개 언어 |

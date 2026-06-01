@@ -28,7 +28,7 @@ React/TypeScript 기반 SPA 개발과 모노레포·테스트 자동화 경험�
 | **Build** | Nx, pnpm, Webpack, Module Federation |
 | **Testing** | Playwright, Jest, Vitest, MSW |
 | **Architecture** | FSD (Feature-Sliced Design), Facade Pattern |
-| **CI/CD** | Azure DevOps Pipelines, AWS EC2 CronJob |
+| **CI/CD** | GitHub Actions(self-hosted), Azure DevOps Pipelines, AWS EC2 CronJob |
 | **Monitoring** | Datadog RUM/Logs, Electron Crash Reporter |
 | **i18n** | i18next, Lokalise |
 | **Backend** | Node.js, Fastify, MongoDB |
@@ -78,7 +78,7 @@ NX 모노레포 환경에서 플랫폼 아키텍처 개선, E2E 테스트 자동
 
 | 항목 | 내용 |
 |------|------|
-| **기간** | 2024.08 ~ 2026.02 |
+| **기간** | 2024.07 ~ 2025.12 |
 | **기술** | Electron, React, TypeScript, Vite, Express, Nx Monorepo, Azure Pipelines, Datadog, Jest |
 
 치과 CAM 소프트웨어 연동 Electron 데스크톱 앱을 설계/구축하고, Chrome LNA 대응을 위한 Custom Protocol 아키텍처 전환을 주도.
@@ -90,12 +90,9 @@ NX 모노레포 환경에서 플랫폼 아키텍처 개선, E2E 테스트 자동
   - **Config 클래스** 기반 동적 소프트웨어 관리 시스템 구축
   - **16개+ CAM 소프트웨어**별 좌표계 차이를 **변환 매트릭스 알고리즘**으로 해결
   - Export Session 방식 Protocol Handler 설계
-- 아키텍처 전환 및 최적화
-  - **Chrome LNA** 규제 선제 대응
-  - 인스톨러 **854MB→78MB (91%↓)**
-- 빌드 및 배포 자동화
-  - **Azure Pipelines** Windows/macOS 크로스 플랫폼 빌드 자동화
-  - **EV 코드 서명** 포함
+- 아키텍처 전환
+  - **Chrome LNA** 규제 선제 대응 — Custom Protocol 전환 (20여 가지 방안 탐색 후 장기 안정성 기준 채택)
+- 빌드·배포: Windows/macOS 크로스 플랫폼 빌드·EV 코드 서명 (인프라 상세는 프로젝트 6 참조)
 - 모니터링 및 안정성
   - **Datadog** RUM/Logs 모니터링 통합
   - Datadog FeatureFlag 적용하여 신규 방식으로 안정적 전환
@@ -158,7 +155,7 @@ iframe 기반 MFE 4개 모듈 운영의 한계를 경험하고, Module Federatio
 | **기간** | 2023.12 ~ 2025.01 |
 | **기술** | Electron, React, TypeScript, Recoil, Webpack, Jest, MSW, Datadog |
 
-치과 CAD 크라운 배치 처리 Electron 앱을 아키텍처 설계부터 v1.0.13 프로덕션 릴리즈까지 전체 개발을 주도.
+치과 CAD 크라운 배치 처리 Electron 앱을 아키텍처 설계부터 v1.0.13 프로덕션 릴리즈까지 주도 (팀 내 최다 기여자).
 
 **주요 성과**
 - 아키텍처 및 구조 설계
@@ -167,11 +164,7 @@ iframe 기반 MFE 4개 모듈 운영의 한계를 경험하고, Module Federatio
   - **IPC 통신 아키텍처** 설계 (Main/Renderer 프로세스)
 - 시스템 기능 구현
   - **Deep Link** 커스텀 프로토콜 구현
-  - **자동 업데이트** 시스템 구현
-- 빌드 및 배포 파이프라인
-  - **Webpack** Main 프로세스 번들링
-  - Windows/Mac **코드 서명**, 환경별(dev/qa/prod) 빌드 분리
-  - Artifact 버전 관리
+- 빌드·배포: Webpack 번들링, 환경별(dev/qa/prod) 빌드 분리 (빌드·코드 서명·자동 업데이트 인프라는 프로젝트 6 참조)
 - 테스트 인프라 도입
   - 테스트 문화 부재 환경에서 **Jest + MSW** 단위 테스트 인프라 도입
   - 주요 모듈 테스트 코드 작성
@@ -181,7 +174,23 @@ iframe 기반 MFE 4개 모듈 운영의 한계를 경험하고, Module Federatio
 
 ---
 
-### 6. 기업 랜딩 페이지 (Next.js 풀스택)
+### 6. Electron 빌드·배포·자동 업데이트 인프라 (Batch·Linker 공통)
+
+| 항목 | 내용 |
+|------|------|
+| **기간** | 2024 ~ 현재 (GitHub Actions 이관 2026.04) |
+| **기술** | electron-builder, GitHub Actions(self-hosted), Azure Pipelines, S3, NAS, blue-green |
+
+두 Electron 앱(Batch·Linker)의 빌드·배포·자동 업데이트를 담당. 로컬 PC·인프라팀 의존 구조를 self-hosted 파이프라인으로 재설계하고 GitHub Actions 이관을 주도.
+
+**주요 성과**
+- 빌드 파이프라인 재설계: 로컬 PC 빌드 → **GitHub Actions self-hosted 러너 이관** 주도, 빌드 시간 약 20분→약 6분(직접 비교), 담당자·인프라팀 의존 제거
+- 자동 업데이트: electron-builder `BitbucketPublisher` 내부 분석·패치(hostname·timeout·Bearer 인증), QA/PROD 채널 분리
+- 배포: NAS 직접 업로드로 QA 자가 설치 경로 확보, blue-green 구성 + green 검증 자동화는 운영 비용 고려해 의도적 보류
+
+---
+
+### 7. 기업 랜딩 페이지 (Next.js 풀스택)
 
 | 항목 | 내용 |
 |------|------|
