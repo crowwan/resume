@@ -8,10 +8,11 @@
 
 ## 현재 상태
 
-- **Current Phase**: 카드별 발굴→인터뷰→재작성 진행 중 (사용자 지정 순서)
+- **Current Phase**: 재작성 기준(가이드) 정립 완료 → 가이드 기반 본문 재작성 단계
+- **재작성 기준**: [WRITING-GUIDE.md](./WRITING-GUIDE.md) — 모든 career/resume 재작성은 이 가이드를 따름 (2026-06-01 도입). JD 제공 시 §13 매핑 운영법 적용.
 - **완료 카드**: ✅ 06 랜딩 (findings+인터뷰+career/resume, 2026-05-31)
-- **발굴 완료·career 보류**: 🔶 05 Batch + 🔶 02 Linker — findings 완료(2026-06-01). 빌드/자동업데이트가 공통 → **Electron 인프라 통합 정리** 후 각 career
-- **다음**: batch+linker Electron 인프라 통합 career 정리 (또는 남은 카드 발굴: 01 Solutions / 03 MFE / 04 Account)
+- **인프라 통합 진행 중**: 🔶 Electron 빌드·배포·자동업데이트를 **career 신설 카드(프로젝트 6)** 로 분리 + Linker(4)/Batch(5) 사실 정정(LNA·1인개발→팀·기간·checksum). **남음: 가이드 스타일 재점검 + resume 정렬 + 일관성 점검 + 커밋**
+- **다음**: 인프라 통합 마무리 → 가이드 기준 메인 카드(01 Solutions / 03 MFE) 재작성
 
 > Claude는 작업 시작 시 이 줄을 먼저 확인하고, 다음 Phase로 진입 시 이 블록을 갱신합니다.
 
@@ -184,7 +185,7 @@ Phase 0과 묶어도 됨 (사용자 선택).
 | `resume.md` 자기소개 재작성 (실제 강점 3개로 압축, "AI 도구 운영" 격상) | ⬜ |
 | `career-description.md` 핵심 성과 5줄 재작성 | ⬜ |
 | 정량적 성과 종합 표 갱신 (인터뷰에서 정정된 수치 반영) | ⬜ |
-| 공고 키워드 매핑 체크 (성능 지표화·옵저버빌리티·아키텍처 주도·AI 도구 활용·모노레포·테스트 자동화·CS 기초) | ⬜ |
+| 공고 키워드 매핑 체크 (성능 지표화·옵저버빌리티·아키텍처 주도·AI 도구 활용·모노레포·테스트 자동화·CS 기초). **JD 제공 시 [WRITING-GUIDE.md §13](./WRITING-GUIDE.md) 매핑 운영법 적용** | ⬜ |
 
 ---
 
@@ -210,3 +211,4 @@ Phase 0과 묶어도 됨 (사용자 선택).
 5. **인터뷰 진행은** [interviews/README.md](./interviews/README.md)의 4축 템플릿을 따름. 입력은 해당 카드의 `findings/0X-*.md`.
 6. Phase 2부터는 **한 PR = 한 카드**.
 7. **새 사실/수치를 본문에 박을 때마다** "이거 사용자가 답했나, 내가 만들었나" 자체 검증. findings에 출처 없는 항목은 본문 못 박음.
+8. **본문 재작성은** [WRITING-GUIDE.md](./WRITING-GUIDE.md)의 문장 공식(CAR/XYZ)·정량 표기·선별/정렬 기준을 따름. JD가 주어지면 §13 매핑 운영법으로 타겟 정렬.

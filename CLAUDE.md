@@ -125,7 +125,8 @@ Claude Code(=메인 Claude in CLI)는 이 룰에 따라 동작합니다.
   - "~에 참여했습니다" → "~를 전담/주도했습니다" (사실이면)
   - "다양한 기술을 사용했습니다" → 구체 기술 + 사용 맥락
   - "팀과 협업했습니다" → 구체 기여 범위와 결과
-- 영문 기술 용어는 원문 유지 (Module Federation, Page Object, PNA 등)
+- 영문 기술 용어는 원문 유지 (Module Federation, Page Object, LNA 등)
+- **상세 작성 공식·정량 표기·좋은예/나쁜예·선별/정렬·JD 매핑은 [WRITING-GUIDE.md](./WRITING-GUIDE.md) 참조** — career/resume 재작성 시 이 가이드를 기준으로 삼습니다.
 
 ---
 
@@ -177,6 +178,7 @@ git config --local user.email "32172056+crowwan@users.noreply.github.com"
 | `claude-project-instructions.md` | 모바일 Claude.ai Project Instructions | 모바일 Claude.ai |
 | `STRATEGY.md` | 채널별 워크플로우 (PC/모바일/자동화) | 사용자 (참고용) |
 | `PLAN.md` | 현재 작업 순서와 Phase 상태 | Claude + 사용자 |
+| `WRITING-GUIDE.md` | **이력서·경력기술서 재작성 스타일 가이드** — 문장 공식·정량 표기·프로젝트 선별/정렬·JD 매핑 운영법 | Claude + 사용자 |
 | `findings/README.md` | **사실 발굴 룰** — 4시그널·출처 태그·카드별 레포 지도 | Claude + 사용자 |
 | `findings/0X-*.md` | 카드별 발굴된 raw 사실 (서사 X). 인터뷰의 입력원 | Claude + 사용자 |
 | `interviews/README.md` | 인터뷰 진행 룰과 면접 답변 스크립트 변환 가이드 | Claude + 사용자 |
@@ -190,11 +192,12 @@ git config --local user.email "32172056+crowwan@users.noreply.github.com"
 
 1. 사용자 명시 지시 (이번 대화)
 2. `CLAUDE.md` (이 파일)
-3. `PLAN.md` 현재 Phase
-4. `claude-project-instructions.md`의 일반 작성 원칙
-5. 글로벌 `~/.claude/CLAUDE.md`의 코드 작업 룰
+3. `WRITING-GUIDE.md` (작성 스타일 상세 — CLAUDE.md 문체 룰의 하위 구체화)
+4. `PLAN.md` 현재 Phase
+5. `claude-project-instructions.md`의 일반 작성 원칙
+6. 글로벌 `~/.claude/CLAUDE.md`의 코드 작업 룰
 
-5번은 **이 레포에서는 무효**입니다. 이력서 레포는 문서 작업이므로 메인 Claude가 직접 작업합니다(executor 위임 X).
+6번은 **이 레포에서는 무효**입니다. 이력서 레포는 문서 작업이므로 메인 Claude가 직접 작업합니다(executor 위임 X).
 
 ---
 
