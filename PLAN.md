@@ -58,7 +58,7 @@ E. 포맷·배포   HTML/Pages, JD별 버전
 | 01. Solutions | `dentbird-solutions`, vault 풍부 | ⬜ 발굴 |
 | 02. Linker | `dentbird-linker-app` 외 | ✅ done |
 | 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ 발굴 |
-| 04. Account | `dentbird-account-client` | ⬜ 발굴 |
+| 04. Account | `dentbird-account-client` | ✅ done (+ 인터뷰) |
 | 05. Batch | `workspace/dentbird-batch-client`, `dentbird-solutions/apps/batch` | ✅ done |
 | 06. Landing | `landing-page-client`, `landing-page-server` | ✅ done |
 | 07. Design System | `imago-design-system` | ⬜ 발굴 |
