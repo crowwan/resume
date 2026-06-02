@@ -1,34 +1,38 @@
 # Resume Repo — 작업 계획서
 
-> 1년 내 이직 목표(라인/오늘의집/CJ ENM) 기준, 이력서·경력기술서·면접 답변 자산을 **콘텐츠 먼저, 포맷은 나중에** 정비합니다.
+> 1년 내 이직 목표(라인/오늘의집/CJ ENM) 기준. **정보 정리 → 포지셔닝 기반 새 이력서 → 비판적 평가 루프**로 "매력적인" 이력서를 만든다.
 >
-> 운영 룰은 [CLAUDE.md](./CLAUDE.md), 인터뷰 진행은 [interviews/README.md](./interviews/README.md).
+> 운영 룰: [CLAUDE.md](./CLAUDE.md) · 작성 기준: [WRITING-GUIDE.md](./WRITING-GUIDE.md) · 발굴 룰: [findings/README.md](./findings/README.md) · 인터뷰: [interviews/README.md](./interviews/README.md)
 
 ---
 
 ## 현재 상태
 
-- **Current Phase**: 재작성 기준(가이드) 정립 완료 → 가이드 기반 본문 재작성 단계
-- **재작성 기준**: [WRITING-GUIDE.md](./WRITING-GUIDE.md) — 모든 career/resume 재작성은 이 가이드를 따름 (2026-06-01 도입). JD 제공 시 §13 매핑 운영법 적용.
-- **완료 카드**: ✅ 06 랜딩 (findings+인터뷰+career/resume, 2026-05-31)
-- **인프라 통합 진행 중**: 🔶 Electron 빌드·배포·자동업데이트를 **career 신설 카드(프로젝트 6)** 로 분리 + Linker(4)/Batch(5) 사실 정정(LNA·1인개발→팀·기간·checksum). **남음: 가이드 스타일 재점검 + resume 정렬 + 일관성 점검 + 커밋**
-- **다음**: 인프라 통합 마무리 → 가이드 기준 메인 카드(01 Solutions / 03 MFE) 재작성
+- **Current Phase**: A(정보 토대) — 미완 5개 카드 findings 발굴 예정
+- **워크플로 전환 (2026-06-01)**: 기존 "카드별 순차 발굴→인터뷰→재작성"에서 → **[전체 정보 정리 → 포지셔닝 기반 백지 재작성 → 평가 서브에이전트 루프]** 로 전환. *기존 양식을 답습하면 매력이 안 생긴다*는 판단에서 비롯.
+- **포지셔닝 1안 (검증 대상)**: "제품의 구조와 품질을 끝까지 책임지는 FE" + 4축(**범위 / 구조 / 판단 / 효율**). 확정 아님 — Phase D 평가 루프에서 검증·조정.
+- **완료**: ✅ 인프라 통합(career/resume 프로젝트 6) + 가이드 도입(WRITING-GUIDE) + 운영문서 등록
+- **interviews 트랙**: 이력서와 **병행 유지** (면접 답변 스크립트 자산 + 카드 서사 깊이)
 
-> Claude는 작업 시작 시 이 줄을 먼저 확인하고, 다음 Phase로 진입 시 이 블록을 갱신합니다.
+> Claude는 작업 시작 시 이 줄을 먼저 확인하고, Phase 진입 시 이 블록을 갱신합니다.
 
 ---
 
-## 3단계 흐름 (한눈에)
+## 새 워크플로 (한눈에)
 
 ```
-findings/0X-*.md          (raw 사실 — Phase 0A에서 채움)
-    ↓
-interviews/0X-*.md        (4축 서사 — Phase 2에서 채움)
-    ↓
-resume.md / career-description.md   (형식화 — Phase 2~4)
+A. 정보 토대   findings/ 전체 완비 (raw 사실, 출처 강제)
+      ↓
+B. 기준 정비   WRITING-GUIDE(포지셔닝 섹션) + EVALUATION-RUBRIC
+      ↓
+C. 새 이력서   findings → (interviews 4축 병행) → 포지셔닝 렌즈로 백지 재작성
+      ↓
+D. 평가 루프   평가 서브에이전트가 RUBRIC으로 비판적 채점 → 통과까지 개선
+      ↓
+E. 포맷·배포   HTML/Pages, JD별 버전
 ```
 
-각 단계는 다음 단계의 **유일한 입력원**입니다. findings를 건너뛰고 인터뷰로 가면 4축의 사실 정보가 사용자 기억에만 의존하게 됩니다.
+**핵심 원칙**: 기존 resume/career 양식을 **답습하지 않는다.** findings(사실)와 포지셔닝에서 새로 짓고, 비판적 평가자가 `통과`시킬 때까지 돌린다. 사실·수치는 여전히 **발굴 OK / 발명 NO** (CLAUDE.md §3).
 
 ---
 
@@ -39,176 +43,85 @@ resume.md / career-description.md   (형식화 — Phase 2~4)
 | `user.name` (local) | `Jinwan Kim` | ✅ |
 | `user.email` (local) | `32172056+crowwan@users.noreply.github.com` (개인 GitHub noreply) | ✅ |
 | 격리 범위 | 이 레포만 (`git config --local`) | ✅ |
-| `.git/hooks/pre-commit` | 회사 도메인(`imagoworks.ai`) author 자동 차단 + dry test 양쪽 케이스 통과 | ✅ |
-| 과거 5개 커밋 | 회사 이메일로 박혀 있음. 의도적으로 그대로 둠 (history rewrite 안 함) | ⚠️ 알고 있음 |
+| `.git/hooks/pre-commit` | 회사 도메인(`imagoworks.ai`) author 자동 차단 | ✅ |
 
-> 새 워킹트리/재클론 후엔 `CLAUDE.md § 8 Git Identity 셋업`의 명령을 다시 실행해야 합니다.
-
----
-
-## Phase 0A — Findings 수집 (★ 시작 지점)
-
-**목표**: 본문/인터뷰 작업 전에, 실제 작업 레포·vault·기억에서 **의미있는 사실만** 카드별로 발굴해 `findings/0X-*.md`에 누적합니다. 등급/그룹화는 여기서 안 함.
-
-**왜 이 단계가 먼저인가**:
-- 현재 이력서·career에 **임의 수치·모호 표현**이 일부 박혀 있음 (Phase 0B 항목 = 그 증거)
-- 4축 인터뷰의 사실 정보를 사용자 기억에만 의존하면, 또 같은 오류가 재생산됨
-- vault `projects/dentbird-solutions/`에 이미 풍부한 자료(`log`/`learnings`/`decisions`/`bugs`)가 있어 발굴 비용이 낮음
-
-**수집 기준**: [findings/README.md](./findings/README.md) — 4가지 시그널(의사결정 / 측정 / 후속 영향 / 운영 패턴) 중 하나라도 걸리면 수집. 출처 태그 강제.
-
-**진행 순서**:
-
-| 순 | 카드 | 발굴 대상 | Status |
-|----|------|----------|--------|
-| 1 | 01. Solutions | `dentbird-solutions`, vault 풍부 | ⬜ |
-| 2 | 02. Linker | `workspace/dentbird-linker`(초기) + `dentbird-linker-app`(Azure) + `solutions/apps/linker-desktop`(현재) | ✅ |
-| 3 | 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ |
-| 4 | 04. Account | `dentbird-account-client` | ⬜ |
-| 5 | 05. Batch | `workspace/dentbird-batch-client`(초기 v1) + `dentbird-solutions/apps/batch`(P004) | ✅ |
-| 6 | 06. Landing | `landing-page-client`, `landing-page-server` | ✅ (devops/workspace 발굴 완료) |
-| 7 | 07. Design System | `imago-design-system` | ⬜ |
-| 8 | 99. Misc | Datadog 스터디 등 카드 외 경험 | ⬜ |
-
-**완료 기준**: 카드별 4시그널 섹션이 어느 정도 채워지고, `[측정필요]`/`[기억]` 중 본문 박을 항목은 별도 확인 완료. 이때 Phase 0B의 3가지 의문(Linker 종료·버전·LCP)은 자동 해결될 가능성 큼.
+> 새 워킹트리/재클론 후엔 `CLAUDE.md § 8 Git Identity 셋업` 명령을 다시 실행.
 
 ---
 
-## Phase 0B — 일관성 오류 정리 (Findings 산물 기반)
+## Phase A — 정보 토대 (findings 완비) ★ 현재
 
-**목표**: Phase 0A에서 확인된 정확값으로 두 문서 간 불일치를 1 PR로 정리.
+모든 카드의 raw 사실을 `findings/`에 완비. 서사 X, 출처 태그 강제. 기준: [findings/README.md](./findings/README.md)의 4시그널.
 
-| 항목 | 위치 | 해야 할 일 | Status |
-|------|------|------------|--------|
-| Chrome LNA → PNA | `resume.md:11` | `LNA` → `PNA`. career는 이미 PNA로 통일됨 | ⬜ |
-| 연차 표현 | `resume.md:7` `3년차` | 2023.09 입사 → 2026.05 기준 **2년 8개월**. 정확값으로 교체 | ⬜ |
-| Linker 기간 | resume `2024.08 ~ 2026.02` vs career `~ 현재` | Phase 0A 산물(`findings/02-linker.md`)에서 확인된 종료 시점으로 통일 | ⬜ |
-| Linker 버전 수 | career `v1.0.0~v1.0.3` + `8개 버전` | Phase 0A에서 git tag 발굴 결과로 확정 | ⬜ |
-| 랜딩페이지 정량값 | resume.md 6번, career 6-4 | Phase 0A 산물에서 확인된 LCP/Lighthouse 실수치 또는 표현 완화 | ⬜ |
+| 카드 | 발굴 대상 (`~/Works/devops/`, `~/Works/workspace/`) | Status |
+|------|------|--------|
+| 01. Solutions | `dentbird-solutions`, vault 풍부 | ⬜ 발굴 |
+| 02. Linker | `dentbird-linker-app` 외 | ✅ done |
+| 03. MFE | `dentbird-front-module-monorepo`, `dentbird-console-client` | ⬜ 발굴 |
+| 04. Account | `dentbird-account-client` | ⬜ 발굴 |
+| 05. Batch | `workspace/dentbird-batch-client`, `dentbird-solutions/apps/batch` | ✅ done |
+| 06. Landing | `landing-page-client`, `landing-page-server` | ✅ done |
+| 07. Design System | `imago-design-system` | ⬜ 발굴 |
+| 99. Misc | Datadog 스터디·AI 도구 운영 등 카드 외 | ⬜ 발굴 |
 
-**PR 제목 예시**: `docs: 이력서/경력기술서 일관성 오류 정리 (LNA→PNA, 연차, Linker 기간)`
+**완료 기준**: 4시그널 섹션이 채워지고, 본문에 박을 `[측정필요]`/`[기억]` 항목은 별도 확인 완료.
 
 ---
 
-## Phase 1 — 누락 큼지막한 경험 슬롯 만들기
-
-**목표**: 본문에 아예 빠져 있는 큰 경험에 자리를 마련하고, 짧은 인터뷰로 채움.
+## Phase B — 기준 정비
 
 | 항목 | 내용 | Status |
 |------|------|--------|
-| Datadog 팀 옵저버빌리티 스터디 리딩 | ~10명, 6주 추정 — 정확값은 사용자 확인. `99-misc.md`로 인터뷰 후 career에 신규 섹션 추가 (또는 Solutions 카드 안에 흡수) | ⬜ |
-| AI 도구 활용 강조 | Claude Code CLI 변경 감지 시스템은 이미 본문 있음. 자기소개와 핵심성과에서 "AI 도구 운영" 키워드를 격상 (Phase 4에서 통합 처리) | ⬜ |
-
-Phase 0과 묶어도 됨 (사용자 선택).
+| WRITING-GUIDE 포지셔닝 섹션 | "우산 + 4축" 개념 + 포지셔닝 1안 명시 (검증 대상) | ⬜ |
+| EVALUATION-RUBRIC.md 신규 | 평가 서브에이전트 채점표·통과 기준 (포지셔닝 선명도/첫줄 임팩트/정량 실측/트레이드오프/6초 매력/발명 없음). **무한루프 방지 위해 통과 임계치 명문화** | ⬜ |
 
 ---
 
-## Phase 2 — 메인 카드 3개 깊은 4축 인터뷰
+## Phase C — 새 이력서 생성
 
-각 1 PR. **입력: `findings/0X-*.md`** → 4축 빈칸은 사용자 기억으로 보강 → `interviews/0X-*.md` 저장 → career 압축 → resume 정렬.
+findings를 입력으로, **포지셔닝(1안) 렌즈 + [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준**으로 백지 재작성.
 
-### Phase 2A — DentBird Solutions ★ (시작 지점)
+- `interviews/0X-*.md` 4축 인터뷰 **병행** (면접 답변 스크립트 + 카드 서사 깊이 확보)
+- `career-description.md` 먼저(상세) → `resume.md`(압축·선별·정렬, WRITING-GUIDE §1-1)
+- 기존 양식 답습 금지. 첫 줄 임팩트·문제→해결→임팩트·트레이드오프 서사 필수.
 
-**왜 먼저**: 현재 진행 중이라 기억 가장 생생. 모노레포/E2E/Datadog 시장 키워드 밀집.
+### 카드별 인터뷰 깊이 가이드 (기존 보존)
 
-**인터뷰 깊이 가이드**:
-- 모노레포 통합: 분산 5개를 왜 통합? "공통화 좋아 보이니까"가 아니라 진짜 아팠던 사고/낭비
-- Playwright + Page Object: 93% 중복 감소·39% 성능 개선의 결정 근거. 다른 패턴은 왜 탈락
-- Claude Code CLI 기반 변경 감지: 시간/비용/안정성 트레이드오프. 도입 후 효과 측정 방식
-- Datadog RUM 전사 적용: 누가 처음 제안? 도입 전후 장애 추적이 어떻게 바뀜?
-- Facade 토큰 관리 200→33줄: 단순 양적 감소가 아니라 Race Condition / Stale Closure가 왜 발생했는지
-
-**산출물**: `interviews/01-solutions.md`, career § Solutions 재작성, resume § 1 재작성
-
-| Status | ⬜ |
-|---|---|
+- **Solutions ★**: 모노레포 통합의 진짜 동기 / Playwright Page Object 93%·39%의 결정 근거 / Claude CLI 변경 감지 효과 측정 / Datadog RUM 전사 적용 경위 / Facade 토큰 200→33줄 Race Condition 맥락
+- **Linker ★**: LNA Custom Protocol 20여 방안 의사결정 / 16개 CAM 검증 방식 / 1개월 113커밋 페이스
+- **MFE ★**: iframe 4~5개 운영의 진짜 비용 / Module Federation 대안 검토 / FSD 도입 후 변화 / 지속성·재설계 계획
+- **Account / DS / Misc**: 가벼운 4축 (결정 서사 위주)
 
 ---
 
-### Phase 2B — DentBird Linker
+## Phase D — 평가-개선 루프
 
-**왜 중요**: WebSocket vs Custom Protocol POC가 면접에서 가장 강한 카드(기술 의사결정 + 4,000줄 문서).
-
-**인터뷰 깊이 가이드**:
-- 854MB → 78MB (91%↓): webpack DefinePlugin 환경변수 빌드 시점 주입의 진짜 효과. 어떤 자원이 빠진 건지
-- Chrome PNA 대응: 언제·어떻게 감지? 선제 대응의 트리거는?
-- WebSocket vs Custom Protocol POC: 두 안의 측정 방식, 채택 근거, 탈락 근거
-- 16개+ CAM SW 좌표계 변환 매트릭스: 알고리즘 자체보다, **검증 방식**(어떻게 맞는지 알았나)
-- 1개월 113커밋 0→1 개발: 페이스가 가능했던 이유, 못 한 일은 무엇
-
-**산출물**: `interviews/02-linker.md`, career § Linker, resume § 2
-
-| Status | ⬜ |
-|---|---|
+- **평가 서브에이전트**: `EVALUATION-RUBRIC.md` + `WRITING-GUIDE.md` 기준으로 **비판적 채점** → `통과`/`미통과` + 구체 피드백
+- 메인(생성자)이 피드백 반영 → 재평가 → **통과까지 반복**
+- **통과 = 룹브릭 전 항목 합격 + 치명결함 0**
+- **포지셔닝 1안도 여기서 검증·조정** (더 강한 포지셔닝이 보이면 교체)
 
 ---
 
-### Phase 2C — Micro Frontend 전환
+## Phase E — 포맷·배포 (선택)
 
-**왜 중요**: iframe → Module Federation 재설계 = 성장 서사의 정석. 사용자가 가장 강조하라고 한 카드.
-
-**인터뷰 깊이 가이드**:
-- iframe MFE 4(or 5)개 운영의 진짜 불편: "개별 도메인"이 정확히 어떻게 비용? SSL 비용? 보안 검토 반복?
-- Module Federation 결정 근세: Web Components / 단일 SPA 통합 / Nx 라이브러리 분할 같은 대안은?
-- FSD 도입: 왜 FSD? 도입 후 코드 리뷰/온보딩이 실제로 바뀌었나?
-- 3주 4개 모듈 신규 개발: 페이스 가능했던 구조적 이유
-- 지속성: 지금도 MF로 굴러가나? Phase 3 / 4 재설계 계획 있나?
-
-**산출물**: `interviews/03-mfe.md`, career § MFE, resume § 4
-
-| Status | ⬜ |
-|---|---|
-
----
-
-## Phase 3 — 나머지 4개 카드 가벼운 4축
-
-각 1 PR 또는 묶음 PR (사용자 선택). 인터뷰 깊이는 메인 카드의 절반.
-
-| 카드 | 인터뷰 파일 | Status |
-|------|-------------|--------|
-| DentBird Account (구독/계정) | `04-account.md` | ⬜ |
-| DentBird Batch (Electron 빌드·배포 인프라) | `05-batch.md` | 🔶 findings 완료 (career는 Linker 후 통합) |
-| 기업 랜딩 페이지 (Next.js 풀스택) | `06-landing.md` | ✅ 완료 |
-| Imago Cloud Design System | `07-design-system.md` | ⬜ |
-
-각 카드의 4축 답이 얕더라도 OK. 핵심은 "이게 작업 나열이 아니라 결정 서사로 보이는가"입니다.
-
----
-
-## Phase 4 — 자기소개·핵심성과·키워드 정렬
-
-**목표**: 메인 카드 인터뷰가 끝나 본문 디테일이 강해지면, 상단 요약을 다시 씁니다.
+콘텐츠·평가 통과 후 진입.
 
 | 항목 | Status |
 |------|--------|
-| `resume.md` 자기소개 재작성 (실제 강점 3개로 압축, "AI 도구 운영" 격상) | ⬜ |
-| `career-description.md` 핵심 성과 5줄 재작성 | ⬜ |
-| 정량적 성과 종합 표 갱신 (인터뷰에서 정정된 수치 반영) | ⬜ |
-| 공고 키워드 매핑 체크 (성능 지표화·옵저버빌리티·아키텍처 주도·AI 도구 활용·모노레포·테스트 자동화·CS 기초). **JD 제공 시 [WRITING-GUIDE.md §13](./WRITING-GUIDE.md) 매핑 운영법 적용** | ⬜ |
-
----
-
-## Phase 5 — 포맷·배포 손질 (선택)
-
-콘텐츠 안정화 후 진입.
-
-| 항목 | Status |
-|------|--------|
-| Pages 배포 검증 ([github.com/crowwan/resume](https://github.com/crowwan/resume) Pages URL 확인) | ⬜ |
-| PDF 자동 빌드 복원 — README에는 `build-pdf.yml` 언급되나 실제 워크플로우는 `deploy-pages.yml` 뿐. 필요 시 PDF job 추가 | ⬜ |
-| Pages 공개 시 개인정보 분리 (연락처 분리 / private repo 유지 / public Pages의 검색 노출 절충) | ⬜ |
-| `resume-style.css` 다듬기 (필요 시) | ⬜ |
+| Pages 배포 검증 | ⬜ |
+| **JD별 이력서 버전 분기** (공고마다 다른 빌드 산출물 — WRITING-GUIDE §13 매핑) | ⬜ |
+| PDF 자동 빌드 / `resume-style.css` 다듬기 | ⬜ |
+| 공개 시 개인정보 분리 | ⬜ |
 
 ---
 
 ## 진행 규칙 요약
 
-1. **순서대로 진행** (Phase 0A → 0B → 1 → 2A → 2B → 2C → 3 → 4 → 5).
-2. 사용자가 명시적으로 점프하라고 하면 점프 가능.
-3. 각 Phase 완료 시 이 PLAN.md 상단의 **Current Phase** 줄을 갱신.
-4. **사실 발굴은** [findings/README.md](./findings/README.md)의 4시그널 기준을 따름.
-5. **인터뷰 진행은** [interviews/README.md](./interviews/README.md)의 4축 템플릿을 따름. 입력은 해당 카드의 `findings/0X-*.md`.
-6. Phase 2부터는 **한 PR = 한 카드**.
-7. **새 사실/수치를 본문에 박을 때마다** "이거 사용자가 답했나, 내가 만들었나" 자체 검증. findings에 출처 없는 항목은 본문 못 박음.
-8. **본문 재작성은** [WRITING-GUIDE.md](./WRITING-GUIDE.md)의 문장 공식(CAR/XYZ)·정량 표기·선별/정렬 기준을 따름. JD가 주어지면 §13 매핑 운영법으로 타겟 정렬.
+1. **A → B → C → D → E 순서**. 사용자가 점프 지시하면 점프 가능.
+2. 각 Phase 완료 시 이 PLAN 상단 **Current Phase** 갱신.
+3. **사실 발굴은** [findings/README.md](./findings/README.md) 4시그널. **인터뷰는** [interviews/README.md](./interviews/README.md) 4축.
+4. **본문 작성·재작성은** [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준 + 포지셔닝(1안) 렌즈. **기존 양식 답습 금지.**
+5. **평가는** `EVALUATION-RUBRIC.md` 기준 비판적으로. 통과까지 개선.
+6. **새 사실/수치를 박을 때마다** "사용자가 답했나, 내가 만들었나" 자체 검증. 출처 없으면 못 박음.
+7. 한 PR = 한 카드 또는 한 Phase 정리 묶음. 변경 전후 보여주고 사용자 검토.

@@ -11,12 +11,14 @@
 ```
 findings/0X-*.md          (raw 사실 — 등급/그룹화 X, 출처 강제)
     ↓
-interviews/0X-*.md        (4축 서사 정리 + 면접 답변 스크립트)
+interviews/0X-*.md        (4축 서사 + 면접 답변 스크립트, 이력서와 병행)
     ↓
-resume.md / career-description.md   (형식화)
+resume.md / career-description.md   (포지셔닝 렌즈 + WRITING-GUIDE 기준 작성)
+    ↓
+평가 서브에이전트 루프     (EVALUATION-RUBRIC 비판적 채점 → 통과까지)
 ```
 
-각 단계는 다음 단계의 **유일한 입력원**입니다. 단계를 건너뛰면 본문에 가짜 서사가 박힙니다.
+findings는 그 윗단계의 **사실 입력원**입니다. 단계를 건너뛰면 본문에 가짜 서사가 박힙니다. (전체 흐름은 [PLAN.md](../PLAN.md) Phase A~E)
 
 ---
 
