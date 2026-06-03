@@ -32,13 +32,17 @@ jobs:
           pandoc resume.md \
             -o output/resume.html \
             --standalone \
+            --section-divs \
             --css=resume-style.css \
-            --metadata title="김진완 이력서"
+            -V pagetitle="김진완 이력서 | Frontend Developer" \
+            -V lang=ko
           pandoc career-description.md \
             -o output/career-description.html \
             --standalone \
+            --section-divs \
             --css=resume-style.css \
-            --metadata title="김진완 경력기술서"
+            -V pagetitle="김진완 경력기술서" \
+            -V lang=ko
 
       - name: Copy assets
         run: |
