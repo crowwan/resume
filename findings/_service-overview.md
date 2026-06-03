@@ -1,65 +1,73 @@
 # _ 서비스/플랫폼 개요 — "우리 서비스를 설명할 수 있게" (면접 대비)
 
-> 이 파일은 **개인 카드(이력서 bullet)용이 아닙니다.** 면접에서 *"회사 서비스/기술 스택을 설명해보세요"*에 답하기 위해, **본인이 직접 안 했어도** 알아야 할 팀/플랫폼 차원 기술을 모으는 카탈로그입니다. (사용자 요청 2026-06-03)
+> 면접 *"회사 서비스/기술 스택을 설명해보세요"* 대비 카탈로그. **본인이 직접 안 했어도** 알아야 할 팀/플랫폼 기술을 모음. (개인 이력서 bullet용 아님)
 >
-> **기여 주체 태그**: `[본인]` 본인 기여 / `[팀]` 팀·타인 주도(서비스 이해용) / `[발굴대기]` 아직 코드 미조사. 이력서 본문엔 `[본인]`만, 면접 "서비스 설명"엔 전체 활용.
-> **발명 금지**: `[팀]`/`[발굴대기]` 항목을 본인 성과로 말하지 않는다. "팀에서 했고 나는 이렇게 이해한다"로.
+> **기여 태그**: `[본인]` / `[팀]` / `[팀-김현철]`(hckim, authorId ba204367 — 본인 아님!) / `[기여확인]`. 본문엔 `[본인]`만.
+> **발명 금지**: `[팀]` 항목을 본인 성과로 말하지 않는다. "팀에서 했고 나는 이렇게 이해한다."
 
 ---
 
 ## 1. 서비스 개요
+- **DentBird** — 이마고웍스의 AI 기반 치과 CAD/CAM SaaS, 글로벌 B2B. 제품: cloud(cloud-desktop), crown, modeler, milling, batch.
+- 멀티테넌트(highdental/ci_medical/idd 등) + 멀티리전(KR, US_EAST 등 10여 리전).
 
-- **DentBird** — 이마고웍스(ImagoWorks)의 AI 기반 치과 CAD/CAM SaaS, 글로벌 B2B. [기억]
-- 제품군(도메인): cloud(cloud-desktop), crown, modeler, milling, batch 등. 초기엔 서비스별 도메인·관리팀 분리 → 통합 진행. [code: dentbird-solutions/apps/, 03-mfe 참조]
-- 멀티테넌트(Dentium/Axsys/CI Medical 등 호스트 도메인) + 멀티리전(KR, US_EAST). [code: libs/runtime-config deriveUrls, .mirrord]
+## 2. 플랫폼 아키텍처
+- **dentbird-solutions 모노레포(NX)**: 흩어진 앱·서버 통합.
+- **MFE 공통 모듈**: iframe→빌드타임→iframe(same-origin `/cloud/module.html`). `[본인]`(초기 주도)+`[팀]`(최종)
+- **런타임 Config(Build Once Deploy Everywhere)**: 빌드 1회→config.js만 교체. `[본인]`(핵심설계 참여)+`[팀]`
+- **격리환경 커밋 재현**: setup.sh --sha. `[본인]` 다수
+
+## 3. 빌드/배포 최적화 ★ (정량 강력 — 대체로 [팀])
+- **CI 빌드 시간 456s → 40~60s (약 -89~91%)**, 6주 트렌드(2026-03~04). [Confluence 2284322880] `[팀]`
+  - shared node_modules hardlink snapshot: **pnpm install 193s→2s(-99%)**
+  - Webpack→Vite(빌드 60s→5s), GitHub Actions 전환 + **NX affected**(변경 앱만 빌드), tsc incremental(19s→1s)
+- **Build Once Deploy Everywhere**: qa/prod 배포 **120s→11s(-91%)**(아티팩트 promote + config.js 교체). [Confluence 2284322927] `[본인 참여]+[팀]`
+- **cold start 최적화**: nx daemon/crown-client, Windows Defender exclusion(56.5s→~40s). [Confluence 2358378605] `[팀]`
+- **prefetch viewer 속도**: `libs/embed-modules/.../ViewerDialog/prefetch/` — `prefetchViewerMesh()` + LRU 캐시(5). [code] `[팀/기여확인]`
+
+## 4. 관측성 (Datadog) — [팀], 문서 작성자 hckim
+- **Datadog 본격화**: 로그인/인증→구독/결제→케이스→viewer→export 8개 핵심 흐름 계측. RUM `usr.id` 표준화, gateway/platform APM trace, 구조화 로그(`obs.domain/event`, `error.code`). [Confluence 2356150511] `[팀-김현철]`
+- **EB→Datadog 표준 정렬**: `logAsyncError` 단일 진입점으로 5개 앱 수렴. [Confluence 2364440747] `[팀]`
+- 호주 업/다운로드 RUM 30일 분석 등 RUM 기반 가설검증. `[팀]`
+
+## 5. 백엔드 아키텍처/통합 — [팀]
+- **Milling Worker 얇음화**(Service Bus→Prepared Worker, platform-server 진실원천). [Confluence 2394423468] `[팀]`
+- **Crown 생성 오프로드→milling-worker 통합**(taskType 라우팅, 자식 spawn, 세마포어). [Confluence 2425946261] `[팀]`
+- **WIP Lock Poll API 단일화**(`/status/poll` 5초 hub + 5 subscriber, Redis shadow+Mongo fallback). [Confluence 2300411905] `[팀]`
+- **Preference/Setting/Preset 도메인 통합**(CRWN-3355, UserConfig/Preset 신규 컬렉션, 13 PR). [Confluence 2394882059] `[팀]`
+- **인증 JWT→Redis 세션** → findings/10. `[팀]` 핵심, `[기여확인]` 본인 FE측
+- **파일 스토리지 S3 + AEAD 암호화** → findings/10. `[팀]` 핵심
+
+## 6. 인증·보안 → findings/10-auth-security
+- JWT→Redis 세션, 파일 AEAD 암호화(KMS envelope). 대체로 `[팀]`, 본인 범위 `[기여확인]`.
+
+## 7. 결제(Stripe)/구독 — [본인](Account FE)+[팀]
+- **Account 구독제 전환 FE 전담**(플랜 업그레이드·시트 구매·쿠폰·결제수단·히스토리). → findings/04. `[본인]`
+- Stripe 미국→싱가폴 법인 이전, Connected Account Direct Charges(P010, 딜러 Stripe `Stripe-Account` 헤더). [Confluence 2426143016, 2265415798] `[팀]`
+
+## 8. 측정/Analytics (GA4) — [본인?](Account/Landing 연관)+[팀]
+- **GA4 이벤트 택소노미 v2 — 281개 이벤트**("코드에서 읽는" 네이밍 `GA4.{app}.{feature}.{action}`). [Confluence 2250408398] `[팀]`
+- **Landing→Account→Subscription 전환 측정 갭**: UTM/click id 미보존으로 attribution 단절, 서버 purchase/refund 이벤트 세션 단절. 권장 구조 제안. [Confluence 2383052830] `[본인?]` ← 06 Landing·04 Account 담당이라 연관, 확인 필요
+- Desktop Analytics(Metabase + dhub CLI). `[팀]`
+
+## 9. 멀티테넌트/도메인 — [팀] 설계, [본인] Account FE 연동
+- 테넌트 배정(IP 독점국가 → 서브도메인 → 기본), 한번 배정 후 고정. `?tid=` 파라미터(화면 브랜딩만). [Confluence 2193588330] `[팀]`
+- 서브도메인 통합 리서치(region path-prefix vs `?tid=`). [Confluence 2391769104] `[팀]`
+
+## 10. 테스트·자동화 → findings/09-test-automation
+- Playwright E2E(642스펙·13제품, Page Object, visual regression). EC2 Claude `e2e detect`. `[본인]` 주도
+
+## 11. ★ AI 도구·엔지니어링 문화 — ⚠️ 대부분 [팀-김현철], 본인 아님!
+> 사용자가 "Claude Code 핸즈온 등"을 언급했으나, **Confluence 작성자 전부 김현철(hckim, ba204367)**. 본인 성과로 오인 금지. 본인 참여/영향은 [기여확인].
+- Claude Code 핸즈온 프레젠테이션 대본(발표자=hckim). [Confluence 1947041920] `[팀-김현철]`
+- dentbird-bot(Teams AI 봇) 아키텍처·운영(D1팀·김현철). [Confluence 2389016603] `[팀-김현철]`
+- CLAUDE.md 구조 개선 의사결정(6,446 커밋 분석). [Confluence 2218426594] `[팀-김현철]`
+- Batch CLI AI Agent 연동 기획. [Confluence 2339733648] `[팀-김현철]`
+- 타입스크립트 챌린지 스터디 운영(주최=hckim). [Confluence 1757544577] `[팀-김현철]` / 본인 참여 여부 `[기여확인]`
+- PR Complexity Leverage 분석 도구. [Confluence 2285895870] `[팀-김현철]`
+- 팀 봇 계정 운영(작성=Jungwon Lee). [Confluence 2275508256] `[팀]`
 
 ---
 
-## 2. 플랫폼 아키텍처 (통합의 큰 그림)
-
-- **dentbird-solutions 모노레포(NX + pnpm)**: 흩어진 앱·서버를 한 레포로 통합. [code]
-- **공통 모듈 통합(MFE)**: setting/export/explorer/viewer를 iframe 런타임 통합 → 빌드타임 → 다시 iframe(same-origin `/cloud/module.html`). [→ findings/03-mfe] `[본인]`(초기 주도) + `[팀]`(최종 결과)
-- **런타임 Config("Build Once, Deploy Everywhere")**: 빌드 1회 → env(`config.js`)만 교체해 dev/qa/prod 배포. [→ findings/01-solutions] `[팀]` 핵심 + `[본인]` 일부
-- **격리환경 커밋 재현**: `setup.sh --sha <commit>`로 특정 커밋의 클라+서버를 Docker로 재현(E2E 신뢰성). [→ findings/01-solutions] `[본인]` 다수
-- **통합 배포 전략**: 불필요 배포를 줄이려 여러 앱·서버 통합. [발굴대기 — 무엇을 왜 통합했는지]
-
----
-
-## 3. 성능·최적화 (팀 차원 — 서비스 설명 시 알아야 할 것)
-
-- **iwtk(VTK) → Three.js 전환**: 모듈의 iwtk 의존 제거 → cloud-desktop 배포 번들 **119MB→51MB(-57%)**, iwtk WASM 리소스 68MB 제거(초기 로딩 단축). vendor lock-in 해소. [Confluence page/2282094594] `[팀]` (본인 카드는 08로 별도)
-- **prefetch로 viewer 여는 속도 최적화**: viewer 오픈 속도를 prefetch로 개선. [발굴대기 — 어떤 리소스를 어떻게 prefetch, 효과] `[팀]`
-- **빌드 시간 최적화**: 빌드 시간 단축 작업(런타임config의 빌드 단일화 외에도). [발굴대기 — Rspack 전환·NX 캐시·affected 등 추정] `[팀]`
-  - 단서: cloud-desktop **Webpack→Rspack** 전환(TS7056 회피+속도). [vault: decisions/cloud-desktop-rspack-migration.md] `[팀]`
-
----
-
-## 4. 관측성 (Observability)
-
-- **Datadog 본격화**: 가시성 향상(RUM/로그/소스맵). [발굴대기 — 적용 범위·무엇을 잡았나] `[기억/본인?]`
-- **Grafana Faro**: dev 환경 collector(`FARO_COLLECTOR_URL`). [code: deploy/config/dev.json] `[팀]`
-
----
-
-## 5. 인증·보안
-
-- **서버 JWT 토큰 → Session Cookie 전환**: 인증 방식 전환. [발굴대기 — 동기(보안/SSR?), 본인 BE 기여 범위] `[본인?]`
-- **파일 접근 권한 암복호화**: 파일 접근 시 암복호화 기능 추가(진행 중). AEAD envelope 관련 vault 단서. [vault: learnings/2026-05-27-aead-envelope-*] [발굴대기] `[본인?]`
-
----
-
-## 6. 테스트·자동화 [→ findings/09-test-automation]
-
-- **E2E 본격 도입**: Playwright, 약 642 스펙·13개 제품, Page Object(BasePage 추상), visual regression, TC Manager 리포터, 격리 스택 연동. `[본인]` 주도
-- **EC2 Claude 자동 E2E**(과거): `e2e detect` 스킬 — 크론 pull→Claude 변경 분석→관련 E2E 실행→Teams(Power Automate) 보고. 현재 미사용(보안·안정성 한계 → daily workflow 재활성화로 전환). `[본인]` 주도
-
----
-
-## 추가 발굴 대기 목록 (다음 라운드)
-
-1. prefetch viewer 최적화 (코드·효과) `[팀]`
-2. 빌드 시간 최적화 (Rspack/NX 캐시/affected) `[팀]`
-3. 앱·서버 통합으로 배포 감소 (무엇을 통합, 효과) `[팀/본인?]`
-4. Datadog 관측성 적용 범위 `[본인?]`
-5. JWT→session cookie 전환 (BE) `[본인?]`
-6. 파일 암복호화(AEAD) `[본인?]`
+## 발굴 대기 (남은 것)
+- prefetch viewer cache 정책 효과, 빌드 최적화 본인 기여분, GA4 attribution 본인 구현 여부 — 인터뷰로(→ _questions.md).

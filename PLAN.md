@@ -64,8 +64,11 @@ E. 포맷·배포   HTML/Pages, JD별 버전
 | 04. Account | `dentbird-account-client` | ✅ done (+ 인터뷰) |
 | 05. Batch | `workspace/dentbird-batch-client`, `dentbird-solutions/apps/batch` | ✅ done |
 | 06. Landing | `landing-page-client`, `landing-page-server` | ✅ done |
-| 07. Design System | `imago-design-system` | ⬜ 발굴 |
-| 99. Misc | Datadog 스터디·AI 도구 운영 등 카드 외 | ⬜ 발굴 |
+| 07. Design System | `imago-design-system` | ✅ done (발굴, 본인 부분기여) |
+| 08. iwtk→Three.js | `cloud-mesh-io` | ✅ done (발굴, [팀-hckim] 주도/본인 Viewer 일부) |
+| 10. 인증/보안 | 파일 AEAD 암호화 + JWT→Redis 세션 | ✅ done (발굴, 대체로 [팀]/본인범위 확인필요) |
+| 99. Misc | AI 도구 리딩은 [팀-hckim] 판명 → 본인 항목 재확인 필요 | 🔵 보류 |
+| _questions | 발굴 후 확인 질문 15개 모음 | 🔵 인터뷰 대기 |
 
 **완료 기준**: 4시그널 섹션이 채워지고, 본문에 박을 `[측정필요]`/`[기억]` 항목은 별도 확인 완료.
 
