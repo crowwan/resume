@@ -139,4 +139,6 @@ code {
   ul, table, blockquote { page-break-inside: avoid; }
   h1 + blockquote { background: var(--bg-accent) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   a { color: var(--text); }
+  /* 프로젝트 카드(--section-divs로 생성된 section.level3) 페이지 중간 잘림 방지 */
+  section[class~="level3"] { break-inside: avoid; }
 }

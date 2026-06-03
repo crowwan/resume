@@ -1,5 +1,13 @@
 # HTML 이력서 (output/resume.html) 면접관 리뷰
 
+## v2 (리뷰 보강 후) — **36/40 통과 유지** (2026-06-03)
+반영: "(성장)/(일할 계산)" 괄호 메모 본문 흡수 · bullet 볼드 정량만 · "수십 분" 제거 · Account 결제 정확성(검증·단위테스트) 보강 · `--section-divs`+`section.level3 break-inside`로 카드 페이지 분할 방지.
+형식 평가 = 가독성/시맨틱/ATS/인쇄 **모두 우수**. 남은 상향 과제: Account·MFE 카드 임팩트, 이메일 연락처, "약/이상" 근사표현 정밀화(본인 정보 필요).
+아래는 v1(최초 빌드) 리뷰 원본 ↓
+
+---
+
+
 > 리뷰어: 면접관 서브에이전트 (결과물만, findings/interviews 미열람) · 2026-06-03
 > 대상: pandoc 빌드 `output/resume.html` + `resume-style.css` (Style A 기반)
 
