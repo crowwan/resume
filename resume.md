@@ -1,18 +1,75 @@
-# 김진완 | Frontend Developer
+# 김진완 (Jinwan Kim) | Frontend Developer
+
+> **제품의 구조와 품질을 끝까지 책임지는 프론트엔드 개발자**
+> React·TypeScript를 기반으로 화면 구현을 넘어 Electron 데스크톱, 빌드·배포 인프라, 테스트 자동화까지 — 제품이 안정적으로 돌아가는 구조를 만듭니다.
+
+- [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
 
 ---
 
 ## 자기소개
 
-React/TypeScript 기반 SPA 개발과 모노레포·테스트 자동화 경험을 바탕으로, B2B SaaS 제품의 안정성과 개발 생산성을 높여온 3년차 프론트엔드 개발자입니다.
+2023.09부터 AI 기반 치과 CAD/CAM SaaS(DentBird)에서 화면 구현을 넘어 **제품의 구조와 품질을 책임지는** 프론트엔드 개발자로 일해왔습니다. 변경된 코드를 분석해 관련 E2E만 자동 실행하는 시스템을 만들고, 데스크톱 빌드를 **20분에서 6분으로** 줄이는 등 개발 생산성과 릴리스 신뢰성을 끌어올렸습니다.
 
-- 분산된 프론트엔드 프로젝트를 NX 모노레포로 통합하고 Azure Pipelines·Datadog RUM을 적용하여 배포 일관성과 관측성을 확보했습니다.
-- Playwright 기반 E2E 프레임워크를 설계해 핵심 사용자 흐름을 자동 검증하고, Page Object·세션 공유로 중복 제거 및 실행 효율을 높여 릴리스 리스크를 낮췄습니다.
-- Electron 데스크톱 앱을 설계·구축하고 16개+ CAM 소프트웨어 연동, Chrome LNA 규제 선제 대응 등 제품 전반의 기술적 의사결정을 주도하고 있습니다.
+- **효율** — 격리 재현 환경과 E2E·AI 자동 테스트로 디버깅과 릴리스의 신뢰성을 높입니다.
+- **판단** — Chrome LNA 우회 방안을 여러 갈래로 비교해 장기 안정성 기준으로 Custom Protocol을 택하는 등, 기술 결정의 근거를 남기고 팀과 공유합니다.
+- **구조** — 분산된 앱을 모노레포로 통합하고, 공통 모듈을 MFE로, 환경 설정을 런타임으로 분리하는 등 플랫폼 구조를 설계합니다.
+- **범위** — FE를 중심으로 Electron 데스크톱과 빌드·배포 인프라까지 제품의 처음부터 끝까지 다룹니다.
 
-제품의 처음부터 끝까지 책임지는 것을 좋아하고, 그 과정에서 팀에 도움이 되는 구조를 남기려 합니다.
-사용자가 쓰는 제품의 UX뿐 아니라, 함께 일하는 동료가 편하게 작업할 수 있는 DX도 함께 고민합니다.
-기술 선택 전에 POC와 문서를 먼저 작성하며, 결정의 근거를 팀과 투명하게 공유하는 것을 중요시합니다.
+---
+
+## 핵심 역량
+
+- **품질 자동화**: Playwright E2E, 커밋 단위 격리 재현 환경, AI 기반 변경 감지 테스트
+- **데스크톱**: Electron 앱 0→1 설계·프로덕션 릴리스, 빌드·자동 업데이트·코드 서명 인프라
+- **플랫폼 아키텍처**: NX 모노레포 통합, Micro Frontend, 런타임 환경 분리
+- **제품 도메인**: B2B SaaS 구독/결제 FE 전담, 글로벌 멀티테넌트·다국어
+
+---
+
+## 경력
+
+**이마고웍스 (ImagoWorks)** | Frontend Developer | Dentbird 1 Team | 2023.09 ~ 현재
+
+AI 기반 치과 CAD/CAM SaaS(DentBird)의 프론트엔드 전반을 설계·구축했습니다. 모노레포 통합, Micro Frontend 전환, 런타임 인프라, 품질 자동화 등 플랫폼 기술 결정을 주도했습니다.
+
+---
+
+## 프로젝트
+
+### 1. DentBird Solutions — 플랫폼 인프라 & 품질 자동화 *(효율·구조)*
+
+커밋 단위 격리 재현과 E2E·AI 자동 테스트로 배포 안정성과 디버깅·릴리스 신뢰성을 끌어올렸습니다.
+
+- **EC2에 Claude를 띄워 커밋 변경을 분석하고, 전체 E2E를 매번 돌리는 대신 변경과 관련된 테스트만 자동 선별·실행해 Teams로 보고하는 AI 변경 감지 시스템**을 구축했습니다. 검증 피드백을 10분 주기로 자동화해 **회귀를 평균 수십 분 내 조기 발견**하도록 만들었습니다.
+- Playwright 기반 E2E 프레임워크를 주도 구축하며, **테스트마다 반복되던 로그인 셋업 코드(약 60줄)를 공통 Page Object 호출로 대체해 중복을 93% 제거**하고, **로그인 세션 공유로 전체 스위트 실행 시간을 약 18분 → 11분(39%↓)** 단축했습니다.
+- **특정 커밋 시점의 클라이언트+서버를 Docker로 재현하는 격리 환경을 주도 구축**하고, qa/prod 데이터를 복제해 즉시 재현하도록 만들어 환경 차이로 깨지던 디버깅·E2E를 안정화했습니다.
+- 환경변수를 **빌드타임에서 런타임 주입으로 전환하는 구조를 설계·도입**해, 빌드 결과물 1개를 환경변수만 바꿔 dev·qa·prod에 배포하도록 만들고 **배포 직후 핫픽스를 반복하던 문제를 해소**했습니다.
+- 레거시 모노레포 통합 시 **TypeScript 에러 688 → 0**, Facade 패턴으로 토큰 관리 코드 **200 → 33줄(85%↓)** 로 정리했습니다.
+
+### 2. DentBird Linker — CAM 연동 Electron 데스크톱 앱 *(판단·효율·범위)*
+
+웹 브라우저와 로컬 CAM 소프트웨어를 잇는 Electron 앱을 0→1로 설계하고, Chrome LNA 규제 대응부터 빌드·배포 인프라까지 책임졌습니다.
+
+- Chrome **Local Network Access(LNA)** 정책으로 웹→로컬 통신이 차단되는 문제에, **HTTPS 로컬 서버·WebSocket·Chrome Extension·WebRTC·mDNS 등 여러 방안을 비교 분석한 뒤 장기 안정성 기준으로 Custom Protocol을 채택**했습니다(WebSocket은 구현은 빠르나 향후 LNA 재차단 우려로 탈락).
+- Electron + Vite + React 아키텍처를 설계해 **1개월간 113커밋으로 v1.0.3까지 프로덕션 릴리스**하고, `dentbird-linker://` 딥링크 통신과 DRC→STL 실시간 변환 파이프라인을 구축했습니다.
+- **12개 CAM 소프트웨어**별 좌표계 차이를 변환 매트릭스 알고리즘으로 흡수하고, CAM별 정합 회귀 테스트로 검증해 어떤 CAM으로 내보내도 좌표 오류 없이 동작하도록 만들었습니다.
+- **Batch·Linker 두 데스크톱 앱의 빌드**를 담당자 PC·인프라팀 의존 구조에서 self-hosted 파이프라인으로 재설계하고 GitHub Actions 이관을 주도해, **빌드 시간을 20분 → 6분으로 단축**(직접 비교)하고 QA/PROD 채널 분리로 잘못된 빌드 수신 사고를 막았습니다.
+
+### 3. DentBird Account — B2B SaaS 구독/계정 시스템 *(범위·제품)*
+
+크레딧 기반에서 **구독제로 전환**하는 결제·권한 도메인의 프론트엔드를 전담 설계·구축해 글로벌 B2B 수익화 기반을 마련했습니다.
+
+- **15개 이상의 국가별 테넌트·다국어 환경**에서 플랜 업그레이드·시트 구매(일할 계산)·구독 취소/재개·쿠폰·결제수단까지 구독 결제 워크플로우 전체를 구현하며, 수익화에 직접 닿는 결제 흐름의 정확성을 책임졌습니다.
+- **한 기능의 오류가 전체 페이지를 멈추던 구조를 ErrorBoundary 기반 선언적 에러 처리로 기능 단위로 격리**하고, 서버 비즈니스 에러를 코드별로 분기 처리하도록 정리해 장애의 전파 범위를 좁혔습니다.
+- (성장) 디자인 패턴·FSD를 적극 도입해봤으나, **"패턴은 검증된 공통 문제의 해법인데 우리가 풀려던 문제는 그게 아니었다"**는 판단 기준을 얻었습니다 → 기술 도입은 우선순위 높은 문제 해결이 먼저라는 원칙으로 이어졌습니다.
+
+### 4. Micro Frontend — 공통 모듈 통합 *(구조·판단)*
+
+4개 서비스가 공유하는 기능(setting/export/explorer/viewer)을 iframe 런타임 통합으로 모듈화하고, 통합 전략을 상황에 맞게 재설계했습니다.
+
+- 공통 기능을 바꿀 때마다 **4개 서비스를 각각 수정·배포하던 작업을 모듈 한 곳 수정으로 좁혔습니다.** 라이브러리 배포는 매번 버전 업·재배포가 필요해 문제를 못 푼다고 판단해 iframe 런타임 통합을 선택했고, Module Federation은 notification·console-client에 직접 적용해본 뒤 초기 설정·소비처 부담을 이유로 이 건에선 제외했습니다.
+- 모노레포 통합 후 빌드타임 통합으로 옮겼다가 배포 부담이 커지자 다시 iframe으로 회귀하며, **"통합 전략에 정답 기술은 없고 조직·배포 제약에 맞는 선택이 있을 뿐"**임을 체득했습니다.
 
 ---
 
@@ -22,203 +79,21 @@ React/TypeScript 기반 SPA 개발과 모노레포·테스트 자동화 경험�
 |------|------|
 | **Language** | TypeScript, JavaScript |
 | **Frontend** | React 18/19, Next.js |
-| **Desktop** | Electron (IPC, Deep Link, Auto Update, Code Signing) |
-| **State** | TanStack Query, Recoil, Zustand |
-| **UI** | MUI, Emotion, styled-components, Storybook |
-| **Build** | Nx, pnpm, Webpack, Module Federation |
+| **Desktop** | Electron (IPC, Deep Link, Custom Protocol, Auto Update, Code Signing) |
+| **State / UI** | TanStack Query, Recoil · MUI, Emotion |
+| **Build / Arch** | NX, pnpm, Module Federation, 런타임 Config |
 | **Testing** | Playwright, Jest, Vitest, MSW |
-| **Architecture** | FSD (Feature-Sliced Design), Facade Pattern |
-| **CI/CD** | GitHub Actions(self-hosted), Azure DevOps Pipelines, AWS EC2 CronJob |
-| **Monitoring** | Datadog RUM/Logs, Electron Crash Reporter |
-| **i18n** | i18next, Lokalise |
-| **Backend** | Node.js, Fastify, MongoDB |
+| **CI/CD · Infra** | GitHub Actions(self-hosted), Azure Pipelines, Docker, AWS(EC2/S3) |
+| **Monitoring** | Datadog RUM/Logs |
 
----
-
-## 경력
-
-### 이마고웍스 (ImagoWorks) | Frontend Developer
-Dentbird 1 Team | 2023.09 ~ 현재
-
-AI 기반 치과 CAD/CAM SaaS 기업(DentBird)에서 프론트엔드 시스템 전반을 설계/구축. Micro Frontend 전환, 모노레포 통합, 도메인 아키텍처 설계 등 플랫폼 전반의 기술적 의사결정을 주도.
-
----
-
-## 프로젝트
-
-### 1. DentBird Solutions - 플랫폼 아키텍처 및 품질 자동화
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2025.08 ~ 현재 |
-| **기술** | React, TypeScript, Playwright, Nx Monorepo, Azure Pipelines, Datadog, AWS EC2, TDD |
-
-NX 모노레포 환경에서 플랫폼 아키텍처 개선, E2E 테스트 자동화, 모듈 기능 고도화를 주도.
-
-**주요 성과**
-- 플랫폼 아키텍처 개선
-  - 분산된 **5개+ 프론트엔드 프로젝트**를 NX 모노레포로 통합
-  - **Azure DevOps Pipeline CI/CD** 구성
-  - **Datadog RUM 모니터링** 전사 적용
-- E2E 테스트 자동화
-  - Playwright 기반 E2E 테스트 프레임워크 설계, **80+ TC** 구축
-  - Page Object 패턴으로 로그인 중복 코드 **93% 감소**
-  - 세션 공유 전략으로 테스트 실행 성능 **39% 개선**
-- AI 기반 테스트 최적화
-  - **AWS EC2 CronJob** 기반 일일 자동 테스트 실행 환경 구축
-  - **Claude Code CLI** 기반 AI 변경 감지 시스템 개발
-  - 커밋 변경사항 자동 분석 → 관련 테스트 선별 실행
-- 레거시 개선
-  - 레거시 마이그레이션으로 TS 에러 **688→0개** 해결
-  - Facade 패턴 토큰 관리 **200→33줄(85%↓)**
-
----
-
-### 2. DentBird Linker - CAM 연동 데스크톱 앱
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2024.07 ~ 2025.12 |
-| **기술** | Electron, React, TypeScript, Vite, Express, Nx Monorepo, Azure Pipelines, Datadog, Jest |
-
-치과 CAM 소프트웨어 연동 Electron 데스크톱 앱을 설계/구축하고, Chrome LNA 대응을 위한 Custom Protocol 아키텍처 전환을 주도.
-
-**주요 성과**
-- 프로젝트 설계 및 구축
-  - **Electron + Vite + React** 데스크톱 앱 설계
-  - 내장 Express 서버로 웹↔데스크톱 통신 구조 설계
-  - **Config 클래스** 기반 동적 소프트웨어 관리 시스템 구축
-  - **16개+ CAM 소프트웨어**별 좌표계 차이를 **변환 매트릭스 알고리즘**으로 해결
-  - Export Session 방식 Protocol Handler 설계
-- 아키텍처 전환
-  - **Chrome LNA** 규제 선제 대응 — Custom Protocol 전환 (20여 가지 방안 탐색 후 장기 안정성 기준 채택)
-- 빌드·배포: Windows/macOS 크로스 플랫폼 빌드·EV 코드 서명 (인프라 상세는 프로젝트 6 참조)
-- 모니터링 및 안정성
-  - **Datadog** RUM/Logs 모니터링 통합
-  - Datadog FeatureFlag 적용하여 신규 방식으로 안정적 전환
-
----
-
-### 3. DentBird Account - SaaS 구독/계정 관리 시스템
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2025.01 ~ 2025.07 |
-| **기술** | React 18, TypeScript, TanStack Query, MUI, react-hook-form, i18next, MSW, Jest |
-
-글로벌 B2B SaaS 수익화를 위한 구독 관리 시스템을 설계하고 프론트엔드 전체를 전담 구축.
-
-**주요 성과**
-- 구독 관리 시스템 설계 및 구축
-  - **SaaS 구독 관리 시스템** 전체 설계/구현
-  - Free/Paid 플랜, 시트 구매, 결제 관리, 구독 취소/재개, 쿠폰
-- 사용자 관리 시스템
-  - 멤버 초대/권한 관리 (다지역 처리 포함)
-- 결제 시스템 연동
-  - PostMessage 기반 Payment 페이지 연동
-  - Ping-back 구현
-- UI/UX 및 테스트
-  - **반응형 UI** 시스템 설계 (모바일/태블릿/데스크톱)
-  - **Jest + MSW** 기반 테스트 인프라 구축
-
----
-
-### 4. Micro Frontend 아키텍처 설계 및 운영
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2024.11 ~ 2025.07 |
-| **기술** | React 18, TypeScript, Nx, Module Federation, pnpm, TanStack Query, MSW, MUI |
-
-iframe 기반 MFE 4개 모듈 운영의 한계를 경험하고, Module Federation 기반 아키텍처로 전환하여 독립 배포 체계와 중앙화된 모듈 관리를 확립.
-
-**주요 성과**
-- 아키텍처 전환
-  - iframe 방식의 개별 도메인/빌드 파이프라인 분산 한계 분석
-  - **Module Federation** 기반 호스트-리모트 아키텍처 설계
-  - **FSD** 도입 및 ESLint 커스텀 규칙으로 레이어 간 import 방향 강제
-  - 독립 배포 체계와 중앙화된 모듈 관리 확립
-- 외부 시스템 연동 및 마이그레이션
-  - **iframe MFE 4개 모듈**(explorer, export, viewer, setting) 운영
-  - 외부 스캐너 **3개 서비스**(Medit, Shining 3D, Connect) OAuth 연동
-  - 서브 도메인 마이그레이션 **무중단 전환** 완료
-- 신규 모듈 개발 및 자동화
-  - 사내 백오피스용 **4개 원격 모듈**을 3주 내 신규 개발
-  - 호스트-리모트 간 **타입 공유 자동화** 스크립트 구현
-
----
-
-### 5. Dentbird Batch - 크라운 디자인 배치 처리 자동화 데스크톱 앱
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2023.12 ~ 2025.01 |
-| **기술** | Electron, React, TypeScript, Recoil, Webpack, Jest, MSW, Datadog |
-
-치과 CAD 크라운 배치 처리 Electron 앱을 아키텍처 설계부터 v1.0.13 프로덕션 릴리즈까지 주도 (팀 내 최다 기여자).
-
-**주요 성과**
-- 아키텍처 및 구조 설계
-  - **Electron + React + TypeScript** 데스크톱 앱 초기 세팅부터 구축
-  - 라우팅/SNB/페이지 공통 컴포넌트 등 프로젝트 구조 설계
-  - **IPC 통신 아키텍처** 설계 (Main/Renderer 프로세스)
-- 시스템 기능 구현
-  - **Deep Link** 커스텀 프로토콜 구현
-- 빌드·배포: Webpack 번들링, 환경별(dev/qa/prod) 빌드 분리 (빌드·코드 서명·자동 업데이트 인프라는 프로젝트 6 참조)
-- 테스트 인프라 도입
-  - 테스트 문화 부재 환경에서 **Jest + MSW** 단위 테스트 인프라 도입
-  - 주요 모듈 테스트 코드 작성
-- 모니터링 및 에러 추적
-  - **Datadog RUM** 연동 (환경별 설정 분리, 빌드 시 환경변수 주입)
-  - **Crash Reporter** 구축, 프로덕션 에러 추적 체계 확립
-
----
-
-### 6. Electron 빌드·배포·자동 업데이트 인프라 (Batch·Linker 공통)
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2024 ~ 현재 (GitHub Actions 이관 2026.04) |
-| **기술** | electron-builder, GitHub Actions(self-hosted), Azure Pipelines, S3, NAS, blue-green |
-
-두 Electron 앱(Batch·Linker)의 빌드·배포·자동 업데이트를 담당. 로컬 PC·인프라팀 의존 구조를 self-hosted 파이프라인으로 재설계하고 GitHub Actions 이관을 주도.
-
-**주요 성과**
-- 빌드 파이프라인 재설계: 로컬 PC 빌드 → **GitHub Actions self-hosted 러너 이관** 주도, 빌드 시간 약 20분→약 6분(직접 비교), 담당자·인프라팀 의존 제거
-- 자동 업데이트: electron-builder `BitbucketPublisher` 내부 분석·패치(hostname·timeout·Bearer 인증), QA/PROD 채널 분리
-- 배포: NAS 직접 업로드로 QA 자가 설치 경로 확보, blue-green 구성 + green 검증 자동화는 운영 비용 고려해 의도적 보류
-
----
-
-### 7. 기업 랜딩 페이지 (Next.js 풀스택)
-
-| 항목 | 내용 |
-|------|------|
-| **기간** | 2023.09 ~ 2025.10 (입사 첫 업무) |
-| **기술** | Next.js, React, TypeScript, i18next, Fastify, MongoDB |
-
-입사 첫 업무로 기업 랜딩 페이지를 v3로 전면 리뉴얼하고, 관리자 Backoffice·서버 API까지 개발한 풀스택 프로젝트.
-
-**주요 성과**
-- **i18n 타입 안정성**: `i18next-resources-for-ts`로 번역 리소스 타입을 자동 생성, 존재하지 않는 키 사용을 컴파일 타임에 검출해 키 노출 버그 차단
-- **풀스택 구현**: 관리자 조직 관리 3계층(Groups→Teams→Members) CRUD를 프론트엔드 + 서버 PATCH API까지 직접 개발
-- **성능/SEO**: LCP·폰트 preload, 이미지 4x·quality, 정적 자원 캐시, SEO 개선
-
----
-
-## 포트폴리오
-
-- [블로그](https://velog.io/@crowwan)
-- [깃허브](https://github.com/crowwan)
+> 백엔드(Node.js/Fastify·MongoDB)는 기업 랜딩 페이지 풀스택 등에서 일부 직접 개발했습니다.
 
 ---
 
 ## 교육
 
-### 세종대학교
-졸업 | 대학교(학사) | 데이터사이언스학과
-2017.03 ~ 2024.08
+**세종대학교** | 데이터사이언스학과 (학사) | 2017.03 ~ 2024.08
 
 ---
 
-*마지막 업데이트: 2026-02-11*
+*Style A (서사 상세형) · versions/resume-v5.md 기반 · 면접관 리뷰 35/40 통과 (2026-06-03)*
