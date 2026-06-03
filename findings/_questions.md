@@ -11,6 +11,7 @@
 5. **iwtk→Three.js**: 본인 24커밋이 Viewer 색상/abutment 렌더 수정 중심. 그 외 cloud-mesh-io 설계·계획 참여가 있었나? → findings/08
 6. **디자인 시스템**: DatePicker 확장(10커밋) 외에 테마/토큰/마이그레이션 주도 같은 더 큰 범위가 있었나? → findings/07
 7. **GA4 전환 측정(Landing→Account attribution)**: 권장 구조 제안/구현이 본인인가? 서버 Measurement Protocol 구현 범위? → findings/_service-overview §8
+7b. **★ 배포/릴리스 신체계(GitHub Actions 앱별 독립 배포·Build Once·호환성 경계·ECR 태그)**: git author가 jwkim으로 잡힘 — 본인이 이 배포 파이프라인을 설계·구현했나? 어느 범위(클라/서버/호환성 경계)? 03 MFE "통합 배포 전략"과 같은 작업인가? → findings/_service-overview §15 [최우선 확인]
 
 ## 🟡 2순위 — 효과/사례 (정성 보강, 면접 답변용)
 8. **격리환경 커밋 재현**이 실제로 잡은 버그/상황 1~2개. → 01
