@@ -87,7 +87,7 @@
 - 클라(8앱) S3+CloudFront promote(~7~15초), 서버(3앱) ECR retag + ArgoCD Blue-Green. NX-skipped 앱은 직전 아티팩트/이미지 manifest를 새 SHA로 copy(모든 release SHA promote 가능 invariant — 2026-04-30 incident 회고). [code: .github/workflows/deploy-clients.yml, deploy-servers.yml]
 - **배포 호환성 경계 재정의**: PR 단위 → **앱 간 배포 태그 단위**. 같은 앱 내 PR 완결이면 Parallel Change 불필요, 앱 경계(서버↔클라)·DB/공유인프라는 필수. [Confluence 2299199490, code: .claude/rules/deployment-compat.md]
 - **ECR 태그 컨벤션 통일** + 배포 이력 태그 414건 backfill. [Confluence 2274394290, 2301198337]
-- **★ 기여**: 한 조사에서 git author `jwkim`로 "앱별 배포 파이프라인 설계·구현, 호환성 경계 조사, ECR 태그 제안"이 잡힘 → **본인 기여 가능성 높음**. 03 MFE "통합 배포 전략"과 직결. [git: 본인?] `[기여확인 — 우선]`
+- **★ 기여**: **본인 일부 기여 확정**(2026-06-03). 독립 카드 대신 **03 MFE "통합 배포 전략" / 01 인프라에 bullet로 흡수**. 구체 범위(클라/서버 파이프라인·호환성 경계 조사 중 무엇을 본인이) 는 카드 작성 시 확정. [git: 본인 일부]
 
 ## 16. Open API(파트너 통합) + Dealer 비즈니스 — [팀]
 - **Open API**: 외부 파트너(hass/luxcreo/eighteeth 등)가 DentBird Crown을 자기 플랫폼에 임베딩. **구독 위임형 시나리오 B**(파트너가 구독 관리), API Key+OAuth, webhook(case_created/designed/exported), transfer session. [Confluence 2387673224, 2177040407]
