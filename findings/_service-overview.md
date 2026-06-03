@@ -99,4 +99,4 @@
 
 ## 발굴 대기 (남은 것)
 - prefetch viewer cache 정책 효과, 빌드 최적화 본인 기여분, GA4 attribution 본인 구현 여부, **배포 파이프라인 본인 기여 범위** — 인터뷰로(→ _questions.md).
-- **코드 확인 진행 중**(2026-06-03): 레포 구조 맵 + 주제별 코드 교차검증 → _codebase-map.md
+- **코드 확인 완료**(2026-06-03): 레포 구조 맵 → [_codebase-map.md](./_codebase-map.md) (apps 30+·libs 60+, 본인 연관 lib 표시)
