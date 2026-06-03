@@ -17,7 +17,7 @@
 - **격리환경 커밋 재현**: setup.sh --sha. `[본인]` 다수
 
 ## 3. 빌드/배포 최적화 ★ (정량 강력 — 대체로 [팀])
-- **CI 빌드 시간 456s → 40~60s (약 -89~91%)**, 6주 트렌드(2026-03~04). [Confluence 2284322880] `[팀]`
+- **CI 빌드 시간 456s → 40~60s (약 -89~91%)**, 6주 트렌드(2026-03~04). [Confluence 2284322880] `[팀]` + `[본인 일부]`(어느 기법인지 확인 후 01 bullet)
   - shared node_modules hardlink snapshot: **pnpm install 193s→2s(-99%)**
   - Webpack→Vite(빌드 60s→5s), GitHub Actions 전환 + **NX affected**(변경 앱만 빌드), tsc incremental(19s→1s)
 - **Build Once Deploy Everywhere**: qa/prod 배포 **120s→11s(-91%)**(아티팩트 promote + config.js 교체). [Confluence 2284322927] `[본인 참여]+[팀]`
@@ -46,7 +46,7 @@
 
 ## 8. 측정/Analytics (GA4) — [본인?](Account/Landing 연관)+[팀]
 - **GA4 이벤트 택소노미 v2 — 281개 이벤트**("코드에서 읽는" 네이밍 `GA4.{app}.{feature}.{action}`). [Confluence 2250408398] `[팀]`
-- **Landing→Account→Subscription 전환 측정 갭**: UTM/click id 미보존으로 attribution 단절, 서버 purchase/refund 이벤트 세션 단절. 권장 구조 제안. [Confluence 2383052830] `[본인?]` ← 06 Landing·04 Account 담당이라 연관, 확인 필요
+- **Landing→Account→Subscription 전환 측정 갭**: UTM/click id 미보존으로 attribution 단절. 택소노미·구조는 팀. **본인은 Account 일부 이벤트 연동**(2026-06-03 확정). [Confluence 2383052830] `[본인 일부 이벤트]+[팀]` → 04에 작은 bullet
 - Desktop Analytics(Metabase + dhub CLI). `[팀]`
 
 ## 9. 멀티테넌트/도메인 — [팀] 설계, [본인] Account FE 연동

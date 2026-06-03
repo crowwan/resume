@@ -1,7 +1,7 @@
 # 10. 인증/보안 — 파일 암호화(AEAD) + JWT→Redis 세션 — 발굴된 사실
 
 > 수집 기준: [README.md](./README.md)
-> Status: partial (코드·Confluence 풍부 발굴 / ★ 본인 기여분 확인이 핵심)
+> Status: done(발굴) / ⚠️ **독립 개인 카드 아님** — 본인 기여는 격리 AEAD 검증(→09)뿐, 인증은 서비스 이해용. (2026-06-03 확정)
 > 발굴 대상: `dentbird-solutions` platform-server/api-gateway, Confluence(인덱스 A·B), vault
 >
 > **★ 기여 주체 주의**: 두 주제 모두 **핵심 구현은 백엔드 팀 주도**(김현철·Jinyong Lee 등). 사용자는 "JWT→session cookie 전환을 진행했다"고 했고 파일 암복호화도 "진행 중"이라 했으나, git author 매칭은 불명확 → **본인 FE측 기여/검증 범위를 인터뷰로 확정 필요.** 발명 금지.
@@ -46,6 +46,7 @@
 - **[팀]** 백엔드 주도: `860d9b94994`(2026-02-03 Hyeoncheol Kim "JWT→Redis 세션 Phase 0-1"), `e40283bf906`(legacy-batch 세션 쿠키 전환), D1-3398(Jinyong Lee 크로스탭). 코드: `SessionVerificationFilter.kt`, `GatewaySessionReader.kt`, `RegionDirectRouter.kt`, `CrossRegionLoginTokenService.kt`.
 - **[본인?]** FE측 쿠키 기반 인증 전환(axios 토큰→쿠키, IdleTracker 등) 기여 가능성 — **확인 필요**. account-client `AxiosAuthInstance` 등. [기여확인]
 
-## 미해결 (질문)
-- **사용자가 말한 "JWT→session cookie 전환을 진행했다"의 본인 실제 범위**: FE 클라이언트 인증 흐름(쿠키 전환·세션 폴링·IdleTracker)을 담당했나, 아니면 BE 팀 작업을 FE에서 연동만 했나. [기여확인 — 최우선]
-- **파일 암복호화 "진행 중"이라 한 본인 작업**: AEAD 관련 본인이 직접 구현/검증한 부분(격리 e2e 외)이 있나. [기여확인]
+## ★ 확정 (2026-06-03 인터뷰)
+- **JWT→Redis 세션**: 본인 **거의 무관**(BE팀 주도). → 인증(B)은 **개인 카드 아님**, [_service-overview §5/6](./_service-overview.md)(서비스 이해)에만 둔다.
+- **파일 AEAD 암호화**: 본인은 **격리 e2e 환경에서 AEAD decrypt 전수 검증(DEN-3706, fixture seed)만**. 구현은 BE팀. → **09 테스트/격리재현에 "격리 환경 AEAD decrypt 검증" bullet로 흡수.**
+- **결론: 10은 독립 개인 카드에서 제외.** 보안/인증은 "팀이 이렇게 했고 나는 이해한다"(서비스개요), 본인 손이 닿은 건 격리검증(09)뿐. 이 파일은 **서비스 이해용 사실 보관**으로 유지.

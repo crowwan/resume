@@ -23,6 +23,7 @@
 
 ### 3. 후속 영향
 - E2E가 격리 스택(docker/e2e, `STAGE=local`) 위에서 실행 → 01 격리재현과 결합. [code: docker/e2e/docker-compose.private-dns.yml]
+- **격리 환경에서 AEAD 암호화 파일 decrypt 전수 검증**(DEN-3706 fixture seed, 2026-06-03 흡수): dev 바이너리가 AEAD ciphertext라, 격리 E2E용 fixture를 KMS envelope 구조에 맞춰 직접 decrypt·재현(AES-256-GCM, gzip magic 정합 6/6). → 10 인증/보안에서 본인이 손댄 부분은 여기로 흡수. [vault: learnings/2026-05-27-aead-envelope-isolated-self-seed.md] `[본인]`
 - 결과 보고 파이프라인: JUnit XML(GitHub Checks) + HTML 리포트 + **TC Manager 커스텀 리포터**(`libs/e2e/tc-manager-reporter`) + Qase 동기화(Crown) + Teams 알림. [code]
 - 시각 회귀가 cross-app mesh 정합 가드로 확장(DEN-4539/4549, Three.js 전환 검증과 맞물림). [git: 본인]
 

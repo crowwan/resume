@@ -2,16 +2,16 @@
 
 > 전체 스페이스·코드 발굴 후 남은 `[기여확인]`/`[기억]` 항목. **이력서 정확성·발명 방지의 핵심.** 사용자가 답하는 대로 각 findings에 반영.
 
-## 🔴 1순위 — 기여 주체 (이력서에 박을지 결정)
+## 🔴 1순위 — 기여 주체 (대부분 해소 2026-06-03)
 
-1. **빌드 최적화(CI 456s→40s, -91%, qa/prod 배포 120s→11s)**: 본인 기여가 있나? 있다면 어느 부분(shared node_modules snapshot / Vite·Rspack 전환 / GitHub Actions·NX affected / Build Once)? 아니면 팀 작업이고 본인은 무관? → findings/_service-overview §3, 01
-2. **JWT→Redis 세션 전환**: 사용자가 "JWT→session cookie 전환을 진행했다"고 함. 본인이 **FE 클라이언트 인증 전환**(토큰→쿠키, 세션 폴링, IdleTracker)을 담당했나, BE팀(김현철 등) 작업을 FE에서 연동만 했나, 거의 무관인가? → findings/10-B
-3. **파일 AEAD 암호화(KMS envelope)**: 사용자가 "암복호화 진행 중"이라 함. 본인 직접 구현/검증 범위는? (격리 e2e 검증 외 FE decrypt 연동 등) → findings/10-A
-4. **AI 도구 리딩(Claude Code 핸즈온·dentbird-bot·CLAUDE.md 개선·Batch CLI AI·PR Complexity)**: Confluence 작성자 **전부 김현철(hckim)**. 본인은 공동 참여/영향인가, 단순 참석자·사용자인가, 무관인가? (TS 챌린지 스터디 참여 여부 포함) → findings/_service-overview §11
-5. **iwtk→Three.js**: 본인 24커밋이 Viewer 색상/abutment 렌더 수정 중심. 그 외 cloud-mesh-io 설계·계획 참여가 있었나? → findings/08
-6. **디자인 시스템**: DatePicker 확장(10커밋) 외에 테마/토큰/마이그레이션 주도 같은 더 큰 범위가 있었나? → findings/07
-7. **GA4 전환 측정(Landing→Account attribution)**: 권장 구조 제안/구현이 본인인가? 서버 Measurement Protocol 구현 범위? → findings/_service-overview §8
-7b. **배포/릴리스 신체계**: ✅ **본인 일부 기여로 확정**(2026-06-03). 독립 카드 X, 03/01 흡수. → 남은 확인: **구체적으로 어느 부분**(클라 deploy-clients / 서버 deploy-servers / 배포 호환성 경계 조사 / ECR 태그 컨벤션 / backfill 중 무엇)을 본인이 했나. → 카드 작성 시 확정
+1. **빌드 최적화(456s→40s)**: ✅ **일부 기여**. → 01에 bullet. 남은 확인: shared node_modules/Vite·Rspack/NX affected/Build Once 중 어느 부분.
+2. **JWT→Redis 세션**: ✅ **거의 무관**(BE팀). → 개인 카드 X, 서비스개요만.
+3. **파일 AEAD 암호화**: ✅ **격리 e2e 검증만**. → 09에 흡수.
+4. **AI 도구 리딩(Claude Code 핸즈온 등)**: ✅ **[팀-김현철], 본인 무관**. → 99 버림.
+5. **iwtk→Three.js**: ⬜ 본인 24커밋(Viewer 색상/abutment 수정). cloud-mesh-io 설계 참여까지인지 vs Viewer 수정만인지. → 08
+6. **디자인 시스템**: ⬜ DatePicker 확장(10커밋) 외 테마/토큰/마이그레이션 주도 범위 있나. → 07
+7. **GA4 전환 측정**: ✅ **일부 이벤트만**(택소노미·구조는 팀). → 04에 작은 bullet.
+7b. **배포/릴리스 신체계**: ✅ **본인 일부 기여**. → 03/01 흡수. 남은 확인: 어느 부분(클라/서버 파이프라인·호환성 경계·ECR 태그·backfill).
 
 ## 🟡 2순위 — 효과/사례 (정성 보강, 면접 답변용)
 8. **격리환경 커밋 재현**이 실제로 잡은 버그/상황 1~2개. → 01
