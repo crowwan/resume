@@ -48,10 +48,10 @@
 
 ---
 
-## 6. 테스트·자동화
+## 6. 테스트·자동화 [→ findings/09-test-automation]
 
-- **E2E 본격 도입**: Playwright 기반. [→ findings 09 예정] `[본인]`
-- **EC2 Claude 자동 E2E**(과거): 크론 pull→변경 분석→관련 E2E 실행→Teams 보고. 현재 미사용. [→ findings 09 예정] `[본인]`
+- **E2E 본격 도입**: Playwright, 약 642 스펙·13개 제품, Page Object(BasePage 추상), visual regression, TC Manager 리포터, 격리 스택 연동. `[본인]` 주도
+- **EC2 Claude 자동 E2E**(과거): `e2e detect` 스킬 — 크론 pull→Claude 변경 분석→관련 E2E 실행→Teams(Power Automate) 보고. 현재 미사용(보안·안정성 한계 → daily workflow 재활성화로 전환). `[본인]` 주도
 
 ---
 

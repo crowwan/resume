@@ -34,7 +34,8 @@
 - Docker: `docker/stack/lib/runtime-config.sh`의 `bust_runtime_config_cache()`가 config 변경 시 `config.js?v=HASH` 캐시버스터 주입. [code]
 
 ### ★ 기여 주체 (런타임 config)
-- **핵심 구현(PR #6422~#6469)은 팀/타인 주도로 보임** [팀]. **본인 기여**: `runtime-config-dev` 플러그인이 `local.json`을 무조건 우선하던 버그 수정(#6614), Batch 미설치 다이얼로그 install URL 일관성(#9279), **linker의 dotenv override 문제 해결/복원**(NX 프로젝트 그래프 초기화 시 `.env.dev` 선로드) 등 — *시스템의 엣지/버그·linker 적용 지점에 기여*. [git: 본인] [기여확인: 본인 핵심 기여 범위 더 확인]
+- **본인이 런타임 config 핵심 설계에도 참여** [기억 — 사용자 확정 2026-06-03]. + 확인된 본인 커밋: `runtime-config-dev` 플러그인이 `local.json`을 무조건 우선하던 버그 수정(#6614), Batch 미설치 다이얼로그 install URL 일관성(#9279), **linker의 dotenv override 문제 해결/복원**(NX 프로젝트 그래프 초기화 시 `.env.dev` 선로드) 등. [git: 본인]
+- ※ git author 매칭상 일부 전환 PR(#6422~#6469)은 타인 이름으로 잡혔으나, **설계 논의·구현에 관여**했다는 사용자 진술 기준. 본문에 정량(빌드 단일화 효과)을 쓸 땐 *"팀에서 설계·도입, 본인도 설계 참여"* 톤으로. 정확한 본인 PR 목록은 추후 git 확인. [기여확인]
 
 ---
 

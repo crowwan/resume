@@ -55,8 +55,9 @@ E. 포맷·배포   HTML/Pages, JD별 버전
 
 | 카드 | 발굴 대상 (`~/Works/devops/`, `~/Works/workspace/`) | Status |
 |------|------|--------|
-| 01. Solutions | `dentbird-solutions`, vault 풍부 | 🔵 ①런타임config+격리재현 done / 09(E2E·EC2Claude)·10(인증·보안)·앱서버통합·Datadog 잔여 |
-| _서비스개요 | 팀/플랫폼 차원 기술 카탈로그(면접 "서비스 설명"용) | 🔵 골격+발굴대기 6항목 |
+| 01. Solutions | `dentbird-solutions`, vault 풍부 | 🔵 ①인프라(런타임config+격리재현) done / 10(인증·보안)·앱서버통합·Datadog 잔여 |
+| 09. 테스트 자동화 | E2E 본격 도입 + EC2 Claude 자동 E2E (01에서 분리) | ✅ done (발굴) |
+| _서비스개요 | 팀/플랫폼 차원 기술 카탈로그(면접 "서비스 설명"용) | 🔵 골격+발굴대기 항목 |
 | 02. Linker | `dentbird-linker-app` 외 | ✅ done |
 | 03. MFE | `workspace/module-monorepo`, `solutions/libs/embed-modules`, `dentbird-console-client` | ✅ done (+ 인터뷰) |
 | 08. iwtk→Three.js | `solutions/libs/cloud-mesh-io` 외 (MFE에서 분리) | ⬜ 발굴 예정 |
