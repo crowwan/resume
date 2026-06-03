@@ -58,6 +58,14 @@ jobs:
             --css=resume-style.css \
             -V pagetitle="김진완 이력서 (역량 중심형)" \
             -V lang=ko
+          pandoc portfolio.md \
+            -o output/portfolio.html \
+            --standalone \
+            --section-divs \
+            --css=resume-style.css \
+            -A templates/mermaid.html \
+            -V pagetitle="김진완 포트폴리오 | Frontend Developer" \
+            -V lang=ko
 
       - name: Copy assets
         run: |
