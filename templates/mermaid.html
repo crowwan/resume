@@ -1,4 +1,11 @@
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+  // pandoc은 ```mermaid 펜스를 <pre class="mermaid"><code>…</code></pre>로 출력하는데,
+  // mermaid는 <code> 자식 때문에 코드가 "<code>flowchart…"로 시작해 파싱에 실패한다
+  // ("No diagram type detected"). 초기화 전에 code 텍스트만 남겨 평탄화한다.
+  document.querySelectorAll('pre.mermaid > code').forEach((code) => {
+    code.parentElement.textContent = code.textContent;
+  });
+  mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose' });
+  await mermaid.run({ querySelector: 'pre.mermaid' });
 </script>
