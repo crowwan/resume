@@ -4,7 +4,7 @@
 > Status: partial (코드·Confluence·git 발굴 완료 / 본인 기여분 확인 필요)
 > 발굴 대상: `dentbird-solutions/libs/cloud-mesh-io`, `embed-modules` ViewerDialog, Confluence 2282094594
 >
-> **★ 기여 주체 주의**: 이 전환의 **결과보고서(2282094594)와 핵심 구현은 김현철(hckim, 35커밋) 주도**. 본인(jwkim)은 **24커밋 — Viewer mesh 렌더 수정 중심**(후기 기여). 본문에 정량을 쓸 땐 "팀 전환, 본인은 Viewer 렌더 회귀 담당" 톤.
+> **★ 기여 주체** (2026-06-03 확정): 결과보고서·전반 구현은 hckim(35커밋) 주도이나, **본인도 cloud-mesh-io/Three.js 전환 설계에 참여** + **Viewer mesh 렌더 수정(24커밋, 색상/abutment/회귀가드)** 담당. → **08 개인 카드 유지.** 정량(번들 -57%)은 "팀 전환 결과"로, 본인 bullet은 "설계 참여 + Viewer 렌더 정합" 중심.
 
 ## 1. 의사결정 흔적
 - **동기**: 크라운팀이 관리하던 사내 vtk 라이브러리 **iwtk(VTK.js 기반, 상용) vendor lock-in 해소** → 업계 표준 Three.js로 전환해 **모듈 제어권을 우리 팀이 확보** + 생태계 활용. [기억] + [Confluence: page/2282094594 §5]
@@ -27,6 +27,6 @@
 - **[본인 일부]**: jwkim 24커밋 — `[DEN-4597] Batch/Cloud Viewer Model(Die) mesh 색상 수정`, `[DEN-3706] Batch Viewer implant abutment 표시 + 색상 통일` 등 **Viewer 렌더 정합·회귀 수정**. [git: 본인]
 - 다른 기여자: sihyeong lee(29), Songyi Jung(9), Jihoon Park(8). [git]
 
-## 미해결 (질문)
-- 본인이 cloud-mesh-io 초기 설계/계획에 참여했는지, 아니면 Viewer 렌더 수정만인지. [기여확인]
-- Viewer 색상/abutment 수정 작업의 임팩트(어떤 버그·회귀를 잡았나). [기억]
+## 확정/미해결
+- ✅ 본인은 **Three.js 전환 설계에도 참여** + Viewer 렌더 수정. (2026-06-03)
+- ⬜ Viewer 색상/abutment 수정 작업의 임팩트(어떤 버그·회귀를 잡았나) — 카드 작성 시 정성. [기억]

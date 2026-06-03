@@ -22,6 +22,6 @@
 - **[본인 일부]** (Jinwan Kim, 2025-04-23 ~ 2025-08-28, **약 10커밋**): DatePicker 확장(onClose props 덮어쓰기 버그 해결, placeholder 추가, onClick handler 노출), v3.0.0 릴리스 관리(3.0.0-13/15). [git: 본인]
 - **[팀]**: Seongjoo Kim(아이콘·custom icon), Yeonho Jeong/PhilSung/Sihyeong Lee/Jihoon Park(컴포넌트 확장·버전 관리). [git]
 
-## 미해결 (질문)
-- 본인 기여가 DatePicker 등 부분 컴포넌트인지, 더 큰 범위(테마/토큰/마이그레이션 주도)가 있었는지. [기여확인]
-- 디자인 시스템 도입으로 실제 Design QA가 줄었는지 체감/지표. [기억]
+## 확정/미해결
+- ✅ 본인 기여 = **특정 컴포넌트 위주**(DatePicker 확장 등 10커밋). 시스템 설계·마이그레이션은 팀. (2026-06-03) → 07은 "공통 컴포넌트 기여" 정도의 가벼운 카드/bullet.
+- ⬜ 디자인 시스템 도입으로 Design QA가 줄었는지 체감 — 카드 작성 시 정성. [기억]
