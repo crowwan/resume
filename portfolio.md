@@ -29,7 +29,7 @@ LNA를 우회할 여러 방안을 놓고, **구현 속도가 아니라 장기 �
 
 `dentbird-linker://` 딥링크로 웹과 데스크톱 앱을 잇고, 그 위에 DRC→STL 실시간 변환 파이프라인을 올렸습니다. CAM마다 좌표계가 달라 생기는 정합 오류는 **변환 매트릭스 알고리즘**으로 흡수하고, CAM별 회귀 테스트로 검증했습니다.
 
-<div class="mermaid">
+```mermaid
 flowchart LR
   W["웹 브라우저<br/>DentBird Cloud"]
   E["Linker<br/>(Electron App)"]
@@ -37,7 +37,7 @@ flowchart LR
   W -->|"dentbird-linker://<br/>Custom Protocol"| E
   E -->|"DRC → STL 변환<br/>좌표 변환 매트릭스"| C
   C -.->|"정합 회귀 테스트로 검증"| E
-</div>
+```
 
 빌드·배포 인프라도 함께 재설계했습니다. 빌드 담당자 PC와 인프라팀(코드사인 USB)에 묶여 있던 구조를, 본인 PC를 self-hosted 빌드머신으로 세우고 GitHub Actions로 이관해 끊어냈습니다. 개발 중에는 *코드사인을 빌드 이후에 따로 하면 바이너리 checksum이 바뀌어 자동 업데이트가 깨진다*는 점을 직접 부딪혀 배웠고, 코드사인을 빌드 과정에 포함하는 구조로 정리했습니다.
 
@@ -70,12 +70,12 @@ cloud·crown·modeler·milling이 도메인도 관리팀도 분리된 상황에�
 
 **Module Federation**도 후보였습니다. 다만 notification 기능에서 직접 도입해본 경험상 초기 설정이 복잡하고 모노레포가 아닌 소비처에서 설정 부담이 커서 이 건에서는 제외했습니다 — 몰라서가 아니라 **써보고 트레이드오프로 뺀** 판단입니다. (별도로 console-client에는 Module Federation을 직접 적용했습니다.)
 
-<div class="mermaid">
+```mermaid
 flowchart LR
   A["라이브러리 배포"] -->|"버전업·재배포 반복<br/>→ 문제 그대로"| B["iframe<br/>런타임 통합"]
   B -->|"모노레포 통합<br/>빌드 포함이 쉬워짐"| C["빌드타임 통합"]
   C -->|"통합 배포 실제론 잘 안 됨<br/>짧은 주기 배포 어려워짐"| D["iframe 런타임 통합<br/>(same-origin)"]
-</div>
+```
 
 가장 흥미로운 건 그 다음입니다. 4개 앱이 한 모노레포로 합쳐지자 빌드에 넣기 쉬워져 **빌드타임 통합**으로 옮겼지만, 막상 운영해보니 통합 배포가 실제로는 잘 이뤄지지 않았고 사내 배포 프로세스가 짧은 주기 배포를 어렵게 바뀌면서 배포 부담이 커졌습니다. 그래서 **다시 iframe 런타임 통합으로 회귀**하되, 이번엔 모듈별 도메인 대신 cloud 도메인 하위 same-origin으로 서빙해 CORS·인증 공유·origin 검증을 단순화했습니다.
 
@@ -106,12 +106,12 @@ flowchart LR
 
 이 런타임 분리가 다음 단계를 열었습니다. 환경이 런타임에 결정되니, **특정 커밋 시점으로 Docker를 띄워 그때의 클라이언트+서버 환경을 그대로 재현**하는 격리 환경을 쌓을 수 있었습니다. 핵심은 격리 환경을 바로 만든 게 아니라, 런타임 config·앱 통합으로 *"격리하기 쉬운 환경"* 을 먼저 깔고 그 위에 쌓았다는 점입니다.
 
-<div class="mermaid">
+```mermaid
 flowchart TD
   R["런타임 Config<br/>빌드타임 → 런타임 주입"] --> M["격리하기 쉬운 환경<br/>(선행 구조)"]
   M --> I["커밋 단위 격리 재현<br/>Docker · qa/prod 데이터 복제"]
   I --> E["E2E · AI 자동 테스트<br/>실행 기반"]
-</div>
+```
 
 ### 결과 (RESULT)
 
