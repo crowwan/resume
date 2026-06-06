@@ -1,137 +1,58 @@
 # Resume Repo — 작업 계획서
 
-> 1년 내 이직 목표(라인/오늘의집/CJ ENM) 기준. **정보 정리 → 포지셔닝 기반 새 이력서 → 비판적 평가 루프**로 "매력적인" 이력서를 만든다.
+> 1년 내 이직(라인·오늘의집·채널톡·토스플레이스) 기준. **1차 자료 발굴 → 귀속 정정 → 담백 재작성 → 회사별 변형**으로 운영.
 >
-> 운영 룰: [CLAUDE.md](./CLAUDE.md) · 작성 기준: [WRITING-GUIDE.md](./WRITING-GUIDE.md) · 발굴 룰: [findings/README.md](./findings/README.md) · 인터뷰: [interviews/README.md](./interviews/README.md)
+> 운영 룰: [CLAUDE.md](./CLAUDE.md) · 작성 기준: [WRITING-GUIDE.md](./WRITING-GUIDE.md) · 평가: [EVALUATION-RUBRIC.md](./EVALUATION-RUBRIC.md) · 발굴 룰: [findings/README.md](./findings/README.md)
 
 ---
 
-## 현재 상태
+## 현재 상태 (2026-06-06)
 
-- **Current Phase**: A(정보 토대) ✅ **거의 완료** — 카드 01~10 발굴 + 팀 작업 서비스개요 + 코드베이스 맵 완성(2026-06-03). 카드 세트 확정(99 버림, 배포 흡수). 남은 건 _questions.md 기여확인 일부 → **C(이력서 작성) 진입 준비.** (B 기준 정비 ✅)
-- **워크플로 전환 (2026-06-01)**: 기존 "카드별 순차 발굴→인터뷰→재작성"에서 → **[전체 정보 정리 → 포지셔닝 기반 백지 재작성 → 평가 서브에이전트 루프]** 로 전환. *기존 양식을 답습하면 매력이 안 생긴다*는 판단에서 비롯.
-- **포지셔닝 1안 (검증 대상)**: "제품의 구조와 품질을 끝까지 책임지는 FE" + 4축(**범위 / 구조 / 판단 / 효율**). 확정 아님 — Phase D 평가 루프에서 검증·조정.
-- **완료**: ✅ 인프라 통합(career/resume 프로젝트 6) + 가이드 도입(WRITING-GUIDE) + 운영문서 등록
-- **interviews 트랙**: 이력서와 **병행 유지** (면접 답변 스크립트 자산 + 카드 서사 깊이)
+**Phase: 최종 빌드 검토 중.** 대규모 발굴로 기존 이력서의 오귀속(타팀/hckim 웹 인프라 수치)·누락(3D SRGB·관측 표준·Subtree)을 정정하고, 여러 라운드의 문체 calibration 끝에 **레퍼런스식 담백 스타일**로 확정해 마스터 + 4사 변형을 재작성했습니다.
 
-> Claude는 작업 시작 시 이 줄을 먼저 확인하고, Phase 진입 시 이 블록을 갱신합니다.
+- 정본 산출 위치: `drafts/2026-06-rebuild/final/` (career-description.md · resume.md · variants/{라인,오늘의집,채널톡,토스플레이스})
+- 발굴 raw 사실: `findings/collected/` (+ `_GAP-REPORT.md`, `_INTERVIEW-ANSWERS.md`)
+- 보이스 리서치: `drafts/2026-06-rebuild/RESEARCH-voice-format-board.md`
 
 ---
 
-## 새 워크플로 (한눈에)
+## 실제 진행한 파이프라인 (이번 재작성)
 
 ```
-A. 정보 토대   findings/ 전체 완비 (raw 사실, 출처 강제)
+1. 대규모 자료 수집   본인(jwkim) 커밋·PR·Confluence·Jira·vault·S3 전수 발굴 → findings/collected/
       ↓
-B. 기준 정비   WRITING-GUIDE(포지셔닝 섹션) + EVALUATION-RUBRIC
+2. 귀속 정정         git/Confluence author 교차검증 → 오귀속 제거·누락 강점 격상 (_GAP-REPORT)
       ↓
-C. 새 이력서   findings → (interviews 4축 병행) → 포지셔닝 렌즈로 백지 재작성
+3. 발명 방지 인터뷰   사용자만 아는 사실·수치·기여 확인 (_INTERVIEW-ANSWERS)
       ↓
-D. 평가 루프   평가 서브에이전트가 RUBRIC으로 비판적 채점 → 통과까지 개선
+4. 보이스 리서치      한국 IT 컨벤션 밖 사례 수집 → 담백 스타일 확정 (RESEARCH-voice-format-board)
       ↓
-E. 포맷·배포   HTML/Pages, JD별 버전
+5. 담백 재작성        최종 스타일로 마스터 8카드 + career/resume (final/)
+      ↓
+6. 회사별 변형        4사 렌즈로 재정렬 + 담백한 회사-맞춤 도입부 (final/variants)
+      ↓
+7. 회사별 평가        RUBRIC + 귀속·tic 점검 (통과까지)
 ```
 
-**핵심 원칙**: 기존 resume/career 양식을 **답습하지 않는다.** findings(사실)와 포지셔닝에서 새로 짓고, 비판적 평가자가 `통과`시킬 때까지 돌린다. 사실·수치는 여전히 **발굴 OK / 발명 NO** (CLAUDE.md §3).
+핵심 원칙은 그대로: 사실·수치는 **발굴 OK / 발명 NO** (CLAUDE.md §3). 본인 기여 경계는 메모리 `resume-attribution-boundary` 참조.
 
 ---
 
-## Pre-Phase — Git Identity 격리 (완료)
+## 남은 작업
 
-| 항목 | 결과 | Status |
+| 단계 | 내용 | Status |
 |------|------|--------|
-| `user.name` (local) | `Jinwan Kim` | ✅ |
-| `user.email` (local) | `32172056+crowwan@users.noreply.github.com` (개인 GitHub noreply) | ✅ |
-| 격리 범위 | 이 레포만 (`git config --local`) | ✅ |
-| `.git/hooks/pre-commit` | 회사 도메인(`imagoworks.ai`) author 자동 차단 | ✅ |
-
-> 새 워킹트리/재클론 후엔 `CLAUDE.md § 8 Git Identity 셋업` 명령을 다시 실행.
-
----
-
-## Phase A — 정보 토대 (findings 완비) ★ 현재
-
-모든 카드의 raw 사실을 `findings/`에 완비. 서사 X, 출처 태그 강제. 기준: [findings/README.md](./findings/README.md)의 4시그널.
-
-| 카드 | 발굴 대상 (`~/Works/devops/`, `~/Works/workspace/`) | Status |
-|------|------|--------|
-| 01. Solutions | `dentbird-solutions`, vault 풍부 | 🔵 ①인프라(런타임config+격리재현) done / 10(인증·보안)·앱서버통합·Datadog 잔여 |
-| 09. 테스트 자동화 | E2E 본격 도입 + EC2 Claude 자동 E2E (01에서 분리) | ✅ done (발굴) |
-| _서비스개요 | 팀/플랫폼 차원 기술 카탈로그(면접 "서비스 설명"용) | 🔵 골격+발굴대기 항목 |
-| 02. Linker | `dentbird-linker-app` 외 | ✅ done |
-| 03. MFE | `workspace/module-monorepo`, `solutions/libs/embed-modules`, `dentbird-console-client` | ✅ done (+ 인터뷰) |
-| 08. iwtk→Three.js | `solutions/libs/cloud-mesh-io` 외 (MFE에서 분리) | ⬜ 발굴 예정 |
-| 04. Account | `dentbird-account-client` | ✅ done (+ 인터뷰) |
-| 05. Batch | `workspace/dentbird-batch-client`, `dentbird-solutions/apps/batch` | ✅ done |
-| 06. Landing | `landing-page-client`, `landing-page-server` | ✅ done |
-| 07. Design System | `imago-design-system` | ✅ done (발굴, 본인 부분기여) |
-| 08. iwtk→Three.js | `cloud-mesh-io` | ✅ done (발굴, [팀-hckim] 주도/본인 Viewer 일부) |
-| 10. 인증/보안 | 파일 AEAD 암호화 + JWT→Redis 세션 | ✅ done (발굴, 대체로 [팀]/본인범위 확인필요) |
-| ~~99. Misc~~ | AI 도구 리딩=[팀-hckim] → 본인 항목 없음 | ❌ 버림(2026-06-03) |
-| (배포 운영) | 본인 일부 기여 → 독립 카드 X, **01/03에 bullet 흡수** | ➡️ 흡수 |
-| _service-overview / _codebase-map / _team-space-index | 팀 작업·코드 구조·문서 인덱스(설명용) | ✅ |
-| _questions | 발굴 후 확인 질문(기여확인 일부 해소) | 🔵 인터뷰 대기 |
-
-**★ 카드 세트 확정(2026-06-03): 개인 카드 = 01~09. (10 인증/보안은 본인 기여 약해 개인카드 제외 — AEAD 격리검증은 09 흡수, 인증은 서비스개요. 99 버림. 배포는 01/03 흡수. GA4·빌드최적화는 본인 일부 → 04·01 bullet.) 발굴·코드확인 완료 → Phase C 진입 준비.**
-
-**완료 기준**: 4시그널 섹션이 채워지고, 본문에 박을 `[측정필요]`/`[기억]` 항목은 별도 확인 완료.
-
----
-
-## Phase B — 기준 정비 ✅ 완료
-
-| 항목 | 내용 | Status |
-|------|------|--------|
-| WRITING-GUIDE 포지셔닝 섹션 | "우산 + 4축" 개념 + 포지셔닝 1안 명시 (검증 대상) | ✅ §0-1 |
-| EVALUATION-RUBRIC.md 신규 | 평가 서브에이전트 채점표·통과 기준 (포지셔닝 선명도/첫줄 임팩트/정량 실측/트레이드오프/6초 매력/발명 없음). **무한루프 방지 위해 통과 임계치 명문화** | ✅ 8항목+임계치 |
-
----
-
-## Phase C — 새 이력서 생성
-
-findings를 입력으로, **포지셔닝(1안) 렌즈 + [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준**으로 백지 재작성.
-
-- `interviews/0X-*.md` 4축 인터뷰 **병행** (면접 답변 스크립트 + 카드 서사 깊이 확보)
-- `career-description.md` 먼저(상세) → `resume.md`(압축·선별·정렬, WRITING-GUIDE §1-1)
-- 기존 양식 답습 금지. 첫 줄 임팩트·문제→해결→임팩트·트레이드오프 서사 필수.
-
-### 카드별 인터뷰 깊이 가이드 (기존 보존)
-
-- **Solutions ★**: 모노레포 통합의 진짜 동기 / Playwright Page Object 93%·39%의 결정 근거 / Claude CLI 변경 감지 효과 측정 / Datadog RUM 전사 적용 경위 / Facade 토큰 200→33줄 Race Condition 맥락
-- **Linker ★**: LNA Custom Protocol 20여 방안 의사결정 / 16개 CAM 검증 방식 / 1개월 113커밋 페이스
-- **MFE ★**: iframe 4~5개 운영의 진짜 비용 / Module Federation 대안 검토 / FSD 도입 후 변화 / 지속성·재설계 계획
-- **Account / DS / Misc**: 가벼운 4축 (결정 서사 위주)
-
----
-
-## Phase D — 평가-개선 루프
-
-- **평가 서브에이전트**: `EVALUATION-RUBRIC.md` + `WRITING-GUIDE.md` 기준으로 **비판적 채점** → `통과`/`미통과` + 구체 피드백
-- 메인(생성자)이 피드백 반영 → 재평가 → **통과까지 반복**
-- **통과 = 룹브릭 전 항목 합격 + 치명결함 0**
-- **포지셔닝 1안도 여기서 검증·조정** (더 강한 포지셔닝이 보이면 교체)
-
----
-
-## Phase E — 포맷·배포 (선택)
-
-콘텐츠·평가 통과 후 진입.
-
-| 항목 | Status |
-|------|--------|
-| Pages 배포 검증 | ⬜ |
-| **JD별 이력서 버전 분기** (공고마다 다른 빌드 산출물 — WRITING-GUIDE §13 매핑) | ⬜ |
-| PDF 자동 빌드 / `resume-style.css` 다듬기 | ⬜ |
-| 공개 시 개인정보 분리 | ⬜ |
+| 정본 검토 | 사용자가 `final/` 검토·미세 조정 | 🔵 진행 |
+| 정본 승격 | `final/` → 루트 `resume.md`·`career-description.md` + `applications/` 4종 교체(기존 백업) | ⬜ |
+| 포맷·배포 | HTML/Pages 빌드 검증, PDF, `resume-style.css` | ⬜ |
+| 포트폴리오 분리 | 서사·스토리텔링은 `portfolio.md`로 분리(담백 이력서와 역할 구분) | ⬜ 향후 |
+| 커밋·PR | 한 묶음씩 변경 전후 보여주고 커밋 (개인 noreply 이메일 확인 — CLAUDE.md §8) | ⬜ |
 
 ---
 
 ## 진행 규칙 요약
 
-1. **A → B → C → D → E 순서**. 사용자가 점프 지시하면 점프 가능.
-2. 각 Phase 완료 시 이 PLAN 상단 **Current Phase** 갱신.
-3. **사실 발굴은** [findings/README.md](./findings/README.md) 4시그널. **인터뷰는** [interviews/README.md](./interviews/README.md) 4축.
-4. **본문 작성·재작성은** [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준 + 포지셔닝(1안) 렌즈. **기존 양식 답습 금지.**
-5. **평가는** `EVALUATION-RUBRIC.md` 기준 비판적으로. 통과까지 개선.
-6. **새 사실/수치를 박을 때마다** "사용자가 답했나, 내가 만들었나" 자체 검증. 출처 없으면 못 박음.
-7. 한 PR = 한 카드 또는 한 Phase 정리 묶음. 변경 전후 보여주고 사용자 검토.
+1. **사실 발굴은** [findings/README.md](./findings/README.md) 4시그널 + 출처 태그. **귀속은** git/Confluence author 교차검증.
+2. **작성은** [WRITING-GUIDE.md](./WRITING-GUIDE.md) 최종 담백 스타일. **평가는** [EVALUATION-RUBRIC.md](./EVALUATION-RUBRIC.md).
+3. 새 사실/수치를 박을 때마다 "사용자가 답했나, 내가 만들었나" 자체 검증. 출처 없으면 못 박음.
+4. 커밋 직전 `git config --local user.email`이 `imagoworks.ai`가 아닌지 확인.

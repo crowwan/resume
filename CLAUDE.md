@@ -109,11 +109,12 @@ Claude Code(=메인 Claude in CLI)는 이 룰에 따라 동작합니다.
 
 > 위 0~7은 **카드 1건 처리(미시)** 흐름입니다. 전체 거시 흐름(정보 토대 → 새 이력서 → 평가 루프)은 [PLAN.md](./PLAN.md) Phase A~E 참조.
 
-### ★ 전체 이력서 단위 (워크플로 전환 2026-06-01)
+### ★ 전체 이력서 단위 (최종 스타일 확정 2026-06-06)
 
-- 카드 작성은 **포지셔닝 1안**("제품의 구조와 품질을 끝까지 책임지는 FE" + 범위/구조/판단/효율 4축, **검증 대상**) 렌즈로. **기존 resume/career 양식 답습 금지** — findings·포지셔닝에서 새로 짓는다.
-- 작성 후 **평가 서브에이전트 루프**: `EVALUATION-RUBRIC.md` + [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준으로 비판적 채점 → `통과`까지 개선 반복.
-- 포지셔닝은 확정이 아니라 평가 루프에서 검증·조정한다.
+- **작성 스타일 = 최종 담백 스타일.** [WRITING-GUIDE.md](./WRITING-GUIDE.md) 기준 — 있는 사실을 담백하게, 멋부림 금지, 타이틀은 기능·주제 중심, 구체 기법(격리 재현·AI 변경 감지·ErrorBoundary 등)은 불릿으로. **멋부린 포지셔닝 우산("화면 너머~", "경계 설계")은 폐기.** 차별화는 정확한 사실 + 회사별 맞춤에서.
+- **기존 resume/career 양식·옛 WRITING-GUIDE 블렌드·긴 narrative 답습 금지** (전부 "비슷함/멋부림"으로 반려된 이력 — `drafts/2026-06-rebuild/RESEARCH-voice-format-board.md` 참조).
+- **귀속은 정정본 기준**: `findings/collected/_GAP-REPORT.md`·`_INTERVIEW-ANSWERS.md` + 메모리 `resume-attribution-boundary`. 타팀/hckim 웹 수치·Account 제품수치 등 인용 금지.
+- 작성 후 **평가 루프**: `EVALUATION-RUBRIC.md`(담백 tic·귀속 점검 포함) → `통과`까지 개선.
 
 ### PR 단위
 
@@ -184,9 +185,8 @@ git config --local user.email "32172056+crowwan@users.noreply.github.com"
 |------|------|-----------|
 | `CLAUDE.md` (이 파일) | Claude Code 운영 룰 | Claude Code (CLI) |
 | `claude-project-instructions.md` | 모바일 Claude.ai Project Instructions | 모바일 Claude.ai |
-| `STRATEGY.md` | 채널별 워크플로우 (PC/모바일/자동화) | 사용자 (참고용) |
-| `PLAN.md` | 현재 작업 순서와 Phase 상태 | Claude + 사용자 |
-| `WRITING-GUIDE.md` | **이력서·경력기술서 재작성 스타일 가이드** — 문장 공식·정량 표기·프로젝트 선별/정렬·JD 매핑 운영법 | Claude + 사용자 |
+| `PLAN.md` | 현재 작업 순서·상태 | Claude + 사용자 |
+| `WRITING-GUIDE.md` | **최종 담백 스타일 가이드** — 타이틀·불릿 룰·금지 tic·교정·귀속 | Claude + 사용자 |
 | `findings/README.md` | **사실 발굴 룰** — 4시그널·출처 태그·카드별 레포 지도 | Claude + 사용자 |
 | `findings/0X-*.md` | 카드별 발굴된 raw 사실 (서사 X). 인터뷰의 입력원 | Claude + 사용자 |
 | `interviews/README.md` | 인터뷰 진행 룰과 면접 답변 스크립트 변환 가이드 | Claude + 사용자 |
