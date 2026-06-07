@@ -8,7 +8,7 @@ Electron 데스크톱 · 프론트엔드 플랫폼 아키텍처 · 품질 자동
 
 ## 자기소개
 
-2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드 개발자로 일하고 있습니다. 화면 구현뿐 아니라 Electron 데스크톱 앱, 모노레포·환경 분리 같은 플랫폼 토대, 테스트·빌드·배포 자동화까지 제품이 돌아가는 구조를 맡아 왔습니다.
+2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드 개발자로 일하고 있습니다. 화면 구현뿐 아니라 Electron 데스크톱 앱, 모노레포·환경 분리, 테스트·빌드·배포 자동화까지 제품이 돌아가는 구조를 맡아 왔습니다.
 
 ---
 
@@ -42,11 +42,11 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 `기술` Electron · React · TypeScript · Custom Protocol · Datadog
 
-### 프론트엔드 플랫폼 토대 — 모노레포 통합·환경 분리
+### 모노레포 통합·환경 분리
 
-여러 클라이언트 앱이 환경별 URL·도메인을 제각기 구성하던 구조에, 도메인 파생을 한 곳으로 모으는 토대를 만들었습니다.
+여러 클라이언트 앱이 환경별 URL·도메인을 제각기 구성하던 구조에, 도메인 파생을 한 곳으로 모았습니다.
 
-- 환경별로 흩어진 도메인·URL 구성을 단일 통합 라이브러리로 일원화, 팀의 런타임 환경 분리와 격리 재현 환경이 이 위에 얹히는 시작점
+- 환경별로 흩어진 도메인·URL 구성을 단일 통합 라이브러리로 일원화, 팀의 런타임 환경 분리와 격리 재현 환경이 이 라이브러리를 기반으로 동작
 - 별도 레포의 클라이언트 앱 2종·공용 라이브러리 6종을 메인 NX 모노레포로 Git Subtree 이관, 커밋 이력 보존·이후 정기 동기화까지 운영
 - NX 자동 타겟 추론이 일으키던 빌드 오류를 진단, 불필요한 산출물 설정을 제거해 빌드 태스크를 11개에서 9개로 줄이고 메모리 부족 해소
 - 모노레포 도구는 새로 고르지 않고 기존 NX 유지, 전환 이득이 이관·재학습 비용을 넘지 못한다는 판단
@@ -105,7 +105,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 |------|------|
 | **Language** | TypeScript, JavaScript |
 | **Frontend** | React 18/19, Next.js |
-| **Desktop** | Electron (IPC, Deep Link, Custom Protocol, Auto Update, Code Signing) |
+| **Desktop** | Electron |
 | **State / UI** | TanStack Query, Recoil · MUI, Emotion |
 | **Build / Arch** | NX, pnpm, Git Subtree, Module Federation, iframe + postMessage, 런타임 Config |
 | **3D / Graphics** | Three.js, WebGL, draco3d, SRGB ColorManagement |

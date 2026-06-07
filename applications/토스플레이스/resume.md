@@ -8,7 +8,7 @@ Electron 데스크톱 · 웹과 로컬·하드웨어 연동 · 프론트엔드 �
 
 ## 자기소개
 
-2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드 개발자로 일하며, 웹에서 만든 데이터를 사용자 PC의 외부 소프트웨어로 넘기는 Electron 연동 앱을 설계·단독 운영해 왔습니다. 토스플레이스 POS도 웹뷰가 맡는 UI·비즈니스 로직과 네이티브가 맡는 하드웨어·결제 연동을 잇는 같은 계열의 문제라고 봅니다. 브라우저 보안 정책에 막힌 연동을 재설계하고, 좌표·전달 방식이 제각각인 외부 장비 12종을 단일 인터페이스로 묶은 경험이 직접 닿는다고 생각했습니다. 화면 구현뿐 아니라 모노레포·빌드·배포 같은 플랫폼 토대까지 담당해 왔습니다.
+2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드 개발자로 일하며, 웹에서 만든 데이터를 사용자 PC의 외부 소프트웨어로 넘기는 Electron 연동 앱을 설계·단독 운영해 왔습니다. 토스플레이스 POS도 웹뷰가 맡는 UI·비즈니스 로직과 네이티브가 맡는 하드웨어·결제 연동을 잇는 같은 계열의 문제라고 봅니다. 브라우저 보안 정책에 막힌 연동을 재설계하고, 좌표·전달 방식이 제각각인 외부 장비 12종을 단일 인터페이스로 묶은 경험이 직접 닿는다고 생각했습니다. 화면 구현뿐 아니라 모노레포·빌드·배포까지 담당해 왔습니다.
 
 ---
 
@@ -55,11 +55,11 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 `기술` Electron · electron-builder · electron-updater · GitHub Actions(self-hosted) · Azure Pipelines · 코드 서명·공증 · S3
 
-### 프론트엔드 플랫폼 토대 — 모노레포 통합·환경 분리
+### 모노레포 통합·환경 분리
 
-여러 클라이언트 앱이 환경별 URL·도메인을 제각기 구성하던 구조에, 도메인 파생을 한 곳으로 모으는 토대를 만들었습니다.
+여러 클라이언트 앱이 환경별 URL·도메인을 제각기 구성하던 구조에, 도메인 파생을 한 곳으로 모았습니다.
 
-- 환경별로 흩어진 도메인·URL 구성을 단일 통합 라이브러리로 일원화, 팀의 런타임 환경 분리와 격리 재현 환경이 이 위에 얹히는 시작점
+- 환경별로 흩어진 도메인·URL 구성을 단일 통합 라이브러리로 일원화, 팀의 런타임 환경 분리와 격리 재현 환경이 이 라이브러리를 기반으로 동작
 - 별도 레포의 클라이언트 앱 2종·공용 라이브러리 6종을 메인 NX 모노레포로 Git Subtree 이관, 커밋 이력 보존·이후 정기 동기화까지 운영
 - NX 자동 타겟 추론이 일으키던 빌드 오류를 진단, 불필요한 산출물 설정을 제거해 빌드 태스크를 11개에서 9개로 줄이고 메모리 부족 해소
 - 모노레포 도구는 새로 고르지 않고 기존 NX 유지, 전환 이득이 이관·재학습 비용을 넘지 못한다는 판단
@@ -116,7 +116,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 |------|------|
 | **Language** | TypeScript, JavaScript |
 | **Frontend** | React 18/19, Next.js |
-| **Desktop** | Electron (IPC, Deep Link, Custom Protocol, Auto Update, Code Signing) |
+| **Desktop** | Electron |
 | **State / UI** | TanStack Query, Recoil · MUI, Emotion |
 | **Build / Arch** | NX, pnpm, Git Subtree, Module Federation, iframe + postMessage, 런타임 Config |
 | **Testing** | Playwright, Jest, Vitest, MSW |

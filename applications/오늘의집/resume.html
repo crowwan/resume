@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>김진완 — 오늘의집</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="resume-style.css" />
+</head>
+<body>
+<section id="김진완-프론트엔드-개발자" class="level1">
+<h1>김진완 | 프론트엔드 개발자</h1>
+<p>품질 자동화 · 프론트엔드 플랫폼 아키텍처 · Electron 데스크톱 중심</p>
+<ul>
+<li><a href="portfolio.html">포트폴리오</a> · <a
+href="https://velog.io/@crowwan">블로그</a> · <a
+href="https://github.com/crowwan">깃허브</a></li>
+</ul>
+<hr />
+<section id="자기소개" class="level2">
+<h2>자기소개</h2>
+<p>2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드
+개발자로 일하고 있습니다. 화면 구현뿐 아니라 테스트·빌드·배포 자동화,
+모노레포 통합과 공통 모듈 분리까지, 제품이 돌아가는 구조를 맡아
+왔습니다. 테스트가 거의 없던 제품에 재현 가능한 환경과 자동 회귀 감지를
+직접 만든 경험은 “대충 넘어가지 않는” 품질과 속도를 함께 보는 오늘의집의
+일하는 방식과 맞닿아 있다고 생각합니다. 별도 레포로 흩어진 앱을
+모노레포로 통합하고 공통 기능의 모듈 경계를 다시 그어 온 경험은
+오늘의집이 겪은 모놀리식의 점진적 프론트엔드 분리 문제와도 결이
+같습니다.</p>
+<hr />
+</section>
+<section id="핵심-역량" class="level2">
+<h2>핵심 역량</h2>
+<ul>
+<li><strong>품질 자동화·CI/CD</strong>: Playwright E2E, 커밋 단위
+컨테이너 재현, 변경 기반 테스트 자동 선별, 시각 회귀 CI, 에러 관측
+표준화</li>
+<li><strong>프론트엔드 플랫폼</strong>: NX 모노레포 통합, 환경·도메인
+구성 일원화, 공통 모듈(MFE) 분리</li>
+<li><strong>데스크톱</strong>: Electron 앱 설계·운영, 빌드·코드
+서명·자동 업데이트 인프라</li>
+<li><strong>제품 도메인</strong>: B2B 구독·결제 프론트엔드, 글로벌
+멀티테넌트·다국어</li>
+</ul>
+<hr />
+</section>
+<section id="경력" class="level2">
+<h2>경력</h2>
+<p><strong>이마고웍스 (ImagoWorks)</strong> | 프론트엔드 개발자 |
+Dentbird 1 Team | 2023.09 ~ 현재</p>
+<p>AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데스크톱
+앱 구현부터 모노레포 통합·런타임 환경 분리·품질 자동화 같은 플랫폼 기술
+결정까지 담당해 왔습니다.</p>
+<hr />
+</section>
+<section id="주요-프로젝트" class="level2">
+<h2>주요 프로젝트</h2>
+<section id="테스트품질-자동화-인프라" class="level3">
+<h3>테스트·품질 자동화 인프라</h3>
+<p>테스트가 거의 없던 제품에, 다른 변경의 간섭 없이 재현 가능한 환경
+위에서 회귀를 자동으로 잡는 체계를 만들었습니다.</p>
+<ul>
+<li>커밋 시점의 클라이언트·서버·DB를 컨테이너로 묶어, 다른 변경의 간섭
+없이 그 시점을 결정론적으로 재현</li>
+<li>흩어진 Playwright E2E를 모노레포로 통합하고, Page Object와 세션
+재사용으로 중복 제거</li>
+<li>커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를
+Teams로 보고하며 실패를 실제 회귀와 테스트 코드 문제로 1차 분류하는 AI
+변경 감지 구축</li>
+<li>만성 실패하던 일일 검증을 원인별로 분리 진단해 근본 수정 (결제
+테스트 누락 약 28건 → 0)</li>
+<li>실행 인프라를 K8s로 구성하려다 복잡도가 높고 빠른 적용이 어렵다고
+보고, 더 단순하고 즉시 효과를 볼 수 있는 EC2로 선택</li>
+</ul>
+<p><code>기술</code> Playwright · Docker · MongoDB · EC2 · GitHub
+Actions(self-hosted)</p>
+</section>
+<section id="d-렌더링-품질-자동화" class="level3">
+<h3>3D 렌더링 품질 자동화</h3>
+<p>사내 3D 라이브러리(iwtk)에서 Three.js로의 마이그레이션을 팀이 AI
+기반으로 빠르게 진행하면서, 두 엔진의 렌더 결과 이미지를 비교해 맞추는
+과정에서 색·조명이 미세조정값으로 눈에 맞춰진 부분이 남아 있던 것을,
+소스 엔진의 실제 동작을 근거로 다시 정리했습니다.</p>
+<ul>
+<li>버그 수정 중 ’이미지 맞춤’으로 구현된 부분을 식별, iwtk의 실제
+동작을 근거로 Three.js 표준 기능으로 1:1 대체 가능한 부분을 옮기고
+미세조정값·메인 스레드 디코더 등 약 1,420줄 제거</li>
+<li>렌더 결과를 이미지로 비교하던 과정을 채널별 평균 픽셀 차이를
+metric으로 정의한 도구로 체계화해 시각 회귀 CI로 가드 (소프트웨어
+렌더러로 CI·로컬 GPU 차 흡수, 3개 앱 공유 baseline)</li>
+<li>썸네일 엔진(VTK)의 Three.js 통합은 번들·성능 이득을 실측한 결과
+이득이 없어 보류</li>
+<li>결과 이미지를 맞추는 빠른 마이그레이션은 미세조정값에 기대 깨지기
+쉬워, 소스 엔진의 실제 동작을 이해하고 타깃 엔진의 표준 기능으로 옮기는
+접근으로 정리</li>
+</ul>
+<p><code>기술</code> Three.js · draco3d · WebGL · SRGB ColorManagement ·
+Playwright</p>
+</section>
+<section id="모노레포-통합환경-분리" class="level3">
+<h3>모노레포 통합·환경 분리</h3>
+<p>여러 클라이언트 앱이 환경별 URL·도메인을 제각기 구성하던 구조에,
+도메인 파생을 한 곳으로 모았습니다.</p>
+<ul>
+<li>환경별로 흩어진 도메인·URL 구성을 단일 통합 라이브러리로 일원화,
+팀의 런타임 환경 분리와 격리 재현 환경이 이 라이브러리를 기반으로
+동작</li>
+<li>별도 레포의 클라이언트 앱 2종·공용 라이브러리 6종을 메인 NX
+모노레포로 Git Subtree 이관, 커밋 이력 보존·이후 정기 동기화까지
+운영</li>
+<li>NX 자동 타겟 추론이 일으키던 빌드 오류를 진단, 불필요한 산출물
+설정을 제거해 빌드 태스크를 11개에서 9개로 줄이고 메모리 부족 해소</li>
+<li>모노레포 도구는 새로 고르지 않고 기존 NX 유지, 전환 이득이
+이관·재학습 비용을 넘지 못한다는 판단</li>
+</ul>
+<p><code>기술</code> TypeScript · NX · Git Subtree · i18n</p>
+</section>
+<section id="공통-모듈-통합-micro-frontend" class="level3">
+<h3>공통 모듈 통합 — Micro Frontend</h3>
+<p>도메인도 관리팀도 나뉜 여러 서비스가 같은 공통 기능을 공유하면서,
+하나가 바뀔 때마다 각 서비스에 같은 수정을 반복하던 구조를 한곳으로
+모았습니다.</p>
+<ul>
+<li>공통 기능 4종(설정·내보내기·탐색기·뷰어)을 iframe + postMessage
+런타임 모듈로 통합, 각 서비스 반복 수정을 모듈 한 곳 수정으로 좁히고
+cross-origin 격리 헤더·호스트 화이트리스트로 임베드 경계 잠금</li>
+<li>모노레포 통합 후 빌드타임 통합으로 옮겼다가, 통합 배포가 거의 없고
+사내 배포 주기가 긴 제약을 확인해 같은 origin으로 서빙하는 iframe으로
+회귀 (정답 기술이 아니라 조직·배포 제약에 맞춘 재선택)</li>
+<li>Module Federation은 다른 기능에 도입해 초기·소비처 설정 부담을
+확인한 뒤 이 건에서는 제외하고 별도 콘솔 서비스에만 적용</li>
+</ul>
+<p><code>기술</code> NX · iframe + postMessage · Module Federation</p>
+</section>
+<section id="기업-랜딩-페이지-풀스택" class="level3">
+<h3>기업 랜딩 페이지 풀스택</h3>
+<p>입사 첫 업무로 기업 랜딩을 단독 리뉴얼하고, 이후 2년 넘게 단일
+라인으로 운영했습니다.</p>
+<ul>
+<li>번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을
+자동 생성해 없는 키를 컴파일 타임에 차단하는 타입세이프 i18n으로 전환 —
+키 추가·삭제 시 누락을 빌드에서 차단</li>
+<li>화면부터 서버 API까지 풀스택으로 개발 (Next.js · Fastify ·
+MongoDB)</li>
+</ul>
+<p><code>기술</code> Next.js · 타입세이프 i18n · Fastify · MongoDB</p>
+</section>
+<section id="b2b-구독결제-시스템-프론트엔드" class="level3">
+<h3>B2B 구독·결제 시스템 프론트엔드</h3>
+<p>일회성 크레딧 결제를 반복 구독 매출로 전환하면서, 글로벌 멀티테넌트
+환경의 결제·권한 도메인 프론트엔드를 전담했습니다. 기능 구현뿐 아니라
+부분 실패에도 무너지지 않는 검증 구조까지 설계했습니다.</p>
+<ul>
+<li>플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제
+히스토리까지 구독 워크플로우 전체를 레거시 크레딧 결제와 공존시키며
+구현</li>
+<li>HTTP 200으로 내려오는 서버의 비즈니스 에러를 커스텀 에러로 받아
+코드별로 분기, 결제 정보를 못 받아도 내역 조회·구독 취소·뒤로가기는
+살아남도록 의존 관계 기준으로 Fault Tolerance 설계</li>
+<li>결제 상태를 서버·Stripe 동기화 기준으로 폴링해 UI에 반영하되, 무한
+반복을 막는 안전장치 추가 (3초 간격·최대 20회·언마운트 정리)</li>
+<li>운영자 백오피스 측 구독 회귀 E2E 가드까지 작성</li>
+</ul>
+<p><code>기술</code> React · TypeScript · TanStack Query · Stripe ·
+ErrorBoundary · Playwright(E2E)</p>
+</section>
+<section id="웹로컬-소프트웨어-연동-electron-데스크톱-앱"
+class="level3">
+<h3>웹·로컬 소프트웨어 연동 Electron 데스크톱 앱</h3>
+<p>웹에서 만든 보철 케이스를 사용자 PC의 CAM 소프트웨어로 전달하는 사내
+연동 앱(Linker)을 단독 운영했습니다. 다운로드·압축 해제·수동 투입을
+거치던 과정을 자동 전달 흐름으로 재설계했습니다.</p>
+<ul>
+<li>초기 로컬 서버 방식이 Chrome LNA 정책에 막혀, 통신 방식을 다시
+검토한 끝에 Custom Protocol 중간 레이어로 재설계</li>
+<li>WebSocket은 곧 같은 LNA 정책 적용 대상이라 제외하고 HTTPS 로컬
+서버도 같은 이유로 무효라, 장기 안정성을 채택 기준으로 선택</li>
+<li>좌표계와 파일 전달 방식이 제각각인 외부 CAM 12종을 단일 변환·연동
+인터페이스로 통합</li>
+<li>초기 핵심이던 로컬 서버를 수명이 다하자 직접 폐기하고,
+딥링크·세션·CAM 연동 이슈를 2026년까지 담당</li>
+</ul>
+<p><code>기술</code> Electron · React · TypeScript · Custom Protocol ·
+Datadog</p>
+<hr />
+</section>
+</section>
+<section id="보완하고-싶은-영역" class="level2">
+<h2>보완하고 싶은 영역</h2>
+<p>대규모 웹 트래픽 환경의 Core Web Vitals 최적화, SSR, BFF,
+접근성(a11y)은 아직 실무 경험이 깊지 않습니다. Next.js 기반 풀스택(기업
+랜딩 + Fastify 서버 API)으로 서버사이드 JS 런타임을 다뤄봤고 제품에서
+런타임 환경 분리·번들 구조·빌드 성능은 직접 맡아 왔지만, 사용자 규모가
+큰 웹 런타임 성능과 접근성은 입사 후 우선 채우고 싶은 영역입니다.</p>
+<p>LLM 기반 사용자 인터랙션 설계는 직접 해본 적이 없습니다. 다만 변경
+감지·테스트 선별처럼 AI를 개발 파이프라인의 판단 단계에 결합해 본 경험이
+있어, 그 감각을 사용자 대면 인터랙션으로 확장하는 데 관심이 큽니다.</p>
+<hr />
+</section>
+<section id="기술-스택" class="level2">
+<h2>기술 스택</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>분류</th>
+<th>기술</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Language</strong></td>
+<td>TypeScript, JavaScript</td>
+</tr>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>React 18/19, Next.js</td>
+</tr>
+<tr>
+<td><strong>State / UI</strong></td>
+<td>TanStack Query, Recoil · MUI, Emotion</td>
+</tr>
+<tr>
+<td><strong>Build / Arch</strong></td>
+<td>NX, pnpm, Git Subtree, Module Federation, iframe + postMessage,
+런타임 Config</td>
+</tr>
+<tr>
+<td><strong>3D / Graphics</strong></td>
+<td>Three.js, WebGL, draco3d, SRGB ColorManagement</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Playwright, Jest, Vitest, MSW</td>
+</tr>
+<tr>
+<td><strong>CI/CD · Infra</strong></td>
+<td>GitHub Actions(self-hosted), Azure Pipelines, Docker,
+AWS(EC2/S3)</td>
+</tr>
+<tr>
+<td><strong>Desktop</strong></td>
+<td>Electron</td>
+</tr>
+<tr>
+<td><strong>Monitoring</strong></td>
+<td>Datadog RUM/Logs</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>백엔드(Node.js/Fastify·MongoDB)는 기업 랜딩 페이지 풀스택, 조직 관리
+백오피스 등에서 일부 직접 개발했습니다.</p>
+</blockquote>
+<hr />
+</section>
+<section id="교육" class="level2">
+<h2>교육</h2>
+<p><strong>세종대학교</strong> | 데이터사이언스학과 (학사) | 2017.03 ~
+2024.08</p>
+</section>
+</section>
+</body>
+</html>
