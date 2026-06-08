@@ -6,6 +6,24 @@
   document.querySelectorAll('pre.mermaid > code').forEach((code) => {
     code.parentElement.textContent = code.textContent;
   });
-  mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose' });
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: "'Noto Sans KR', sans-serif",
+      fontSize: '14px',
+      primaryColor: '#eef2ff',
+      primaryBorderColor: '#6366f1',
+      primaryTextColor: '#1e293b',
+      lineColor: '#94a3b8',
+      tertiaryColor: '#f0f9ff',
+      tertiaryBorderColor: '#7dd3fc',
+      clusterBkg: '#f8fafc',
+      clusterBorder: '#cbd5e1',
+      edgeLabelBackground: '#ffffff',
+    },
+    flowchart: { curve: 'basis', padding: 18, nodeSpacing: 48, rankSpacing: 52, htmlLabels: true },
+    securityLevel: 'loose',
+  });
   await mermaid.run({ querySelector: 'pre.mermaid' });
 </script>
