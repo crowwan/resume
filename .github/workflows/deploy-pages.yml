@@ -37,13 +37,6 @@ jobs:
             --css=resume-style.css \
             -V pagetitle="김진완 이력서 | Frontend Developer" \
             -V lang=ko
-          pandoc career-description.md \
-            -o output/career-description.html \
-            --standalone \
-            --section-divs \
-            --css=resume-style.css \
-            -V pagetitle="김진완 경력기술서" \
-            -V lang=ko
           pandoc portfolio.md \
             -o output/portfolio.html \
             --standalone \

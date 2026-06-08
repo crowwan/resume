@@ -6,13 +6,19 @@
 
 ---
 
-## 현재 상태 (2026-06-06)
+## 현재 상태 (2026-06-08)
 
-**Phase: 최종 빌드 검토 중.** 대규모 발굴로 기존 이력서의 오귀속(타팀/hckim 웹 인프라 수치)·누락(3D SRGB·관측 표준·Subtree)을 정정하고, 여러 라운드의 문체 calibration 끝에 **레퍼런스식 담백 스타일**로 확정해 마스터 + 4사 변형을 재작성했습니다.
+**Phase: 문서 아키텍처 재편 중.** 이력서는 담백(업무 중심), 서사는 포트폴리오로 역할을 분리합니다. 경력기술서는 주 제출물에서 빼고 archive로 보존합니다.
 
-- 정본 산출 위치: `drafts/2026-06-rebuild/final/` (career-description.md · resume.md · variants/{라인,오늘의집,채널톡,토스플레이스})
+**목표 아키텍처**
+- `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 맞춤)
+- `portfolio.md` + `applications/*/portfolio.md` → 서사 케이스 스터디 (범용 + JD 큐레이션)
+- `archive/career-description.md` → 보존 (빌드·index 링크 제외, 필요한 회사에만 수동 제출)
+
+원칙: resume/career는 "무엇을 했나(담백)", portfolio는 "왜·어떻게·무엇을 배웠나(서사)". JD 변형은 **내용 재작성이 아니라 Case 선별·순서·강조(큐레이션)**.
+
 - 발굴 raw 사실: `findings/collected/` (+ `_GAP-REPORT.md`, `_INTERVIEW-ANSWERS.md`)
-- 보이스 리서치: `drafts/2026-06-rebuild/RESEARCH-voice-format-board.md`
+- 귀속 경계: 메모리 `resume-attribution-boundary`
 
 ---
 
@@ -42,11 +48,12 @@
 
 | 단계 | 내용 | Status |
 |------|------|--------|
-| 정본 검토 | 사용자가 `final/` 검토·미세 조정 | 🔵 진행 |
-| 정본 승격 | `final/` → 루트 `resume.md`·`career-description.md` + `applications/` 4종 교체(기존 백업) | ⬜ |
-| 포맷·배포 | HTML/Pages 빌드 검증, PDF, `resume-style.css` | ⬜ |
-| 포트폴리오 분리 | 서사·스토리텔링은 `portfolio.md`로 분리(담백 이력서와 역할 구분) | ⬜ 향후 |
-| 커밋·PR | 한 묶음씩 변경 전후 보여주고 커밋 (개인 noreply 이메일 확인 — CLAUDE.md §8) | ⬜ |
+| resume 마스터 담백화 | 6카드 업무 중심 재작성, 서사 불릿 제거 | ✅ |
+| career 아카이브 | `archive/` 이동 + 빌드·index 링크 제외 | ✅ |
+| resume 변형 담백화 | `applications/*/resume.md` 4사를 마스터 담백 톤에 일치 | ⬜ |
+| portfolio 범용 완성 | 현 4 Case → 빌드·3D·결제 추가, resume 6카드와 대응되는 Case 세트 | ⬜ |
+| portfolio JD 큐레이션 | `applications/*/portfolio.md` 4사 Case 선별·순서·강조 | ⬜ |
+| 빌드·배포·커밋 | HTML 빌드 검증, 개인 noreply 확인 후 커밋 (CLAUDE.md §8) | ⬜ |
 
 ---
 
