@@ -41,7 +41,7 @@ jobs:
             -o output/portfolio.html \
             --standalone \
             --section-divs \
-            --css=resume-style.css \
+            --css=portfolio-style.css \
             -A templates/mermaid.html \
             -V pagetitle="김진완 포트폴리오 | Frontend Developer" \
             -V lang=ko
@@ -49,6 +49,7 @@ jobs:
       - name: Copy assets
         run: |
           cp templates/resume-style.css output/
+          cp templates/portfolio-style.css output/
           cp templates/index.html output/
 
       - name: Upload Pages artifact

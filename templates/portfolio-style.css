@@ -1,0 +1,195 @@
+/* 김진완 포트폴리오 전용 스타일 — 케이스 스터디 (2026-06-08) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --accent: #0ea5e9;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+  --bg-subtle: #f8fafc;
+  --bg-accent: #eef2ff;
+  --code-bg: #0f172a;
+  --code-text: #e2e8f0;
+  --ok: #059669;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 32px 96px;
+  font-size: 15px;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 표지 ── */
+h1 {
+  font-size: 34px;
+  font-weight: 900;
+  margin: 0 0 18px;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--primary) 10%, var(--accent) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1 + blockquote {
+  border: none;
+  background: var(--bg-accent);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 14px 14px 0;
+  padding: 20px 24px;
+  margin: 0 0 22px;
+  color: var(--text);
+  font-size: 15px;
+}
+h1 + blockquote p { margin: 9px 0; }
+h1 + blockquote p:first-child { margin-top: 0; }
+h1 + blockquote p:last-child { margin-bottom: 0; }
+h1 + blockquote strong { color: var(--primary-dark); font-weight: 700; }
+
+/* ── 섹션 / Case 제목 (h2) ── */
+h2 {
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 60px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+}
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 22px;
+  margin-right: 12px;
+  vertical-align: -3px;
+  border-radius: 3px;
+  background: linear-gradient(var(--primary), var(--accent));
+}
+
+/* ── 소제목 (개요/문제/해결/회고) ── */
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 30px 0 8px;
+  letter-spacing: -0.01em;
+}
+h4 { font-size: 15px; font-weight: 700; margin: 20px 0 6px; }
+
+p { margin: 11px 0; }
+ul { padding-left: 22px; margin: 11px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--primary); }
+strong { font-weight: 700; color: var(--text); }
+a { color: var(--primary); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 4px 0 0; }
+
+/* ── 인라인 code (기간·기술 메타 / 심볼) ── */
+code {
+  background: var(--bg-accent);
+  color: var(--primary-dark);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+/* Case 제목 바로 아래 메타 줄(기간 · 기술)을 살짝 띄움 */
+h2 + p { margin-top: 4px; color: var(--text-secondary); }
+
+/* ── 멀티라인 코드 블록 (mermaid 제외) ── */
+pre:not(.mermaid) {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 18px 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.65;
+}
+pre:not(.mermaid) code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+/* ── mermaid 다이어그램 박스 ── */
+pre.mermaid {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px 20px;
+  margin: 18px 0;
+  text-align: center;
+  line-height: 1.4;
+}
+pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* ── 이미지/코드 플레이스홀더 (🖼️ / 💻 blockquote) ── */
+blockquote {
+  border: 1.5px dashed #c7d2fe;
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+}
+blockquote p { margin: 0; }
+blockquote strong { color: var(--primary-dark); font-weight: 700; }
+
+/* ── 테이블 (대안 비교 등) ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+th {
+  background: var(--bg-accent);
+  color: var(--primary-dark);
+  font-weight: 700;
+  text-align: left;
+  padding: 11px 14px;
+  border-bottom: 2px solid var(--border);
+}
+td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg-subtle); }
+
+/* ── 인쇄 (A4 PDF) ── */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { padding: 0; font-size: 11px; max-width: none; }
+  h1 { font-size: 26px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h2 { font-size: 17px; margin-top: 26px; page-break-after: avoid; }
+  h3, h4 { page-break-after: avoid; }
+  pre, table, blockquote, pre.mermaid { page-break-inside: avoid; }
+  h1 + blockquote, th, tbody tr:nth-child(even), pre:not(.mermaid) {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  a { color: var(--text); }
+  section[class~="level2"] { break-inside: avoid; }
+}
