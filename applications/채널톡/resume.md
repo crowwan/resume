@@ -68,7 +68,6 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 결정론적 격리 재현 환경 구성
 - 흩어진 Playwright E2E를 모노레포로 통합, Page Object·세션 재사용으로 중복 제거
 - 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를 Teams로 보고하는 AI 변경 감지 구축
-- 만성 실패하던 일일 검증을 원인별로 진단해 근본 수정 (결제 테스트 누락 약 28건 → 0)
 - 실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행
 
 `기술` Playwright · Docker · MongoDB · EC2 · GitHub Actions(self-hosted)

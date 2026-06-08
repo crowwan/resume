@@ -69,7 +69,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 팀이 AI로 빠르게 진행한 사내 3D 라이브러리→Three.js 마이그레이션에서, 두 엔진의 렌더 이미지를 눈으로 맞추느라 미세조정 값에 기댄 색·조명을 원본 엔진 동작 기준으로 다시 정리했습니다.
 
 - 이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로 Three.js 표준 기능으로 대체 (약 1,420줄 정리)
-- 격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고, Playwright 스크린샷 비교로 3D 렌더 회귀를 가드 (3개 앱 공유 baseline)
+- 격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고, Playwright 스크린샷 비교로 3D 렌더 회귀를 가드
 
 `기술` Three.js · draco3d · WebGL · SRGB ColorManagement · Playwright
 

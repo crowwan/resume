@@ -87,8 +87,6 @@ Dentbird 1 Team | 2023.09 ~ 현재</p>
 중복 제거</li>
 <li>커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를
 Teams로 보고하는 AI 변경 감지 구축</li>
-<li>만성 실패하던 일일 검증을 원인별로 진단해 근본 수정 (결제 테스트
-누락 약 28건 → 0)</li>
 <li>실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행</li>
 </ul>
 <p><code>기술</code> Playwright · Docker · MongoDB · EC2 · GitHub
@@ -103,8 +101,7 @@ Actions(self-hosted)</p>
 <li>이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로
 Three.js 표준 기능으로 대체 (약 1,420줄 정리)</li>
 <li>격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고,
-Playwright 스크린샷 비교로 3D 렌더 회귀를 가드 (3개 앱 공유
-baseline)</li>
+Playwright 스크린샷 비교로 3D 렌더 회귀를 가드</li>
 </ul>
 <p><code>기술</code> Three.js · draco3d · WebGL · SRGB ColorManagement ·
 Playwright</p>
