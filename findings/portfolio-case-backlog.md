@@ -132,3 +132,32 @@ history.jsonl로 확인: 회사 작업 **2025-09-30 ~ 2026-06-08** (실질 요�
 - **Case 9 (관측)**: 4월 ErrorBoundary 3-layer 5앱 통합 + GlobalErrorHandler + Datadog Taxonomy(D1-4763·4824·4827·4833) = Case 9의 핵심 작업 시기.
 
 > ⚠️ 정량(artifact·시간)은 PR 본문 일부 확인(메모리 정량과 일치). 미확인 수치는 인터뷰/PR diff로.
+
+---
+
+## H. 9~11월 발굴 (history 165 + jwkim 147커밋) — E2E 토대 형성기
+
+### 핵심 발견 (포트폴리오 Case 4/5의 실제 토대)
+- **H1. Backoffice E2E 대량 구축 (9~11월, 수십 suite)** ★ — Create new user·User List·Subscription·Session Management·Delete account·Change password 등 BO 전 영역 E2E를 수십 suite로 구축(D1-775~997, BO-396~3730). 로그인 중복을 auth 헬퍼로 **93% 코드 감소**(PR #26232), 인라인 셀렉터를 Page Object로 리팩토링. = 포트폴리오 "테스트 거의 없던 제품에 E2E 체계"의 **첫 실체**(Case 4/5 토대). 현재 본문엔 BO E2E 규모가 안 드러남.
+- **H2. E2E 실행 인프라 K8s→EC2 전환 — git 1차 증거** ★ — D1-868 **K8s 통합 스케줄러 Phase 1·2 구축**(PR #26427) → D1-888 **Docker/K8s에서 EC2 SSH 접근으로 전환**(PR #26444) → D1-899 EC2 환경 가이드(#26621). ⚠️ 즉 이력서/포트폴리오의 "K8s 대신 EC2"는 정확히는 **"K8s를 구축했다가 EC2로 전환"** — 본문 미세 정정 검토 대상.
+- **H3. E2E 변경 감지 크론잡 착수** — D1-987 계획서→D1-992 스킬 문서→D1-993 테스트→D1-997(PR #26934~26953, 11월)→12월 D1-1058 확장. = Case 5(AI 변경감지)의 **착수 시점**(K8s CronJob → EC2 크론으로 진화).
+
+### Case 3 보강
+- **i18n 중앙화 (10월, 실제 작업 시기)** — lokalise 다운로드/업로드/스캔 스크립트가 각 앱 중복 → root `scripts/i18n/`로 중앙화, NX 타겟을 config로 download/upload 구분, 단계적 제거. = Case 3 "다국어 중앙화(89줄·14스크립트)"의 실제 구현 시점/디테일. (history 10-01·10-10)
+
+### 리팩토링 패밀리 (A1 연결)
+- **caseInfoDialogue 공통 컴포넌트화 (9월)** — cloud-desktop/mobile/viewer-module 중복 CaseInfo를 FormProvider 기반 공통 컴포넌트로(Actions·Information·필드 통합, useCaseInfoForm). "각 필드 초기화 vs 다이얼로그 초기화", "포매팅이 라벨 형태에 의존하면 i18n 영향" 등 설계 판단 대화 다수. = A1 패밀리. (history 09-30)
+
+### 정량 (git 확인)
+- BO auth 헬퍼로 로그인 중복 **93% 감소**(#26232) / Subscription History Export 성능 **39% 개선**(#26389).
+
+> 귀속: BO E2E·E2E 인프라(K8s→EC2)·i18n 중앙화·caseInfoDialogue 모두 jwkim author ✅.
+
+---
+
+## 발굴 종합 메모
+
+- 전 구간 발굴 완료: **2025-09 ~ 2026-06** (history 13,854 회사 프롬프트 + 세션 180 + git 600+커밋 교차).
+- 신규 케이스급 후보 ~18개 + 기존 11케이스 보강 다수. 포트폴리오 본문은 **미반영(사용자 검토 후 선별)**.
+- 우선 검토 추천: TC-Verify(Case 5 전신)·Mock Server·Feature Flag render-props·세션인증 cross-app 공통화·리팩토링 비용편익 사다리.
+- 본문 미세 정정 검토: Case 5 "K8s 대신 EC2" → "K8s 구축 후 EC2 전환"(H2).
