@@ -8,7 +8,7 @@
 
 ## 현재 상태 (2026-06-09)
 
-**Phase: 이력서 축 완료 · 포트폴리오 초안 완료 · 발굴 백로그 확보. 다음 = 백로그 검토 → 케이스 승격.**
+**Phase: 포트폴리오 코드 발췌·표지 이미지 반영 중. 다음 = 나머지 Case 이미지(Case1 Export·Case8 결제) + 백로그 케이스 승격 + JD 큐레이션.**
 
 **문서 아키텍처 (2축, 확정)**
 - `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 4사) — ✅ 담백화 완료
@@ -61,13 +61,25 @@
 | 메모리 2건 박제 (코드사인 미도입 · 2축/추상화 원칙) | ✅ |
 | 대규모 발굴 → `findings/portfolio-case-backlog.md` (전 구간, ~18 신규후보) | ✅ |
 
+## 이번 세션 (2026-06-09 후속 — 코드·표지 반영) 완료
+
+| 작업 | 상태 |
+|------|------|
+| portfolio 💻 5개 실제 코드 발췌·박음 — **전부 본인(jwkim/crowwan) author git 검증** | ✅ |
+| ↳ Case1 export 특성화테스트(`92d99f1`) · Case3 urlHelper(`8416894`/`70ab668`) · Case6 dental.ts displacementMap(`50533d3`) · Case10 타입세이프 i18n(`8075dce05`/`de091a574`, 레포 `landing-page-client`) | ✅ |
+| ↳ Case8 errorClassifier(`6f0862c`)는 결제 아닌 **Case9(관측)로 이동**. 결제 HTTP200 분기는 hckim 코드라 코드 제외(서사만) | ✅ |
+| 🖼️ 표지 이미지 — 프로덕션 풀아치 스캔(환자정보·UI라벨 제외 크롭) `images/portfolio/cover-scan.png` | ✅ |
+
+> ★ **귀속 검증 핵심**: 1차 발굴 시 git blame이 hckim으로 나온 코드 다수 → 본인 author 커밋(`git log --author`)으로 재발굴해 **본인이 실제 작성한 라인만** 박음. Case8 결제 핵심 로직은 본인 author 없어 코드 미게재(오귀속 방지).
+> ★ **이미지 캡처법(재사용)**: claude-in-chrome은 원격세션이라 `save_to_disk` 불가 + Dentbird 단일세션 정책상 Playwright와 공존X. → **Playwright headed + persistent profile**(`/tmp/pw-dentbird-profile`)로 사용자가 1회 직접 로그인 후, 같은 프로필로 크롭 캡처. `NODE_PATH=~/Works/devops/dentbird-solutions/node_modules`. 프로덕션은 실데이터라 3D 캔버스만 clip(환자정보 패널 제외).
+
 ## 다음 세션 할 일 (우선순위)
 
 | # | 작업 | 메모 |
 |---|------|------|
 | 1 | **백로그 검토 → 케이스 승격 선별** | `findings/portfolio-case-backlog.md`에서 고름. 추천: TC-Verify(Case5 전신)·Mock Server·Feature Flag render-props·세션인증 cross-app 공통화·리팩토링 비용편익 사다리 |
 | 2 | **승격 케이스 git 검증** | 선택 케이스만 `git -C ~/Works/devops/dentbird-solutions show/diff` + PR 본문으로 **정량 실측·코드 발췌·author 귀속** 확정 (발명 금지) |
-| 3 | **이미지/코드 플레이스홀더 → 실물** | portfolio의 🖼️ = 사용자 스크린샷, 💻 = 회사레포 코드 발췌 |
+| 3 | **이미지/코드 플레이스홀더 → 실물** | 💻 5개 완료 · 🖼️ 표지 완료. 남음: Case1 Export·Case8 결제(Free계정 한계 확인 필요). 나머지(Case2·5·9·10=외부도구, Case3·4·7·11=mermaid)는 제품 캡처 불가/불필요 |
 | 4 | **portfolio JD 큐레이션** | `applications/*/portfolio.md` 4사 — Case 선별·순서·강조 (내용 재작성 X) |
 | 5 | 다이어그램 스타일 추가 다듬기 | 사용자 "나중에" — mermaid 색/모양 or 핵심 1~2개 SVG 교체 |
 
