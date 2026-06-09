@@ -6,19 +6,24 @@
 
 ---
 
-## 현재 상태 (2026-06-08)
+## 현재 상태 (2026-06-09)
 
-**Phase: 문서 아키텍처 재편 중.** 이력서는 담백(업무 중심), 서사는 포트폴리오로 역할을 분리합니다. 경력기술서는 주 제출물에서 빼고 archive로 보존합니다.
+**Phase: 이력서 축 완료 · 포트폴리오 초안 완료 · 발굴 백로그 확보. 다음 = 백로그 검토 → 케이스 승격.**
 
-**목표 아키텍처**
-- `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 맞춤)
-- `portfolio.md` + `applications/*/portfolio.md` → 서사 케이스 스터디 (범용 + JD 큐레이션)
-- `archive/career-description.md` → 보존 (빌드·index 링크 제외, 필요한 회사에만 수동 제출)
+**문서 아키텍처 (2축, 확정)**
+- `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 4사) — ✅ 담백화 완료
+- `portfolio.md` → 서사 케이스 스터디 11개 (PDF 형식) — ✅ 초안 완료
+- `archive/career-description.md` → 보존 (빌드·index 제외) — ✅
+- `applications/*/portfolio.md` → JD 큐레이션 — ⬜ 미착수
 
-원칙: resume/career는 "무엇을 했나(담백)", portfolio는 "왜·어떻게·무엇을 배웠나(서사)". JD 변형은 **내용 재작성이 아니라 Case 선별·순서·강조(큐레이션)**.
+원칙: resume는 "무엇을 했나(담백)", portfolio는 "왜·어떻게·무엇을 배웠나(서사)". JD 변형은 **내용 재작성이 아니라 Case 선별·순서·강조(큐레이션)**. 카드 추상화 = "판단 보이는가 + 오귀속 안 하는가"(메모리 `resume-architecture-and-card-abstraction`).
 
-- 발굴 raw 사실: `findings/collected/` (+ `_GAP-REPORT.md`, `_INTERVIEW-ANSWERS.md`)
-- 귀속 경계: 메모리 `resume-attribution-boundary`
+**핵심 산출물 위치**
+- 이력서: `resume.md`(루트, Pages 자동배포) + `applications/{라인,오늘의집,채널톡,토스플레이스}/`
+- 포트폴리오: `portfolio.md`(루트) · 전용 스타일 `templates/portfolio-style.css` · 다이어그램 `templates/mermaid.html`
+- ★ **발굴 백로그**: `findings/portfolio-case-backlog.md` — 2025-09~2026-06 전 구간, 신규 케이스 후보 ~18개 + 기존 11케이스 보강 + 귀속주의
+- 귀속 경계 메모리: `resume-attribution-boundary` · 코드사인 미도입: `resume-codesign-build-integration-not-adopted` · 2축/추상화 원칙: `resume-architecture-and-card-abstraction`
+- 발굴 raw: `findings/collected/` (+ `_GAP-REPORT.md`, `_INTERVIEW-ANSWERS.md`)
 
 ---
 
@@ -44,16 +49,36 @@
 
 ---
 
-## 남은 작업
+## 이번 세션 (2026-06-08~09) 완료
 
-| 단계 | 내용 | Status |
-|------|------|--------|
-| resume 마스터 담백화 | 6카드 업무 중심 재작성, 서사 불릿 제거 | ✅ |
-| career 아카이브 | `archive/` 이동 + 빌드·index 링크 제외 | ✅ |
-| resume 변형 담백화 | `applications/*/resume.md` 4사를 마스터 담백 톤에 일치 | ⬜ |
-| portfolio 범용 완성 | 현 4 Case → 빌드·3D·결제 추가, resume 6카드와 대응되는 Case 세트 | ⬜ |
-| portfolio JD 큐레이션 | `applications/*/portfolio.md` 4사 Case 선별·순서·강조 | ⬜ |
-| 빌드·배포·커밋 | HTML 빌드 검증, 개인 noreply 확인 후 커밋 (CLAUDE.md §8) | ⬜ |
+| 작업 | 상태 |
+|------|------|
+| resume 마스터 6카드 담백화 (판단 중심 + 사실 정정: 크론잡·익명화·코드사인 미도입·공존X 등) | ✅ |
+| career-description → `archive/` (빌드·index 제외) | ✅ |
+| resume 변형 4사 담백화 (오늘의집·채널톡·토스·라인) | ✅ |
+| portfolio 11케이스 전면 재작성 (PDF 형식, reviewer 2회 반영) | ✅ |
+| portfolio 전용 스타일 `portfolio-style.css` + mermaid 테마 | ✅ |
+| 메모리 2건 박제 (코드사인 미도입 · 2축/추상화 원칙) | ✅ |
+| 대규모 발굴 → `findings/portfolio-case-backlog.md` (전 구간, ~18 신규후보) | ✅ |
+
+## 다음 세션 할 일 (우선순위)
+
+| # | 작업 | 메모 |
+|---|------|------|
+| 1 | **백로그 검토 → 케이스 승격 선별** | `findings/portfolio-case-backlog.md`에서 고름. 추천: TC-Verify(Case5 전신)·Mock Server·Feature Flag render-props·세션인증 cross-app 공통화·리팩토링 비용편익 사다리 |
+| 2 | **승격 케이스 git 검증** | 선택 케이스만 `git -C ~/Works/devops/dentbird-solutions show/diff` + PR 본문으로 **정량 실측·코드 발췌·author 귀속** 확정 (발명 금지) |
+| 3 | **이미지/코드 플레이스홀더 → 실물** | portfolio의 🖼️ = 사용자 스크린샷, 💻 = 회사레포 코드 발췌 |
+| 4 | **portfolio JD 큐레이션** | `applications/*/portfolio.md` 4사 — Case 선별·순서·강조 (내용 재작성 X) |
+| 5 | 다이어그램 스타일 추가 다듬기 | 사용자 "나중에" — mermaid 색/모양 or 핵심 1~2개 SVG 교체 |
+
+## 미해결 확인사항 (사용자 답 필요 — 발명 방지)
+
+- **Case 5 "K8s 대신 EC2" → "K8s 구축 후 EC2 전환"** 정정 검토 (git D1-868→888로 확인, 백로그 H2)
+- **blue-green 보류 근거** "환경·빌드 2배 비용"이 실제 판단인지 (career 출처, 발굴 노트엔 근거 없음)
+- **CAM 수 12종 확정** 여부 (findings엔 12/16 혼재 — 현재 이력서·portfolio는 12종 통일)
+- **Case 1 "핵심 경로에서 분리"** 가 실제 진행 방향인지
+
+> 빌드: 루트 `resume.md`·`portfolio.md` 수정 시 `.github/workflows/deploy-pages.yml`이 Pages 자동배포. 커밋 전 `git config --local user.email`이 `imagoworks.ai` 아닌지 확인 (CLAUDE.md §8).
 
 ---
 
