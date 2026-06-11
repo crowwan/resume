@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+  <defs>
+    <linearGradient id="gIndigo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="gSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <filter id="fShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- 상단: 썸네일 배치 로딩 -->
+  <text x="40" y="40" font-size="13" font-weight="700" fill="#4338ca">① 썸네일 로딩 — 보일 때만, 모아서 한 번에</text>
+
+  <g filter="url(#fShadow)"><rect x="40" y="58" width="180" height="74" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
+  <circle cx="62" cy="82" r="4.5" fill="url(#gSky)"/>
+  <text x="76" y="87" font-size="12.5" font-weight="700" fill="#1e293b">viewport 진입</text>
+  <text x="130" y="110" font-size="10.5" fill="#94a3b8" text-anchor="middle">IntersectionObserver</text>
+
+  <g filter="url(#fShadow)"><rect x="252" y="58" width="180" height="74" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
+  <circle cx="274" cy="82" r="4.5" fill="url(#gIndigo)"/>
+  <text x="288" y="87" font-size="12.5" font-weight="700" fill="#1e293b">50ms 코얼레싱</text>
+  <text x="342" y="110" font-size="10.5" fill="#94a3b8" text-anchor="middle">요청을 모아 1회 배치</text>
+
+  <g filter="url(#fShadow)"><rect x="464" y="58" width="180" height="74" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
+  <circle cx="486" cy="82" r="4.5" fill="url(#gIndigo)"/>
+  <text x="500" y="87" font-size="12.5" font-weight="700" fill="#1e293b">TTL URL 캐시</text>
+  <text x="554" y="110" font-size="10.5" fill="#94a3b8" text-anchor="middle">성공 4분 · 실패 10초</text>
+
+  <g filter="url(#fShadow)"><rect x="676" y="58" width="164" height="74" rx="12" fill="#ffffff" stroke="#fde68a"/></g>
+  <circle cx="698" cy="82" r="4.5" fill="#f59e0b"/>
+  <text x="712" y="87" font-size="12.5" font-weight="700" fill="#1e293b">재요청 가드</text>
+  <text x="758" y="110" font-size="10.5" fill="#94a3b8" text-anchor="middle">403/404 무한루프 차단</text>
+
+  <line x1="220" y1="95" x2="248" y2="95" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="432" y1="95" x2="460" y2="95" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="644" y1="95" x2="672" y2="95" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <text x="40" y="160" font-size="10.5" fill="#64748b">트레이드오프: 성공해도 errorCount를 리셋하지 않는다 — 같은 영구 오류가 다시 무한루프를 만들기 때문(코드 주석으로 의도화)</text>
+
+  <line x1="40" y1="186" x2="840" y2="186" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- 하단: URL↔state -->
+  <text x="40" y="222" font-size="13" font-weight="700" fill="#4338ca">② 목록 ↔ 3D 리뷰 토글 — URL을 상태로, 멀티 owner 충돌 제거</text>
+
+  <g filter="url(#fShadow)"><rect x="40" y="244" width="360" height="120" rx="12" fill="#fff7ed" stroke="#fed7aa"/></g>
+  <text x="60" y="270" font-size="12.5" font-weight="700" fill="#9a3412">Before — 즉시 되튕김(bounce-back)</text>
+  <text x="60" y="294" font-size="10.5" fill="#7c2d12">view 토글 → 다른 훅이 reviewCase를 URL에</text>
+  <text x="60" y="312" font-size="10.5" fill="#7c2d12">→ 전체 query diff가 그걸 "외부 변경"으로 오판</text>
+  <text x="60" y="330" font-size="10.5" fill="#7c2d12">→ stale view=3d 로 되돌림</text>
+  <text x="60" y="352" font-size="10.5" fill="#c2410c" font-weight="600">여러 훅이 같은 URL을 공유하는데 비교 범위가 전체</text>
+
+  <line x1="408" y1="304" x2="448" y2="304" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+
+  <g filter="url(#fShadow)"><rect x="456" y="244" width="384" height="120" rx="12" fill="#eef2ff" stroke="#c7d2fe"/></g>
+  <text x="476" y="270" font-size="12.5" font-weight="700" fill="#3730a3">After — 내 키만 본다</text>
+  <text x="476" y="294" font-size="10.5" fill="#4338ca">own-key 부분집합 diff로 비교 범위 축소</text>
+  <text x="476" y="312" font-size="10.5" fill="#475569">→ 타 owner 키(reviewCase) 변경은 무시</text>
+  <text x="476" y="330" font-size="10.5" fill="#475569">이산 키(view·tab)는 즉시 push, 연속 입력(검색)만 debounce</text>
+  <text x="476" y="352" font-size="10.5" fill="#3730a3" font-weight="600">race를 타이머가 아니라 "비교 경계"로 근본 해결</text>
+</svg>

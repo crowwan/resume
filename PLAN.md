@@ -8,7 +8,7 @@
 
 ## 현재 상태 (2026-06-11)
 
-**Phase: 전수 리뷰·정정 + 케이스 병합(11→9) + SVG 다이어그램 완료. 다음 = 남은 이미지(Case1 Linker 흐름·Case7 결제 화면) + 백로그 케이스 승격 + JD 큐레이션.**
+**Phase: 프론트엔드 색 재편 완료 — FE 신규 3케이스 추가 + 순서 재배치(FE 우선) + About/Skills/resume FE 중심. 케이스 9→12개. 다음 = 남은 이미지 + JD 큐레이션 + (선택)인프라 케이스 압축 검토.**
 
 **문서 아키텍처 (2축, 확정)**
 - `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 4사) — ✅ 담백화 완료
@@ -85,6 +85,23 @@
 | **SVG 다이어그램 10종** 제작(`images/portfolio/diagrams/`) — mermaid 전부 교체, 레이어드(격리 스택·MFE·관측)는 타깃 이미지 스타일. Chrome 렌더 검수 완료 | ✅ |
 | 빌드 결함 수정: deploy-pages.yml에 `cp -r images output/` 추가 (기존엔 표지/다이어그램 미배포) + `.diagram`/figure CSS | ✅ |
 | 변형 동기화: 토스플레이스·채널톡 resume.md/html 빌드 수치 실측으로 교체 | ✅ |
+
+## 이번 세션 (2026-06-11 후속 — 프론트엔드 색 재편) 완료
+
+> 사용자 피드백: "프론트엔드 개발자라고 하기엔 애매하다. 분석 정보에 FE 역량 있을 것" → 진단 결과 **자료는 충분, 인프라 프레임으로 분류해 FE 색을 못 살린 게 문제**.
+
+| 작업 | 상태 |
+|------|------|
+| **FE 역량 4소스 재발굴** (회사코드 git·vault·interviews/04·컨플루언스 본인글) — 에이전트 병렬 | ✅ |
+| ↳ 컨플루언스 **본인 작성 FE 설계글 25편+** 발굴(선언적 에러처리·Compound/RenderProps·클린아키텍처+DI·FSD·도메인모델링·추상화 절제·서버/클라 상태분리·MF 트레이드오프·@imago/feedback-react) | ✅ |
+| ↳ 회사코드 신규: 썸네일 lazy-loading 배치훅·Viewer partial render·URL↔state race·Snackbar Portal·커스텀훅 추출·viewer GPU 라이프사이클 | ✅ |
+| **신규 FE 케이스 3개**: Case1 디자인패턴·도입의 전제(FSD+Compound/RenderProps+CaseInfo 66%↓+성장서사) · Case2 리스트 렌더링 성능·URL 상태 · Case3 Viewer partial render | ✅ |
+| **순서 재배치**: FE 본연(1-3) → 에러·복원력 3부작(partial·결제·관측 3-5) → 3D·랜딩(6-7) → 플랫폼·인프라(8-12). 상호참조 갱신 | ✅ |
+| About·Skills·표지 인용 FE 중심 재편 (Frontend·아키텍처·설계를 앞에) | ✅ |
+| resume.md 핵심역량·주요프로젝트 FE 우선 재편(프론트엔드 설계·화면/상태/성능 추가) | ✅ |
+| 신규 SVG 다이어그램 3개(design-patterns·list-performance·partial-render) 제작·렌더 검수 | ✅ |
+
+> ★ **귀속·발명 주의 (재발굴에서 확인)**: ① 썸네일 "90%↓" 등은 **자기보고 커밋 메시지** → 수치 미인용(서사만). ② CaseInfo 66%↓는 본인 컨플루언스 회고 수치 → "본인 회고 기준" 명시해 사용. ③ 2025-10 이후 일부 커밋 **AI 페어(Co-Authored-By Claude)** → 설계·판단은 본인이나 면접 시 정직 표기. ④ 순수 3D 카메라/raycast 직접 구현은 근거 없음 → 안 씀(뷰어는 "표시·상태·에러" 측면만).
 
 ## 다음 세션 할 일 (우선순위)
 

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" font-family="Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+  <defs>
+    <linearGradient id="gIndigo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="gEmerald" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="fShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="44" font-size="13" font-weight="700" fill="#4338ca">패턴을 고르는 사다리 — 관심사 분리가 필요한 만큼만</text>
+
+  <!-- 사다리 단계 -->
+  <g filter="url(#fShadow)"><rect x="40" y="64" width="240" height="76" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
+  <circle cx="62" cy="88" r="4.5" fill="url(#gIndigo)"/>
+  <text x="76" y="93" font-size="13" font-weight="700" fill="#1e293b">Compound Component</text>
+  <text x="60" y="116" font-size="10.5" fill="#64748b">관심사를 Context로 분리</text>
+  <text x="60" y="132" font-size="10.5" fill="#94a3b8">단점: 리렌더·세팅 비용 명시</text>
+
+  <g filter="url(#fShadow)"><rect x="320" y="64" width="240" height="76" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
+  <circle cx="342" cy="88" r="4.5" fill="url(#gIndigo)"/>
+  <text x="356" y="93" font-size="13" font-weight="700" fill="#1e293b">Render Props</text>
+  <text x="340" y="116" font-size="10.5" fill="#64748b">내부 데이터를 외부로 노출</text>
+  <text x="340" y="132" font-size="10.5" fill="#94a3b8">"커스텀 훅+props로도 가능"</text>
+
+  <g filter="url(#fShadow)"><rect x="600" y="64" width="240" height="76" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/></g>
+  <circle cx="622" cy="88" r="4.5" fill="url(#gIndigo)"/>
+  <text x="636" y="93" font-size="13" font-weight="700" fill="#1e293b">판단 기준</text>
+  <text x="620" y="116" font-size="10.5" fill="#64748b">관심사 분리가 목적일 때만</text>
+  <text x="620" y="132" font-size="10.5" fill="#94a3b8">아니면 굳이 안 쓴다</text>
+
+  <line x1="280" y1="102" x2="316" y2="102" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="560" y1="102" x2="596" y2="102" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- 실전 적용 -->
+  <g filter="url(#fShadow)"><rect x="40" y="184" width="800" height="80" rx="14" fill="#ecfdf5" stroke="#a7f3d0"/></g>
+  <circle cx="66" cy="212" r="5" fill="url(#gEmerald)"/>
+  <text x="82" y="217" font-size="14" font-weight="800" fill="#065f46">실전 — CaseInfo 다이얼로그 3앱 공통화</text>
+  <text x="64" y="242" font-size="11" fill="#047857">Viewer·Desktop·Mobile에 흩어진 중복을 Compound + FormProvider 단일 컴포넌트로</text>
+  <rect x="600" y="200" width="220" height="48" rx="10" fill="#ffffff" stroke="#a7f3d0"/>
+  <text x="710" y="222" font-size="15" font-weight="800" fill="#059669" text-anchor="middle">984줄 → 330줄</text>
+  <text x="710" y="240" font-size="10.5" fill="#64748b" text-anchor="middle">중복 66% 감소 (본인 회고 기준)</text>
+
+  <!-- 전제 -->
+  <rect x="40" y="296" width="800" height="56" rx="12" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="60" y="320" font-size="12" font-weight="700" fill="#4338ca">배운 것 — 패턴이 아니라 "도입의 전제"</text>
+  <text x="60" y="340" font-size="11" fill="#475569">디자인 패턴은 오래된 공통 문제의 해법. 풀 문제를 먼저 정의하고, 우선순위 높은 것부터, 팀이 같은 이해를 가진 뒤 도입한다.</text>
+</svg>
