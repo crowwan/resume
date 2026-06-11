@@ -1,6 +1,6 @@
 # 김진완 | 프론트엔드 개발자
 
-Electron 데스크톱 · 프론트엔드 플랫폼 아키텍처 · 품질 자동화 중심
+프론트엔드 아키텍처·상태관리 · Electron 데스크톱 · 품질 자동화
 
 - [포트폴리오](portfolio.html) · [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
 
@@ -14,6 +14,8 @@ Electron 데스크톱 · 프론트엔드 플랫폼 아키텍처 · 품질 자동
 
 ## 핵심 역량
 
+- **프론트엔드 설계**: FSD·클린 아키텍처·도메인 모델링, 컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance
+- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능, 3D 뷰어 부분 실패 처리
 - **프론트엔드 플랫폼**: NX 모노레포 통합·Git Subtree 이관, 환경·도메인 구성 일원화, 모노레포 도구 유지·전환 비용편익 판단
 - **데스크톱**: Electron 앱 설계·운영, 멀티 환경 일관 동작, 빌드·코드 서명·자동 업데이트 인프라
 - **품질 자동화·DX**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, 커밋 변경 분석 자동 선별, 에러 관측 표준화
@@ -30,6 +32,26 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 ---
 
 ## 주요 프로젝트
+
+### 프론트엔드 아키텍처·디자인 패턴
+
+계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고, 그 한계까지 겪으며 "패턴 도입의 전제"를 배웠습니다.
+
+- FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리 (단점·적용 한계까지 문서화)
+- ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance 설계, BusinessLogicError 커스텀 분기
+- 3개 앱에 중복되던 CaseInfo 다이얼로그를 Compound + FormProvider 공통 컴포넌트로 추출 (약 66% 감소)
+
+`기술` React · TypeScript · FSD · Compound/Render Props · ErrorBoundary
+
+### 복잡한 화면 — 렌더링 성능·상태관리
+
+사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 성능과 상태를 다뤘습니다.
+
+- 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 가드로 처리
+- 목록↔3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본 해결
+- 뷰어 부분 실패 시 살아있는 mesh만 렌더하고 누락은 트리에 표시 (Promise.allSettled)
+
+`기술` React · TanStack Query · IntersectionObserver · Three.js
 
 ### 모노레포 통합·환경 분리
 

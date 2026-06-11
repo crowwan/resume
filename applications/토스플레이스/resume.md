@@ -1,6 +1,6 @@
 # 김진완 | 프론트엔드 개발자
 
-Electron 데스크톱 · 웹과 로컬·하드웨어 연동 · 프론트엔드 플랫폼 아키텍처
+Electron 데스크톱·하드웨어 연동 · 프론트엔드 아키텍처·상태관리 · 품질 자동화
 
 - [포트폴리오](portfolio.html) · [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
 
@@ -15,6 +15,7 @@ Electron 데스크톱 · 웹과 로컬·하드웨어 연동 · 프론트엔드 �
 ## 핵심 역량
 
 - **데스크톱·하드웨어 연동**: Electron 앱 설계·운영, 웹과 로컬 소프트웨어 연동, 외부 장비 12종 단일 인터페이스 통합, 브라우저 보안 정책 대응 통신 재설계
+- **프론트엔드 설계·상태관리**: FSD·컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능
 - **빌드·배포 인프라**: macOS/Windows 빌드 파이프라인 재설계, 코드 서명·자동 업데이트, blue-green 무중단 배포
 - **프론트엔드 플랫폼**: NX 모노레포 통합, 공통 모듈(MFE) 분리, 환경·도메인 구성 일원화
 - **품질 자동화**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, AI 변경 감지, 결제 도메인 회귀 가드
@@ -40,6 +41,16 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 명세 없던 기존 CAM 연동을 특성화 테스트로 고정한 뒤 재구현
 
 `기술` Electron · React · TypeScript · Custom Protocol · Datadog
+
+### 프론트엔드 아키텍처·디자인 패턴
+
+계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고, 그 한계까지 겪으며 "패턴 도입의 전제"를 배웠습니다.
+
+- FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리 (단점·적용 한계까지 문서화)
+- ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance 설계
+- 뷰어 부분 실패 시 살아있는 mesh만 렌더하고 누락은 트리에 표시 (Promise.allSettled)
+
+`기술` React · TypeScript · FSD · Compound/Render Props · ErrorBoundary
 
 ### 데스크톱 앱 빌드·배포 인프라
 

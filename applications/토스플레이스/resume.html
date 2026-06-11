@@ -30,8 +30,8 @@
 <body>
 <section id="김진완-프론트엔드-개발자" class="level1">
 <h1>김진완 | 프론트엔드 개발자</h1>
-<p>Electron 데스크톱 · 웹과 로컬·하드웨어 연동 · 프론트엔드 플랫폼
-아키텍처</p>
+<p>Electron 데스크톱·하드웨어 연동 · 프론트엔드 아키텍처·상태관리 · 품질
+자동화</p>
 <ul>
 <li><a href="portfolio.html">포트폴리오</a> · <a
 href="https://velog.io/@crowwan">블로그</a> · <a
@@ -56,6 +56,9 @@ href="https://github.com/crowwan">깃허브</a></li>
 <li><strong>데스크톱·하드웨어 연동</strong>: Electron 앱 설계·운영, 웹과
 로컬 소프트웨어 연동, 외부 장비 12종 단일 인터페이스 통합, 브라우저 보안
 정책 대응 통신 재설계</li>
+<li><strong>프론트엔드 설계·상태관리</strong>: FSD·컴포넌트
+패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance, TanStack
+Query·URL 상태 동기화, 리스트 렌더링 성능</li>
 <li><strong>빌드·배포 인프라</strong>: macOS/Windows 빌드 파이프라인
 재설계, 코드 서명·자동 업데이트, blue-green 무중단 배포</li>
 <li><strong>프론트엔드 플랫폼</strong>: NX 모노레포 통합, 공통 모듈(MFE)
@@ -90,6 +93,21 @@ class="level3">
 </ul>
 <p><code>기술</code> Electron · React · TypeScript · Custom Protocol ·
 Datadog</p>
+</section>
+<section id="프론트엔드-아키텍처디자인-패턴" class="level3">
+<h3>프론트엔드 아키텍처·디자인 패턴</h3>
+<p>계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고,
+그 한계까지 겪으며 “패턴 도입의 전제”를 배웠습니다.</p>
+<ul>
+<li>FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리
+(단점·적용 한계까지 문서화)</li>
+<li>ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance
+설계</li>
+<li>뷰어 부분 실패 시 살아있는 mesh만 렌더하고 누락은 트리에 표시
+(Promise.allSettled)</li>
+</ul>
+<p><code>기술</code> React · TypeScript · FSD · Compound/Render Props ·
+ErrorBoundary</p>
 </section>
 <section id="데스크톱-앱-빌드배포-인프라" class="level3">
 <h3>데스크톱 앱 빌드·배포 인프라</h3>

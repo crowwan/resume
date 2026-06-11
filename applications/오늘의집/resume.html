@@ -30,7 +30,7 @@
 <body>
 <section id="김진완-프론트엔드-개발자" class="level1">
 <h1>김진완 | 프론트엔드 개발자</h1>
-<p>품질 자동화 · 프론트엔드 플랫폼 아키텍처 · Electron 데스크톱 중심</p>
+<p>프론트엔드 아키텍처·상태관리 · 품질 자동화 · Electron 데스크톱</p>
 <ul>
 <li><a href="portfolio.html">포트폴리오</a> · <a
 href="https://velog.io/@crowwan">블로그</a> · <a
@@ -53,6 +53,12 @@ href="https://github.com/crowwan">깃허브</a></li>
 <section id="핵심-역량" class="level2">
 <h2>핵심 역량</h2>
 <ul>
+<li><strong>프론트엔드 설계</strong>: FSD·클린 아키텍처·도메인 모델링,
+컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault
+Tolerance</li>
+<li><strong>화면·상태·성능</strong>: 복잡한 구독·뷰어 워크플로우,
+TanStack Query·URL 상태 동기화, 리스트 렌더링 성능, 3D 뷰어 부분 실패
+처리</li>
 <li><strong>품질 자동화·CI/CD</strong>: Playwright E2E, 커밋 단위
 컨테이너 재현, 변경 기반 테스트 자동 선별, 시각 회귀 CI, 에러 관측
 표준화</li>
@@ -76,6 +82,36 @@ Dentbird 1 Team | 2023.09 ~ 현재</p>
 </section>
 <section id="주요-프로젝트" class="level2">
 <h2>주요 프로젝트</h2>
+<section id="프론트엔드-아키텍처디자인-패턴" class="level3">
+<h3>프론트엔드 아키텍처·디자인 패턴</h3>
+<p>계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고,
+그 한계까지 겪으며 “패턴 도입의 전제”를 배웠습니다.</p>
+<ul>
+<li>FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리
+(단점·적용 한계까지 문서화)</li>
+<li>ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance
+설계, BusinessLogicError 커스텀 분기</li>
+<li>3개 앱에 중복되던 CaseInfo 다이얼로그를 Compound + FormProvider 공통
+컴포넌트로 추출 (약 66% 감소)</li>
+</ul>
+<p><code>기술</code> React · TypeScript · FSD · Compound/Render Props ·
+ErrorBoundary</p>
+</section>
+<section id="복잡한-화면-렌더링-성능상태관리" class="level3">
+<h3>복잡한 화면 — 렌더링 성능·상태관리</h3>
+<p>사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 성능과 상태를
+다뤘습니다.</p>
+<ul>
+<li>썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한
+재요청 가드로 처리</li>
+<li>목록↔︎3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본
+해결</li>
+<li>뷰어 부분 실패 시 살아있는 mesh만 렌더하고 누락은 트리에 표시
+(Promise.allSettled)</li>
+</ul>
+<p><code>기술</code> React · TanStack Query · IntersectionObserver ·
+Three.js</p>
+</section>
 <section id="테스트품질-자동화-인프라" class="level3">
 <h3>테스트·품질 자동화 인프라</h3>
 <p>테스트가 거의 없던 제품에 격리 재현 기반의 자동 회귀 감지 체계를
