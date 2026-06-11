@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" font-family="Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+  <defs>
+    <linearGradient id="gIndigoP" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="gSkyP" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="gVioletP" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="fShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e1b4b" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Feature (위) -->
+  <g filter="url(#fShadow)">
+    <path d="M 80 204 l 105 -56 l 320 0 l -105 56 z" fill="url(#gVioletP)" fill-opacity="0.92" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <text x="240" y="180" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Feature</text>
+  <line x1="452" y1="176" x2="530" y2="176" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="538" y="172" font-size="13" font-weight="700" fill="#7c3aed">기능 단위 격리</text>
+  <text x="538" y="190" font-size="10.5" fill="#94a3b8">계층 적용 깊이는 앱별 단계적</text>
+
+  <!-- Section (중간) -->
+  <g filter="url(#fShadow)">
+    <path d="M 80 292 l 105 -56 l 320 0 l -105 56 z" fill="url(#gSkyP)" fill-opacity="0.92" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <text x="240" y="268" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Section</text>
+  <line x1="452" y1="264" x2="530" y2="264" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="538" y="260" font-size="13" font-weight="700" fill="#0369a1">영역 단위 격리</text>
+  <text x="538" y="278" font-size="10.5" fill="#94a3b8">한 영역의 실패가 화면 전체로 번지지 않게</text>
+
+  <!-- Root (아래) -->
+  <g filter="url(#fShadow)">
+    <path d="M 80 380 l 105 -56 l 320 0 l -105 56 z" fill="url(#gIndigoP)" fill-opacity="0.92" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <text x="240" y="356" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Root</text>
+  <line x1="452" y1="352" x2="530" y2="352" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="538" y="348" font-size="13" font-weight="700" fill="#4338ca">외부 의존 없는 최후 안전망</text>
+  <text x="538" y="366" font-size="10.5" fill="#94a3b8">안전망이 자기 의존성 때문에 죽지 않게</text>
+
+  <!-- Datadog -->
+  <g filter="url(#fShadow)">
+    <rect x="620" y="40" width="220" height="78" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="1.5"/>
+  </g>
+  <circle cx="644" cy="66" r="4.5" fill="#632ca6"/>
+  <text x="658" y="71" font-size="14" font-weight="700" fill="#1e293b">Datadog RUM</text>
+  <text x="730" y="96" font-size="10.5" fill="#64748b" text-anchor="middle">원인별 직렬화 — grep 가능한 단일 라인</text>
+
+  <path d="M 440 150 C 500 110, 550 80, 616 80" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
+  <text x="520" y="102" font-size="10.5" fill="#64748b" text-anchor="middle">Error.cause + 구조화된 상세</text>
+
+  <text x="440" y="424" font-size="11.5" font-weight="600" fill="#64748b" text-anchor="middle">공통 라이브러리 — 한 곳을 고치면 5개 앱에 반영, 한 메시지로 뭉치던 실패 124건이 원인별로 갈라진다</text>
+</svg>

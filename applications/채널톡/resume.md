@@ -56,7 +56,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 담당자 로컬 PC에서 돌던 두 데스크톱 앱의 빌드·서명·배포 파이프라인을 재설계했습니다.
 
-- macOS 빌드 파이프라인 재설계로 약 36분에서 20분으로 단축
+- macOS 빌드 파이프라인 재설계로 전체 33~39분에서 17~24분으로 단축 (PR 실측 약 -56%, 아티팩트 757MB→334MB)
 - Windows 코드 서명 에이전트를 물리 빌드머신에 직접 설치·풀 등록해 단독 운영 (서명 USB·인프라팀 의존 제거)
 
 `기술` Electron · electron-builder · electron-updater · GitHub Actions(self-hosted) · Azure Pipelines · 코드 서명·공증 · S3

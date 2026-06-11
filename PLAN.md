@@ -6,9 +6,9 @@
 
 ---
 
-## 현재 상태 (2026-06-09)
+## 현재 상태 (2026-06-11)
 
-**Phase: 포트폴리오 코드 발췌·표지 이미지 반영 중. 다음 = 나머지 Case 이미지(Case1 Export·Case8 결제) + 백로그 케이스 승격 + JD 큐레이션.**
+**Phase: 전수 리뷰·정정 + 케이스 병합(11→9) + SVG 다이어그램 완료. 다음 = 남은 이미지(Case1 Linker 흐름·Case7 결제 화면) + 백로그 케이스 승격 + JD 큐레이션.**
 
 **문서 아키텍처 (2축, 확정)**
 - `resume.md` + `applications/*/resume.md` → 담백 이력서 (범용 + JD 4사) — ✅ 담백화 완료
@@ -73,22 +73,41 @@
 > ★ **귀속 검증 핵심**: 1차 발굴 시 git blame이 hckim으로 나온 코드 다수 → 본인 author 커밋(`git log --author`)으로 재발굴해 **본인이 실제 작성한 라인만** 박음. Case8 결제 핵심 로직은 본인 author 없어 코드 미게재(오귀속 방지).
 > ★ **이미지 캡처법(재사용)**: claude-in-chrome은 원격세션이라 `save_to_disk` 불가 + Dentbird 단일세션 정책상 Playwright와 공존X. → **Playwright headed + persistent profile**(`/tmp/pw-dentbird-profile`)로 사용자가 1회 직접 로그인 후, 같은 프로필로 크롭 캡처. `NODE_PATH=~/Works/devops/dentbird-solutions/node_modules`. 프로덕션은 실데이터라 3D 캔버스만 clip(환자정보 패널 제외).
 
+## 이번 세션 (2026-06-11 — 전수 리뷰·병합·시각화) 완료
+
+| 작업 | 상태 |
+|------|------|
+| **4소스 전수 교차검증** (레포 findings · vault · 회사 git/코드 · Confluence/Jira) — 에이전트 4기 병렬 | ✅ |
+| 사실 정정: 격리 시행착오 16→**17건**(vault) · 빌드 36→20분 → **33~39분→17~24분 -56%·아티팩트 757→334MB**(PR 실측) · urlHelper 발췌 2곳 실코드 교정(`_URL`·`dentbird.com`) · billtap 28건 **→0 달성** 반영 · "3-layer 5앱" → 체계 설계+표준 정렬(깊이 앱별)로 정밀화 | ✅ |
+| **Case 6 VTK 보류 supersede 반영** — 6/11 전제 변화(서버 오프로드)로 팀(hckim)이 Three 통합 → "뒤집힌 전제" 서사로 흡수 | ✅ |
+| 발굴 사실 추가: CAM 12종 구성(프로세스 8+포트 4, 코드 실증) · 2단계 방향 **본인 제안**(CP-1327 코멘트 author) · 관측 Before/After 격리 검증(Confluence 본인 author) · OAuth 콜백 race 트리 밖 분리(2-PR) · TC-Verify→AI 변경 감지 진화 · DNS 포화 진단·오진 반증 · 시각회귀 대기 120→37.7초 · 분류기 공통 lib 승격 | ✅ |
+| **케이스 병합 11→9**: Case 11(딥링크 감지)→Case 1로, Case 5(AI 변경 감지)→Case 4로 흡수. 번호 재정렬·상호참조 갱신 | ✅ |
+| **SVG 다이어그램 10종** 제작(`images/portfolio/diagrams/`) — mermaid 전부 교체, 레이어드(격리 스택·MFE·관측)는 타깃 이미지 스타일. Chrome 렌더 검수 완료 | ✅ |
+| 빌드 결함 수정: deploy-pages.yml에 `cp -r images output/` 추가 (기존엔 표지/다이어그램 미배포) + `.diagram`/figure CSS | ✅ |
+| 변형 동기화: 토스플레이스·채널톡 resume.md/html 빌드 수치 실측으로 교체 | ✅ |
+
 ## 다음 세션 할 일 (우선순위)
 
 | # | 작업 | 메모 |
 |---|------|------|
 | 1 | **백로그 검토 → 케이스 승격 선별** | `findings/portfolio-case-backlog.md`에서 고름. 추천: TC-Verify(Case5 전신)·Mock Server·Feature Flag render-props·세션인증 cross-app 공통화·리팩토링 비용편익 사다리 |
 | 2 | **승격 케이스 git 검증** | 선택 케이스만 `git -C ~/Works/devops/dentbird-solutions show/diff` + PR 본문으로 **정량 실측·코드 발췌·author 귀속** 확정 (발명 금지) |
-| 3 | **이미지/코드 플레이스홀더 → 실물** | 💻 5개 완료 · 🖼️ 표지 완료. 남음: Case1 Export·Case8 결제(Free계정 한계 확인 필요). 나머지(Case2·5·9·10=외부도구, Case3·4·7·11=mermaid)는 제품 캡처 불가/불필요 |
-| 4 | **portfolio JD 큐레이션** | `applications/*/portfolio.md` 4사 — Case 선별·순서·강조 (내용 재작성 X) |
-| 5 | 다이어그램 스타일 추가 다듬기 | 사용자 "나중에" — mermaid 색/모양 or 핵심 1~2개 SVG 교체 |
+| 3 | **남은 이미지 플레이스홀더 2개 → 실물** | Case 1(Linker 실행 흐름 3컷/GIF) · Case 7(결제 워크플로 화면, Free 계정 한계 확인). 캡처법은 위 "이미지 캡처법(재사용)" 참조 |
+| 4 | **portfolio JD 큐레이션** | `applications/*/portfolio.md` 4사 — Case 선별·순서·강조 (내용 재작성 X). ※ 케이스 번호가 9개로 재정렬됐음 |
 
 ## 미해결 확인사항 (사용자 답 필요 — 발명 방지)
 
-- **Case 5 "K8s 대신 EC2" → "K8s 구축 후 EC2 전환"** 정정 검토 (git D1-868→888로 확인, 백로그 H2)
-- **blue-green 보류 근거** "환경·빌드 2배 비용"이 실제 판단인지 (career 출처, 발굴 노트엔 근거 없음)
-- **CAM 수 12종 확정** 여부 (findings엔 12/16 혼재 — 현재 이력서·portfolio는 12종 통일)
-- **Case 1 "핵심 경로에서 분리"** 가 실제 진행 방향인지
+- **Case 9(랜딩) 타입세이프 i18n의 프로덕션 반영 여부** — git 검증 결과 코드는 본인 author로 실재하나 `test/i18next-typescript` 브랜치에만 있고 kevin/main 계보에 병합 흔적이 없음(로컬 클론이 2025-11에서 stale, 원격 fetch는 인증 불가). 실제로 배포까지 갔는지 확인 필요 — 아니라면 "전환했습니다" 표현 조정
+- **CAM 12종 구성 표현** — 코드 enum(PROCESS 8종·PORT 4종)을 "프로세스 실행 방식 8종 + 포트 연동 방식 4종"으로 적음(`portfolio.md` Case 1). 이 의미 해석이 맞는지 확인
+- **격리 재현 환경 "직접 구축"** — Confluence의 격리 환경 문서 2건 author가 김현철. 본인 "직접 구축" 표현(Case 4 결과·resume)이 면접에서 방어 가능한 경계인지 확인 (현행 유지 중)
+
+### 해결됨 (2026-06-11 사용자 확인)
+
+- ✅ **Case 1 "핵심 경로에서 분리"** → 모호한 작문이라 정정. 실제 방향 = **설치 감지 판정 제거 + 다운로드 안내 항상 제공**(기획 합의, 착수 미정). 근거: vault `inbox/2026-06-08-linker-batch-install-detect-removal.md` (CP-1327 2단계). `portfolio.md` Case 1 회고 수정 완료 — Case 11 서사와 정합
+
+- ✅ **Case 5 K8s**: "K8s 구축 후 EC2 전환"이 맞음 (후자). 현재 발행본엔 K8s 언급 없음 — Case 5 보강 시 판단 서사로 사용 가능
+- ✅ **blue-green 보류 근거** "환경·빌드 2배 비용"은 실제 판단 맞음 (`portfolio.md:141` 그대로 유지)
+- ✅ **CAM 12종** 확정 (현재 문서 12종 통일 유지)
 
 > 빌드: 루트 `resume.md`·`portfolio.md` 수정 시 `.github/workflows/deploy-pages.yml`이 Pages 자동배포. 커밋 전 `git config --local user.email`이 `imagoworks.ai` 아닌지 확인 (CLAUDE.md §8).
 

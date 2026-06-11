@@ -145,6 +145,26 @@ pre.mermaid {
 }
 pre.mermaid svg { max-width: 100%; height: auto; }
 
+/* ── 이미지 · 아키텍처 다이어그램(SVG) ── */
+figure { margin: 18px 0; }
+figure > img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+}
+img.diagram {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 18px;
+}
+figcaption {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  margin-top: 8px;
+}
+
 /* ── 이미지/코드 플레이스홀더 (🖼️ / 💻 blockquote) ── */
 blockquote {
   border: 1.5px dashed #c7d2fe;

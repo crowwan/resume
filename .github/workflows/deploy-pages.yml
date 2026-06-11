@@ -51,6 +51,7 @@ jobs:
           cp templates/resume-style.css output/
           cp templates/portfolio-style.css output/
           cp templates/index.html output/
+          cp -r images output/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
