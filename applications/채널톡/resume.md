@@ -15,7 +15,7 @@
 ## 핵심 역량
 
 - **프론트엔드 설계**: FSD·클린 아키텍처·도메인 모델링, 컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance
-- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능, 3D 뷰어 부분 실패 처리
+- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능
 - **프론트엔드 플랫폼**: NX 모노레포 통합·Git Subtree 이관, 환경·도메인 구성 일원화, 모노레포 도구 유지·전환 비용편익 판단
 - **데스크톱**: Electron 앱 설계·운영, 멀티 환경 일관 동작, 빌드·코드 서명·자동 업데이트 인프라
 - **품질 자동화·DX**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, 커밋 변경 분석 자동 선별, 에러 관측 표준화
@@ -49,7 +49,6 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 - 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 가드로 처리
 - 목록↔3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본 해결
-- 뷰어 부분 실패 시 살아있는 mesh만 렌더하고 누락은 트리에 표시 (Promise.allSettled)
 
 `기술` React · TanStack Query · IntersectionObserver · Three.js
 
@@ -88,7 +87,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 테스트가 거의 없던 제품에 격리 재현 기반의 자동 회귀 감지 체계를 구축했습니다.
 
 - 커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 결정론적 격리 재현 환경 구성
-- 흩어진 Playwright E2E를 모노레포로 통합, Page Object·세션 재사용으로 중복 제거
+- 백오피스 전 영역에 E2E를 구축하고(로그인 중복을 공통 헬퍼로 약 93% 감소), 흩어진 Playwright E2E를 모노레포로 통합·Page Object 리팩토링으로 중복 제거
 - 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를 Teams로 보고하는 AI 변경 감지 구축
 - 실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행
 
@@ -99,7 +98,8 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 일회성 크레딧에서 반복 구독으로 전환하는 시점에, 글로벌 멀티테넌트 결제·권한 도메인 프론트엔드를 전담했습니다.
 
 - 플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제 히스토리까지 구독 워크플로우 전체를 구현
-- 부분 실패에도 핵심 흐름(결제 내역 조회·구독 취소·뒤로가기)이 살아남도록 의존 관계 기준으로 Fault Tolerance 설계
+- 결제 상태를 서버·Stripe 동기화(SoT) 기준으로 두고 무한 반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보
+- 부분 실패에도 핵심 흐름(내역 조회·구독 취소·뒤로가기)이 살아남도록 의존 관계 기준 Fault Tolerance를 제안 (착수 전)
 
 `기술` React · TypeScript · TanStack Query · Stripe · ErrorBoundary · Playwright(E2E)
 
