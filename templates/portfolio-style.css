@@ -132,6 +132,31 @@ pre:not(.mermaid) code {
   font-weight: 400;
   font-size: 13px;
 }
+/* ── 코드 하이라이트: 어두운 배경용 밝은 팔레트로 재정의
+   (pandoc 기본 하이라이트는 밝은 배경용이라 어두운 코드 배경에서 안 보임) ── */
+pre:not(.mermaid) code span.co,
+pre:not(.mermaid) code span.an,
+pre:not(.mermaid) code span.cv,
+pre:not(.mermaid) code span.in,
+pre:not(.mermaid) code span.do { color: #8b97a8; font-style: italic; }
+pre:not(.mermaid) code span.kw,
+pre:not(.mermaid) code span.cf,
+pre:not(.mermaid) code span.im,
+pre:not(.mermaid) code span.bu,
+pre:not(.mermaid) code span.ot { color: #c792ea; font-weight: 500; }
+pre:not(.mermaid) code span.fu { color: #82aaff; }
+pre:not(.mermaid) code span.st,
+pre:not(.mermaid) code span.sc,
+pre:not(.mermaid) code span.vs,
+pre:not(.mermaid) code span.ch,
+pre:not(.mermaid) code span.ss { color: #c3e88d; }
+pre:not(.mermaid) code span.dv,
+pre:not(.mermaid) code span.fl,
+pre:not(.mermaid) code span.bn { color: #f78c6c; }
+pre:not(.mermaid) code span.dt { color: #ffcb6b; }
+pre:not(.mermaid) code span.at { color: #7fdbca; }
+pre:not(.mermaid) code span.va { color: #e2e8f0; }
+pre:not(.mermaid) code span.op { color: #b8c4d6; }
 
 /* ── mermaid 다이어그램 박스 ── */
 pre.mermaid {
@@ -150,7 +175,12 @@ figure { margin: 18px 0; }
 figure > img {
   display: block;
   width: 100%;
+  margin: 0 auto;
   border-radius: 12px;
+}
+/* 스크린샷(다이어그램 제외)은 본문보다 좁게·가운데 정렬해 과하게 커 보이지 않게 */
+figure > img:not(.diagram) {
+  max-width: 680px;
 }
 img.diagram {
   background: var(--bg-subtle);
@@ -198,6 +228,18 @@ th {
 td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tr:last-child td { border-bottom: none; }
 tbody tr:nth-child(even) { background: var(--bg-subtle); }
+
+/* ── Skills (로고 칩) ── */
+.skills-chips { margin: 8px 0 24px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-accent); color: var(--primary-dark);
+  border: 1px solid #dbe1fb; border-radius: 999px;
+  padding: 4px 12px; margin: 4px 6px 0 0;
+  font-size: 13px; font-weight: 600; line-height: 1.5;
+  vertical-align: middle;
+}
+.chip img { width: 14px; height: 14px; display: block; flex: none; }
 
 /* ── 인쇄 (A4 PDF) ── */
 @media print {

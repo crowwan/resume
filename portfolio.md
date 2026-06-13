@@ -16,16 +16,24 @@
 
 **Skills**
 
-- **Frontend** — React 18/19, Next.js · TypeScript, JavaScript · MUI, Emotion · TanStack Query, Recoil
-- **아키텍처·설계** — FSD, 클린 아키텍처, 도메인 모델링 · Compound Component·Render Props·커스텀 훅 · 선언적 에러 처리(ErrorBoundary)·Fault Tolerance
-- **Desktop** — Electron (IPC, Deep Link, Custom Protocol, Auto Update, Code Signing)
-- **3D / Graphics** — Three.js, WebGL, draco3d, SRGB ColorManagement
-- **Build / Arch** — NX, pnpm, Git Subtree, Module Federation, iframe + postMessage, 런타임 Config
-- **Quality / Infra** — Playwright, Jest, Vitest, MSW, qase · GitHub Actions(self-hosted), Docker, AWS(EC2/S3) · Datadog RUM/Logs
+<p class="skills-chips">
+<span class="chip"><img src="images/portfolio/icons/react.svg" alt="">React</span>
+<span class="chip"><img src="images/portfolio/icons/typescript.svg" alt="">TypeScript</span>
+<span class="chip"><img src="images/portfolio/icons/nextjs.svg" alt="">Next.js</span>
+<span class="chip"><img src="images/portfolio/icons/tanstack.svg" alt="">TanStack Query</span>
+<span class="chip"><img src="images/portfolio/icons/threejs.svg" alt="">Three.js</span>
+<span class="chip"><img src="images/portfolio/icons/electron.svg" alt="">Electron</span>
+<span class="chip"><img src="images/portfolio/icons/playwright.svg" alt="">Playwright</span>
+<span class="chip"><img src="images/portfolio/icons/jest.svg" alt="">Jest</span>
+<span class="chip"><img src="images/portfolio/icons/docker.svg" alt="">Docker</span>
+<span class="chip"><img src="images/portfolio/icons/aws.svg" alt="">AWS</span>
+<span class="chip"><img src="images/portfolio/icons/ghactions.svg" alt="">GitHub Actions</span>
+<span class="chip"><img src="images/portfolio/icons/datadog.svg" alt="">Datadog</span>
+</p>
 
-![Dentbird — 구강 스캔 기반 3D 치과 CAD 플랫폼](images/portfolio/cover-scan.png)
+![Dentbird Cloud — AI 기반 치과 CAD/CAM 플랫폼의 케이스 목록 화면](images/portfolio/screenshots/cloud-case-list.png)
 
-*Dentbird Cloud — 구강 스캔을 3D로 다루는 AI 기반 치과 CAD/CAM 플랫폼. 이 화면을 포함한 웹·데스크톱 프론트엔드를 담당했습니다.*
+*Dentbird Cloud — AI 기반 치과 CAD/CAM SaaS. 이 화면을 포함한 웹·데스크톱 프론트엔드를 담당했습니다.*
 
 ---
 
@@ -49,6 +57,8 @@
 - **서버 상태와 클라이언트 상태를 분리**하는 컨벤션(TanStack Query의 data를 useState로 복제하지 않는다 등)을 팀 코드 컨벤션으로 정의했습니다.
 
 이 사고를 실제로 적용한 예가 **CaseInfo 다이얼로그 공통화**입니다. Viewer·Desktop·Mobile 세 앱에 흩어져 중복되던 케이스 정보 모달을 Compound Component + FormProvider로 단일 컴포넌트로 추출해, 폼 상태 관리까지 소비처에서 공통 컴포넌트로 옮겼습니다(본인 회고 기준 984줄 → 330줄, 약 66% 감소).
+
+![CaseInfo 다이얼로그 공통화 — 같은 모달이 Cloud·Viewer 등 서로 다른 앱에서 단일 컴포넌트로 재사용된다](images/portfolio/screenshots/caseinfo-shared.png)
 
 ![패턴을 고르는 사다리와 실전 적용 — 관심사 분리가 필요한 만큼만 쓰고, 도입의 전제를 배웠다](images/portfolio/diagrams/design-patterns.svg){.diagram}
 
@@ -94,65 +104,39 @@
 
 ---
 
-## Case 3. 부분 실패를 우아하게 — 살아있는 것만 보여주는 뷰어
-
-`2026.05 ~` · `React · TypeScript · Three.js · Promise.allSettled`
-
-### 개요
-
-3D 뷰어에서 여러 design 중 일부 mesh가 손상돼도 화면 전체가 죽지 않게, **살아있는 것은 보여주고 빠진 것은 알려주는** 방식으로 만든 작업입니다. 에러를 "어디까지 격리할지"를 화면에서 직접 설계한 사례입니다.
-
-### 문제
-
-5개 design 중 3개만 mesh가 살아있는 부분 손상 케이스에서, 기존에는 하나라도 실패하면 `Promise.all`이 전부 reject돼 **화면 전체가 에러**로 떨어졌습니다. 사용자는 멀쩡한 3개도 못 보고, 무엇이 왜 빠졌는지도 알 수 없었습니다.
-
-### 해결 — 전부 실패할 때만 throw
-
-- 변환 로직의 `Promise.all`을 **2단계(group·file) `Promise.allSettled`**로 바꿔, 실패한 file은 `isMissing` 메타로 표시하고 살아있는 mesh는 그대로 렌더하도록 했습니다.
-- 누락 항목은 **ModelTree에 warning 아이콘 + 사용자 친화 라벨**로 띄워, "전부 못 본다" 대신 "어떤 게 빠졌는지 안다"로 바꿨습니다. 누락 라벨 추출은 별도 순수 함수로 분리해 테스트했습니다.
-- **모든 group·모든 file이 실패할 때만 throw**되도록 에러 조건을 자연스럽게 좁혀, 부분 실패와 전체 실패를 하나의 데이터 흐름에서 분기했습니다.
-
-![부분 실패를 우아하게 — 살아있는 mesh는 렌더하고 누락은 트리에 표시](images/portfolio/diagrams/partial-render.svg){.diagram}
-
-이건 결제(Case 4)·관측(Case 5)과 같은 사고의 뷰어 판입니다. 제가 정리했던 원칙 — **"에러 바운더리를 모든 곳에 쓰는 게 아니라, 장애 허용 범위를 어디까지 둘지 FE가 설계한다"** — 를 데이터 로딩 흐름에 적용한 것입니다.
-
-### 회고
-
-"기능이 된다"와 "일부가 실패해도 안전하다"는 다릅니다. 부분 실패를 전체 실패로 처리하는 건 쉽지만, 사용자에게는 최악입니다. **무엇이 살아남아야 하는지를 먼저 정하고**, 에러를 화면 트리에 반영하는 쪽을 택했습니다.
-
----
-
-## Case 4. 부분 실패에도 무너지지 않는 결제 — B2B 구독·결제 프론트엔드
+## Case 3. 일회성 크레딧에서 반복 구독으로 — B2B 구독·결제 프론트엔드
 
 `2023.09 ~ 2025.07` · `React · TypeScript · TanStack Query · Stripe · ErrorBoundary`
 
-> 🖼️ **[이미지]** 구독 워크플로우 화면(플랜 업그레이드·시트 구매·결제 히스토리 등) + 결제 정보 실패 시에도 살아남는 화면 예시.
-
 ### 개요
 
-일회성 크레딧에서 **반복 구독으로 결제 모델을 전환**하면서, 글로벌 멀티테넌트 환경의 결제·권한 도메인 프론트엔드를 전담했습니다. 결제는 틀리면 곧바로 신뢰가 깨지는 영역이라, 기능 구현뿐 아니라 **부분 실패에도 무너지지 않는 구조**까지 설계했습니다.
+일회성 크레딧에서 **반복 구독으로 결제 모델을 전환**하면서, 글로벌 멀티테넌트 환경의 결제·권한 도메인 프론트엔드를 전담했습니다. 결제는 틀리면 곧바로 신뢰가 깨지는 영역이라, 구독 워크플로우 전반을 구현하면서 외부 연동(Stripe·OAuth)의 복원력까지 함께 다뤘습니다. 나아가 **부분 실패에도 무너지지 않는 의존 관계 설계를 제안**했습니다(착수 전).
 
 ### 문제
 
 플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제 히스토리까지 구독 워크플로우 전체를 구현해야 했고, 그 과정에서 서버가 **HTTP 200으로 비즈니스 에러를 내려주는** 경우가 있었습니다. 또 결제 정보 일부를 못 받는다고 화면 전체가 죽으면, 사용자는 구독 취소나 내역 조회조차 못 하게 됩니다.
 
-### 해결 — 의존 관계 기준 Fault Tolerance
+### 해결 — 구독 워크플로우와 외부 연동 복원력
 
-핵심은 "무엇이 무엇에 의존하는가"를 기준으로 화면을 설계한 것입니다. **결제 정보를 받지 못해도 결제 내역 조회·구독 취소·뒤로가기는 살아남도록** 의존 관계를 끊어, 한 영역의 실패가 전체로 번지지 않게 했습니다.
-
-![결제 화면의 Fault Tolerance — 결제 정보 조회가 실패해도 내역 조회·구독 취소·뒤로가기는 살아남는다](images/portfolio/diagrams/payment-isolation.svg){.diagram}
+플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제 히스토리까지 **구독 워크플로우 전체를 구현**했습니다. 결제는 외부(서버·Stripe·OAuth)와의 동기화가 핵심이라, 그 경계에서 무너지지 않게 하는 데 집중했습니다.
 
 결제 상태는 **서버·Stripe 동기화를 SoT(source of truth)로 두고**, UI에는 폴링으로 반영하되 무한 반복을 막는 안전장치(3초 간격·최대 20회·언마운트 정리)를 두었습니다. 별도 결제 팝업 앱에 Stripe 결제 페이지를 얹을 때는 부모·팝업 **origin 격리** 구조 위에서 결제 컨텍스트만 안전하게 주고받도록 연동했습니다.
 
-같은 복원력 관점을 외부 vendor 연동(OAuth)에도 적용했습니다. 토큰 인터셉터가 모듈 상태의 토큰으로 요청 헤더를 무조건 덮어써 로그아웃 후 재로그인 시 옛 토큰으로 401이 나던 결함을 **요청 단위 토큰을 우선하도록** 고쳤고, '동시 호출 방지' 안전장치가 콜백 예외 시 잠금을 영영 못 풀어 무한 로딩에 빠지던 문제를 `try-finally`로 바로잡았습니다 — **안전장치가 자기 결함으로 죽지 않게** 한다는, Case 5와 같은 원칙입니다. 외부 스캐너 OAuth 콜백이 간헐적으로 깨지던 문제는 1차 수정(중복 실행 멱등 처리)이 dev에서 재발하자, **콜백 화면이 앱 부트스트랩 트리 안에 있어 리마운트마다 가드가 리셋되는 구조**를 원인으로 확정하고 콜백을 트리 밖 경량 셸로 분리해 풀었습니다.
+같은 복원력 관점을 외부 vendor 연동(OAuth)에도 적용했습니다. 토큰 인터셉터가 모듈 상태의 토큰으로 요청 헤더를 무조건 덮어써 로그아웃 후 재로그인 시 옛 토큰으로 401이 나던 결함을 **요청 단위 토큰을 우선하도록** 고쳤고, '동시 호출 방지' 안전장치가 콜백 예외 시 잠금을 영영 못 풀어 무한 로딩에 빠지던 문제를 `try-finally`로 바로잡았습니다 — **안전장치가 자기 결함으로 죽지 않게** 한다는, Case 4와 같은 원칙입니다. 외부 스캐너 OAuth 콜백이 간헐적으로 깨지던 문제는 1차 수정(중복 실행 멱등 처리)이 dev에서 재발하자, **콜백 화면이 앱 부트스트랩 트리 안에 있어 리마운트마다 가드가 리셋되는 구조**를 원인으로 확정하고 콜백을 트리 밖 경량 셸로 분리해 풀었습니다.
+
+### 제안 — 부분 실패에도 무너지지 않는 의존 관계 (착수 전)
+
+여기서 한발 더 나아가, **결제 정보를 받지 못해도 결제 내역 조회·구독 취소·뒤로가기는 살아남도록** 의존 관계를 끊는 설계를 제안했습니다. "무엇이 무엇에 의존하는가"를 기준으로 한 영역의 실패가 전체로 번지지 않게 한다는 구상이며, 아직 착수 전입니다.
+
+![결제 화면의 Fault Tolerance(제안) — 결제 정보 조회가 실패해도 내역 조회·구독 취소·뒤로가기는 살아남는 구조](images/portfolio/diagrams/payment-isolation.svg){.diagram}
 
 ### 회고
 
-"기능이 된다"와 "틀려도 안전하다"는 다릅니다. 결제에서는 후자가 더 중요했고, 그래서 기능 목록보다 **무엇이 실패해도 무엇은 살아남아야 하는가**를 먼저 그렸습니다.
+"기능이 된다"와 "틀려도 안전하다"는 다릅니다. 결제에서는 후자가 더 중요하다고 봤고, 그래서 구독 워크플로우 구현을 마친 뒤에도 다음 단계로 **무엇이 실패해도 무엇은 살아남아야 하는가**를 의존 관계로 설계하는 방향을 제안했습니다.
 
 ---
 
-## Case 5. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화
+## Case 4. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화
 
 `2026.04 ~` · `React · TypeScript · ErrorBoundary · Datadog RUM`
 
@@ -203,13 +187,15 @@ export function classifyAsyncError(reason: unknown): ErrorClassification {
 
 관측 표준 정렬 종합 계획을 직접 작성·주도하고 **5개 PR로 분해**해 적용했습니다.
 
+같은 복원력 관점을 데이터 로딩으로도 확장하려 합니다 — 3D 뷰어에서 여러 design 중 일부 mesh가 손상돼도 `Promise.allSettled`로 **살아있는 mesh는 렌더하고 누락은 ModelTree에 표시**해, "전부 실패"와 "부분 실패"를 하나의 흐름에서 가르는 방향을 제안했습니다(착수 전). 에러 바운더리를 모든 곳에 두는 대신 **장애 허용 범위를 화면이 직접 설계한다**는 원칙을 데이터 흐름에 적용하려는 구상입니다.
+
 ### 회고
 
 직접 만든 7분류 에러 체계가 특정 앱에 치우쳐 있던 걸 인정하고, **팀 공통 표준에 맞춰 폐기·정렬**했습니다. 내가 만든 걸 고집하는 것보다 팀 표준으로 수렴시키는 게 관측의 가치를 살린다고 봤습니다.
 
 ---
 
-## Case 6. AI가 옮긴 마이그레이션의 부채를 잡다 — 3D 렌더링 품질
+## Case 5. AI가 옮긴 마이그레이션의 부채를 잡다 — 3D 렌더링 품질
 
 `2026.04 ~` · `Three.js · draco3d · WebGL · SRGB ColorManagement · Playwright · pngjs`
 
@@ -270,7 +256,7 @@ VTK는 modeler·crown·milling의 핵심 렌더 엔진인데, 그중 **썸네일
 
 ---
 
-## Case 7. 런타임에야 깨지던 번역을 빌드에서 막다 — 기업 랜딩 풀스택
+## Case 6. 런타임에야 깨지던 번역을 빌드에서 막다 — 기업 랜딩 풀스택
 
 `2023.09 ~ 2025.10` · `Next.js · 타입세이프 i18n · Fastify · MongoDB`
 
@@ -313,11 +299,11 @@ declare module 'i18next' {
 
 ---
 
-## Case 8. 웹과 로컬 CAM을 잇는 Electron 데스크톱 앱 — Dentbird Linker
+## Case 7. 웹과 로컬 CAM을 잇는 Electron 데스크톱 앱 — Dentbird Linker
 
 `2024.07 ~ 2025.12, 이후 단독 운영` · `Electron · React · TypeScript · Custom Protocol · Chrome LNA · Datadog`
 
-> 🖼️ **[이미지]** Linker 실행 흐름 — 웹에서 "CAM으로 보내기" 클릭 → Linker 실행 → CAM 소프트웨어가 케이스를 받는 장면(스크린샷 3컷 또는 짧은 GIF).
+![Dentbird Linker와 검증용 Mock Server — 외부 CAM 12종(포트 연동 4종 + 프로세스 실행 8종)을 한 인터페이스로 추상화한 연동 화면(좌)과, CAM 없이 연동·자동 업데이트를 시나리오별로 재현해 검증한 Mock Server(우)](images/portfolio/screenshots/linker-mockserver.png)
 
 ### 개요
 
@@ -372,6 +358,8 @@ it('평문 fixture 의 export 흐름은 valid STL 을 만들고 sendToMillBox �
 });
 ```
 
+CAM 12종을 모두 설치하지 않고도 연동·자동 업데이트를 검증하려고, 케이스 상단의 **Mock Server**를 만들었습니다. CAM의 헬스체크·파일 핑 같은 엔드포인트와 자동 업데이트 응답을 흉내 내고, **성공·에러(500)·지연·타임아웃·부분 실패** 시나리오를 버튼으로 전환해 Linker가 각 상황에서 어떻게 동작하는지 재현했습니다.
+
 ### 설치 감지 — 감지를 믿지 않는 방향으로
 
 두 번째 축인 감지 채널입니다. 브라우저는 LNA 정책 때문에 로컬 헬스체크로 앱 실행을 직접 확인할 수 없어, 창 포커스 변화 같은 **휴리스틱으로 추정**할 수밖에 없습니다. 그래서 두 방향의 오탐이 있었습니다.
@@ -391,7 +379,7 @@ it('평문 fixture 의 export 흐름은 valid STL 을 만들고 sendToMillBox �
 
 ---
 
-## Case 9. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro Frontend
+## Case 8. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro Frontend
 
 `2023.09 ~ 2025.10` · `NX · iframe + postMessage · Module Federation`
 
@@ -400,6 +388,8 @@ it('평문 fixture 의 export 흐름은 valid STL 을 만들고 sendToMillBox �
 4개 서비스(cloud·crown·modeler·milling)가 공유하던 공통 기능 4개(설정·내보내기·탐색기·뷰어)를 모듈화하면서, **"정답 기술"을 찾는 대신 그때의 조직·배포 제약에 맞는 통합 전략을 거듭 다시 고른** 과정입니다.
 
 ![공통 모듈 Micro Frontend — 4개 서비스 위에 same-origin iframe 모듈 레이어가 얹힌다](images/portfolio/diagrams/mfe-layers.svg){.diagram}
+
+![공통화한 4개 모듈 — 설정·내보내기·탐색기·뷰어가 4개 서비스에서 같은 구현으로 재사용된다](images/portfolio/screenshots/common-modules.png)
 
 ### 문제
 
@@ -423,13 +413,13 @@ iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의 Fi
 
 ---
 
-## Case 10. 흩어진 레포를 모노레포로 — 통합과 환경 일원화
+## Case 9. 흩어진 레포를 모노레포로 — 통합과 환경 일원화
 
 `2024.06 ~` · `TypeScript · NX · Git Subtree · i18n`
 
 ### 개요
 
-별도 레포로 흩어져 있던 클라이언트 앱·공용 라이브러리를 하나의 NX 모노레포로 모으고, 환경별로 제각기 구성하던 도메인·URL을 일원화한 프로젝트입니다. 이후 격리 재현 환경(Case 11)이 이 토대 위에 올라갑니다.
+별도 레포로 흩어져 있던 클라이언트 앱·공용 라이브러리를 하나의 NX 모노레포로 모으고, 환경별로 제각기 구성하던 도메인·URL을 일원화한 프로젝트입니다. 이후 격리 재현 환경(Case 10)이 이 토대 위에 올라갑니다.
 
 ### 문제
 
@@ -480,13 +470,13 @@ export const UrlHelper = {
 
 ---
 
-## Case 11. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
+## Case 10. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
 
 `2025.11 ~` · `Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase`
 
 ### 개요
 
-테스트·디버깅의 신뢰성 문제를 "테스트를 더 짜는" 대신 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 10의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
+테스트·디버깅의 신뢰성 문제를 "테스트를 더 짜는" 대신 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 9의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
 
 ### 문제
 
@@ -494,7 +484,7 @@ dev·qa에서는 멀쩡하던 것이 **prod 배포 시 dev 환경변수가 박�
 
 ### 해결 — 선행 구조 먼저, 그 위에 격리
 
-원인은 **빌드 시점에 환경변수가 번들에 박히는 구조**였습니다. 런타임 분리 자체는 팀이 진행했고, 본인은 그 토대로 **도메인 통합 라이브러리(Case 10)**를 깔았습니다. 환경이 런타임에 결정되니, **특정 커밋 시점으로 Docker를 띄워 그때의 클라이언트 + 서버 + DB를 그대로 재현**하는 격리 환경을 쌓을 수 있었습니다.
+원인은 **빌드 시점에 환경변수가 번들에 박히는 구조**였습니다. 런타임 분리 자체는 팀이 진행했고, 본인은 그 토대로 **도메인 통합 라이브러리(Case 9)**를 깔았습니다. 환경이 런타임에 결정되니, **특정 커밋 시점으로 Docker를 띄워 그때의 클라이언트 + 서버 + DB를 그대로 재현**하는 격리 환경을 쌓을 수 있었습니다.
 
 ![격리 재현 환경 — 도메인 통합과 런타임 분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로 재현한다](images/portfolio/diagrams/isolation-stack.svg){.diagram}
 
@@ -530,7 +520,7 @@ AI의 선별·분류는 1차 판단이라 사람의 확인이 필요하고, **EC
 
 ---
 
-## Case 12. 담당자 PC에 묶인 데스크톱 빌드를 자동화 파이프라인으로
+## Case 11. 담당자 PC에 묶인 데스크톱 빌드를 자동화 파이프라인으로
 
 `2024 ~` · `Electron · electron-builder · electron-updater · GitHub Actions(self-hosted) · Azure Pipelines · 코드 서명·공증 · S3`
 
