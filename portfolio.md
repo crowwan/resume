@@ -96,7 +96,7 @@
 
 ---
 
-## Case 3. 일회성 크레딧에서 반복 구독으로 — B2B 구독·결제 프론트엔드
+## Case 3. 에러를 구분하기 시작하다 — B2B 구독·결제 프론트엔드
 
 `2023.09 ~ 2025.07` · `React · TypeScript · TanStack Query · ErrorBoundary · BusinessLogicError`
 
