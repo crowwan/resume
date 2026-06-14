@@ -45,22 +45,22 @@
 
   <line x1="40" y1="186" x2="840" y2="186" stroke="#e2e8f0" stroke-width="1"/>
 
-  <!-- 하단: URL↔state -->
-  <text x="40" y="222" font-size="13" font-weight="700" fill="#4338ca">② 목록 ↔ 3D 리뷰 토글 — URL을 상태로, 멀티 owner 충돌 제거</text>
+  <!-- 하단: 증상 vs 구조 -->
+  <text x="40" y="222" font-size="13" font-weight="700" fill="#4338ca">② 무한 재요청 — 증상이 아니라 구조를 고친다</text>
 
   <g filter="url(#fShadow)"><rect x="40" y="244" width="360" height="120" rx="12" fill="#fff7ed" stroke="#fed7aa"/></g>
-  <text x="60" y="270" font-size="12.5" font-weight="700" fill="#9a3412">Before — 즉시 되튕김(bounce-back)</text>
-  <text x="60" y="294" font-size="10.5" fill="#7c2d12">view 토글 → 다른 훅이 reviewCase를 URL에</text>
-  <text x="60" y="312" font-size="10.5" fill="#7c2d12">→ 전체 query diff가 그걸 "외부 변경"으로 오판</text>
-  <text x="60" y="330" font-size="10.5" fill="#7c2d12">→ stale view=3d 로 되돌림</text>
-  <text x="60" y="352" font-size="10.5" fill="#c2410c" font-weight="600">여러 훅이 같은 URL을 공유하는데 비교 범위가 전체</text>
+  <text x="60" y="270" font-size="12.5" font-weight="700" fill="#9a3412">Before — 카드마다 훅, 캐시가 날아감</text>
+  <text x="60" y="294" font-size="10.5" fill="#7c2d12">카드 재마운트 → 훅 새로 생성 → 카드별 캐시</text>
+  <text x="60" y="312" font-size="10.5" fill="#7c2d12">→ 같은 썸네일 중복 요청, onError ref도 리셋</text>
+  <text x="60" y="330" font-size="10.5" fill="#7c2d12">→ 403을 새 URL로 계속 다시 두드림</text>
+  <text x="60" y="352" font-size="10.5" fill="#c2410c" font-weight="600">재시도 1회로 막으면 멈추지만 = 증상</text>
 
   <line x1="408" y1="304" x2="448" y2="304" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
 
   <g filter="url(#fShadow)"><rect x="456" y="244" width="384" height="120" rx="12" fill="#eef2ff" stroke="#c7d2fe"/></g>
-  <text x="476" y="270" font-size="12.5" font-weight="700" fill="#3730a3">After — 내 키만 본다</text>
-  <text x="476" y="294" font-size="10.5" fill="#4338ca">own-key 부분집합 diff로 비교 범위 축소</text>
-  <text x="476" y="312" font-size="10.5" fill="#475569">→ 타 owner 키(reviewCase) 변경은 무시</text>
-  <text x="476" y="330" font-size="10.5" fill="#475569">이산 키(view·tab)는 즉시 push, 연속 입력(검색)만 debounce</text>
-  <text x="476" y="352" font-size="10.5" fill="#3730a3" font-weight="600">race를 타이머가 아니라 "비교 경계"로 근본 해결</text>
+  <text x="476" y="270" font-size="12.5" font-weight="700" fill="#3730a3">After — 캐시를 Provider로 끌어올림</text>
+  <text x="476" y="294" font-size="10.5" fill="#4338ca">컴포넌트 바깥 공유 스코프로 → 모든 카드가 공유</text>
+  <text x="476" y="312" font-size="10.5" fill="#475569">→ 재마운트돼도 캐시 hit, 중복 fetch 0</text>
+  <text x="476" y="330" font-size="10.5" fill="#475569">성공(4분)뿐 아니라 실패(10초)도 캐시</text>
+  <text x="476" y="352" font-size="10.5" fill="#3730a3" font-weight="600">재마운트 자체는 안 건드림 — 공유 캐시로 우회(실용)</text>
 </svg>
