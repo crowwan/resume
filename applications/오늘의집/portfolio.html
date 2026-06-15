@@ -24,71 +24,6 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { color: #008000; } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { color: #008000; font-weight: bold; } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="portfolio-style.css" />
 </head>
@@ -164,19 +99,19 @@ alt="Dentbird Cloud — AI 기반 치과 CAD/CAM 플랫폼의 케이스 목록 �
 <hr />
 </section>
 <section
-id="case-1.-테스트를-더-짜는-대신-재현-가능한-환경을-만든다-격리-재현과-ai-변경-감지"
+id="case-1.-신뢰할-수-있는-테스트를-위해-재현-가능한-환경을-만든다-격리-재현과-ai-변경-감지"
 class="level2">
-<h2>Case 1. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리
-재현과 AI 변경 감지</h2>
+<h2>Case 1. 신뢰할 수 있는 테스트를 위해, 재현 가능한 환경을 만든다 —
+격리 재현과 AI 변경 감지</h2>
 <p><code>2025.11 ~</code> ·
 <code>Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase</code></p>
 <section id="개요" class="level3">
 <h3>개요</h3>
-<p>테스트·디버깅의 신뢰성 문제를 “테스트를 더 짜는” 대신 <strong>재현
-가능한 환경을 만드는 방향</strong>으로 푼 프로젝트입니다. 선행 구조(Case
-3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을
-올리고, 다시 그 위에 <strong>“바뀐 코드만 골라 테스트하는” AI 변경
-감지</strong>까지 올렸습니다.</p>
+<p>테스트·디버깅의 신뢰성 문제를, 테스트가 믿을 수 있게 돌아가는
+<strong>재현 가능한 환경을 만드는 방향</strong>으로 푼 프로젝트입니다.
+선행 구조(Case 3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에
+격리 재현 환경을 올리고, 다시 그 위에 <strong>“바뀐 코드만 골라
+테스트하는” AI 변경 감지</strong>까지 올렸습니다.</p>
 </section>
 <section id="문제" class="level3">
 <h3>문제</h3>
@@ -384,29 +319,6 @@ alt="모노레포 통합 전/후 — 흩어진 레포들이 단일 NX 모노레�
 파생됩니다. 통합 도메인에서는 상대 경로로, 레거시에서는 환경변수 기반
 절대 URL로 갈라지되 호출부는 <code>UrlHelper.cloud()</code> 한 형태로
 통일됩니다.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// libs/url-utils — 기준 도메인 하나에서 cloud·accounts·api URL이 모두 파생된다.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getServiceUrl</span>(service<span class="op">:</span> <span class="st">&#39;cloud&#39;</span> <span class="op">|</span> <span class="st">&#39;accounts&#39;</span><span class="op">,</span> path<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&#39;&#39;</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isUnifiedDomain</span>()) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 통합 도메인: 상대 경로 (Webpack Proxy가 처리)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>path) <span class="cf">return</span> <span class="vs">`/</span><span class="sc">${</span>service<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> normalizedPath <span class="op">=</span> path<span class="op">.</span><span class="fu">startsWith</span>(<span class="st">&#39;/&#39;</span>) <span class="op">?</span> path <span class="op">:</span> <span class="vs">`/</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`/</span><span class="sc">${</span>service<span class="sc">}${</span>normalizedPath<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 레거시 도메인: 환경변수 기반 절대 URL</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> baseUrl <span class="op">=</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="at">env</span>[<span class="vs">`NX_PUBLIC_</span><span class="sc">${</span>service<span class="op">.</span><span class="fu">toUpperCase</span>()<span class="sc">}</span><span class="vs">_URL`</span>] <span class="op">||</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`https://</span><span class="sc">${</span>service<span class="sc">}</span><span class="vs">.dentbird.com`</span><span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>path) <span class="cf">return</span> baseUrl<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> normalizedPath <span class="op">=</span> path<span class="op">.</span><span class="fu">startsWith</span>(<span class="st">&#39;/&#39;</span>) <span class="op">?</span> path <span class="op">:</span> <span class="vs">`/</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> baseUrl <span class="op">+</span> normalizedPath<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> UrlHelper <span class="op">=</span> {</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  cloud<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getServiceUrl</span>(<span class="st">&#39;cloud&#39;</span><span class="op">,</span> path)<span class="op">,</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  accounts<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getServiceUrl</span>(<span class="st">&#39;accounts&#39;</span><span class="op">,</span> path)<span class="op">,</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  api<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getApiUrl</span>(path)<span class="op">,</span> <span class="co">// axios baseURL용 — prefix만 반환, 경로는 axios가 붙임</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="회고-2" class="level3">
 <h3>회고</h3>
@@ -537,32 +449,9 @@ iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ 결국 t
 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통
 라이브러리라 <strong>한 곳을 고치면 5개 앱에 반영</strong>됩니다.</p>
 <p>에러를 라이브러리(<code>instanceof</code>)에 묶지 않고
-<strong>shape(duck typing)으로 판별·분류</strong>한 예입니다. axios든
-fetch든 응답 형태만 보고 HTTP 상태를 뽑아, 같은 기준으로 6분류합니다. 이
+<strong>shape(duck typing)으로 판별·분류</strong>했습니다. axios든
+fetch든 응답 형태만 보고 HTTP 상태를 뽑아 같은 기준으로 6분류하며, 이
 분류기는 이후 공통 라이브러리로 승격됐습니다.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// apps/batch/batch-web — axios 등 런타임에 의존하지 않고 shape 로 HTTP 상태를 추출한다.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getHttpStatus</span>(reason<span class="op">:</span> <span class="dt">unknown</span>)<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">undefined</span> {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="fu">isRecord</span>(reason)) <span class="cf">return</span> <span class="kw">undefined</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isRecord</span>(reason<span class="op">.</span><span class="at">response</span>) <span class="op">&amp;&amp;</span> <span class="kw">typeof</span> reason<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="at">status</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> reason<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="at">status</span><span class="op">;</span> <span class="co">// axios: reason.response.status</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> reason<span class="op">.</span><span class="at">status</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) <span class="cf">return</span> reason<span class="op">.</span><span class="at">status</span><span class="op">;</span> <span class="co">// fetch wrapper</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> reason<span class="op">.</span><span class="at">statusCode</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) <span class="cf">return</span> reason<span class="op">.</span><span class="at">statusCode</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">undefined</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">// 순서 중요: native_auth &gt; schema &gt; ignore &gt; fatal &gt; transient &gt; unknown</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">classifyAsyncError</span>(reason<span class="op">:</span> <span class="dt">unknown</span>)<span class="op">:</span> ErrorClassification {</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (reason <span class="kw">instanceof</span> NativeAuthError) <span class="cf">return</span> <span class="st">&#39;native_auth&#39;</span><span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (reason <span class="kw">instanceof</span> ZodError) <span class="cf">return</span> <span class="st">&#39;schema&#39;</span><span class="op">;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isAbortError</span>(reason)) <span class="cf">return</span> <span class="st">&#39;ignore&#39;</span><span class="op">;</span>   <span class="co">// AbortController / axios ERR_CANCELED</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isExplicitFatal</span>(reason)) <span class="cf">return</span> <span class="st">&#39;fatal&#39;</span><span class="op">;</span> <span class="co">// 데이터손상·인증훼손·프로세스누수만 승격</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> status <span class="op">=</span> <span class="fu">getHttpStatus</span>(reason)<span class="op">;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> status <span class="op">===</span> <span class="st">&#39;number&#39;</span> <span class="op">&amp;&amp;</span> status <span class="op">&gt;=</span> <span class="dv">500</span> <span class="op">&amp;&amp;</span> status <span class="op">&lt;</span> <span class="dv">600</span>) <span class="cf">return</span> <span class="st">&#39;transient&#39;</span><span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isNetworkErrorMessage</span>(reason)) <span class="cf">return</span> <span class="st">&#39;transient&#39;</span><span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">&#39;unknown&#39;</span><span class="op">;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>관측 표준 정렬 종합 계획을 직접 작성·주도하고 <strong>5개 PR로
 분해</strong>해 적용했습니다.</p>
 <p>같은 복원력 관점을 데이터 로딩으로도 확장하려 합니다 — 3D 뷰어에서

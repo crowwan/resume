@@ -40,13 +40,13 @@
 
 ---
 
-## Case 1. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
+## Case 1. 신뢰할 수 있는 테스트를 위해, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
 
 `2025.11 ~` · `Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase`
 
 ### 개요
 
-테스트·디버깅의 신뢰성 문제를 "테스트를 더 짜는" 대신 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
+테스트·디버깅의 신뢰성 문제를, 테스트가 믿을 수 있게 돌아가는 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
 
 ### 문제
 
@@ -135,31 +135,6 @@ AI 변경 감지에서도 한계를 정직하게 마주했습니다. 선별·분
 
 기준 도메인(통합/레거시) 하나에서 cloud·accounts·api URL이 모두 파생됩니다. 통합 도메인에서는 상대 경로로, 레거시에서는 환경변수 기반 절대 URL로 갈라지되 호출부는 `UrlHelper.cloud()` 한 형태로 통일됩니다.
 
-```typescript
-// libs/url-utils — 기준 도메인 하나에서 cloud·accounts·api URL이 모두 파생된다.
-function getServiceUrl(service: 'cloud' | 'accounts', path: string = ''): string {
-  if (isUnifiedDomain()) {
-    // 통합 도메인: 상대 경로 (Webpack Proxy가 처리)
-    if (!path) return `/${service}`;
-    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-    return `/${service}${normalizedPath}`;
-  }
-  // 레거시 도메인: 환경변수 기반 절대 URL
-  const baseUrl =
-    process.env[`NX_PUBLIC_${service.toUpperCase()}_URL`] ||
-    `https://${service}.dentbird.com`;
-  if (!path) return baseUrl;
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return baseUrl + normalizedPath;
-}
-
-export const UrlHelper = {
-  cloud: (path = '') => getServiceUrl('cloud', path),
-  accounts: (path = '') => getServiceUrl('accounts', path),
-  api: (path = '') => getApiUrl(path), // axios baseURL용 — prefix만 반환, 경로는 axios가 붙임
-};
-```
-
 ### 회고
 
 "무엇을 합칠까"보다 "합친 뒤에도 흔들리지 않을 토대를 먼저 까는 것"이 중요했습니다. 도메인 통합 라이브러리라는 선행 구조가 있었기에, 다음 단계인 격리 재현 환경이 가능했습니다.
@@ -218,32 +193,7 @@ iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의 Fi
 
 가시성을 높이는 방법으로 처음엔 `react-error-boundary` 라이브러리를 검토했지만 **기각**했습니다 — ① 실제 실패는 렌더가 아니라 **async 이벤트 핸들러**(파일 다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ② iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ 결국 throw 지점마다 wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신 **에러 객체 자체에 풍부한 metadata를 담는** 방식(표준 `Error.cause` + 구조화된 실패 상세)을 택해, throw 지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통 라이브러리라 **한 곳을 고치면 5개 앱에 반영**됩니다.
 
-에러를 라이브러리(`instanceof`)에 묶지 않고 **shape(duck typing)으로 판별·분류**한 예입니다. axios든 fetch든 응답 형태만 보고 HTTP 상태를 뽑아, 같은 기준으로 6분류합니다. 이 분류기는 이후 공통 라이브러리로 승격됐습니다.
-
-```typescript
-// apps/batch/batch-web — axios 등 런타임에 의존하지 않고 shape 로 HTTP 상태를 추출한다.
-function getHttpStatus(reason: unknown): number | undefined {
-  if (!isRecord(reason)) return undefined;
-  if (isRecord(reason.response) && typeof reason.response.status === 'number') {
-    return reason.response.status; // axios: reason.response.status
-  }
-  if (typeof reason.status === 'number') return reason.status; // fetch wrapper
-  if (typeof reason.statusCode === 'number') return reason.statusCode;
-  return undefined;
-}
-
-// 순서 중요: native_auth > schema > ignore > fatal > transient > unknown
-export function classifyAsyncError(reason: unknown): ErrorClassification {
-  if (reason instanceof NativeAuthError) return 'native_auth';
-  if (reason instanceof ZodError) return 'schema';
-  if (isAbortError(reason)) return 'ignore';   // AbortController / axios ERR_CANCELED
-  if (isExplicitFatal(reason)) return 'fatal'; // 데이터손상·인증훼손·프로세스누수만 승격
-  const status = getHttpStatus(reason);
-  if (typeof status === 'number' && status >= 500 && status < 600) return 'transient';
-  if (isNetworkErrorMessage(reason)) return 'transient';
-  return 'unknown';
-}
-```
+에러를 라이브러리(`instanceof`)에 묶지 않고 **shape(duck typing)으로 판별·분류**했습니다. axios든 fetch든 응답 형태만 보고 HTTP 상태를 뽑아 같은 기준으로 6분류하며, 이 분류기는 이후 공통 라이브러리로 승격됐습니다.
 
 관측 표준 정렬 종합 계획을 직접 작성·주도하고 **5개 PR로 분해**해 적용했습니다.
 

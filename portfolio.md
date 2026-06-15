@@ -150,32 +150,7 @@
 
 가시성을 높이는 방법으로 처음엔 `react-error-boundary` 라이브러리를 검토했지만 **기각**했습니다 — ① 실제 실패는 렌더가 아니라 **async 이벤트 핸들러**(파일 다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ② iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ 결국 throw 지점마다 wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신 **에러 객체 자체에 풍부한 metadata를 담는** 방식(표준 `Error.cause` + 구조화된 실패 상세)을 택해, throw 지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통 라이브러리라 **한 곳을 고치면 5개 앱에 반영**됩니다.
 
-에러를 라이브러리(`instanceof`)에 묶지 않고 **shape(duck typing)으로 판별·분류**한 예입니다. axios든 fetch든 응답 형태만 보고 HTTP 상태를 뽑아, 같은 기준으로 6분류합니다. 이 분류기는 이후 공통 라이브러리로 승격됐습니다.
-
-```typescript
-// apps/batch/batch-web — axios 등 런타임에 의존하지 않고 shape 로 HTTP 상태를 추출한다.
-function getHttpStatus(reason: unknown): number | undefined {
-  if (!isRecord(reason)) return undefined;
-  if (isRecord(reason.response) && typeof reason.response.status === 'number') {
-    return reason.response.status; // axios: reason.response.status
-  }
-  if (typeof reason.status === 'number') return reason.status; // fetch wrapper
-  if (typeof reason.statusCode === 'number') return reason.statusCode;
-  return undefined;
-}
-
-// 순서 중요: native_auth > schema > ignore > fatal > transient > unknown
-export function classifyAsyncError(reason: unknown): ErrorClassification {
-  if (reason instanceof NativeAuthError) return 'native_auth';
-  if (reason instanceof ZodError) return 'schema';
-  if (isAbortError(reason)) return 'ignore';   // AbortController / axios ERR_CANCELED
-  if (isExplicitFatal(reason)) return 'fatal'; // 데이터손상·인증훼손·프로세스누수만 승격
-  const status = getHttpStatus(reason);
-  if (typeof status === 'number' && status >= 500 && status < 600) return 'transient';
-  if (isNetworkErrorMessage(reason)) return 'transient';
-  return 'unknown';
-}
-```
+에러를 라이브러리(`instanceof`)에 묶지 않고 **shape(duck typing)으로 판별·분류**했습니다. axios든 fetch든 응답 형태만 보고 HTTP 상태를 뽑아 같은 기준으로 6분류하며, 이 분류기는 이후 공통 라이브러리로 승격됐습니다.
 
 관측 표준 정렬 종합 계획을 직접 작성·주도하고 **5개 PR로 분해**해 적용했습니다.
 
@@ -207,34 +182,7 @@ export function classifyAsyncError(reason: unknown): ErrorClassification {
 - **소스 엔진을 역추적해 표준 기능으로 매핑** — 보철이 스캔 위에 겹쳐 보이는 'z-fighting'을 처음엔 레이어 순서 문제로 보고 튜닝했지만, 한쪽 mesh를 안 그려보는 실측으로 **겹친 geometry가 근본 원인**임을 확정했습니다. 원본 엔진이 왜 depth를 직접 미는 방식을 썼는지(16비트 depth 정밀도 한계)까지 코드로 이해한 뒤, GLSL을 새로 쓰는 대신 Three.js 표준 기능(displacementMap으로 vertex를 균일하게 미세 inflate)으로 같은 효과를 냈습니다. 썸네일이 본 화면과 미묘하게 다르던 것도 'legacy 픽셀을 맞추려 남긴 보정값 몇 개'가 그새 통일된 기준과 갈라진 것이라 같은 원칙으로 정리했습니다.
 - **시각 회귀를 결정적으로 측정** — 처음엔 채널별 평균 픽셀 차이를 metric으로 정의한 도구를 만들었지만, 평균값 비교는 국소적 깨짐을 놓치는 한계가 있었습니다. 이후 **격리 컨테이너에서 baseline을 고정 생성**(소프트웨어 렌더러로 CI·로컬 GPU 차 흡수)하고 **Playwright 스크린샷 비교**로 가드하는 방식으로 발전시켰고, 고정 대기 대신 **이벤트 기반 대기로 바꿔 케이스당 검증 시간을 120초에서 37.7초로** 줄였습니다.
 
-겹친 면의 좌표 충돌(z-fighting)을 새 GLSL을 쓰지 않고 Three.js 표준 `displacementMap`으로 풀고, opaque/transparent로 갈라져 있던 정책을 모드 무관 단일 정책으로 통합한 렌더 레이어입니다. 이 함수 한 곳만 고치면 모든 호출처가 자동으로 맞춰집니다.
-
-```typescript
-// libs/cloud-mesh-io/dental.ts
-// Base/Die/Model 을 arch scan 과 같은 depth tier(renderOrder 0)에 두고
-// coincident z-fighting(흰점)만 displacement 로 분리한다 — cloud/batch 공통 단일 정책.
-export const applyModelLayer = (obj: THREE.Object3D, opts: LayerOptions = {}): void => {
-  obj.renderOrder = 0;
-  obj.traverse((child) => {
-    if (child instanceof THREE.Mesh && child.material instanceof THREE.Material) {
-      const mat = child.material;
-      mat.depthWrite = true;
-      mat.depthTest = true;
-      mat.polygonOffset = false; // 옛 renderOrder/polygonOffset 강제는 Crown die 가림 부작용으로 폐기
-
-      // coincident z-fighting 을 GLSL 없이 해결: 내장 displacement 로 base 를 normal 방향
-      // 미세 inflate 해 항상 scan 보다 앞에 오게 한다. polygonOffset 은 float 오차를 못 이기고,
-      // gl_FragDepth 는 early-z 비활성화 비용이 든다 — displacement 는 둘 다 회피하고 원본 geometry 보존.
-      // vertex shader 단계라 opaque/transparent 무관 — 이 함수 한 곳 수정이 모든 호출처에 자동 정합.
-      if (mat instanceof THREE.MeshPhongMaterial && !mat.vertexColors && !mat.map) {
-        mat.displacementMap = getCoincidentDisplacementMap();
-        mat.displacementScale = COINCIDENT_INFLATE_EPS;
-        mat.needsUpdate = true;
-      }
-    }
-  });
-};
-```
+겹친 면의 좌표 충돌(z-fighting)을 새 GLSL을 쓰지 않고 Three.js 표준 `displacementMap`으로 풀고, opaque/transparent로 갈라져 있던 정책을 모드 무관 단일 정책으로 통합했습니다. 이 함수 한 곳만 고치면 모든 호출처가 자동으로 맞춰집니다.
 
 ### 검토 후 보류한 결정 — 그리고 뒤집힌 전제
 
@@ -265,25 +213,6 @@ VTK는 modeler·crown·milling의 핵심 렌더 엔진인데, 그중 **썸네일
 영어 단일 소스에서 **타입을 자동 생성**해, 없는 키를 **컴파일 타임에 차단**하는 타입세이프 i18n으로 전환했습니다. 키를 추가·삭제할 때 누락이 빌드에서 바로 걸립니다.
 
 영어 로케일(`locales/en`)을 단일 소스로 타입 정의를 자동 생성하고, 그 타입을 i18next에 주입해 **존재하지 않는 키는 `t('...')` 호출 시 컴파일 에러**가 나게 했습니다. 키를 추가·삭제하면 `tsc --noEmit`에서 바로 걸립니다.
-
-```jsonc
-// package.json — 영어 로케일 단일 소스에서 타입을 자동 생성하고 컴파일로 검증
-"interface": "i18next-resources-for-ts interface -i ./src/i18n/locales/en -o ./src/types/resources.d.ts",
-"check-types": "tsc --noEmit --pretty"
-```
-
-```typescript
-// src/types/i18next.d.ts — 생성된 타입을 i18next 에 주입 → 없는 키는 컴파일 타임에 차단
-import type Resources from '@/types/resources';
-
-declare module 'i18next' {
-  interface CustomTypeOptions {
-    defaultNS: 'lang';
-    fallbackNS: 'lokalise';
-    resources: Resources; // 존재하지 않는 키는 t('...') 호출 시 TS 컴파일 에러
-  }
-}
-```
 
 ### 회고
 
@@ -322,33 +251,6 @@ Custom Protocol을 **중간 레이어**로 두어, 브라우저가 프로토콜�
 운영 중 뜨던 정체불명의 'unknown error' 모달도 추측으로 고치지 않았습니다. **Datadog 로그 시퀀스로 초기 가설(요청 페이로드 문제)을 반증**하고, 실제 원인이 변환 대상에 잘못 섞여 들어간 point cloud 파일임을 로그로 확정해 좁혔습니다.
 
 명세가 없던 외부 export는 **기존 동작 자체를 명세로 삼았습니다** — CAM으로 보내는 시점의 STL byte snapshot(크기·sha256)을 그 자리에서 박제해 특성화(characterization) 테스트로 고정한 뒤, 구현을 그 테스트에 통과시키는 방식으로 안전하게 재구현했습니다. `processExportSession`이 전송 직후 임시 STL을 지우기 때문에, 단언 시점이 아니라 mock 구현 안에서 즉시 읽어 둡니다.
-
-```typescript
-// apps/linker-desktop/tests/integration/exportSession.integration.test.ts
-sendToMillBoxMock.mockImplementation(async (exportFiles) => {
-  const snapshot = [];
-  for (const ef of exportFiles) {
-    const buffer = await fs.readFile(ef.filePath);
-    snapshot.push({
-      filePath: ef.filePath,
-      byteLength: buffer.byteLength,
-      sha256: createHash('sha256').update(buffer).digest('hex'),
-    });
-  }
-  capturedSendToMillBoxFiles.push(snapshot);
-  return { success: true };
-});
-
-it('평문 fixture 의 export 흐름은 valid STL 을 만들고 sendToMillBox 로 위임한다', async () => {
-  await handleProtocolUrl(buildProtocolUrl({ sessionId, softwareId: 'MILLBOX', config }));
-
-  expect(sendToMillBoxMock).toHaveBeenCalledTimes(1);          // CAM SW 위임 완료
-  expect(capturedDialogTypes).not.toContain('export-error');   // 에러 다이얼로그 없음
-  const [snapshot] = capturedSendToMillBoxFiles;               // 전송 시점 byte snapshot
-  expect(snapshot[0].byteLength).toBeGreaterThanOrEqual(84);   // binary STL 최소 크기
-  expect(snapshot[0].filePath.toLowerCase().endsWith('.stl')).toBe(true);
-});
-```
 
 CAM 12종을 모두 설치하지 않고도 연동·자동 업데이트를 검증하려고, 케이스 상단의 **Mock Server**를 만들었습니다. CAM의 헬스체크·파일 핑 같은 엔드포인트와 자동 업데이트 응답을 흉내 내고, **성공·에러(500)·지연·타임아웃·부분 실패** 시나리오를 버튼으로 전환해 Linker가 각 상황에서 어떻게 동작하는지 재현했습니다.
 
@@ -424,44 +326,19 @@ iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의 Fi
 
 기준 도메인(통합/레거시) 하나에서 cloud·accounts·api URL이 모두 파생됩니다. 통합 도메인에서는 상대 경로로, 레거시에서는 환경변수 기반 절대 URL로 갈라지되 호출부는 `UrlHelper.cloud()` 한 형태로 통일됩니다.
 
-```typescript
-// libs/url-utils — 기준 도메인 하나에서 cloud·accounts·api URL이 모두 파생된다.
-function getServiceUrl(service: 'cloud' | 'accounts', path: string = ''): string {
-  if (isUnifiedDomain()) {
-    // 통합 도메인: 상대 경로 (Webpack Proxy가 처리)
-    if (!path) return `/${service}`;
-    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-    return `/${service}${normalizedPath}`;
-  }
-  // 레거시 도메인: 환경변수 기반 절대 URL
-  const baseUrl =
-    process.env[`NX_PUBLIC_${service.toUpperCase()}_URL`] ||
-    `https://${service}.dentbird.com`;
-  if (!path) return baseUrl;
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return baseUrl + normalizedPath;
-}
-
-export const UrlHelper = {
-  cloud: (path = '') => getServiceUrl('cloud', path),
-  accounts: (path = '') => getServiceUrl('accounts', path),
-  api: (path = '') => getApiUrl(path), // axios baseURL용 — prefix만 반환, 경로는 axios가 붙임
-};
-```
-
 ### 회고
 
 "무엇을 합칠까"보다 "합친 뒤에도 흔들리지 않을 토대를 먼저 까는 것"이 중요했습니다. 도메인 통합 라이브러리라는 선행 구조가 있었기에, 다음 단계인 격리 재현 환경이 가능했습니다.
 
 ---
 
-## Case 10. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
+## Case 10. 신뢰할 수 있는 테스트를 위해, 재현 가능한 환경을 만든다 — 격리 재현과 AI 변경 감지
 
 `2025.11 ~` · `Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase`
 
 ### 개요
 
-테스트·디버깅의 신뢰성 문제를 "테스트를 더 짜는" 대신 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 9의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
+테스트·디버깅의 신뢰성 문제를, 테스트가 믿을 수 있게 돌아가는 **재현 가능한 환경을 만드는 방향**으로 푼 프로젝트입니다. 선행 구조(Case 9의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을 올리고, 다시 그 위에 **"바뀐 코드만 골라 테스트하는" AI 변경 감지**까지 올렸습니다.
 
 ### 문제
 
