@@ -136,7 +136,7 @@ LLM 기반 사용자 인터랙션 설계는 직접 해본 적이 없습니다. �
 | **Language**      | TypeScript                                    |
 | **Frontend**      | React, Next.js, Electron                      |
 | **State / UI**    | TanStack Query, Recoil, MUI                   |
-| **Build / Arch**  | NX, MFE                                       |
+| **Build / Arch**  | NX, Vite, Webpack                             |
 | **3D / Graphics** | Three.js                                      |
 | **Testing**       | Playwright, Jest                              |
 | **CI/CD · Infra** | GitHub Actions, Docker, AWS                   |
