@@ -45,7 +45,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 렌더링 성능을 다뤘습니다.
 
-- "N장 = 네트워크 N요청"이 되기 쉬운 썸네일을 **IntersectionObserver로 보일 때만 로드**하고, 50ms 윈도우로 모아 **배치 요청**으로 처리
+- "N장 = 네트워크 N요청"이 되기 쉬운 썸네일을 **IntersectionObserver로 보일 때만 로드**하고, 동시에 들어온 요청을 모아 **한 번에 배치 요청**으로 처리
 - 운영 중 터진 무한 재요청을 재시도로 틀어막는 대신, **재마운트마다 훅·캐시가 날아가는 구조**를 진단해 캐시를 공유 스코프로 끌어올리고 **성공뿐 아니라 실패도 캐시**해 근본 해결, 회귀 테스트로 고정
 
 `기술` React · TanStack Query · IntersectionObserver · Three.js
@@ -59,7 +59,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고, **실패를 실제 회귀와 테스트 코드 문제로 1차 분류**해 Teams로 보고하는 AI 변경 감지 구축
 - 실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행
 
-`기술` Playwright · Docker · MongoDB · EC2 · GitHub Actions self-hosted
+`기술` Playwright · Docker · MongoDB · EC2 · GitHub Actions
 
 ### 3D 렌더링 품질 자동화
 
@@ -68,7 +68,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로 **Three.js 표준 기능으로 대체** — 약 1,420줄 정리
 - 격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고, **Playwright 스크린샷 비교로 3D 렌더 회귀를 가드**
 
-`기술` Three.js · draco3d · WebGL · SRGB ColorManagement · Playwright
+`기술` Three.js · draco3d · WebGL · Playwright
 
 ### 모노레포 통합·환경 분리
 
@@ -87,16 +87,16 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 설정·내보내기·탐색기·뷰어 등 공통 기능 4종을 **iframe + postMessage 런타임 모듈로 통합**, cross-origin 격리 헤더·호스트 화이트리스트로 임베드 경계 잠금
 - Module Federation은 초기·소비처 설정 부담을 확인하고 별도 콘솔 서비스에만 적용
 
-`기술` NX · iframe + postMessage · Module Federation
+`기술` NX · Module Federation
 
 ### 기업 랜딩 페이지 풀스택
 
 입사 첫 업무로 기업 랜딩을 단독 리뉴얼하고, 이후 2년 넘게 단일 라인으로 운영했습니다.
 
-- 번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을 자동 생성해 **없는 키를 컴파일 타임에 차단**하는 타입세이프 i18n으로 전환
+- 번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을 자동 생성해 **없는 키를 컴파일 타임에 차단**하는 i18n으로 전환
 - 화면부터 **서버 API까지 풀스택으로 개발**
 
-`기술` Next.js · 타입세이프 i18n · Fastify · MongoDB
+`기술` Next.js · i18n · Fastify · MongoDB
 
 ### B2B 구독·결제 시스템 프론트엔드
 
@@ -117,7 +117,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - 명세 없던 기존 CAM 연동을 **특성화 테스트로 고정한 뒤 재구현**
 - 설치 감지는 **틀려도 사용자가 막히지 않게** 비차단 안내로 통일하고, CAM 없이 시나리오를 재현하는 Mock Server와 Datadog 로그로 검증·진단
 
-`기술` Electron · React · TypeScript · Custom Protocol · Datadog
+`기술` Electron · React · TypeScript · Datadog
 
 ---
 
@@ -136,10 +136,10 @@ LLM 기반 사용자 인터랙션 설계는 직접 해본 적이 없습니다. �
 | **Language**      | TypeScript, JavaScript                                                        |
 | **Frontend**      | React 18/19, Next.js                                                          |
 | **State / UI**    | TanStack Query, Recoil · MUI, Emotion                                         |
-| **Build / Arch**  | NX, pnpm, Git Subtree, Module Federation, iframe + postMessage, 런타임 Config |
-| **3D / Graphics** | Three.js, WebGL, draco3d, SRGB ColorManagement                                |
+| **Build / Arch**  | NX, pnpm, Git Subtree, Module Federation, 런타임 Config |
+| **3D / Graphics** | Three.js, WebGL, draco3d                                |
 | **Testing**       | Playwright, Jest, Vitest, MSW                                                 |
-| **CI/CD · Infra** | GitHub Actions(self-hosted), Azure Pipelines, Docker, AWS(EC2/S3)             |
+| **CI/CD · Infra** | GitHub Actions, Azure Pipelines, Docker, AWS(EC2/S3)             |
 | **Desktop**       | Electron                                                                     |
 | **Monitoring**    | Datadog RUM/Logs                                                              |
 

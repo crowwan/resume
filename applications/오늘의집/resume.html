@@ -92,8 +92,8 @@ ErrorBoundary</p>
 다뤘습니다.</p>
 <ul>
 <li>“N장 = 네트워크 N요청”이 되기 쉬운 썸네일을
-<strong>IntersectionObserver로 보일 때만 로드</strong>하고, 50ms
-윈도우로 모아 <strong>배치 요청</strong>으로 처리</li>
+<strong>IntersectionObserver로 보일 때만 로드</strong>하고, 동시에
+들어온 요청을 모아 <strong>한 번에 배치 요청</strong>으로 처리</li>
 <li>운영 중 터진 무한 재요청을 재시도로 틀어막는 대신,
 <strong>재마운트마다 훅·캐시가 날아가는 구조</strong>를 진단해 캐시를
 공유 스코프로 끌어올리고 <strong>성공뿐 아니라 실패도 캐시</strong>해
@@ -118,7 +118,7 @@ Teams로 보고하는 AI 변경 감지 구축</li>
 <li>실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행</li>
 </ul>
 <p><code>기술</code> Playwright · Docker · MongoDB · EC2 · GitHub
-Actions self-hosted</p>
+Actions</p>
 </section>
 <section id="d-렌더링-품질-자동화" class="level3">
 <h3>3D 렌더링 품질 자동화</h3>
@@ -131,8 +131,7 @@ Actions self-hosted</p>
 <li>격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고,
 <strong>Playwright 스크린샷 비교로 3D 렌더 회귀를 가드</strong></li>
 </ul>
-<p><code>기술</code> Three.js · draco3d · WebGL · SRGB ColorManagement ·
-Playwright</p>
+<p><code>기술</code> Three.js · draco3d · WebGL · Playwright</p>
 </section>
 <section id="모노레포-통합환경-분리" class="level3">
 <h3>모노레포 통합·환경 분리</h3>
@@ -160,7 +159,7 @@ postMessage 런타임 모듈로 통합</strong>, cross-origin 격리 헤더·호
 <li>Module Federation은 초기·소비처 설정 부담을 확인하고 별도 콘솔
 서비스에만 적용</li>
 </ul>
-<p><code>기술</code> NX · iframe + postMessage · Module Federation</p>
+<p><code>기술</code> NX · Module Federation</p>
 </section>
 <section id="기업-랜딩-페이지-풀스택" class="level3">
 <h3>기업 랜딩 페이지 풀스택</h3>
@@ -168,11 +167,11 @@ postMessage 런타임 모듈로 통합</strong>, cross-origin 격리 헤더·호
 라인으로 운영했습니다.</p>
 <ul>
 <li>번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을
-자동 생성해 <strong>없는 키를 컴파일 타임에 차단</strong>하는 타입세이프
-i18n으로 전환</li>
+자동 생성해 <strong>없는 키를 컴파일 타임에 차단</strong>하는 i18n으로
+전환</li>
 <li>화면부터 <strong>서버 API까지 풀스택으로 개발</strong></li>
 </ul>
-<p><code>기술</code> Next.js · 타입세이프 i18n · Fastify · MongoDB</p>
+<p><code>기술</code> Next.js · i18n · Fastify · MongoDB</p>
 </section>
 <section id="b2b-구독결제-시스템-프론트엔드" class="level3">
 <h3>B2B 구독·결제 시스템 프론트엔드</h3>
@@ -206,8 +205,7 @@ ErrorBoundary · Playwright E2E</p>
 안내로 통일하고, CAM 없이 시나리오를 재현하는 Mock Server와 Datadog
 로그로 검증·진단</li>
 </ul>
-<p><code>기술</code> Electron · React · TypeScript · Custom Protocol ·
-Datadog</p>
+<p><code>기술</code> Electron · React · TypeScript · Datadog</p>
 <hr />
 </section>
 </section>
@@ -251,12 +249,11 @@ Datadog</p>
 </tr>
 <tr>
 <td><strong>Build / Arch</strong></td>
-<td>NX, pnpm, Git Subtree, Module Federation, iframe + postMessage,
-런타임 Config</td>
+<td>NX, pnpm, Git Subtree, Module Federation, 런타임 Config</td>
 </tr>
 <tr>
 <td><strong>3D / Graphics</strong></td>
-<td>Three.js, WebGL, draco3d, SRGB ColorManagement</td>
+<td>Three.js, WebGL, draco3d</td>
 </tr>
 <tr>
 <td><strong>Testing</strong></td>
@@ -264,8 +261,7 @@ Datadog</p>
 </tr>
 <tr>
 <td><strong>CI/CD · Infra</strong></td>
-<td>GitHub Actions(self-hosted), Azure Pipelines, Docker,
-AWS(EC2/S3)</td>
+<td>GitHub Actions, Azure Pipelines, Docker, AWS(EC2/S3)</td>
 </tr>
 <tr>
 <td><strong>Desktop</strong></td>
