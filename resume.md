@@ -8,18 +8,18 @@
 
 ## 자기소개
 
-2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드 개발자로 일하고 있습니다. 복잡한 화면과 3D 뷰어를 만들고 그 코드가 오래 버티도록 아키텍처·디자인 패턴·상태관리를 설계하는 한편, Electron 데스크톱 앱·모노레포·품질 자동화 같은 플랫폼 토대까지 맡아 왔습니다.
+2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 화면 구현부터 Electron 데스크톱·모노레포·환경 분리·품질 자동화 같은 플랫폼 토대까지 폭넓게 다뤄 왔습니다. 문제를 빠른 처치보다 근본 원인을 정확히 파악한 뒤 해결하며, 트레이드오프를 정량적으로 판단해 도입을 결정하는 방식으로 일합니다. 개발 전반에 AI를 적극 활용하되, AI가 내놓은 결과를 사실로 검증하고 판단은 직접 내립니다.
 
 ---
 
 ## 핵심 역량
 
-- **프론트엔드 설계**: FSD·클린 아키텍처·도메인 모델링, 컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance
-- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능
-- **프론트엔드 플랫폼**: NX 모노레포 통합, 환경·도메인 구성 일원화, 공통 모듈(MFE) 분리
-- **데스크톱**: Electron 앱 설계·운영, 빌드·코드 서명·자동 업데이트 인프라
-- **품질 자동화**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, 시각 회귀 CI, 에러 관측 표준화
-- **제품 도메인**: B2B 구독·결제, 글로벌 멀티테넌트·다국어, 외부 CAM 연동
+- **복잡한 화면·외부 연동 설계** — 구독·결제, 3D 뷰어, 데스크톱 CAM 연동처럼 외부 의존이 많은 워크플로우를 에러 구분·복원력 중심으로 설계
+- **렌더링 성능·상태관리** — 리스트 렌더링 성능과 서버 상태 관리, 선언적 에러 처리
+- **품질 자동화 인프라** — 신뢰할 수 있는 테스트 환경을 위해 커밋 단위로 재현 가능한 격리 환경을 만들고, 변경 연관 테스트를 자동 선별·실행
+- **프론트엔드 플랫폼 통합** — 흩어진 레포·앱을 모노레포로 통합하고 환경·도메인 구성을 일원화, 공통 기능을 모듈로 분리
+- **데스크톱 앱 설계·빌드 인프라** — Electron 앱 단독 설계·운영, 빌드·코드 서명·자동 업데이트 파이프라인
+- **AI를 개발 워크플로우에 활용** — 조사·디버깅·검증·문서화에 AI를 적극 활용하고, 변경 연관 테스트를 자동 선별하는 파이프라인을 구축; AI 산출물은 사실 검증을 거쳐 판단에 결합
 
 ---
 
@@ -39,79 +39,65 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고, 그 한계까지 겪으며 "패턴 도입의 전제"를 배웠습니다.
 
-- FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리 (단점·적용 한계까지 문서화)
-- ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance 설계, BusinessLogicError 커스텀 분기
-- 3개 앱에 중복되던 CaseInfo 다이얼로그를 Compound + FormProvider 공통 컴포넌트로 추출 (약 66% 감소)
-
-`기술` React · TypeScript · FSD · Compound/Render Props · ErrorBoundary
+- FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리 — **단점·적용 한계까지 문서화**
+- **ErrorBoundary 기반 선언적 에러 처리** + 화면 단위 Fault Tolerance 설계, BusinessLogicError 커스텀 분기
+- 3개 앱에 중복되던 CaseInfo 다이얼로그를 공통 컴포넌트로 추출 — **약 66% 감소**
 
 ### 복잡한 화면 — 렌더링 성능·상태관리
 
-사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 성능과 상태를 다뤘습니다.
+사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 렌더링 성능을 다뤘습니다.
 
-- 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 가드로 처리
-- 목록↔3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본 해결
-
-`기술` React · TanStack Query · IntersectionObserver · Three.js
+- "N장 = 네트워크 N요청"이 되기 쉬운 썸네일을 **IntersectionObserver로 보일 때만 로드**하고, 동시에 들어온 요청을 모아 **한 번에 배치 요청**으로 처리
+- 운영 중 발생한 무한 재요청을 재시도로 억제하는 대신, **재마운트마다 훅·캐시가 소실되는 구조**를 진단해 캐시를 공유 스코프로 끌어올리고 **성공뿐 아니라 실패도 캐시**해 근본 해결, 회귀 테스트로 고정
 
 ### 웹·로컬 CAM 연동 Electron 데스크톱 앱
 
 웹 보철 케이스를 사용자 PC의 CAM 소프트웨어로 전달하는 사내 연동 앱을 단독 설계·운영했습니다.
 
-- Chrome LNA 정책으로 막힌 로컬 서버 통신을 Custom Protocol 중간 레이어로 재설계
-- 좌표계·파일 전달 방식이 제각각인 외부 CAM 12종을 단일 변환·연동 인터페이스로 통합
-- 명세 없던 기존 CAM 연동을 특성화 테스트로 고정한 뒤 재구현
-
-`기술` Electron · React · TypeScript · Custom Protocol · Datadog
+- Chrome LNA 정책으로 막힌 로컬 서버 통신을 **Custom Protocol 중간 레이어로 재설계**
+- 좌표계·파일 전달 방식이 제각각인 **외부 CAM 12종을 단일 변환·연동 인터페이스로 통합**
+- 명세 없던 기존 CAM 연동을 **특성화 테스트로 고정한 뒤 재구현**
+- 설치 감지는 **틀려도 사용자가 막히지 않게** 비차단 안내로 통일하고, CAM 없이 시나리오를 재현하는 Mock Server와 Datadog 로그로 검증·진단
 
 ### 모노레포 통합·환경 분리
 
 여러 클라이언트 앱과 공용 라이브러리를 단일 NX 모노레포로 통합하고, 환경·도메인 구성을 일원화했습니다.
 
-- 환경별 도메인·URL 구성을 단일 통합 라이브러리로 일원화 (팀의 런타임 환경 분리·격리 재현이 이를 기반으로 동작)
-- 별도 레포 클라이언트 앱 2종·공용 라이브러리 6종을 Git Subtree로 이관
-- NX 자동 타겟 추론이 일으키던 빌드 실패(OOM)를 진단, 불필요한 산출물 설정을 제거해 해소
-
-`기술` TypeScript · NX · Git Subtree · i18n
+- 환경별 도메인·URL 구성을 **단일 통합 라이브러리로 일원화** — 팀의 런타임 환경 분리·격리 재현이 이를 기반으로 동작
+- 별도 레포 클라이언트 앱 2종·공용 라이브러리 6종을 **Git Subtree로 이관**
+- NX 자동 타겟 추론이 일으키던 **메모리 부족 빌드 실패**를 진단, 불필요한 산출물 설정을 제거해 해소
 
 ### 테스트·품질 자동화 인프라
 
 테스트가 거의 없던 제품에 격리 재현 기반의 자동 회귀 감지 체계를 구축했습니다.
 
-- 커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 결정론적 격리 재현 환경 구성
-- 백오피스 전 영역에 E2E를 구축하고(로그인 중복을 공통 헬퍼로 약 93% 감소), 흩어진 Playwright E2E를 모노레포로 통합·Page Object 리팩토링으로 중복 제거
-- 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를 Teams로 보고하는 AI 변경 감지 구축
+- 커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 **결정론적 격리 재현 환경 구성**
+- 백오피스 전 영역에 E2E를 구축하며 **로그인 중복을 공통 헬퍼로 약 93% 감소**, 흩어진 Playwright E2E를 모노레포로 통합·Page Object 리팩토링으로 중복 제거
+- 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고, **실패를 실제 회귀와 테스트 코드 문제로 1차 분류**해 Teams로 보고하는 AI 변경 감지 구축
 - 실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행
-
-`기술` Playwright · Docker · MongoDB · EC2 · GitHub Actions(self-hosted)
+- 개발팀 공용 도구로, **품질 테스트 케이스(TC)가 E2E로 검증됐는지 추적하는 대시보드**를 구축하고 E2E 통과 결과가 자동 반영되도록 연동 (FE 화면 + API)
 
 ### 3D 렌더링 품질 자동화
 
 팀이 AI로 빠르게 진행한 사내 3D 라이브러리→Three.js 마이그레이션에서, 두 엔진의 렌더 이미지를 눈으로 맞추느라 미세조정 값에 기댄 색·조명을 원본 엔진 동작 기준으로 다시 정리했습니다.
 
-- 이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로 Three.js 표준 기능으로 대체 (약 1,420줄 정리)
-- 격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고, Playwright 스크린샷 비교로 3D 렌더 회귀를 가드
-
-`기술` Three.js · draco3d · WebGL · SRGB ColorManagement · Playwright
+- 이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로 **Three.js 표준 기능으로 대체** — 약 1,420줄 정리
+- 격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고, **Playwright 스크린샷 비교로 3D 렌더 회귀를 가드**
 
 ### 데스크톱 앱 빌드·배포 인프라
 
 담당자 로컬 PC에서 돌던 두 데스크톱 앱의 빌드·서명·배포 파이프라인을 재설계했습니다.
 
-- macOS 빌드 파이프라인 재설계로 전체 33~39분에서 17~24분으로 단축 (PR 실측 약 -56%, 아티팩트 757MB→334MB)
-- Windows 코드 서명 에이전트를 물리 빌드머신에 직접 설치·풀 등록해 단독 운영 (서명 USB·인프라팀 의존 제거)
-
-`기술` Electron · electron-builder · electron-updater · GitHub Actions(self-hosted) · Azure Pipelines · 코드 서명·공증 · S3
+- macOS 빌드 파이프라인 재설계로 전체 33~39분에서 **17~24분으로 단축** — PR 실측 약 -56%, 아티팩트 757MB→334MB
+- Windows 코드 서명 에이전트를 물리 빌드머신에 직접 설치·풀 등록해 **단독 운영** — 서명 USB·인프라팀 의존 제거
 
 ### B2B 구독·결제 시스템 프론트엔드
 
 일회성 크레딧에서 반복 구독으로 전환하는 시점에, 글로벌 멀티테넌트 결제·권한 도메인 프론트엔드를 전담했습니다.
 
 - 플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제 히스토리까지 구독 워크플로우 전체를 구현
-- 결제 상태를 서버·Stripe 동기화(SoT) 기준으로 두고 무한 반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보
-- 부분 실패에도 핵심 흐름(내역 조회·구독 취소·뒤로가기)이 살아남도록 의존 관계 기준 Fault Tolerance를 제안 (착수 전)
-
-`기술` React · TypeScript · TanStack Query · Stripe · ErrorBoundary · Playwright(E2E)
+- 결제 상태를 **서버·Stripe 동기화 기준**으로 두고, 무한 반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보
+- 모든 에러를 unknown으로 일괄 처리하던 것을 **예측 가능/불가능으로 구분** — 비즈니스 에러는 코드별 분기, 시스템 실패는 ErrorBoundary로 격리하고, 이 문제의식을 이후 **5개 앱 관측·복원력 표준화**로 확장
 
 ---
 
@@ -119,17 +105,14 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 | 분류 | 기술 |
 |------|------|
-| **Language** | TypeScript, JavaScript |
-| **Frontend** | React 18/19, Next.js |
-| **Desktop** | Electron |
-| **State / UI** | TanStack Query, Recoil · MUI, Emotion |
-| **Build / Arch** | NX, pnpm, Git Subtree, Module Federation, iframe + postMessage, 런타임 Config |
-| **3D / Graphics** | Three.js, WebGL, draco3d, SRGB ColorManagement |
-| **Testing** | Playwright, Jest, Vitest, MSW |
-| **CI/CD · Infra** | GitHub Actions(self-hosted), Azure Pipelines, Docker, AWS(EC2/S3) |
-| **Monitoring** | Datadog RUM/Logs |
-
-> 백엔드(Node.js/Fastify·MongoDB)는 기업 랜딩 페이지 풀스택, 조직 관리 백오피스 등에서 일부 직접 개발했습니다.
+| **Language** | TypeScript |
+| **Frontend** | React, Next.js, Electron |
+| **State / UI** | TanStack Query, Recoil, MUI |
+| **Build / Arch** | NX, Vite, Webpack |
+| **3D / Graphics** | Three.js |
+| **Testing** | Playwright, Jest |
+| **CI/CD · Infra** | GitHub Actions, Docker, AWS |
+| **Monitoring** | Datadog |
 
 ---
 
