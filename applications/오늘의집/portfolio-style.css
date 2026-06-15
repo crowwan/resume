@@ -254,4 +254,5 @@ tbody tr:nth-child(even) { background: var(--bg-subtle); }
   }
   a { color: var(--text); }
   section[class~="level2"] { break-inside: avoid; }
+  h2::before { background: var(--primary); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
