@@ -91,12 +91,13 @@ ErrorBoundary</p>
 <p>사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 렌더링 성능을
 다뤘습니다.</p>
 <ul>
-<li>썸네일을 IntersectionObserver 배치 lazy-loading으로 처리하고,
-성공·실패를 함께 캐시해 <strong>재마운트 시 중복·무한 재요청을
-제거</strong>하고 회귀 테스트로 고정</li>
-<li>깜빡임·무한 재요청 회귀의 근본 원인인 <strong>카드 재마운트마다 훅이
-새로 생기는 구조</strong>를 진단해, 캐시를 공유 스코프로 끌어올려
-구조적으로 해결</li>
+<li>“N장 = 네트워크 N요청”이 되기 쉬운 썸네일을
+<strong>IntersectionObserver로 보일 때만 로드</strong>하고, 50ms
+윈도우로 모아 <strong>배치 요청</strong>으로 처리</li>
+<li>운영 중 터진 무한 재요청을 재시도로 틀어막는 대신,
+<strong>재마운트마다 훅·캐시가 날아가는 구조</strong>를 진단해 캐시를
+공유 스코프로 끌어올리고 <strong>성공뿐 아니라 실패도 캐시</strong>해
+근본 해결, 회귀 테스트로 고정</li>
 </ul>
 <p><code>기술</code> React · TanStack Query · IntersectionObserver ·
 Three.js</p>
