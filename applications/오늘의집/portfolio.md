@@ -3,7 +3,7 @@
 
 # 김진완 포트폴리오 | Frontend Developer
 
-- [이력서](resume.html) · [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
+블로그 velog.io/@crowwan · 깃허브 github.com/crowwan
 
 ---
 
@@ -205,9 +205,3 @@ iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의 Fi
 
 이 문제의식의 출발점은 구독·결제 프론트엔드에서 에러를 예측 가능/불가능으로 처음 구분한 경험이었고, 그때 한 프로젝트 안에 머물렀던 정리를 이번에 5개 앱 조직 표준으로 끌어올렸습니다.
 
----
-
-## 함께 보기
-
-- **[이력서](resume.html)** — 전체 경력과 기술 스택
-- **[깃허브](https://github.com/crowwan)** · **[블로그](https://velog.io/@crowwan)**

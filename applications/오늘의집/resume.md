@@ -2,7 +2,7 @@
 
 프론트엔드 아키텍처·상태관리 · 품질 자동화 · Electron 데스크톱
 
-- [포트폴리오](portfolio.html) · [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
+블로그 velog.io/@crowwan · 깃허브 github.com/crowwan
 
 ---
 
@@ -56,7 +56,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 - 커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 **결정론적 격리 재현 환경 구성**
 - 백오피스 전 영역에 E2E를 구축하며 **로그인 중복을 공통 헬퍼로 약 93% 감소**, 흩어진 Playwright E2E를 모노레포로 통합·Page Object 리팩토링으로 중복 제거
-- 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를 Teams로 보고하는 **AI 변경 감지 구축**
+- 커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고, **실패를 실제 회귀와 테스트 코드 문제로 1차 분류**해 Teams로 보고하는 AI 변경 감지 구축
 - 실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행
 
 `기술` Playwright · Docker · MongoDB · EC2 · GitHub Actions self-hosted
@@ -115,6 +115,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 - Chrome LNA 정책으로 막힌 로컬 서버 통신을 **Custom Protocol 중간 레이어로 재설계**
 - 좌표계·파일 전달 방식이 제각각인 **외부 CAM 12종을 단일 변환·연동 인터페이스로 통합**
 - 명세 없던 기존 CAM 연동을 **특성화 테스트로 고정한 뒤 재구현**
+- 설치 감지는 **틀려도 사용자가 막히지 않게** 비차단 안내로 통일하고, CAM 없이 시나리오를 재현하는 Mock Server와 Datadog 로그로 검증·진단
 
 `기술` Electron · React · TypeScript · Custom Protocol · Datadog
 
