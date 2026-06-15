@@ -148,7 +148,7 @@
 
 ![3계층 ErrorBoundary — 외부 의존 없는 최후 안전망부터 기능 단위 격리까지, 원인별 직렬화로 Datadog에 닿는다](images/portfolio/diagrams/observability-layers.svg){.diagram}
 
-가시성을 높이는 방법으로 처음엔 `react-error-boundary` 라이브러리를 검토했지만 **기각**했습니다 — ① 실제 실패는 렌더가 아니라 **async 이벤트 핸들러**(파일 다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ② iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ 결국 throw 지점마다 wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신 **에러 객체 자체에 풍부한 metadata를 담는** 방식(표준 `Error.cause` + 구조화된 실패 상세)을 택해, throw 지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통 라이브러리라 **한 곳을 고치면 5개 앱에 반영**됩니다.
+render-time 에러는 `react-error-boundary`로 처리하지만, **비동기 에러에는 이 라이브러리를 쓰지 않았습니다** — ① 실제 실패는 렌더가 아니라 **async 이벤트 핸들러**(파일 다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ② iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ throw 지점마다 wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신 비동기 에러는 **에러 객체 자체에 풍부한 metadata를 담는** 방식(표준 `Error.cause` + 구조화된 실패 상세)을 택해, throw 지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통 라이브러리라 **한 곳을 고치면 5개 앱에 반영**됩니다.
 
 에러를 라이브러리(`instanceof`)에 묶지 않고 **shape(duck typing)으로 판별·분류**했습니다. axios든 fetch든 응답 형태만 보고 HTTP 상태를 뽑아 같은 기준으로 6분류하며, 이 분류기는 이후 공통 라이브러리로 승격됐습니다.
 
