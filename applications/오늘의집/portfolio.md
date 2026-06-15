@@ -143,7 +143,7 @@ AI 변경 감지에서도 한계를 정직하게 마주했습니다. 선별·분
 
 ## Case 4. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro Frontend
 
-`2023.09 ~ 2025.10` · `NX · iframe + postMessage · Module Federation`
+`2023.09 ~ 2025.10` · `NX · Module Federation`
 
 ### 개요
 
@@ -173,7 +173,7 @@ iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의 Fi
 
 ## Case 5. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화
 
-`2026.04 ~` · `React · TypeScript · ErrorBoundary · Datadog RUM`
+`2026.04 ~` · `React · TypeScript · Datadog RUM`
 
 ### 개요
 

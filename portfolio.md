@@ -39,7 +39,7 @@
 
 ## Case 1. 패턴을 적용하는 법이 아니라, 도입의 전제를 배우다 — FSD·컴포넌트 패턴
 
-`2023.09 ~ 2025.07` · `React · TypeScript · FSD · Compound Component · Render Props · ErrorBoundary`
+`2023.09 ~ 2025.07` · `React · TypeScript · FSD`
 
 ### 개요
 
@@ -98,7 +98,7 @@
 
 ## Case 3. 에러를 구분하기 시작하다 — B2B 구독·결제 프론트엔드
 
-`2023.09 ~ 2025.07` · `React · TypeScript · TanStack Query · ErrorBoundary · BusinessLogicError`
+`2023.09 ~ 2025.07` · `React · TypeScript · TanStack Query`
 
 ### 개요
 
@@ -130,7 +130,7 @@
 
 ## Case 4. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화
 
-`2026.04 ~` · `React · TypeScript · ErrorBoundary · Datadog RUM`
+`2026.04 ~` · `React · TypeScript · Datadog RUM`
 
 ### 개요
 
@@ -164,7 +164,7 @@
 
 ## Case 5. AI가 옮긴 마이그레이션의 부채를 잡다 — 3D 렌더링 품질
 
-`2026.04 ~` · `Three.js · draco3d · WebGL · SRGB ColorManagement · Playwright · pngjs`
+`2026.04 ~` · `Three.js · draco3d · WebGL · Playwright · pngjs`
 
 > 🖼️ **[이미지]** 같은 치아 모델을 두 엔진으로 렌더한 결과 비교 + 시각 회귀 CI의 RED/GREEN 스크린샷 diff 예시.
 
@@ -198,7 +198,7 @@ VTK는 modeler·crown·milling의 핵심 렌더 엔진인데, 그중 **썸네일
 
 ## Case 6. 런타임에야 깨지던 번역을 빌드에서 막다 — 기업 랜딩 풀스택
 
-`2023.09 ~ 2025.10` · `Next.js · 타입세이프 i18n · Fastify · MongoDB`
+`2023.09 ~ 2025.10` · `Next.js · i18n · Fastify · MongoDB`
 
 ### 개요
 
@@ -222,7 +222,7 @@ VTK는 modeler·crown·milling의 핵심 렌더 엔진인데, 그중 **썸네일
 
 ## Case 7. 웹과 로컬 CAM을 잇는 Electron 데스크톱 앱 — Dentbird Linker
 
-`2024.07 ~ 2025.12, 이후 단독 운영` · `Electron · React · TypeScript · Custom Protocol · Chrome LNA · Datadog`
+`2024.07 ~ 2025.12, 이후 단독 운영` · `Electron · React · TypeScript · Datadog`
 
 ![Dentbird Linker와 검증용 Mock Server — 외부 CAM 12종(포트 연동 4종 + 프로세스 실행 8종)을 한 인터페이스로 추상화한 연동 화면(좌)과, CAM 없이 연동·자동 업데이트를 시나리오별로 재현해 검증한 Mock Server(우)](images/portfolio/screenshots/linker-mockserver.png)
 
@@ -275,7 +275,7 @@ CAM 12종을 모두 설치하지 않고도 연동·자동 업데이트를 검증
 
 ## Case 8. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro Frontend
 
-`2023.09 ~ 2025.10` · `NX · iframe + postMessage · Module Federation`
+`2023.09 ~ 2025.10` · `NX · Module Federation`
 
 ### 개요
 
@@ -380,7 +380,7 @@ AI 변경 감지에서도 한계를 정직하게 마주했습니다. 선별·분
 
 ## Case 11. 담당자 PC에 묶인 데스크톱 빌드를 자동화 파이프라인으로
 
-`2024 ~` · `Electron · electron-builder · electron-updater · GitHub Actions(self-hosted) · Azure Pipelines · 코드 서명·공증 · S3`
+`2024 ~` · `Electron · electron-builder · electron-updater · GitHub Actions · Azure Pipelines · S3`
 
 ### 개요
 
