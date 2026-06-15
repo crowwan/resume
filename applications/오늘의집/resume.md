@@ -131,17 +131,16 @@ LLM 기반 사용자 인터랙션 설계는 직접 해본 적이 없습니다. �
 
 ## 기술 스택
 
-| 분류              | 기술                                                                          |
-| ----------------- | ----------------------------------------------------------------------------- |
-| **Language**      | TypeScript, JavaScript                                                        |
-| **Frontend**      | React 18/19, Next.js                                                          |
-| **State / UI**    | TanStack Query, Recoil · MUI, Emotion                                         |
-| **Build / Arch**  | NX, pnpm, Git Subtree, Module Federation, 런타임 Config |
-| **3D / Graphics** | Three.js, WebGL, draco3d                                |
-| **Testing**       | Playwright, Jest, Vitest, MSW                                                 |
-| **CI/CD · Infra** | GitHub Actions, Azure Pipelines, Docker, AWS(EC2/S3)             |
-| **Desktop**       | Electron                                                                     |
-| **Monitoring**    | Datadog RUM/Logs                                                              |
+| 분류              | 기술                                          |
+| ----------------- | --------------------------------------------- |
+| **Language**      | TypeScript                                    |
+| **Frontend**      | React, Next.js, Electron                      |
+| **State / UI**    | TanStack Query, Recoil, MUI                   |
+| **Build / Arch**  | NX, MFE                                       |
+| **3D / Graphics** | Three.js                                      |
+| **Testing**       | Playwright, Jest                              |
+| **CI/CD · Infra** | GitHub Actions, Docker, AWS                   |
+| **Monitoring**    | Datadog                                       |
 
 > 백엔드 **Node.js/Fastify·MongoDB**는 기업 랜딩 페이지 풀스택, 조직 관리 백오피스 등에서 일부 직접 개발했습니다.
 
