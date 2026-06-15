@@ -454,12 +454,14 @@ wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다
 지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다.
 공통 라이브러리라 <strong>한 곳을 고치면 5개 앱에
 반영</strong>됩니다.</p>
-<p>에러를 라이브러리(<code>instanceof</code>)에 묶지 않고
-<strong>shape(duck typing)으로 판별·분류</strong>했습니다. axios든
-fetch든 응답 형태만 보고 HTTP 상태를 뽑아 같은 기준으로 6분류하며, 이
-분류기는 이후 공통 라이브러리로 승격됐습니다.</p>
-<p>관측 표준 정렬 종합 계획을 직접 작성·주도하고 <strong>5개 PR로
-분해</strong>해 적용했습니다.</p>
+<p>에러를 <code>instanceof</code>로 — axios·fetch 같은 특정 라이브러리의
+에러 타입으로 — 판별하면 라이브러리마다 타입이 달라 분기가 복잡해지고 그
+라이브러리에 종속됩니다. 대신 에러 객체의 <strong>형태(shape)만 보고
+HTTP 상태를 추출</strong>해, axios·fetch·커스텀 wrapper 어디서 온 에러든
+같은 기준으로 다뤘습니다. 이렇게 뽑은 상태로 에러를 일시적 오류·치명적
+오류·무시할 오류 등 여섯 갈래로 나눠 분류별로 다르게 대응했고, 이 분류
+로직은 한 앱에서 만든 뒤 공통 라이브러리로 옮겨 여러 앱이 함께 쓰게
+했습니다.</p>
 <p>같은 복원력 관점을 데이터 로딩으로도 확장하려 합니다 — 3D 뷰어에서
 여러 design 중 일부 mesh가 손상돼도 <code>Promise.allSettled</code>로
 <strong>살아있는 mesh는 렌더하고 누락은 ModelTree에 표시</strong>해,
