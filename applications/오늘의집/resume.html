@@ -39,34 +39,27 @@ href="https://github.com/crowwan">깃허브</a></li>
 <hr />
 <section id="자기소개" class="level2">
 <h2>자기소개</h2>
-<p>2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird에서 프론트엔드
-개발자로 일하고 있습니다. 화면 구현뿐 아니라 테스트·빌드·배포 자동화,
-모노레포 통합과 공통 모듈 분리까지, 제품이 돌아가는 구조를 맡아
-왔습니다. 테스트가 거의 없던 제품에 재현 가능한 환경과 자동 회귀 감지를
-직접 만든 경험은 “대충 넘어가지 않는” 품질과 속도를 함께 보는 오늘의집의
-일하는 방식과 맞닿아 있다고 생각합니다. 별도 레포로 흩어진 앱을
-모노레포로 통합하고 공통 기능의 모듈 경계를 다시 그어 온 경험은
-오늘의집이 겪은 모놀리식의 점진적 프론트엔드 분리 문제와도 결이
-같습니다.</p>
+<p>2023년 9월부터 AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를
+맡아, 화면 구현부터 모노레포·환경 분리·품질 자동화 같은 플랫폼 토대까지
+폭넓게 다뤄 왔습니다. 문제를 빠르게 덮기보다 근본 원인을 이해하고
+재현으로 확인하며, 트레이드오프를 따져 도입을 결정하는 방식으로
+일합니다.</p>
 <hr />
 </section>
 <section id="핵심-역량" class="level2">
 <h2>핵심 역량</h2>
 <ul>
-<li><strong>프론트엔드 설계</strong>: FSD·클린 아키텍처·도메인 모델링,
-컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault
-Tolerance</li>
-<li><strong>화면·상태·성능</strong>: 복잡한 구독·뷰어 워크플로우,
-TanStack Query 기반 서버 상태 관리, 리스트 렌더링 성능</li>
-<li><strong>품질 자동화·CI/CD</strong>: Playwright E2E, 커밋 단위
-컨테이너 재현, 변경 기반 테스트 자동 선별, 시각 회귀 CI, 에러 관측
-표준화</li>
-<li><strong>프론트엔드 플랫폼</strong>: NX 모노레포 통합, 환경·도메인
-구성 일원화, 공통 모듈(MFE) 분리</li>
-<li><strong>데스크톱</strong>: Electron 앱 설계·운영, 빌드·코드
-서명·자동 업데이트 인프라</li>
-<li><strong>제품 도메인</strong>: B2B 구독·결제 프론트엔드, 글로벌
-멀티테넌트·다국어</li>
+<li><strong>복잡한 화면·외부 연동 설계</strong> — 구독·결제, 3D 뷰어,
+데스크톱 CAM 연동처럼 외부 의존이 많은 워크플로우를 에러 구분·복원력
+중심으로 설계</li>
+<li><strong>렌더링 성능·상태관리</strong> — 리스트 렌더링 성능과 서버
+상태 관리, 선언적 에러 처리</li>
+<li><strong>품질 자동화 인프라</strong> — 신뢰할 수 있는 테스트 환경을
+위해 커밋 단위로 재현 가능한 격리 환경을 만들고, 변경 연관 테스트를 자동
+선별·실행</li>
+<li><strong>프론트엔드 플랫폼 통합</strong> — 흩어진 레포·앱을
+모노레포로 통합하고 환경·도메인 구성을 일원화, 공통 기능을 모듈로
+분리</li>
 </ul>
 <hr />
 </section>
@@ -86,12 +79,12 @@ Dentbird 1 Team | 2023.09 ~ 현재</p>
 <p>계정·구독 클라이언트에 FSD·컴포넌트 패턴·선언적 에러 처리를 도입하고,
 그 한계까지 겪으며 “패턴 도입의 전제”를 배웠습니다.</p>
 <ul>
-<li>FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리
-(단점·적용 한계까지 문서화)</li>
-<li>ErrorBoundary 기반 선언적 에러 처리 + 화면 단위 Fault Tolerance
-설계, BusinessLogicError 커스텀 분기</li>
-<li>3개 앱에 중복되던 CaseInfo 다이얼로그를 Compound + FormProvider 공통
-컴포넌트로 추출 (약 66% 감소)</li>
+<li>FSD로 도메인 분리, Compound Component·Render Props로 관심사 분리 —
+<strong>단점·적용 한계까지 문서화</strong></li>
+<li><strong>ErrorBoundary 기반 선언적 에러 처리</strong> + 화면 단위
+Fault Tolerance 설계, BusinessLogicError 커스텀 분기</li>
+<li>3개 앱에 중복되던 CaseInfo 다이얼로그를 공통 컴포넌트로 추출 —
+<strong>약 66% 감소</strong></li>
 </ul>
 <p><code>기술</code> React · TypeScript · FSD · Compound/Render Props ·
 ErrorBoundary</p>
@@ -102,10 +95,11 @@ ErrorBoundary</p>
 다뤘습니다.</p>
 <ul>
 <li>썸네일을 IntersectionObserver 배치 lazy-loading으로 처리하고,
-성공·실패(negative)를 함께 캐시해 재마운트 시 중복·무한 재요청을 제거
-(회귀 테스트로 고정)</li>
-<li>깜빡임·무한 재요청 회귀의 근본 원인(카드 재마운트마다 훅 재생성)을
-진단해, 캐시를 공유 스코프로 끌어올려 구조적으로 해결</li>
+성공·실패를 함께 캐시해 <strong>재마운트 시 중복·무한 재요청을
+제거</strong>하고 회귀 테스트로 고정</li>
+<li>깜빡임·무한 재요청 회귀의 근본 원인인 <strong>카드 재마운트마다 훅이
+새로 생기는 구조</strong>를 진단해, 캐시를 공유 스코프로 끌어올려
+구조적으로 해결</li>
 </ul>
 <p><code>기술</code> React · TanStack Query · IntersectionObserver ·
 Three.js</p>
@@ -115,17 +109,17 @@ Three.js</p>
 <p>테스트가 거의 없던 제품에 격리 재현 기반의 자동 회귀 감지 체계를
 구축했습니다.</p>
 <ul>
-<li>커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 결정론적 격리 재현
-환경 구성</li>
-<li>백오피스 전 영역에 E2E를 구축하고(로그인 중복을 공통 헬퍼로 약 93%
-감소), 흩어진 Playwright E2E를 모노레포로 통합·Page Object 리팩토링으로
-중복 제거</li>
+<li>커밋 시점 클라이언트·서버·DB를 컨테이너로 묶어 <strong>결정론적 격리
+재현 환경 구성</strong></li>
+<li>백오피스 전 영역에 E2E를 구축하며 <strong>로그인 중복을 공통 헬퍼로
+약 93% 감소</strong>, 흩어진 Playwright E2E를 모노레포로 통합·Page
+Object 리팩토링으로 중복 제거</li>
 <li>커밋 변경을 분석해 연관 QA 테스트 케이스만 자동 선별·실행하고 결과를
-Teams로 보고하는 AI 변경 감지 구축</li>
+Teams로 보고하는 <strong>AI 변경 감지 구축</strong></li>
 <li>실행 인프라를 EC2로 구성하고 10분 간격 크론잡으로 자동 실행</li>
 </ul>
 <p><code>기술</code> Playwright · Docker · MongoDB · EC2 · GitHub
-Actions(self-hosted)</p>
+Actions self-hosted</p>
 </section>
 <section id="d-렌더링-품질-자동화" class="level3">
 <h3>3D 렌더링 품질 자동화</h3>
@@ -134,9 +128,9 @@ Actions(self-hosted)</p>
 원본 엔진 동작 기준으로 다시 정리했습니다.</p>
 <ul>
 <li>이미지 맞춤으로 들어간 미세조정 값을 원본 엔진 실제 동작 근거로
-Three.js 표준 기능으로 대체 (약 1,420줄 정리)</li>
+<strong>Three.js 표준 기능으로 대체</strong> — 약 1,420줄 정리</li>
 <li>격리 컨테이너에서 baseline을 고정 생성해 환경 차를 제거하고,
-Playwright 스크린샷 비교로 3D 렌더 회귀를 가드</li>
+<strong>Playwright 스크린샷 비교로 3D 렌더 회귀를 가드</strong></li>
 </ul>
 <p><code>기술</code> Three.js · draco3d · WebGL · SRGB ColorManagement ·
 Playwright</p>
@@ -146,12 +140,13 @@ Playwright</p>
 <p>여러 클라이언트 앱과 공용 라이브러리를 단일 NX 모노레포로 통합하고,
 환경·도메인 구성을 일원화했습니다.</p>
 <ul>
-<li>환경별 도메인·URL 구성을 단일 통합 라이브러리로 일원화 (팀의 런타임
-환경 분리·격리 재현이 이를 기반으로 동작)</li>
-<li>별도 레포 클라이언트 앱 2종·공용 라이브러리 6종을 Git Subtree로
-이관</li>
-<li>NX 자동 타겟 추론이 일으키던 빌드 실패(OOM)를 진단, 불필요한 산출물
-설정을 제거해 해소</li>
+<li>환경별 도메인·URL 구성을 <strong>단일 통합 라이브러리로
+일원화</strong> — 팀의 런타임 환경 분리·격리 재현이 이를 기반으로
+동작</li>
+<li>별도 레포 클라이언트 앱 2종·공용 라이브러리 6종을 <strong>Git
+Subtree로 이관</strong></li>
+<li>NX 자동 타겟 추론이 일으키던 <strong>메모리 부족 빌드
+실패</strong>를 진단, 불필요한 산출물 설정을 제거해 해소</li>
 </ul>
 <p><code>기술</code> TypeScript · NX · Git Subtree · i18n</p>
 </section>
@@ -160,9 +155,9 @@ Playwright</p>
 <p>도메인·관리팀이 나뉜 여러 서비스가 공유하는 공통 기능을, 한 곳에서
 고치면 모두 반영되도록 런타임 모듈로 통합했습니다.</p>
 <ul>
-<li>공통 기능 4종(설정·내보내기·탐색기·뷰어)을 iframe + postMessage
-런타임 모듈로 통합, cross-origin 격리 헤더·호스트 화이트리스트로 임베드
-경계 잠금</li>
+<li>설정·내보내기·탐색기·뷰어 등 공통 기능 4종을 <strong>iframe +
+postMessage 런타임 모듈로 통합</strong>, cross-origin 격리 헤더·호스트
+화이트리스트로 임베드 경계 잠금</li>
 <li>Module Federation은 초기·소비처 설정 부담을 확인하고 별도 콘솔
 서비스에만 적용</li>
 </ul>
@@ -174,10 +169,9 @@ Playwright</p>
 라인으로 운영했습니다.</p>
 <ul>
 <li>번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을
-자동 생성해 없는 키를 컴파일 타임에 차단하는 타입세이프 i18n으로
-전환</li>
-<li>화면부터 서버 API까지 풀스택으로 개발 (Next.js · Fastify ·
-MongoDB)</li>
+자동 생성해 <strong>없는 키를 컴파일 타임에 차단</strong>하는 타입세이프
+i18n으로 전환</li>
+<li>화면부터 <strong>서버 API까지 풀스택으로 개발</strong></li>
 </ul>
 <p><code>기술</code> Next.js · 타입세이프 i18n · Fastify · MongoDB</p>
 </section>
@@ -188,26 +182,27 @@ MongoDB)</li>
 <ul>
 <li>플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제
 히스토리까지 구독 워크플로우 전체를 구현</li>
-<li>결제 상태를 서버·Stripe 동기화(SoT) 기준으로 두고 무한 반복 방지
-폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보</li>
-<li>모든 에러를 unknown으로 뭉개던 것을 예측 가능/불가능으로 구분 —
-비즈니스 에러(HTTP 200·errorCode)는 코드별 분기, 시스템 실패는
-ErrorBoundary로 격리; 이 문제의식을 이후 5개 앱 관측·복원력 표준화로
-확장</li>
+<li>결제 상태를 <strong>서버·Stripe 동기화 기준</strong>으로 두고, 무한
+반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보</li>
+<li>모든 에러를 unknown으로 뭉개던 것을 <strong>예측 가능/불가능으로
+구분</strong> — 비즈니스 에러는 코드별 분기, 시스템 실패는
+ErrorBoundary로 격리하고, 이 문제의식을 이후 <strong>5개 앱 관측·복원력
+표준화</strong>로 확장</li>
 </ul>
 <p><code>기술</code> React · TypeScript · TanStack Query · Stripe ·
-ErrorBoundary · Playwright(E2E)</p>
+ErrorBoundary · Playwright E2E</p>
 </section>
 <section id="웹로컬-cam-연동-electron-데스크톱-앱" class="level3">
 <h3>웹·로컬 CAM 연동 Electron 데스크톱 앱</h3>
 <p>웹 보철 케이스를 사용자 PC의 CAM 소프트웨어로 전달하는 사내 연동 앱을
 단독 설계·운영했습니다.</p>
 <ul>
-<li>Chrome LNA 정책으로 막힌 로컬 서버 통신을 Custom Protocol 중간
-레이어로 재설계</li>
-<li>좌표계·파일 전달 방식이 제각각인 외부 CAM 12종을 단일 변환·연동
-인터페이스로 통합</li>
-<li>명세 없던 기존 CAM 연동을 특성화 테스트로 고정한 뒤 재구현</li>
+<li>Chrome LNA 정책으로 막힌 로컬 서버 통신을 <strong>Custom Protocol
+중간 레이어로 재설계</strong></li>
+<li>좌표계·파일 전달 방식이 제각각인 <strong>외부 CAM 12종을 단일
+변환·연동 인터페이스로 통합</strong></li>
+<li>명세 없던 기존 CAM 연동을 <strong>특성화 테스트로 고정한 뒤
+재구현</strong></li>
 </ul>
 <p><code>기술</code> Electron · React · TypeScript · Custom Protocol ·
 Datadog</p>
@@ -216,11 +211,11 @@ Datadog</p>
 </section>
 <section id="보완하고-싶은-영역" class="level2">
 <h2>보완하고 싶은 영역</h2>
-<p>대규모 웹 트래픽 환경의 Core Web Vitals 최적화, SSR, BFF,
-접근성(a11y)은 아직 실무 경험이 깊지 않습니다. Next.js 기반 풀스택(기업
-랜딩 + Fastify 서버 API)으로 서버사이드 JS 런타임을 다뤄봤고 제품에서
-런타임 환경 분리·번들 구조·빌드 성능은 직접 맡아 왔지만, 사용자 규모가
-큰 웹 런타임 성능과 접근성은 입사 후 우선 채우고 싶은 영역입니다.</p>
+<p>대규모 웹 트래픽 환경의 Core Web Vitals 최적화, SSR, BFF, 접근성은
+아직 실무 경험이 깊지 않습니다. Next.js 기반 풀스택으로 서버사이드 JS
+런타임을 다뤄봤고 제품에서 런타임 환경 분리·번들 구조·빌드 성능은 직접
+맡아 왔지만, 사용자 규모가 큰 웹 런타임 성능과 접근성은 입사 후 우선
+채우고 싶은 영역입니다.</p>
 <p>LLM 기반 사용자 인터랙션 설계는 직접 해본 적이 없습니다. 다만 변경
 감지·테스트 선별처럼 AI를 개발 파이프라인의 판단 단계에 결합해 본 경험이
 있어, 그 감각을 사용자 대면 인터랙션으로 확장하는 데 관심이 큽니다.</p>
@@ -281,8 +276,8 @@ AWS(EC2/S3)</td>
 </tbody>
 </table>
 <blockquote>
-<p>백엔드(Node.js/Fastify·MongoDB)는 기업 랜딩 페이지 풀스택, 조직 관리
-백오피스 등에서 일부 직접 개발했습니다.</p>
+<p>백엔드 <strong>Node.js/Fastify·MongoDB</strong>는 기업 랜딩 페이지
+풀스택, 조직 관리 백오피스 등에서 일부 직접 개발했습니다.</p>
 </blockquote>
 <hr />
 </section>
