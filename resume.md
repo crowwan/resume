@@ -1,8 +1,6 @@
 # 김진완 | 프론트엔드 개발자
 
-프론트엔드 아키텍처·상태관리 · Electron 데스크톱 · 품질 자동화
-
-- [포트폴리오](portfolio.html) · [블로그](https://velog.io/@crowwan) · [깃허브](https://github.com/crowwan)
+- [포트폴리오](portfolio.html) · [블로그](https://crowwan.github.io/) · [깃허브](https://github.com/crowwan)
 
 ---
 
