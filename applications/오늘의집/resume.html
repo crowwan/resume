@@ -180,10 +180,10 @@ postMessage 런타임 모듈로 통합</strong>, cross-origin 격리 헤더·호
 히스토리까지 구독 워크플로우 전체를 구현</li>
 <li>결제 상태를 <strong>서버·Stripe 동기화 기준</strong>으로 두고, 무한
 반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보</li>
-<li>모든 에러를 unknown으로 뭉개던 것을 <strong>예측 가능/불가능으로
-구분</strong> — 비즈니스 에러는 코드별 분기, 시스템 실패는
-ErrorBoundary로 격리하고, 이 문제의식을 이후 <strong>5개 앱 관측·복원력
-표준화</strong>로 확장</li>
+<li>모든 에러를 unknown으로 일괄 처리하던 것을 <strong>예측
+가능/불가능으로 구분</strong> — 비즈니스 에러는 코드별 분기, 시스템
+실패는 ErrorBoundary로 격리하고, 이 문제의식을 이후 <strong>5개 앱
+관측·복원력 표준화</strong>로 확장</li>
 </ul>
 </section>
 <section id="웹로컬-cam-연동-electron-데스크톱-앱" class="level3">
