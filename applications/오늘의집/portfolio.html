@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>김진완 포트폴리오 | 오늘의집</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="portfolio-style.css" />
+</head>
+<body>
+<!-- 오늘의집(버킷플레이스) Frontend Engineer 지원용 포트폴리오 -->
+<!-- 메인 portfolio.md에서 JD 매칭 5개 케이스 발췌·재번호 (테스트·CI / 성능 / 아키텍처 2축 / 복원력) -->
+<section id="김진완-포트폴리오-frontend-developer" class="level1">
+<h1>김진완 포트폴리오 | Frontend Developer</h1>
+<ul>
+<li><a href="resume.html">이력서</a> · <a
+href="https://velog.io/@crowwan">블로그</a> · <a
+href="https://github.com/crowwan">깃허브</a></li>
+</ul>
+<hr />
+<section id="about" class="level2">
+<h2>About</h2>
+<p>2023년 9월부터 이마고웍스에서 AI 기반 치과 CAD/CAM SaaS인
+<strong>Dentbird</strong>의 프론트엔드를 맡고 있습니다. 복잡한 화면과 3D
+뷰어를 만들고, 그 코드가 오래 버티도록 아키텍처·디자인 패턴·상태관리를
+설계하는 것이 일의 중심입니다. 동시에 그 프론트엔드를 받치는
+모노레포·환경 분리·빌드·품질 자동화 같은 플랫폼 토대까지 한 제품 안에서
+폭넓게 다뤄 왔습니다.</p>
+<p>문제를 만나면 빠르게 덮기보다 <strong>근본 원인을 정확히 이해한 뒤
+푸는 쪽</strong>을 택합니다. 증상을 막는 임시방편과 구조를 고치는 일을
+구분하고, “고쳐졌다”가 아니라 <strong>왜 고쳐졌는지 재현으로 확인될
+때</strong>까지 끝을 봅니다. 우연히 고쳐진 수정은 같은 문제로 다시
+돌아온다고 보기 때문입니다.</p>
+<p>선택의 순간에는 <strong>트레이드오프를 가능한 한 지표로
+따집니다</strong>. 그 불편이 실제로 큰지, 해소 방안이 불편을 얼마나
+줄이는지를 가늠하고, 짧은 시간에 큰 이득이 없으면 과감히 접습니다.
+기술도 <strong>명확한 이유가 있을 때만 도입합니다</strong> — 예전에는
+뚜렷한 근거 없이 새 기술을 들였지만, 지금은 그 기술이 어떤 문제를 푸는지
+분명할 때 도입합니다.</p>
+<p>좋은 개발 문화는 <strong>팀이 같은 방향을 공유하고 서로 이해할
+때</strong> 생긴다고 믿습니다. 그래서 혼자 옳은 결정보다 팀이 함께
+납득하는 결정을, 잘된 것뿐 아니라 <strong>되돌린 결정과 한계까지
+정직하게 남기는 것</strong>을 중요하게 봅니다.</p>
+<p><strong>Skills</strong></p>
+<p class="skills-chips">
+<span
+class="chip"><img src="../../images/portfolio/icons/react.svg" alt="">React</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/typescript.svg" alt="">TypeScript</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/nextjs.svg" alt="">Next.js</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/tanstack.svg" alt="">TanStack
+Query</span> <span
+class="chip"><img src="../../images/portfolio/icons/threejs.svg" alt="">Three.js</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/electron.svg" alt="">Electron</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/playwright.svg" alt="">Playwright</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/jest.svg" alt="">Jest</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/docker.svg" alt="">Docker</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/aws.svg" alt="">AWS</span>
+<span
+class="chip"><img src="../../images/portfolio/icons/ghactions.svg" alt="">GitHub
+Actions</span> <span
+class="chip"><img src="../../images/portfolio/icons/datadog.svg" alt="">Datadog</span>
+</p>
+<figure>
+<img src="../../images/portfolio/screenshots/cloud-case-list.png"
+alt="Dentbird Cloud — AI 기반 치과 CAD/CAM 플랫폼의 케이스 목록 화면" />
+<figcaption aria-hidden="true">Dentbird Cloud — AI 기반 치과 CAD/CAM
+플랫폼의 케이스 목록 화면</figcaption>
+</figure>
+<p><em>Dentbird Cloud — AI 기반 치과 CAD/CAM SaaS. 이 화면을 포함한
+웹·데스크톱 프론트엔드를 담당했습니다.</em></p>
+<hr />
+</section>
+<section
+id="case-1.-테스트를-더-짜는-대신-재현-가능한-환경을-만든다-격리-재현과-ai-변경-감지"
+class="level2">
+<h2>Case 1. 테스트를 더 짜는 대신, 재현 가능한 환경을 만든다 — 격리
+재현과 AI 변경 감지</h2>
+<p><code>2025.11 ~</code> ·
+<code>Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase</code></p>
+<section id="개요" class="level3">
+<h3>개요</h3>
+<p>테스트·디버깅의 신뢰성 문제를 “테스트를 더 짜는” 대신 <strong>재현
+가능한 환경을 만드는 방향</strong>으로 푼 프로젝트입니다. 선행 구조(Case
+3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현 환경을
+올리고, 다시 그 위에 <strong>“바뀐 코드만 골라 테스트하는” AI 변경
+감지</strong>까지 올렸습니다.</p>
+</section>
+<section id="문제" class="level3">
+<h3>문제</h3>
+<p>dev·qa에서는 멀쩡하던 것이 <strong>prod 배포 시 dev 환경변수가 박힌
+채 배포</strong>되는 일이 있었고, 그 결과 배포 직후 곧바로 핫픽스를 다시
+배포하는 일이 반복됐습니다. 동시에 특정 시점의 버그를 재현하기 어려웠고,
+E2E가 다른 변경의 간섭으로 쉽게 흔들렸습니다.</p>
+</section>
+<section id="해결-선행-구조-먼저-그-위에-격리" class="level3">
+<h3>해결 — 선행 구조 먼저, 그 위에 격리</h3>
+<p>원인은 <strong>빌드 시점에 환경변수가 번들에 박히는
+구조</strong>였습니다. 런타임 분리 자체는 팀이 진행했고, 본인은 그
+토대로 <strong>도메인 통합 라이브러리(Case 3)</strong>를 깔았습니다.
+환경이 런타임에 결정되니, <strong>특정 커밋 시점으로 Docker를 띄워
+그때의 클라이언트 + 서버 + DB를 그대로 재현</strong>하는 격리 환경을
+쌓을 수 있었습니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/isolation-stack.svg"
+class="diagram"
+alt="격리 재현 환경 — 도메인 통합과 런타임 분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로 재현한다" />
+<figcaption aria-hidden="true">격리 재현 환경 — 도메인 통합과 런타임
+분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로
+재현한다</figcaption>
+</figure>
+<p>핵심은 격리 환경을 바로 만든 게 아니라, <em>“격리하기 쉬운
+환경”</em>을 먼저 깔고 그 위에 쌓았다는 점입니다. 이 환경은 <strong>다른
+변경의 간섭 없이 특정 시점을 결정론적으로 재현</strong>하는 것을 목표로
+합니다.</p>
+</section>
+<section id="결과" class="level3">
+<h3>결과</h3>
+<ul>
+<li>본인이 깐 도메인 통합 토대 위에서 팀의 런타임 분리가 맞물려 환경별
+빌드가 사라지고 <strong>배포 직후 핫픽스 반복이 해소</strong>됐고,
+본인은 그 위에 격리 재현 환경을 직접 구축</li>
+<li>격리 이전에 흩어져 있던 E2E부터 정리했습니다 — 백오피스 전 영역에
+수십 개 suite를 구축하고 로그인 중복을 공통 헬퍼로 <strong>약 93%
+줄였으며</strong>, 인라인 셀렉터를 Page Object로 리팩토링했습니다.
+이렇게 안정화한 E2E를 격리 기반 위로 옮겨, 아래 AI 변경 감지의 실행
+기반으로 삼았습니다</li>
+<li>만성적으로 실패하던 격리 daily는 <strong>원인별로 분리
+진단</strong>했습니다. 본인 몫으로 <strong>결제(billtap) 경로 실패 약
+28건을 근본 수정해 0으로</strong> 만들었고(머지 후 실증), <strong>8개 앱
+동시 기동 시 S3 다운로드가 DNS를 포화</strong>시키던 문제를 수정 유/무
+대조 실행으로 확정해 공유 캐시 프리페치(1회 워밍)로 해소했습니다 —
+처음의 오진(포트 문제)은 같은 대조 실행으로 스스로 반증하고
+버렸습니다.</li>
+</ul>
+</section>
+<section id="그-위에-바뀐-코드만-골라-테스트한다-ai-변경-감지"
+class="level3">
+<h3>그 위에 — 바뀐 코드만 골라 테스트한다 (AI 변경 감지)</h3>
+<p>전체 E2E를 매번 돌리면 느리고, 안 돌리면 회귀를 놓칩니다. 이 이분법
+대신 <strong>“변경과 관련된 테스트만 골라 실행”</strong>하는 중간 해법을
+격리 인프라 위에 올렸습니다. 시작은 수백 개 qase 테스트 케이스를 사람이
+일일이 검증하기 어렵다는 문제를 <strong>Planner·Verifier 2-에이전트로
+자동 검증</strong>하던 도구(TC-Verify)였고, 이를 “변경 연관 테스트
+선별”로 확장한 것입니다.</p>
+<p><strong>EC2에 Claude를 상주</strong>시켜, 커밋 diff를 분석하고
+<strong>QA팀이 관리하는 qase 테스트 케이스 중 연관 케이스를
+선별·실행</strong>한 뒤 결과를 Teams로 보고하고, <strong>실패를 실제
+회귀와 테스트 코드 문제로 1차 분류</strong>하는 파이프라인을
+설계했습니다. 검증은 <strong>10분 주기 크론잡</strong>으로 자동화하고,
+동시 실행·중복 분석을 막아 안정적으로 돌도록 했습니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/ai-detect-pipeline.svg"
+class="diagram"
+alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고" />
+<figcaption aria-hidden="true">AI 변경 감지 파이프라인 — 커밋 diff 분석
+→ 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고</figcaption>
+</figure>
+<p>단순한 테스트 코드 문제(셀렉터 변경 등)와 실제 API 회귀를
+<strong>1차로 갈라</strong>, 사람이 확인할 것만 추려 보고하도록
+했습니다. 핵심은 AI를 코드 자동완성 같은 보조 도구가 아니라
+<strong>“어떤 테스트가 이 변경에 필요한가”라는 판단 단계</strong>에
+결합했다는 점입니다.</p>
+</section>
+<section id="회고" class="level3">
+<h3>회고</h3>
+<p>“왜 내 PC에선 되는데 CI에선 안 되지”를 매번 디버깅하는 대신, 그 질문
+자체가 안 나오는 환경을 만드는 게 목표였습니다. 도구가 아니라
+<strong>결정성</strong>이 핵심이었습니다.</p>
+<p>한 가지 더 배웠습니다. 격리 환경과 2주간 씨름한 시행착오를 17건·약
+36시간으로 직접 집계해 보니, 문제는 환경이 불안정해서가 아니라
+<strong>같은 환경을 두 목적(빌드본 그대로 검증 vs 방금 고친 코드
+swap)으로 쓰면서 한쪽엔 결정성이 오히려 독이 됐기</strong>
+때문이었습니다. 그래서 두 모드를 명시적으로 분리하는 결정을 남겼습니다 —
+결정성은 절대선이 아니라 용도에 따라 양날이라는 걸, 운영 피로를 데이터로
+바꿔 확인한 셈입니다.</p>
+<p>AI 변경 감지에서도 한계를 정직하게 마주했습니다. 선별·분류는 1차
+판단이라 사람의 확인이 필요하고, EC2 보안 정책·스케줄 안정성의 운영 부담
+때문에 이후 로컬 데일리 E2E 워크플로로 재편하고 있습니다. 선별
+정확도·실행량 절감 같은 정량 효과는 아직 측정 근거를 확보하지 못해
+메커니즘과 한계를 정직하게 두고 있습니다. 더 본질적으로는, 어떤 회귀가
+<strong>AI 리뷰가 오히려 통과시킨</strong> 잘못된 테스트에서
+비롯됐습니다 — 기획 의도가 코드·테스트에 안 박히고 티켓 코멘트에만 있던
+탓에 맥락을 모르는 변경이 잘못된 동작을 E2E 단언으로 굳혔고, 그 PR은
+사람 리뷰어 없이 AI 승인만 받은 상태였습니다. 직접 바로잡았지만, AI를
+판단 단계에 넣을수록 그 판단이 맥락 없이 틀릴 수 있다는 것까지 함께
+설계해야 한다는 교훈이 남았습니다.</p>
+<hr />
+</section>
+</section>
+<section id="case-2.-케이스-목록-썸네일-보일-때만-모아서-실패도-캐시"
+class="level2">
+<h2>Case 2. 케이스 목록 썸네일 — 보일 때만, 모아서, 실패도 캐시</h2>
+<p><code>2025.10 ~ 2026.06</code> ·
+<code>React · TanStack Query · IntersectionObserver · Context API</code></p>
+<section id="개요-1" class="level3">
+<h3>개요</h3>
+<p>케이스 목록은 사용자가 가장 자주 보는 화면이고, 썸네일이 수십 장
+깔립니다. 이 화면의 <strong>썸네일 로딩 성능</strong>과, 운영 중 터진
+<strong>깜빡임·무한 재요청 회귀</strong>를 다룬 작업입니다.</p>
+</section>
+<section id="문제-1" class="level3">
+<h3>문제</h3>
+<p>케이스 목록 썸네일은 “N장 = 네트워크 N요청”이 되기 쉽습니다. 게다가
+운영 중 깜빡임과 무한 재요청이 터졌습니다. 무한 재요청의 원인은
+<strong>카드가 재마운트될 때마다 훅이 새로 생겨 같은 썸네일을 중복
+요청</strong>하고, 403 같은 영구 오류도 새 URL로 계속 다시 두드리는
+구조였습니다.</p>
+</section>
+<section id="해결" class="level3">
+<h3>해결</h3>
+<p><strong>IntersectionObserver로 viewport에 들어온 썸네일만
+로드</strong>하고, 50ms 윈도우 안의 요청을 모아 <strong>한 번에 배치
+요청</strong>하는 공통 훅(Context Provider 기반)을 만들었습니다.</p>
+<p>무한 재요청은 <strong>캐시를 카드 바깥 Provider로 끌어올려 모든
+카드가 공유</strong>하게 하고, <strong>성공(4분)뿐 아니라 실패(10초)도
+캐시</strong>해 풀었습니다 — 영구 오류를 짧게 기억해두면 재마운트돼도
+네트워크를 다시 두드리지 않고 즉시 “No data”로 떨어집니다. 그 위에 단일
+마운트 안의 <code>onError</code> 폭주를 막는 재시도 1회 클램프를 보조로
+뒀고, <strong>“성공 시 errorCount를 리셋하면 같은 영구 오류가 또 루프를
+돈다”는 이유로 일부러 리셋하지 않았습니다</strong>. 깜빡임은 로딩 상태를
+첫 fetch에만 토글하고 재시도는 silent로 둬서 없앴습니다. 회귀 가드
+테스트로 “같은 Provider 안에서 재마운트돼도 중복 fetch 없음”을
+고정했습니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/list-performance.svg"
+class="diagram"
+alt="케이스 목록 썸네일 — 보일 때만 로드하고, 모아서 한 번에, 실패도 캐시한다" />
+<figcaption aria-hidden="true">케이스 목록 썸네일 — 보일 때만 로드하고,
+모아서 한 번에, 실패도 캐시한다</figcaption>
+</figure>
+</section>
+<section id="회고-1" class="level3">
+<h3>회고</h3>
+<p>무한 재요청은 재시도 횟수만 틀어막아도 멈추기는 합니다. 하지만 그건
+증상이고, 진짜 원인은 <strong>카드가 재마운트될 때마다 훅이 새로 생겨
+캐시가 날아가고 같은 오류를 다시 두드리는 구조</strong>였습니다. 그래서
+재시도 클램프는 보조로만 두고, 캐시를 카드 바깥 Provider로 끌어올려 구조
+자체를 고쳤습니다. 다만 재마운트 자체를 없애는 건 더 큰 공사라, 거기까진
+가지 않고 <strong>공유 캐시로 우회하는 실용적 선택</strong>을 했습니다 —
+증상을 덮을지 구조를 고칠지 그 사이에서, 비용 대비 효과가 가장 큰 지점을
+고른 작업이었습니다.</p>
+<hr />
+</section>
+</section>
+<section id="case-3.-흩어진-레포를-모노레포로-통합과-환경-일원화"
+class="level2">
+<h2>Case 3. 흩어진 레포를 모노레포로 — 통합과 환경 일원화</h2>
+<p><code>2024.06 ~</code> ·
+<code>TypeScript · NX · Git Subtree · i18n</code></p>
+<section id="개요-2" class="level3">
+<h3>개요</h3>
+<p>별도 레포로 흩어져 있던 클라이언트 앱·공용 라이브러리를 하나의 NX
+모노레포로 모으고, 환경별로 제각기 구성하던 도메인·URL을 일원화한
+프로젝트입니다. 이후 격리 재현 환경(Case 1)이 이 토대 위에
+올라갑니다.</p>
+</section>
+<section id="문제-2" class="level3">
+<h3>문제</h3>
+<p>클라이언트 앱들이 환경별 URL·도메인을 <strong>각자 다르게
+구성</strong>하고 있었고, 별도 레포에 흩어져 있어 공통 변경을 여러 곳에
+반복해야 했습니다. 다국어 관리도 중복 업로드와 흩어진 스크립트로
+파편화돼 있었습니다.</p>
+</section>
+<section id="해결-1" class="level3">
+<h3>해결</h3>
+<ul>
+<li><strong>NX 유지 + OOM 해소</strong> — 모노레포 도구를 새로 고르는
+대신 기존 NX를 유지했습니다. 전환 이득이 이관·재학습 비용을 넘지
+못한다고 봤기 때문입니다. 잔존하던 <code>webpack.config.js</code>가 NX
+자동 타겟 추론을 유발해 불필요한 빌드 산출물과 OOM을 일으키던 것을
+진단해, <strong>빌드 태스크를 11개에서 9개로 줄이고 OOM을
+해소</strong>했습니다.</li>
+<li><strong>Git Subtree로 이관</strong> — 별도 레포의 클라이언트 앱
+2종·공용 라이브러리 6종을 메인 NX 모노레포로 옮겼습니다. 단순 복사가
+아니라 <strong>커밋 이력을 보존</strong>하고 네임스페이스 충돌을
+리네임으로 해소했으며, 이후에도 정기 동기화를 운영했습니다.</li>
+<li><strong>도메인 통합 라이브러리</strong> — 환경별로 흩어진 도메인·URL
+구성을 단일 라이브러리로 일원화했습니다. 기준 도메인 하나에서
+backend·gateway·테넌트 호스트 등이 한 곳에서 파생됩니다. (팀의 런타임
+환경 분리·격리 재현 환경이 이 라이브러리를 기반으로 동작합니다.)</li>
+<li><strong>다국어 중앙화</strong> — 중복 업로드 89줄과 14개 스크립트로
+흩어진 i18n 관리를 단일 스크립트로 모았습니다.</li>
+</ul>
+<figure>
+<img src="../../images/portfolio/diagrams/monorepo.svg" class="diagram"
+alt="모노레포 통합 전/후 — 흩어진 레포들이 단일 NX 모노레포와 도메인 통합 라이브러리 위로 모인다" />
+<figcaption aria-hidden="true">모노레포 통합 전/후 — 흩어진 레포들이
+단일 NX 모노레포와 도메인 통합 라이브러리 위로 모인다</figcaption>
+</figure>
+<p>기준 도메인(통합/레거시) 하나에서 cloud·accounts·api URL이 모두
+파생됩니다. 통합 도메인에서는 상대 경로로, 레거시에서는 환경변수 기반
+절대 URL로 갈라지되 호출부는 <code>UrlHelper.cloud()</code> 한 형태로
+통일됩니다.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// libs/url-utils — 기준 도메인 하나에서 cloud·accounts·api URL이 모두 파생된다.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getServiceUrl</span>(service<span class="op">:</span> <span class="st">&#39;cloud&#39;</span> <span class="op">|</span> <span class="st">&#39;accounts&#39;</span><span class="op">,</span> path<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&#39;&#39;</span>)<span class="op">:</span> <span class="dt">string</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isUnifiedDomain</span>()) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 통합 도메인: 상대 경로 (Webpack Proxy가 처리)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>path) <span class="cf">return</span> <span class="vs">`/</span><span class="sc">${</span>service<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> normalizedPath <span class="op">=</span> path<span class="op">.</span><span class="fu">startsWith</span>(<span class="st">&#39;/&#39;</span>) <span class="op">?</span> path <span class="op">:</span> <span class="vs">`/</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`/</span><span class="sc">${</span>service<span class="sc">}${</span>normalizedPath<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 레거시 도메인: 환경변수 기반 절대 URL</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> baseUrl <span class="op">=</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="at">env</span>[<span class="vs">`NX_PUBLIC_</span><span class="sc">${</span>service<span class="op">.</span><span class="fu">toUpperCase</span>()<span class="sc">}</span><span class="vs">_URL`</span>] <span class="op">||</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`https://</span><span class="sc">${</span>service<span class="sc">}</span><span class="vs">.dentbird.com`</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>path) <span class="cf">return</span> baseUrl<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> normalizedPath <span class="op">=</span> path<span class="op">.</span><span class="fu">startsWith</span>(<span class="st">&#39;/&#39;</span>) <span class="op">?</span> path <span class="op">:</span> <span class="vs">`/</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> baseUrl <span class="op">+</span> normalizedPath<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> UrlHelper <span class="op">=</span> {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  cloud<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getServiceUrl</span>(<span class="st">&#39;cloud&#39;</span><span class="op">,</span> path)<span class="op">,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  accounts<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getServiceUrl</span>(<span class="st">&#39;accounts&#39;</span><span class="op">,</span> path)<span class="op">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  api<span class="op">:</span> (path <span class="op">=</span> <span class="st">&#39;&#39;</span>) <span class="kw">=&gt;</span> <span class="fu">getApiUrl</span>(path)<span class="op">,</span> <span class="co">// axios baseURL용 — prefix만 반환, 경로는 axios가 붙임</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+</section>
+<section id="회고-2" class="level3">
+<h3>회고</h3>
+<p>“무엇을 합칠까”보다 “합친 뒤에도 흔들리지 않을 토대를 먼저 까는 것”이
+중요했습니다. 도메인 통합 라이브러리라는 선행 구조가 있었기에, 다음
+단계인 격리 재현 환경이 가능했습니다.</p>
+<hr />
+</section>
+</section>
+<section
+id="case-4.-정답-기술이-아니라-제약에-맞춘-통합-공통-모듈-micro-frontend"
+class="level2">
+<h2>Case 4. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro
+Frontend</h2>
+<p><code>2023.09 ~ 2025.10</code> ·
+<code>NX · iframe + postMessage · Module Federation</code></p>
+<section id="개요-3" class="level3">
+<h3>개요</h3>
+<p>4개 서비스(cloud·crown·modeler·milling)가 공유하던 공통 기능
+4개(설정·내보내기·탐색기·뷰어)를 모듈화하면서, <strong>“정답 기술”을
+찾는 대신 그때의 조직·배포 제약에 맞는 통합 전략을 거듭 다시
+고른</strong> 과정입니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/mfe-layers.svg"
+class="diagram"
+alt="공통 모듈 Micro Frontend — 4개 서비스 위에 same-origin iframe 모듈 레이어가 얹힌다" />
+<figcaption aria-hidden="true">공통 모듈 Micro Frontend — 4개 서비스
+위에 same-origin iframe 모듈 레이어가 얹힌다</figcaption>
+</figure>
+<figure>
+<img src="../../images/portfolio/screenshots/common-modules.png"
+alt="공통화한 4개 모듈 — 설정·내보내기·탐색기·뷰어가 4개 서비스에서 같은 구현으로 재사용된다" />
+<figcaption aria-hidden="true">공통화한 4개 모듈 —
+설정·내보내기·탐색기·뷰어가 4개 서비스에서 같은 구현으로
+재사용된다</figcaption>
+</figure>
+</section>
+<section id="문제-3" class="level3">
+<h3>문제</h3>
+<p>공통 기능이 하나 바뀔 때마다 <strong>각 서비스에 같은 수정을 반복하고
+전부 배포</strong>해야 했습니다. 도메인도 관리팀도 분리돼 있어 변경 한
+번의 비용이 컸습니다.</p>
+</section>
+<section id="해결-써보고-뺀-판단의-연속" class="level3">
+<h3>해결 — 써보고 뺀 판단의 연속</h3>
+<figure>
+<img src="../../images/portfolio/diagrams/mfe-strategy.svg"
+class="diagram"
+alt="통합 전략의 진동 — 라이브러리 배포 → iframe 런타임 통합 → 빌드타임 통합 → 다시 iframe(same-origin)" />
+<figcaption aria-hidden="true">통합 전략의 진동 — 라이브러리 배포 →
+iframe 런타임 통합 → 빌드타임 통합 → 다시
+iframe(same-origin)</figcaption>
+</figure>
+<p>먼저 컴포넌트를 <strong>라이브러리로 배포</strong>했지만 각 서비스가
+버전업·재배포를 반복해야 해 문제가 그대로 남았습니다. 그래서 가장 빠르고
+단순한 <strong>iframe + postMessage</strong> 런타임 통합으로 틀었습니다.
+4개 앱이 한 모노레포로 합쳐지자 <strong>빌드타임 통합</strong>으로
+옮겼지만, 막상 통합 배포가 실제로는 잘 이뤄지지 않았고 사내 배포 주기
+제약으로 부담만 커졌습니다. 그래서 <strong>다시 iframe으로
+회귀</strong>하되, 이번엔 same-origin으로 서빙해 CORS·인증 공유·origin
+검증을 단순화했습니다.</p>
+<p><strong>Module Federation</strong>도 후보였지만, 다른 기능에 도입해본
+경험상 초기 설정이 복잡하고 모노레포가 아닌 소비처에서 부담이 커 이
+건에서는 제외했습니다 — 몰라서가 아니라 <strong>써보고 트레이드오프로
+뺀</strong> 판단입니다. (console-client에는 Module Federation을 직접
+적용했습니다.)</p>
+</section>
+<section id="회고-3" class="level3">
+<h3>회고</h3>
+<p>iframe의 비용(로딩 지연, 라이브러리 중복 로딩, postMessage의
+File/Blob 제한)까지 직접 확인하며, <strong>“정답 기술”은 없고 그때의
+조직·배포 제약에 맞는 선택만 있다</strong>는 걸 배웠습니다. iframe
+런타임 통합과 console-client의 Module Federation을 주도했고, 빌드 도구
+전환은 팀과 함께 진행하며 압축 해제 워커가 Vite·Rspack 양쪽 빌드에서
+올바른 경로를 찾도록 한 공통 유틸을 맡았습니다. 이 통합은 약 4개월 운영
+후 팀이 Vite로 표준을 통일하며 흡수됐습니다. 같은 문제를 세 번 다르게 푼
+과정 자체가 이 케이스의 핵심입니다.</p>
+<hr />
+</section>
+</section>
+<section id="case-5.-에러는-잡히는데-추적이-안-된다-관측복원력-표준화"
+class="level2">
+<h2>Case 5. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화</h2>
+<p><code>2026.04 ~</code> ·
+<code>React · TypeScript · ErrorBoundary · Datadog RUM</code></p>
+<section id="개요-4" class="level3">
+<h3>개요</h3>
+<p>에러는 잡히지만 <strong>어디서 왜 났는지 추적되지 않던</strong>
+상태를, 5개 앱에 공통 표준으로 정리한 프로젝트입니다.</p>
+</section>
+<section id="문제-4" class="level3">
+<h3>문제</h3>
+<p>여러 fail mode가 같은 UI·같은 메시지로 흡수돼, 예컨대 QA 환경 RUM에서
+124건의 실패가 <code>new Error('failedToExportMeshes')</code> <strong>한
+줄로 collapse</strong>되어 원인 추적이 불가능했습니다.</p>
+</section>
+<section id="해결-2" class="level3">
+<h3>해결</h3>
+<ul>
+<li><strong>Root → Section → Feature 3계층 ErrorBoundary 체계를
+설계</strong>해 에러를 계층별로 격리하고, 5개 앱을 공통 표준으로
+정렬했습니다(계층 적용 깊이는 앱별 단계적).</li>
+<li>에러를 <strong>Datadog 관측 표준에 맞춰 직렬화</strong>해, 한
+메시지로 뭉쳐 보이던 실패 124건을 원인별로 추적 가능하게 만들었습니다.
+적용 전후는 <strong>격리 환경에서 RUM 데이터를 정량 비교</strong>해
+검증했습니다.</li>
+<li><strong>안전망은 발생 위치만 자동 표기</strong>하고 의미 부여는
+호출자가 명시하도록 책임을 분리했으며, 최상위 안전망에는 외부 의존을
+두지 않아 <strong>안전망이 자기 의존성 때문에 죽지 않도록</strong>
+설계했습니다.</li>
+</ul>
+<figure>
+<img src="../../images/portfolio/diagrams/observability-layers.svg"
+class="diagram"
+alt="3계층 ErrorBoundary — 외부 의존 없는 최후 안전망부터 기능 단위 격리까지, 원인별 직렬화로 Datadog에 닿는다" />
+<figcaption aria-hidden="true">3계층 ErrorBoundary — 외부 의존 없는 최후
+안전망부터 기능 단위 격리까지, 원인별 직렬화로 Datadog에
+닿는다</figcaption>
+</figure>
+<p>가시성을 높이는 방법으로 처음엔 <code>react-error-boundary</code>
+라이브러리를 검토했지만 <strong>기각</strong>했습니다 — ① 실제 실패는
+렌더가 아니라 <strong>async 이벤트 핸들러</strong>(파일
+다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ②
+iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ 결국 throw
+지점마다 wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신
+<strong>에러 객체 자체에 풍부한 metadata를 담는</strong> 방식(표준
+<code>Error.cause</code> + 구조화된 실패 상세)을 택해, throw 지점은 한
+줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다. 공통
+라이브러리라 <strong>한 곳을 고치면 5개 앱에 반영</strong>됩니다.</p>
+<p>에러를 라이브러리(<code>instanceof</code>)에 묶지 않고
+<strong>shape(duck typing)으로 판별·분류</strong>한 예입니다. axios든
+fetch든 응답 형태만 보고 HTTP 상태를 뽑아, 같은 기준으로 6분류합니다. 이
+분류기는 이후 공통 라이브러리로 승격됐습니다.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// apps/batch/batch-web — axios 등 런타임에 의존하지 않고 shape 로 HTTP 상태를 추출한다.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getHttpStatus</span>(reason<span class="op">:</span> <span class="dt">unknown</span>)<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">undefined</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="fu">isRecord</span>(reason)) <span class="cf">return</span> <span class="kw">undefined</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isRecord</span>(reason<span class="op">.</span><span class="at">response</span>) <span class="op">&amp;&amp;</span> <span class="kw">typeof</span> reason<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="at">status</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> reason<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="at">status</span><span class="op">;</span> <span class="co">// axios: reason.response.status</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> reason<span class="op">.</span><span class="at">status</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) <span class="cf">return</span> reason<span class="op">.</span><span class="at">status</span><span class="op">;</span> <span class="co">// fetch wrapper</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> reason<span class="op">.</span><span class="at">statusCode</span> <span class="op">===</span> <span class="st">&#39;number&#39;</span>) <span class="cf">return</span> reason<span class="op">.</span><span class="at">statusCode</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">undefined</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">// 순서 중요: native_auth &gt; schema &gt; ignore &gt; fatal &gt; transient &gt; unknown</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">classifyAsyncError</span>(reason<span class="op">:</span> <span class="dt">unknown</span>)<span class="op">:</span> ErrorClassification {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (reason <span class="kw">instanceof</span> NativeAuthError) <span class="cf">return</span> <span class="st">&#39;native_auth&#39;</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (reason <span class="kw">instanceof</span> ZodError) <span class="cf">return</span> <span class="st">&#39;schema&#39;</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isAbortError</span>(reason)) <span class="cf">return</span> <span class="st">&#39;ignore&#39;</span><span class="op">;</span>   <span class="co">// AbortController / axios ERR_CANCELED</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isExplicitFatal</span>(reason)) <span class="cf">return</span> <span class="st">&#39;fatal&#39;</span><span class="op">;</span> <span class="co">// 데이터손상·인증훼손·프로세스누수만 승격</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> status <span class="op">=</span> <span class="fu">getHttpStatus</span>(reason)<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> status <span class="op">===</span> <span class="st">&#39;number&#39;</span> <span class="op">&amp;&amp;</span> status <span class="op">&gt;=</span> <span class="dv">500</span> <span class="op">&amp;&amp;</span> status <span class="op">&lt;</span> <span class="dv">600</span>) <span class="cf">return</span> <span class="st">&#39;transient&#39;</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isNetworkErrorMessage</span>(reason)) <span class="cf">return</span> <span class="st">&#39;transient&#39;</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">&#39;unknown&#39;</span><span class="op">;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>관측 표준 정렬 종합 계획을 직접 작성·주도하고 <strong>5개 PR로
+분해</strong>해 적용했습니다.</p>
+<p>같은 복원력 관점을 데이터 로딩으로도 확장하려 합니다 — 3D 뷰어에서
+여러 design 중 일부 mesh가 손상돼도 <code>Promise.allSettled</code>로
+<strong>살아있는 mesh는 렌더하고 누락은 ModelTree에 표시</strong>해,
+“전부 실패”와 “부분 실패”를 하나의 흐름에서 가르는 방향을
+제안했습니다(착수 전). 에러 바운더리를 모든 곳에 두는 대신 <strong>장애
+허용 범위를 화면이 직접 설계한다</strong>는 원칙을 데이터 흐름에
+적용하려는 구상입니다.</p>
+</section>
+<section id="회고-4" class="level3">
+<h3>회고</h3>
+<p>직접 만든 7분류 에러 체계가 특정 앱에 치우쳐 있던 걸 인정하고,
+<strong>팀 공통 표준에 맞춰 폐기·정렬</strong>했습니다. 내가 만든 걸
+고집하는 것보다 팀 표준으로 수렴시키는 게 관측의 가치를 살린다고
+봤습니다.</p>
+<p>이 문제의식의 출발점은 구독·결제 프론트엔드에서 에러를 예측
+가능/불가능으로 처음 구분한 경험이었고, 그때 한 프로젝트 안에 머물렀던
+정리를 이번에 5개 앱 조직 표준으로 끌어올렸습니다.</p>
+<hr />
+</section>
+</section>
+<section id="함께-보기" class="level2">
+<h2>함께 보기</h2>
+<ul>
+<li><strong><a href="resume.html">이력서</a></strong> — 전체 경력과 기술
+스택</li>
+<li><strong><a href="https://github.com/crowwan">깃허브</a></strong> ·
+<strong><a href="https://velog.io/@crowwan">블로그</a></strong></li>
+</ul>
+</section>
+</section>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  // pandoc은 ```mermaid 펜스를 <pre class="mermaid"><code>…</code></pre>로 출력하는데,
+  // mermaid는 <code> 자식 때문에 코드가 "<code>flowchart…"로 시작해 파싱에 실패한다
+  // ("No diagram type detected"). 초기화 전에 code 텍스트만 남겨 평탄화한다.
+  document.querySelectorAll('pre.mermaid > code').forEach((code) => {
+    code.parentElement.textContent = code.textContent;
+  });
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: "'Noto Sans KR', sans-serif",
+      fontSize: '14px',
+      primaryColor: '#eef2ff',
+      primaryBorderColor: '#6366f1',
+      primaryTextColor: '#1e293b',
+      lineColor: '#94a3b8',
+      tertiaryColor: '#f0f9ff',
+      tertiaryBorderColor: '#7dd3fc',
+      clusterBkg: '#f8fafc',
+      clusterBorder: '#cbd5e1',
+      edgeLabelBackground: '#ffffff',
+    },
+    flowchart: { curve: 'basis', padding: 18, nodeSpacing: 48, rankSpacing: 52, htmlLabels: true },
+    securityLevel: 'loose',
+  });
+  await mermaid.run({ querySelector: 'pre.mermaid' });
+</script>
+</body>
+</html>

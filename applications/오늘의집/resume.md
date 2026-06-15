@@ -15,7 +15,7 @@
 ## 핵심 역량
 
 - **프론트엔드 설계**: FSD·클린 아키텍처·도메인 모델링, 컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance
-- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능
+- **화면·상태·성능**: 복잡한 구독·뷰어 워크플로우, TanStack Query 기반 서버 상태 관리, 리스트 렌더링 성능
 - **품질 자동화·CI/CD**: Playwright E2E, 커밋 단위 컨테이너 재현, 변경 기반 테스트 자동 선별, 시각 회귀 CI, 에러 관측 표준화
 - **프론트엔드 플랫폼**: NX 모노레포 통합, 환경·도메인 구성 일원화, 공통 모듈(MFE) 분리
 - **데스크톱**: Electron 앱 설계·운영, 빌드·코드 서명·자동 업데이트 인프라
@@ -45,10 +45,10 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 ### 복잡한 화면 — 렌더링 성능·상태관리
 
-사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 성능과 상태를 다뤘습니다.
+사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 렌더링 성능을 다뤘습니다.
 
-- 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 가드로 처리
-- 목록↔3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본 해결
+- 썸네일을 IntersectionObserver 배치 lazy-loading으로 처리하고, 성공·실패(negative)를 함께 캐시해 재마운트 시 중복·무한 재요청을 제거 (회귀 테스트로 고정)
+- 깜빡임·무한 재요청 회귀의 근본 원인(카드 재마운트마다 훅 재생성)을 진단해, 캐시를 공유 스코프로 끌어올려 구조적으로 해결
 
 `기술` React · TanStack Query · IntersectionObserver · Three.js
 
@@ -106,7 +106,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 - 플랜 업그레이드·시트 구매·구독 취소·재개·쿠폰·결제수단·결제 히스토리까지 구독 워크플로우 전체를 구현
 - 결제 상태를 서버·Stripe 동기화(SoT) 기준으로 두고 무한 반복 방지 폴링·origin 격리된 결제 팝업으로 외부 연동 복원력 확보
-- 부분 실패에도 핵심 흐름(내역 조회·구독 취소·뒤로가기)이 살아남도록 의존 관계 기준 Fault Tolerance를 제안 (착수 전)
+- 모든 에러를 unknown으로 뭉개던 것을 예측 가능/불가능으로 구분 — 비즈니스 에러(HTTP 200·errorCode)는 코드별 분기, 시스템 실패는 ErrorBoundary로 격리; 이 문제의식을 이후 5개 앱 관측·복원력 표준화로 확장
 
 `기술` React · TypeScript · TanStack Query · Stripe · ErrorBoundary · Playwright(E2E)
 
