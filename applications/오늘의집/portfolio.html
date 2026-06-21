@@ -28,11 +28,15 @@
   <link rel="stylesheet" href="portfolio-style.css" />
 </head>
 <body>
-<!-- 오늘의집(버킷플레이스) Frontend Engineer 지원용 포트폴리오 -->
-<!-- 메인 portfolio.md에서 JD 매칭 5개 케이스 발췌·재번호 (테스트·CI / 성능 / 아키텍처 2축 / 복원력) -->
+<!-- 오늘의집(버킷플레이스) Frontend Engineer, Content 지원용 포트폴리오 -->
+<!-- 마스터 portfolio.md에서 Content 직무 매칭 5개 선별·재배치 (사용자 대면 웹 우선) + 랜딩 리프레이밍 -->
 <section id="김진완-포트폴리오-frontend-developer" class="level1">
 <h1>김진완 포트폴리오 | Frontend Developer</h1>
-<p>블로그 crowwan.github.io · 깃허브 github.com/crowwan</p>
+<ul>
+<li><a href="resume.html">이력서</a> · <a
+href="https://crowwan.github.io/">블로그</a> · <a
+href="https://github.com/crowwan">깃허브</a></li>
+</ul>
 <hr />
 <section id="about" class="level2">
 <h2>About</h2>
@@ -44,11 +48,12 @@ SaaS. 이 화면을 포함한 웹·데스크톱 프론트엔드를
 담당했습니다.</figcaption>
 </figure>
 <p>2023년 9월부터 이마고웍스에서 AI 기반 치과 CAD/CAM SaaS인
-<strong>Dentbird</strong>의 프론트엔드를 맡고 있습니다. 복잡한 화면과 3D
-뷰어를 만들고, 그 코드가 오래 버티도록 아키텍처·디자인 패턴·상태관리를
-설계하는 것이 일의 중심입니다. 동시에 그 프론트엔드를 받치는
-모노레포·환경 분리·빌드·품질 자동화 같은 플랫폼 토대까지 한 제품 안에서
-폭넓게 다뤄 왔습니다.</p>
+<strong>Dentbird</strong>의 프론트엔드를 맡고 있습니다. 구독·결제, 3D
+뷰어, 외부 CAM 연동처럼 외부 의존이 많은 복잡한 화면을 만들고, AI로
+코드가 빠르게 바뀌는 환경에서도 안전하게 개발할 수 있도록
+아키텍처·디자인 패턴·상태관리와 검증 체계를 설계하는 것이 일의
+중심입니다. 동시에 그 프론트엔드를 받치는 모노레포·환경 분리·빌드·품질
+자동화 같은 플랫폼 토대까지 한 제품 안에서 폭넓게 다뤄 왔습니다.</p>
 <p>문제를 만나면 빠른 처치보다 <strong>근본 원인을 정확히 파악한 뒤
 해결하는 쪽</strong>을 택합니다. 증상을 덮는 임시방편과 구조를 바로잡는
 일을 구분하며, “해결됐다”가 아니라 <strong>원인이 무엇이었는지 재현으로
@@ -96,123 +101,66 @@ class="chip"><img src="../../images/portfolio/icons/datadog.svg" alt="">Datadog<
 </p>
 <hr />
 </section>
-<section
-id="case-1.-신뢰할-수-있는-테스트를-위해-재현-가능한-환경을-만든다-격리-재현과-ai-변경-감지"
+<section id="기업-랜딩-사용자-대면-콘텐츠-웹-next.js-풀스택"
 class="level2">
-<h2>Case 1. 신뢰할 수 있는 테스트를 위해, 재현 가능한 환경을 만든다 —
-격리 재현과 AI 변경 감지</h2>
-<p><code>2025.11 ~</code> ·
-<code>Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase</code></p>
+<h2>기업 랜딩 — 사용자 대면 콘텐츠 웹 (Next.js 풀스택)</h2>
+<p><code>2023.09 ~ 2025.10</code> ·
+<code>Next.js 13 · TypeScript · i18n · Fastify</code></p>
 <section id="개요" class="level3">
 <h3>개요</h3>
-<p>테스트·디버깅의 신뢰성 문제를, 테스트가 믿을 수 있게 돌아가는
-<strong>재현 가능한 환경을 만드는 방향</strong>으로 푼 프로젝트입니다.
-선행 구조(Case 3의 도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에
-격리 재현 환경을 구축하고, 다시 그 위에 <strong>“바뀐 코드만 골라
-테스트하는” AI 변경 감지</strong>까지 구축했습니다.</p>
+<p>입사 첫 업무로 기업 랜딩을 v3로 단독 리뉴얼하고(리뉴얼 기간 커밋
+1위), 이후 2년 넘게 단일 라인으로 운영하며 화면부터 서버 API까지
+풀스택으로 개발한 프로젝트입니다. 사용자가 회사를 가장 먼저 만나는
+웹이라, 성능·SEO·다국어·인터랙션을 함께 다뤘습니다.</p>
 </section>
-<section id="문제" class="level3">
-<h3>문제</h3>
-<p>dev·qa에서는 멀쩡하던 것이 <strong>prod 배포 시 dev 환경변수가 포함된
-채 배포</strong>되는 일이 있었고, 그 결과 배포 직후 곧바로 핫픽스를 다시
-배포하는 일이 반복됐습니다. 동시에 특정 시점의 버그를 재현하기 어려웠고,
-E2E가 다른 변경의 간섭으로 쉽게 흔들렸습니다.</p>
-</section>
-<section id="해결-선행-구조-먼저-그-위에-격리" class="level3">
-<h3>해결 — 선행 구조 먼저, 그 위에 격리</h3>
-<p>원인은 <strong>빌드 시점에 환경변수가 번들에 고정되는
-구조</strong>였습니다. 런타임 분리 자체는 팀이 진행했고, 본인은 그
-토대로 <strong>도메인 통합 라이브러리(Case 3)</strong>를 구축했습니다.
-환경이 런타임에 결정되니, <strong>특정 커밋 시점으로 Docker를 기동해
-그때의 클라이언트 + 서버 + DB를 그대로 재현</strong>하는 격리 환경을
-구축할 수 있었습니다.</p>
-<figure>
-<img src="../../images/portfolio/diagrams/isolation-stack.svg"
-class="diagram"
-alt="격리 재현 환경 — 도메인 통합과 런타임 분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로 재현한다" />
-<figcaption aria-hidden="true">격리 재현 환경 — 도메인 통합과 런타임
-분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로
-재현한다</figcaption>
-</figure>
-<p>핵심은 격리 환경을 바로 만든 게 아니라, <em>“격리하기 쉬운
-환경”</em>을 먼저 구축하고 그 위에 격리 환경을 구성했다는 점입니다. 이
-환경은 <strong>다른 변경의 간섭 없이 특정 시점을 결정론적으로
-재현</strong>하는 것을 목표로 합니다.</p>
-</section>
-<section id="결과" class="level3">
-<h3>결과</h3>
+<section id="성능seo" class="level3">
+<h3>성능·SEO</h3>
+<p>사용자에게 빠르게 보이는 것을 우선해, 초기 렌더와 SEO를 Lighthouse로
+측정하며 최적화했습니다.</p>
 <ul>
-<li>본인이 구축한 도메인 통합 토대 위에서 팀의 런타임 분리가 맞물려
-환경별 빌드가 사라지고 <strong>배포 직후 핫픽스 반복이
-해소</strong>됐고, 본인은 그 위에 격리 재현 환경을 직접 구축</li>
-<li>격리 이전에 흩어져 있던 E2E부터 정리했습니다 — 백오피스 전 영역에
-수십 개 suite를 구축하고 로그인 중복을 공통 헬퍼로 <strong>약 93%
-줄였으며</strong>, 인라인 셀렉터를 Page Object로 리팩토링했습니다.
-이렇게 안정화한 E2E를 격리 기반 위로 옮겨, 아래 AI 변경 감지의 실행
-기반으로 삼았습니다</li>
-<li>만성적으로 실패하던 격리 daily는 <strong>원인별로 분리
-진단</strong>했습니다. <strong>결제(billtap) 경로 실패 약 28건을 근본
-수정해 0으로</strong> 만들었고, <strong>8개 앱 동시 기동 시 S3
-다운로드가 DNS를 포화</strong>시키던 문제를 수정 유/무 대조 실행으로
-확정해 공유 캐시 프리페치(1회 워밍)로 해소했습니다 — 처음엔 포트 문제로
-의심했으나, 같은 대조 실행으로 직접 반증했습니다.</li>
+<li><strong>LCP 이미지·폰트(Inter·Noto Sans) preload</strong>로 초기
+렌더 개선</li>
+<li>product hero 이미지 <strong>4x 고해상도 대응·quality 조절</strong>,
+미사용 이미지 제거, webm·woff <strong>정적 자원 캐시</strong></li>
+<li>HeaderSEO·Open Graph 적용 — <strong>SEO는 거의 전 페이지
+100점</strong></li>
 </ul>
 </section>
-<section id="그-위에-바뀐-코드만-골라-테스트한다-ai-변경-감지"
-class="level3">
-<h3>그 위에 — 바뀐 코드만 골라 테스트한다 (AI 변경 감지)</h3>
-<p>전체 E2E를 매번 돌리면 느리고, 안 돌리면 회귀를 놓칩니다. 이 이분법
-대신 <strong>“변경과 관련된 테스트만 골라 실행”</strong>하는 중간 해법을
-격리 인프라 위에 올렸습니다. 시작은 수백 개 qase 테스트 케이스를 사람이
-일일이 검증하기 어렵다는 문제를 <strong>Planner·Verifier 2-에이전트로
-자동 검증</strong>하던 도구(TC-Verify)였고, 이를 “변경 연관 테스트
-선별”로 확장한 것입니다.</p>
-<p><strong>EC2에서 Claude를 상시 구동</strong>해, 커밋 diff를 분석하고
-<strong>QA팀이 관리하는 qase 테스트 케이스 중 연관 케이스를
-선별·실행</strong>한 뒤 결과를 Teams로 보고하고, <strong>실패를 실제
-회귀와 테스트 코드 문제로 1차 분류</strong>하는 파이프라인을
-설계했습니다. 검증은 <strong>10분 주기 크론잡</strong>으로 자동화하고,
-동시 실행·중복 분석을 막아 안정적으로 돌도록 했습니다.</p>
-<figure>
-<img src="../../images/portfolio/diagrams/ai-detect-pipeline.svg"
-class="diagram"
-alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고" />
-<figcaption aria-hidden="true">AI 변경 감지 파이프라인 — 커밋 diff 분석
-→ 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고</figcaption>
-</figure>
-<p>단순한 테스트 코드 문제(셀렉터 변경 등)와 실제 API 회귀를
-<strong>1차로 갈라</strong>, 사람이 확인할 것만 추려 보고하도록
-했습니다. 핵심은 AI를 코드 자동완성 같은 보조 도구가 아니라
-<strong>“어떤 테스트가 이 변경에 필요한가”라는 판단 단계</strong>에
-결합했다는 점입니다.</p>
+<section id="인터랙션다국어" class="level3">
+<h3>인터랙션·다국어</h3>
+<ul>
+<li>product 카드 <strong>무한 횡스크롤(AutoScrolling)</strong>, AOS
+스크롤 애니메이션으로 콘텐츠를 보여주는 인터랙션을 구성했습니다.</li>
+<li>번역 키 오타가 런타임에야 드러나던 문제를, 영어 단일 소스에서 타입을
+자동 생성해 <strong>없는 키를 컴파일 타임에 차단</strong>하는 타입세이프
+i18n으로 전환했습니다. 작업 당시 한·영·일 3개 언어였고, 이후 11개로 확장
+가능한 구조로 설계했습니다.</li>
+</ul>
+</section>
+<section id="풀스택-백오피스-조직관리" class="level3">
+<h3>풀스택 — 백오피스 조직관리</h3>
+<ul>
+<li>랜딩 백오피스에 3계층 조직관리(Groups→Teams→Members) CRUD를 0→1로
+구축하고, 같은 주에 백오피스 클라이언트와 <strong>서버 API(Fastify)를
+동시에</strong> 풀스택으로 완성했습니다.</li>
+</ul>
 </section>
 <section id="회고" class="level3">
 <h3>회고</h3>
-<p>“왜 내 PC에선 되는데 CI에선 안 되지”를 매번 디버깅하는 대신, 그 질문
-자체가 나오지 않는 환경을 만드는 게 목표였습니다. 도구가 아니라
-<strong>결정성</strong>이 핵심이었습니다.</p>
-<p>격리 환경과 2주간 씨름한 시행착오를 17건·약 36시간으로 직접 집계해
-보니, 문제는 환경이 불안정해서가 아니라 <strong>같은 환경을 두
-목적(빌드본 그대로 검증 vs 방금 고친 코드 swap)으로 쓰면서 한쪽엔
-결정성이 오히려 독이 됐기</strong> 때문이었습니다. 그래서 두 모드를
-명시적으로 분리하는 결정을 남겼습니다 — 결정성은 절대선이 아니라 용도에
-따라 양날이라는 것을, 운영 피로를 데이터로 환산해 확인했습니다.</p>
-<p>AI 변경 감지에는 한계도 있습니다. 선별·분류는 1차 판단이라 사람의
-확인이 필요하고, EC2 보안 정책·스케줄 안정성의 운영 부담 때문에 이후
-로컬 데일리 E2E 워크플로로 재편하고 있습니다. 선별 정확도·실행량 절감
-같은 정량 효과는 아직 측정 근거가 없어, 성과로 부풀리지 않고 메커니즘과
-한계만 적어 둡니다. 더 본질적으로는, 어떤 회귀가 <strong>AI 리뷰가
-오히려 통과시킨</strong> 잘못된 테스트에서 비롯됐습니다 — 기획 의도가
-코드·테스트에 반영되지 않고 티켓 코멘트에만 있던 탓에 맥락을 모르는
-변경이 잘못된 동작을 E2E 단언으로 굳혔고, 그 PR은 사람 리뷰어 없이 AI
-승인만 받은 상태였습니다. 직접 바로잡았지만, AI를 판단 단계에 넣을수록
-그 판단이 맥락 없이 틀릴 수 있다는 것까지 함께 설계해야 합니다.</p>
+<p>“런타임에야 드러날 문제를 빌드 타임으로 당긴다”는 원칙은 이후
+결제·테스트·관측까지 제가 일하는 방식의 공통 축이 됐습니다.</p>
+<p>다만 타입 체크가 만능은 아니라는 것도 배웠습니다. 그동안의 i18n
+버그를 직접 집계해보니, 정작 가장 흔한 ’번역 키 노출’은 영어 단일 소스로
+만든 타입 체크가 잡지 못하는 사각지대(언어별 키 누락)였습니다 — 더 싸고
+정확한 건 언어 간 키 parity 체크였습니다. 도구는 좋아 보이는가가 아니라
+무엇을 막는가를 데이터로 따져 선택해야 한다는 걸, 제가 도입했던 방법을
+스스로 점검하며 확인했습니다.</p>
 <hr />
 </section>
 </section>
-<section id="case-2.-케이스-목록-썸네일-보일-때만-모아서-실패도-캐시"
+<section id="케이스-목록-썸네일-로딩-최적화-지연-로딩요청-배치실패-캐싱"
 class="level2">
-<h2>Case 2. 케이스 목록 썸네일 — 보일 때만, 모아서, 실패도 캐시</h2>
+<h2>케이스 목록 썸네일 로딩 최적화 — 지연 로딩·요청 배치·실패 캐싱</h2>
 <p><code>2025.10 ~ 2026.06</code> ·
 <code>React · TanStack Query · IntersectionObserver · Context API</code></p>
 <section id="개요-1" class="level3">
@@ -221,7 +169,7 @@ class="level2">
 표시됩니다. 이 화면의 <strong>썸네일 로딩 성능</strong>과, 운영 중
 발생한 <strong>깜빡임·무한 재요청 회귀</strong>를 다룬 작업입니다.</p>
 </section>
-<section id="문제-1" class="level3">
+<section id="문제" class="level3">
 <h3>문제</h3>
 <p>케이스 목록 썸네일은 “N장 = 네트워크 N요청”이 되기 쉽습니다. 게다가
 운영 중 깜빡임과 무한 재요청이 발생했습니다. 무한 재요청의 원인은
@@ -270,75 +218,187 @@ alt="케이스 목록 썸네일 — 보일 때만 로드하고, 모아서 한 �
 <hr />
 </section>
 </section>
-<section id="case-3.-흩어진-레포를-모노레포로-통합과-환경-일원화"
+<section id="b2b-구독결제-프론트엔드-예측-가능불가능-에러-분리"
 class="level2">
-<h2>Case 3. 흩어진 레포를 모노레포로 — 통합과 환경 일원화</h2>
-<p><code>2024.06 ~</code> ·
-<code>TypeScript · NX · Git Subtree · i18n</code></p>
+<h2>B2B 구독·결제 프론트엔드 — 예측 가능/불가능 에러 분리</h2>
+<p><code>2023.09 ~ 2025.07</code> ·
+<code>React · TypeScript · TanStack Query</code></p>
 <section id="개요-2" class="level3">
 <h3>개요</h3>
-<p>별도 레포로 흩어져 있던 클라이언트 앱·공용 라이브러리를 하나의 NX
-모노레포로 모으고, 환경별로 제각기 구성하던 도메인·URL을 일원화한
-프로젝트입니다. 이후 격리 재현 환경(Case 1)이 이 토대 위에
-올라갑니다.</p>
+<p>일회성 크레딧에서 반복 구독으로 결제 모델을 전환하는 시점에 구독·결제
+화면을 전담했습니다. 플랜 업그레이드, 좌석 구매, 구독 취소·재개, 쿠폰,
+결제수단 관리, 결제 히스토리를 맡았습니다. 동시에 이 프로젝트는 제가
+프론트엔드 아키텍처와 에러 처리를 본격적으로 도입한 무대였고, 그중 가장
+오래 붙들었던 것이 에러를 어떻게 다룰 것인가였습니다. 결제 인프라와 팝업
+앱 기반은 팀과 함께였습니다.</p>
 </section>
-<section id="문제-2" class="level3">
-<h3>문제</h3>
-<p>클라이언트 앱들이 환경별 URL·도메인을 <strong>각자 다르게
-구성</strong>하고 있었고, 별도 레포에 흩어져 있어 공통 변경을 여러 곳에
-반복해야 했습니다. 다국어 관리도 중복 업로드와 흩어진 스크립트로
-파편화돼 있었습니다.</p>
+<section id="문제-모든-에러가-한-덩어리였다" class="level3">
+<h3>문제 — 모든 에러가 한 덩어리였다</h3>
+<p>당시 회사에는 에러 처리에 대한 정의가 없었습니다. 사실 지금도
+그렇습니다. 모든 에러를 하나의 unknown으로 일괄 처리하다 보니, 한
+기능에서 발생한 에러가 전체 페이지를 에러 화면으로 바꿨습니다. 케이스
+리스트 조회 한 번 실패하면 SNB도 대시보드도 접근하지 못했습니다.</p>
+<p>근본 원인은 예측 가능한 에러와 예측 불가능한 에러를 구분하지 않은
+것이었습니다. 구분이 없으니, 서버가 의도적으로 내려준 비즈니스 에러든
+정말 예상하지 못한 시스템 실패든 똑같이 폴백 UI로 흡수돼버렸습니다.</p>
 </section>
-<section id="해결-1" class="level3">
-<h3>해결</h3>
-<ul>
-<li><strong>NX 유지 + OOM 해소</strong> — 모노레포 도구를 새로 고르는
-대신 기존 NX를 유지했습니다. 전환 이득이 이관·재학습 비용을 넘지
-못한다고 봤기 때문입니다. 잔존하던 <code>webpack.config.js</code>가 NX
-자동 타겟 추론을 유발해 불필요한 빌드 산출물과 OOM을 일으키던 것을
-진단해, <strong>빌드 태스크를 11개에서 9개로 줄이고 OOM을
-해소</strong>했습니다.</li>
-<li><strong>Git Subtree로 이관</strong> — 별도 레포의 클라이언트 앱
-2종·공용 라이브러리 6종을 메인 NX 모노레포로 옮겼습니다. 단순 복사가
-아니라 <strong>커밋 이력을 보존</strong>하고 네임스페이스 충돌을
-리네임으로 해소했습니다.</li>
-<li><strong>도메인 통합 라이브러리</strong> — 환경별로 흩어진 도메인·URL
-구성을 단일 라이브러리로 일원화했습니다. 기준 도메인 하나에서
-backend·gateway·테넌트 호스트 등이 한 곳에서 파생됩니다. (팀의 런타임
-환경 분리·격리 재현 환경이 이 라이브러리를 기반으로 동작합니다.)</li>
-<li><strong>다국어 중앙화</strong> — 중복 업로드 89줄과 14개 스크립트로
-흩어진 i18n 관리를 단일 스크립트로 모았습니다.</li>
-</ul>
+<section id="해결-에러를-둘로-나누다" class="level3">
+<h3>해결 — 에러를 둘로 나누다</h3>
+<p>예측 불가능한 에러는 ErrorBoundary로 격리했습니다. 컴포넌트마다
+흩어진 명령형 방어 코드 <code>if (!data) return null</code>을
+ErrorBoundary로 걷어내고, 어디까지 실패를 허용할지를 도메인 의존 관계로
+구분했습니다. billing 정보를 받지 못해도 결제 내역 조회·구독
+취소·뒤로가기는 살아남습니다. 한 기능의 실패가 전체 페이지를 중단시키지
+않습니다.</p>
+<p>예측 가능한 에러는 코드별로 분기했습니다. 서버는 비즈니스 에러를
+<code>HTTP 200 · success:false · errorCode</code> 형태로 내려줍니다.
+이건 실패가 아니라 의도된 결과라 폴백 UI로 흡수하면 안 됩니다.
+<code>BusinessLogicError</code> 커스텀 클래스로 throw하고,
+<code>.when(errorCode, action).otherwise()</code> 체인으로 에러 코드별로
+분기했습니다.</p>
 <figure>
-<img src="../../images/portfolio/diagrams/monorepo.svg" class="diagram"
-alt="모노레포 통합 전/후 — 흩어진 레포들이 단일 NX 모노레포와 도메인 통합 라이브러리 위로 모인다" />
-<figcaption aria-hidden="true">모노레포 통합 전/후 — 흩어진 레포들이
-단일 NX 모노레포와 도메인 통합 라이브러리 위로 모인다</figcaption>
+<img src="../../images/portfolio/diagrams/dual-error-handling.svg"
+class="diagram"
+alt="이중 에러 처리 — 예측 불가능한 에러는 ErrorBoundary로 기능 단위 격리, 예측 가능한 비즈니스 에러는 코드별 분기" />
+<figcaption aria-hidden="true">이중 에러 처리 — 예측 불가능한 에러는
+ErrorBoundary로 기능 단위 격리, 예측 가능한 비즈니스 에러는 코드별
+분기</figcaption>
 </figure>
-<p>기준 도메인(통합/레거시) 하나에서 cloud·accounts·api URL이 모두
-파생됩니다. 통합 도메인에서는 상대 경로로, 레거시에서는 환경변수 기반
-절대 URL로 갈라지되 호출부는 <code>UrlHelper.cloud()</code> 한 형태로
-통일됩니다.</p>
 </section>
 <section id="회고-2" class="level3">
 <h3>회고</h3>
-<p>흩어졌던 레포를 하나로 합치니, 여러 곳에 걸친 변경을 한 PR에서 한눈에
-보고 리뷰할 수 있게 됐습니다. npm 패키지나 외부 모듈로 따로 배포되며
-버전이 어긋나 생기던 불일치도, 빌드 타임에 함께 묶어 컴파일하는 방식으로
-사라졌습니다. “무엇을 합칠까”보다 합친 뒤에도 흔들리지 않을 토대 —
-도메인 통합 라이브러리 — 를 먼저 마련한 것이, 다음 단계인 격리 재현
-환경의 기반이 됐습니다.</p>
+<p>에러 처리의 출발점은 정교한 도구가 아니라 에러를 구분 짓는 일이라는
+걸 이 프로젝트에서 배웠습니다. 예측 가능한 실패와 불가능한 실패를 나누지
+않으면, 아무리 잘 만든 ErrorBoundary를 두어도 결국 다 같은 폴백으로
+흡수됩니다.</p>
+<p>이 구조는 모노레포로 이관된 뒤에도 <code>BusinessLogicError</code>와
+<code>withErrorBoundary</code> HOC로 살아남았습니다. 다만 조직 차원의
+에러 처리 정의는 여전히 없고, 무엇이 실패해도 무엇은 살아남아야 하는가를
+결제 데이터 의존 관계까지 끊어내는 설계는 당시 출시 우선순위와 설계
+역량의 한계로 끝까지 가지 못했습니다. 이 문제의식은 이후 조직 차원의
+관측·복원력 표준으로 넓혔습니다.</p>
+<p>또 패턴과 설계는 팀 전체의 공통 이해가 없으면 복잡도만 높인다는 것도
+이때 배웠습니다. 에러 응답 형식만 해도 서버가 HTTP 200에 success:false로
+내려줄지 4xx·5xx로 내려줄지부터 백엔드와 합의가 필요했고, 이 약속을 미리
+맞춰두지 않으면 응답마다 어떻게 처리할지 다시 논의하는 비용이 계속
+쌓였습니다.</p>
 <hr />
 </section>
 </section>
-<section
-id="case-4.-정답-기술이-아니라-제약에-맞춘-통합-공통-모듈-micro-frontend"
+<section id="격리-재현-환경과-ai-변경-감지-결정론적-테스트-인프라"
 class="level2">
-<h2>Case 4. 정답 기술이 아니라 제약에 맞춘 통합 — 공통 모듈 Micro
-Frontend</h2>
+<h2>격리 재현 환경과 AI 변경 감지 — 결정론적 테스트 인프라</h2>
+<p><code>2025.11 ~</code> ·
+<code>Docker · MongoDB · 런타임 Config · Playwright · EC2 · Claude · qase</code></p>
+<section id="개요-3" class="level3">
+<h3>개요</h3>
+<p>테스트·디버깅의 신뢰성 문제를, 테스트가 믿을 수 있게 돌아가는
+<strong>재현 가능한 환경을 만드는 방향</strong>으로 푼 프로젝트입니다.
+선행 구조(도메인 통합 + 팀의 런타임 분리)부터 쌓고, 그 위에 격리 재현
+환경을 구축하고, 다시 그 위에 <strong>“바뀐 코드만 골라 테스트하는” AI
+변경 감지</strong>까지 구축했습니다.</p>
+</section>
+<section id="문제-1" class="level3">
+<h3>문제</h3>
+<p>dev·qa에서는 멀쩡하던 것이 <strong>prod 배포 시 dev 환경변수가 포함된
+채 배포</strong>되는 일이 있었고, 그 결과 배포 직후 곧바로 핫픽스를 다시
+배포하는 일이 반복됐습니다. 동시에 특정 시점의 버그를 재현하기 어려웠고,
+E2E가 다른 변경의 간섭으로 쉽게 흔들렸습니다.</p>
+</section>
+<section id="해결-선행-구조-먼저-그-위에-격리" class="level3">
+<h3>해결 — 선행 구조 먼저, 그 위에 격리</h3>
+<p>원인은 <strong>빌드 시점에 환경변수가 번들에 고정되는
+구조</strong>였습니다. 런타임 분리 자체는 팀이 진행했고, 본인은 그
+토대로 <strong>도메인 통합 라이브러리</strong>를 구축했습니다. 환경이
+런타임에 결정되니, <strong>특정 커밋 시점으로 Docker를 기동해 그때의
+클라이언트 + 서버 + DB를 그대로 재현</strong>하는 격리 환경을 구축할 수
+있었습니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/isolation-stack.svg"
+class="diagram"
+alt="격리 재현 환경 — 도메인 통합과 런타임 분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로 재현한다" />
+<figcaption aria-hidden="true">격리 재현 환경 — 도메인 통합과 런타임
+분리 토대 위에, 커밋 단위로 클라이언트·서버·DB를 통째로
+재현한다</figcaption>
+</figure>
+</section>
+<section id="결과" class="level3">
+<h3>결과</h3>
+<ul>
+<li>본인이 구축한 도메인 통합 토대 위에서 팀의 런타임 분리가 맞물려
+환경별 빌드가 사라지고 <strong>배포 직후 핫픽스 반복이
+해소</strong>됐고, 본인은 그 위에 격리 재현 환경을 직접 구축</li>
+<li>격리 이전에 흩어져 있던 E2E부터 정리했습니다 — 백오피스 전 영역에
+수십 개 suite를 구축하고 로그인 중복을 공통 헬퍼로 <strong>약 93%
+줄였으며</strong>, 인라인 셀렉터를 Page Object로 리팩토링했습니다.
+이렇게 안정화한 E2E를 격리 기반 위로 옮겨, 아래 AI 변경 감지의 실행
+기반으로 삼았습니다</li>
+<li>만성적으로 실패하던 격리 daily는 <strong>원인별로 분리
+진단</strong>했습니다. <strong>결제(billtap) 경로 실패 약 28건을 근본
+수정해 0으로</strong> 만들었고, <strong>8개 앱 동시 기동 시 S3
+다운로드가 DNS를 포화</strong>시키던 문제를 수정 유/무 대조 실행으로
+확정해 공유 캐시 프리페치(1회 워밍)로 해소했습니다 — 처음엔 포트 문제로
+의심했으나, 같은 대조 실행으로 직접 반증했습니다.</li>
+</ul>
+</section>
+<section id="그-위에-바뀐-코드만-골라-테스트한다-ai-변경-감지"
+class="level3">
+<h3>그 위에 — 바뀐 코드만 골라 테스트한다 (AI 변경 감지)</h3>
+<p>전체 E2E를 매번 돌리면 느리고, 안 돌리면 회귀를 놓칩니다. 이 이분법
+대신 <strong>“변경과 관련된 테스트만 골라 실행”</strong>하는 중간 해법을
+격리 인프라 위에 올렸습니다. 시작은 수백 개 qase 테스트 케이스를 사람이
+일일이 검증하기 어렵다는 문제를 <strong>Planner·Verifier 2-에이전트로
+자동 검증</strong>하던 도구(TC-Verify)였고, 이를 “변경 연관 테스트
+선별”로 확장한 것입니다.</p>
+<p><strong>EC2에서 Claude를 상시 구동</strong>해, 커밋 diff를 분석하고
+<strong>QA팀이 관리하는 qase 테스트 케이스 중 연관 케이스를
+선별·실행</strong>한 뒤 결과를 Teams로 보고하고, <strong>실패를 실제
+회귀와 테스트 코드 문제로 1차 분류</strong>하는 파이프라인을
+설계했습니다. 검증은 <strong>10분 주기 크론잡</strong>으로 자동화하고,
+동시 실행·중복 분석을 막아 안정적으로 돌도록 했습니다.</p>
+<figure>
+<img src="../../images/portfolio/diagrams/ai-detect-pipeline.svg"
+class="diagram"
+alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고" />
+<figcaption aria-hidden="true">AI 변경 감지 파이프라인 — 커밋 diff 분석
+→ 연관 TC 선별 → 격리 환경 실행 → 1차 분류와 보고</figcaption>
+</figure>
+<p>단순한 테스트 코드 문제(셀렉터 변경 등)와 실제 API 회귀를
+<strong>1차로 갈라</strong>, 사람이 확인할 것만 추려 보고하도록
+했습니다. 핵심은 AI를 코드 자동완성 같은 보조 도구가 아니라
+<strong>“어떤 테스트가 이 변경에 필요한가”라는 판단 단계</strong>에
+결합했다는 점입니다.</p>
+</section>
+<section id="회고-3" class="level3">
+<h3>회고</h3>
+<p>“왜 내 PC에선 되는데 CI에선 안 되지”를 매번 디버깅하는 대신, 그 질문
+자체가 나오지 않는 환경을 만드는 게 목표였습니다. 도구가 아니라
+<strong>결정성</strong>이 핵심이었습니다.</p>
+<p>격리 환경과 2주간 씨름한 시행착오를 17건·약 36시간으로 직접 집계해
+보니, 문제는 환경이 불안정해서가 아니라 <strong>같은 환경을 두
+목적(빌드본 그대로 검증 vs 방금 고친 코드 swap)으로 쓰면서 한쪽엔
+결정성이 오히려 독이 됐기</strong> 때문이었습니다. 그래서 두 모드를
+명시적으로 분리하는 결정을 남겼습니다 — 결정성은 절대선이 아니라 용도에
+따라 양날이라는 것을, 운영 피로를 데이터로 환산해 확인했습니다.</p>
+<p>AI 변경 감지에는 한계도 있습니다. 선별·분류는 1차 판단이라 사람의
+확인이 필요하고, EC2 보안 정책·스케줄 안정성의 운영 부담을 줄이려 이후
+로컬 데일리 E2E 워크플로로 옮기고 있습니다. 선별 정확도·실행량 절감 같은
+정량 효과는 아직 측정 근거가 없어, 성과로 부풀리지 않고 메커니즘과
+한계만 적어 둡니다. 더 본질적으로는, 어떤 회귀가 <strong>AI 리뷰가
+오히려 통과시킨</strong> 잘못된 테스트에서 비롯됐습니다 — 기획 의도가
+코드·테스트에 반영되지 않고 티켓 코멘트에만 있던 탓에 맥락을 모르는
+변경이 잘못된 동작을 E2E 단언으로 굳혔고, 그 PR은 사람 리뷰어 없이 AI
+승인만 받은 상태였습니다. 직접 바로잡았지만, AI를 판단 단계에 넣을수록
+그 판단이 맥락 없이 틀릴 수 있다는 것까지 함께 설계해야 합니다.</p>
+<hr />
+</section>
+</section>
+<section id="공통-모듈-micro-frontend-제약-기반-통합-전략"
+class="level2">
+<h2>공통 모듈 Micro Frontend — 제약 기반 통합 전략</h2>
 <p><code>2023.09 ~ 2025.10</code> ·
 <code>NX · Module Federation</code></p>
-<section id="개요-3" class="level3">
+<section id="개요-4" class="level3">
 <h3>개요</h3>
 <p>4개 서비스(cloud·crown·modeler·milling)가 공유하던 공통 기능
 4개(설정·내보내기·탐색기·뷰어)를 모듈화하면서, <strong>“정답 기술”을
@@ -359,7 +419,7 @@ alt="공통화한 4개 모듈 — 설정·내보내기·탐색기·뷰어가 4�
 재사용된다</figcaption>
 </figure>
 </section>
-<section id="문제-3" class="level3">
+<section id="문제-2" class="level3">
 <h3>문제</h3>
 <p>공통 기능이 하나 바뀔 때마다 <strong>각 서비스에 같은 수정을 반복하고
 전부 배포</strong>해야 했습니다. 도메인도 관리팀도 분리돼 있어 변경 한
@@ -389,105 +449,32 @@ iframe으로 회귀</strong>하되, 이번엔 same-origin으로 서빙해 CORS·
 뺀</strong> 판단입니다. (console-client에는 Module Federation을 직접
 적용했습니다.)</p>
 </section>
-<section id="회고-3" class="level3">
+<section id="회고-4" class="level3">
 <h3>회고</h3>
 <p>같은 문제를 라이브러리 → iframe → 빌드타임 통합 → 다시 iframe으로 세
-번 다르게 풀었습니다. 매번 그때 더 낫다고 본 방법을 택했지만, 운영해보면
-조직·배포 제약이 다른 답을 가리켰습니다 — 빌드타임 통합은 기술적으로
-깔끔했어도 사내 배포 주기와 맞지 않아 결국 same-origin iframe으로
-돌아왔습니다. <strong>“정답 기술”은 없고 제약에 맞는 선택만 있다는 것,
-더 나아 보이는 방법도 운영해보기 전엔 모른다는 것</strong>을 배웠습니다.
-iframe 통합과 console-client의 Module Federation은 제가 주도했고, 빌드
-도구 전환은 팀과 함께였습니다. 이 통합은 4개월 운영 후 팀이 Vite로
-표준을 통일하며 흡수됐습니다.</p>
+번 다르게 풀었습니다. iframe 통합과 console-client의 Module Federation은
+제가 주도했고, 빌드 도구 전환은 팀과 함께였습니다. 매번 그때 더 낫다고
+본 방법을 택했지만, 운영해보면 조직·배포 제약이 다른 답을 가리켰습니다 —
+빌드타임 통합은 기술적으로 깔끔했어도 사내 배포 주기와 맞지 않아 결국
+same-origin iframe으로 돌아왔습니다. 이 과정에서 <strong>“정답 기술”은
+없고 제약에 맞는 선택만 있다는 것, 더 나아 보이는 방법도 운영해보기 전엔
+모른다는 것</strong>을 배웠습니다. 이 통합은 4개월간 공통 기능 4종을
+단일 구현으로 유지했고, 이후 팀이 Vite로 표준을 통일하며 그 위로
+수렴됐습니다.</p>
+<p>별개로, 사내 공통 디자인 시스템(MUI 기반)에도 <strong>DatePicker
+확장</strong>(onClose 덮어쓰기 버그 수정·placeholder·onClick 핸들러
+노출) 등 공통 컴포넌트 기여와 v3.0.0 릴리스 관리를 했습니다.</p>
 <hr />
 </section>
 </section>
-<section id="case-5.-에러는-잡히는데-추적이-안-된다-관측복원력-표준화"
-class="level2">
-<h2>Case 5. 에러는 잡히는데 추적이 안 된다 — 관측·복원력 표준화</h2>
-<p><code>2026.04 ~</code> ·
-<code>React · TypeScript · Datadog RUM</code></p>
-<section id="개요-4" class="level3">
-<h3>개요</h3>
-<p>에러는 잡히지만 <strong>어디서 왜 났는지 추적되지 않던</strong>
-상태를, 5개 앱에 공통 표준으로 정리한 프로젝트입니다.</p>
-</section>
-<section id="문제-4" class="level3">
-<h3>문제</h3>
-<p>여러 fail mode가 같은 UI·같은 메시지로 흡수돼, 예컨대 QA 환경 RUM에서
-124건의 실패가 <code>new Error('failedToExportMeshes')</code> <strong>한
-줄로 collapse</strong>되어 원인 추적이 불가능했습니다.</p>
-</section>
-<section id="해결-2" class="level3">
-<h3>해결</h3>
+<section id="함께-보기" class="level2">
+<h2>함께 보기</h2>
 <ul>
-<li><strong>Root → Section → Feature 3계층 ErrorBoundary 체계를
-설계</strong>해 에러를 계층별로 격리하고, 5개 앱을 공통 표준으로
-정렬했습니다(계층 적용 깊이는 앱별 단계적).</li>
-<li>에러를 <strong>Datadog 관측 표준에 맞춰 직렬화</strong>해, 한
-메시지로 뭉쳐 보이던 실패 124건을 원인별로 추적 가능하게 만들었습니다.
-적용 전후는 <strong>격리 환경에서 RUM 데이터를 정량 비교</strong>해
-검증했습니다.</li>
-<li><strong>안전망은 발생 위치만 자동 표기</strong>하고 의미 부여는
-호출자가 명시하도록 책임을 분리했으며, 최상위 안전망에는 외부 의존을
-두지 않아 <strong>안전망이 자기 의존성 때문에 실패하지 않도록</strong>
-설계했습니다.</li>
+<li><strong><a href="resume.html">이력서</a></strong> — 전체 경력과 기술
+스택</li>
+<li><strong><a href="https://github.com/crowwan">깃허브</a></strong> ·
+<strong><a href="https://crowwan.github.io/">블로그</a></strong></li>
 </ul>
-<figure>
-<img src="../../images/portfolio/diagrams/observability-layers.svg"
-class="diagram"
-alt="3계층 ErrorBoundary — 외부 의존 없는 최후 안전망부터 기능 단위 격리까지, 원인별 직렬화로 Datadog에 닿는다" />
-<figcaption aria-hidden="true">3계층 ErrorBoundary — 외부 의존 없는 최후
-안전망부터 기능 단위 격리까지, 원인별 직렬화로 Datadog에
-닿는다</figcaption>
-</figure>
-<p>render-time 에러는 <code>react-error-boundary</code>로 처리하지만,
-<strong>비동기 에러에는 이 라이브러리를 쓰지 않았습니다</strong> — ①
-실제 실패는 렌더가 아니라 <strong>async 이벤트 핸들러</strong>(파일
-다운로드·파싱)에서 나는데 이 라이브러리는 render-time 에러만 잡고, ②
-iframe 안 모듈의 boundary는 host까지 전파되지 않으며, ③ throw 지점마다
-wrap 코드가 늘어 피하려던 분기 증식이 반복되기 때문입니다. 대신 비동기
-에러는 <strong>에러 객체 자체에 풍부한 metadata를 담는</strong>
-방식(표준 <code>Error.cause</code> + 구조화된 실패 상세)을 택해, throw
-지점은 한 줄로 두고 RUM에는 grep 가능한 단일 라인으로 직렬화했습니다.
-공통 라이브러리라 <strong>한 곳을 고치면 5개 앱에
-반영</strong>됩니다.</p>
-<p>에러를 <code>instanceof</code>로 — axios·fetch 같은 특정 라이브러리의
-에러 타입으로 — 판별하면 라이브러리마다 타입이 달라 분기가 복잡해지고 그
-라이브러리에 종속됩니다. 대신 에러 객체의 <strong>형태(shape)만 보고
-HTTP 상태를 추출</strong>해, axios·fetch·커스텀 wrapper 어디서 온 에러든
-같은 기준으로 다뤘습니다. 이렇게 뽑은 상태로 에러를 일시적 오류·치명적
-오류·무시할 오류 등 여섯 갈래로 나눠 분류별로 다르게 대응했고, 이 분류
-로직은 한 앱에서 만든 뒤 공통 라이브러리로 옮겨 여러 앱이 함께 쓰게
-했습니다.</p>
-<p>같은 복원력 관점을 데이터 로딩으로도 확장하려 합니다 — 3D 뷰어에서
-여러 design 중 일부 mesh가 손상돼도 <code>Promise.allSettled</code>로
-<strong>살아있는 mesh는 렌더하고 누락은 ModelTree에 표시</strong>해,
-“전부 실패”와 “부분 실패”를 하나의 흐름에서 가르는 방향을
-제안했습니다(착수 전). 에러 바운더리를 모든 곳에 두는 대신 <strong>장애
-허용 범위를 화면이 직접 설계한다</strong>는 원칙을 데이터 흐름에
-적용하려는 구상입니다.</p>
-</section>
-<section id="회고-4" class="level3">
-<h3>회고</h3>
-<p>관측은 에러를 <em>잡는</em> 일이 아니라 <em>왜 났는지 추적할 수
-있게</em> 만드는 일이라는 걸 이 프로젝트에서 분명히 했습니다. 한 줄로
-뭉쳐 보이던 124건을 원인별로 가른 것이 그 출발이었습니다.</p>
-<p>안전망 설계에서 가장 크게 배운 건, 최후 안전망일수록 외부 의존이
-없어야 한다는 점입니다. 처음엔 ErrorBoundary의 fallback UI에 회사 디자인
-시스템을 그대로 썼는데, 디자인 시스템에 큰 변경이 생기자 그 fallback UI
-자체가 에러를 발생시키며 흰 화면만 남았습니다 — 사용자를 마지막에
-받아내야 할 안전망이 자기 의존성 때문에 무너진 것입니다. 그래서 최상위
-fallback은 의존성을 최대한 걷어낸 UI로 다시 만들어 가장 바깥 레이어에
-뒀습니다.</p>
-<p>직접 만든 7분류 에러 체계가 특정 앱에 치우쳐 있던 것도 인정하고 팀
-공통 표준에 맞춰 폐기·정렬했습니다. 내가 만든 걸 고집하기보다 팀
-표준으로 수렴시키는 게 관측의 가치를 살린다고 봤습니다.</p>
-<p>이 문제의식의 출발점은 구독·결제 프론트엔드에서 에러를 예측
-가능/불가능으로 처음 구분한 경험이었고, 그때 한 프로젝트 안에 머물렀던
-정리를 이번에 5개 앱 조직 표준으로 끌어올렸습니다.</p>
-</section>
 </section>
 </section>
 <script type="module">
