@@ -47,7 +47,7 @@ AI 기반 치과 CAD/CAM SaaS인 Dentbird의 프론트엔드를 맡아, 웹·데
 
 사용자가 가장 자주 보는 케이스 목록·뷰어 화면의 성능과 상태를 다뤘습니다.
 
-- 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 가드로 처리
+- 썸네일을 IntersectionObserver 배치 lazy-loading + TTL 캐시 + 무한 재요청 방지로 처리
 - 목록↔3D 리뷰 토글의 URL 상태 동기화 race를 비교 경계 축소로 근본 해결
 
 `기술` React · TanStack Query · IntersectionObserver · Three.js

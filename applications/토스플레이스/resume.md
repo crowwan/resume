@@ -18,7 +18,7 @@ Electron 데스크톱·하드웨어 연동 · 프론트엔드 아키텍처·상�
 - **프론트엔드 설계·상태관리**: FSD·컴포넌트 패턴(Compound·Render Props), 선언적 에러 처리·Fault Tolerance, TanStack Query·URL 상태 동기화, 리스트 렌더링 성능
 - **빌드·배포 인프라**: macOS/Windows 빌드 파이프라인 재설계, 코드 서명·자동 업데이트, blue-green 무중단 배포
 - **프론트엔드 플랫폼**: NX 모노레포 통합, 공통 모듈(MFE) 분리, 환경·도메인 구성 일원화
-- **품질 자동화**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, AI 변경 감지, 결제 도메인 회귀 가드
+- **품질 자동화**: Playwright E2E, 커밋 단위 컨테이너 격리 재현, AI 변경 감지, 결제 도메인 회귀 테스트
 
 ---
 
