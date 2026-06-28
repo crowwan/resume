@@ -1,7 +1,7 @@
 <!-- 오늘의집(버킷플레이스) Frontend Engineer, Content 지원용 포트폴리오 -->
 <!-- 마스터 portfolio.md에서 Content 직무 매칭 5개 선별·재배치 (깊은 제품 카드 우선, 랜딩은 그 외로) -->
 
-# 김진완 포트폴리오 | Frontend Developer
+# 김진완 포트폴리오 | Frontend Engineer
 
 - [이력서](resume.html) · [블로그](https://crowwan.github.io/) · [깃허브](https://github.com/crowwan)
 
