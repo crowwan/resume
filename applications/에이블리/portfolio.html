@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -30,15 +30,16 @@
 <body>
 <!-- 에이블리(ABLY) 프론트엔드 엔지니어 지원용 포트폴리오 -->
 <!-- 마스터 portfolio.md에서 5개 선별·재배치 (제품 카드 먼저, 브라우저 깊은 이해·웹뷰·AI 우대 직격) -->
-<h1 id="김진완-포트폴리오-frontend-engineer">김진완 포트폴리오 |
-Frontend Engineer</h1>
+<section id="김진완-포트폴리오-frontend-engineer" class="level1">
+<h1>김진완 포트폴리오 | Frontend Engineer</h1>
 <ul>
 <li><a href="resume.html">이력서</a> · <a
 href="https://crowwan.github.io/">블로그</a> · <a
 href="https://github.com/crowwan">깃허브</a></li>
 </ul>
 <hr />
-<h2 id="about">About</h2>
+<section id="about" class="level2">
+<h2>About</h2>
 <figure>
 <img src="../../images/portfolio/screenshots/cloud-case-list.png"
 alt="Dentbird Cloud — AI 기반 치과 CAD/CAM SaaS. 이 화면을 포함한 웹·데스크톱 프론트엔드를 담당했습니다." />
@@ -56,7 +57,9 @@ SaaS. 이 화면을 포함한 웹·데스크톱 프론트엔드를
 폭넓게 다뤄 왔습니다. 아래는 그중 대표적인 작업들의
 배경·판단·회고입니다.</p>
 <hr />
-<h2 id="skills">Skills</h2>
+</section>
+<section id="skills" class="level2">
+<h2>Skills</h2>
 <p class="skills-chips">
 <span
 class="chip"><img src="../../images/portfolio/icons/react.svg" alt="">React</span>
@@ -84,9 +87,10 @@ Actions</span> <span
 class="chip"><img src="../../images/portfolio/icons/datadog.svg" alt="">Datadog</span>
 </p>
 <hr />
-<h2
-id="케이스-목록-썸네일-로딩-최적화-지연-로딩요청-배치실패-캐싱">케이스
-목록 썸네일 로딩 최적화 — 지연 로딩·요청 배치·실패 캐싱</h2>
+</section>
+<section id="케이스-목록-썸네일-로딩-최적화-지연-로딩요청-배치실패-캐싱"
+class="level2">
+<h2>케이스 목록 썸네일 로딩 최적화 — 지연 로딩·요청 배치·실패 캐싱</h2>
 <p><code>2025.10 ~ 2026.06</code> ·
 <code>React · TanStack Query · IntersectionObserver · Context API</code></p>
 <blockquote>
@@ -94,13 +98,16 @@ id="케이스-목록-썸네일-로딩-최적화-지연-로딩요청-배치실패
 구조로 근절(재마운트돼도 중복 fetch 없음을 회귀 테스트로 고정), 썸네일을
 지연 로딩 + 요청 배치로 최적화해 “N장 = N요청” 구조를 해소</p>
 </blockquote>
-<h3 id="문제">문제</h3>
+<section id="문제" class="level3">
+<h3>문제</h3>
 <p>케이스 목록은 사용자가 가장 자주 보는 화면이고 썸네일이 수십 장
 표시되는데, “N장 = 네트워크 N요청”이 되기 쉽습니다. 게다가 운영 중
 깜빡임과 무한 재요청이 발생했습니다. 무한 재요청의 원인은 <strong>카드가
 재마운트될 때마다 훅이 새로 생겨 같은 썸네일을 중복 요청</strong>하고,
 403 같은 영구 오류도 새 URL로 계속 다시 호출하는 구조였습니다.</p>
-<h3 id="해결">해결</h3>
+</section>
+<section id="해결" class="level3">
+<h3>해결</h3>
 <p><strong>IntersectionObserver로 viewport에 들어온 썸네일만
 로드</strong>하고, 50ms 윈도우 안의 요청을 모아 <strong>한 번에 배치
 요청</strong>하는 공통 훅(Context Provider 기반)을 만들었습니다.</p>
@@ -121,7 +128,9 @@ alt="케이스 목록 썸네일 — 보일 때만 로드하고, 모아서 한 �
 <figcaption aria-hidden="true">케이스 목록 썸네일 — 보일 때만 로드하고,
 모아서 한 번에, 실패도 캐시한다</figcaption>
 </figure>
-<h3 id="회고">회고</h3>
+</section>
+<section id="회고" class="level3">
+<h3>회고</h3>
 <p>무한 재요청은 재시도 횟수만 제한해도 멈출 수는 있습니다. 하지만 그건
 증상이고, 진짜 원인은 <strong>카드가 재마운트될 때마다 훅이 새로 생겨
 캐시가 소실되고 같은 오류를 다시 호출하는 구조</strong>였습니다. 그래서
@@ -136,9 +145,13 @@ alt="케이스 목록 썸네일 — 보일 때만 로드하고, 모아서 한 �
 — 성공뿐 아니라 실패도 하나의 상태로 보고 캐싱한 것이 무한 재요청을 끊은
 핵심이었습니다.</p>
 <hr />
-<h2
-id="ai를-판단-단계에-결합한-변경-감지-격리-재현-위-검증-워크플로우">AI를
-판단 단계에 결합한 변경 감지 — 격리 재현 위 검증 워크플로우</h2>
+</section>
+</section>
+<section
+id="ai를-판단-단계에-결합한-변경-감지-격리-재현-위-검증-워크플로우"
+class="level2">
+<h2>AI를 판단 단계에 결합한 변경 감지 — 격리 재현 위 검증
+워크플로우</h2>
 <p><code>2025.11 ~</code> ·
 <code>Claude · Docker · 런타임 Config · Playwright · EC2 · qase</code></p>
 <blockquote>
@@ -146,13 +159,22 @@ id="ai를-판단-단계에-결합한-변경-감지-격리-재현-위-검증-워�
 분리 진단해 28건 → 0, E2E 로그인 중복을 공통 헬퍼로 약 93% 감소, 커밋
 단위 격리 재현 위에 AI 변경 감지 파이프라인 구축</p>
 </blockquote>
-<h3 id="문제-1">문제</h3>
+<figure>
+<img src="../../images/portfolio/diagrams/payment-test-metrics.svg"
+class="diagram"
+alt="결제 경로 테스트 실패 — 만성 실패하던 약 28건을 원인별 분리 진단으로 0건까지" />
+<figcaption aria-hidden="true">결제 경로 테스트 실패 — 만성 실패하던 약
+28건을 원인별 분리 진단으로 0건까지</figcaption>
+</figure>
+<section id="문제-1" class="level3">
+<h3>문제</h3>
 <p>전체 E2E를 매번 돌리면 느리고, 안 돌리면 회귀를 놓칩니다. 동시에
 dev·qa에서는 멀쩡하던 것이 prod 배포 시 환경변수가 섞여 배포돼 핫픽스가
 반복됐고, 특정 시점 버그 재현이 어려웠으며 E2E가 다른 변경의 간섭으로
 흔들렸습니다.</p>
-<h3 id="해결-격리-재현-위에-ai-판단을-올린다">해결 — 격리 재현 위에 AI
-판단을 올린다</h3>
+</section>
+<section id="해결-격리-재현-위에-ai-판단을-올린다" class="level3">
+<h3>해결 — 격리 재현 위에 AI 판단을 올린다</h3>
 <p>먼저 환경이 런타임에 결정되도록 <strong>도메인 통합
 라이브러리</strong>를 구축해(런타임 분리 자체는 팀), <strong>특정 커밋
 시점으로 Docker를 기동해 클라이언트+서버+DB를 그대로 재현</strong>하는
@@ -187,7 +209,9 @@ alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선�
 <strong>결제 경로 실패 약 28건을 0으로</strong>, <strong>8개 앱 동시
 기동 시 S3 다운로드가 DNS를 포화</strong>시키던 문제를 수정 유/무 대조
 실행으로 확정해 공유 캐시 프리페치로 해소했습니다.</p>
-<h3 id="회고-1">회고</h3>
+</section>
+<section id="회고-1" class="level3">
+<h3>회고</h3>
 <p>핵심은 AI를 판단 단계에 넣었다는 것, 그리고 <strong>그 판단이 틀릴 수
 있다는 것까지 설계해야 한다</strong>는 것입니다. 실제로 어떤 회귀가
 <strong>AI 리뷰가 오히려 통과시킨</strong> 잘못된 테스트에서
@@ -202,14 +226,17 @@ alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선�
 <strong>AI 판단의 한계까지 설계하는 것</strong>이 이 작업의
 핵심이었습니다.</p>
 <hr />
-<h2 id="웹로컬-cam-연동-electron-데스크톱-앱-dentbird-linker">웹·로컬
-CAM 연동 Electron 데스크톱 앱 — Dentbird Linker</h2>
+</section>
+</section>
+<section id="웹로컬-cam-연동-electron-데스크톱-앱-dentbird-linker"
+class="level2">
+<h2>웹·로컬 CAM 연동 Electron 데스크톱 앱 — Dentbird Linker</h2>
 <p><code>2024.07 ~ 2025.12, 이후 단독 운영</code> ·
 <code>Electron · React · TypeScript · Datadog</code></p>
 <blockquote>
 <p><strong>성과</strong> — 좌표계·전달 방식이 제각각인 외부 CAM 12종을
 단일 연동 인터페이스로 통합, 제각각이던 설치 감지 타임아웃을 3초로
-수렴하고 비차단 안내로 통일</p>
+맞추고 비차단 안내로 통일</p>
 </blockquote>
 <figure>
 <img src="../../images/portfolio/screenshots/linker-mockserver.png"
@@ -219,7 +246,8 @@ alt="Dentbird Linker와 검증용 Mock Server — 외부 CAM 12종(포트 연동
 추상화한 연동 화면(좌)과, CAM 없이 연동·자동 업데이트를 시나리오별로
 재현해 검증한 Mock Server(우)</figcaption>
 </figure>
-<h3 id="문제-2">문제</h3>
+<section id="문제-2" class="level3">
+<h3>문제</h3>
 <p>Dentbird에서 디자인한 보철 케이스를 사용자 PC의 <strong>외부 CAM
 소프트웨어</strong>로 보내는 사내 연동 앱(Linker)을 단독
 설계·운영했습니다. 연동은 <strong>파일을 전달하는 데이터 채널</strong>과
@@ -231,8 +259,9 @@ CAM으로 보내려면 <strong>다운로드 → 압축 해제 → 수동 투입<
 웹→로컬 통신을 차단하면서, 권한 팝업을 놓친 사용자의 CS 문의가
 늘었습니다. “지금 되는 방법”을 고르면 정책이 강화될 때 또 막히는
 구조였습니다.</p>
-<h3 id="해결-대안-비교-후-장기-안정성-기준-선택">해결 — 대안 비교 후
-장기 안정성 기준 선택</h3>
+</section>
+<section id="해결-대안-비교-후-장기-안정성-기준-선택" class="level3">
+<h3>해결 — 대안 비교 후 장기 안정성 기준 선택</h3>
 <p>여러 통신 방식을 구현 속도가 아니라 <strong>장기 안정성</strong>
 기준으로 비교했습니다.</p>
 <table>
@@ -281,18 +310,21 @@ Protocol로 Linker를 깨우고, Linker가 파일을 받아 변환 후 CAM에
 헬스체크·파일 핑 같은 엔드포인트와 자동 업데이트 응답을 흉내 내고,
 <strong>성공·에러(500)·지연·타임아웃·부분 실패</strong> 시나리오를
 버튼으로 전환해 Linker가 각 상황에서 어떻게 동작하는지 재현했습니다.</p>
-<h3 id="설치-감지-감지를-믿지-않는-방향으로">설치 감지 — 감지를 믿지
-않는 방향으로</h3>
+</section>
+<section id="설치-감지-감지를-믿지-않는-방향으로" class="level3">
+<h3>설치 감지 — 감지를 믿지 않는 방향으로</h3>
 <p>브라우저는 LNA 정책 때문에 로컬 헬스체크로 앱 실행을 직접 확인할 수
 없어, 창 포커스 변화 같은 <strong>휴리스틱으로 추정</strong>할 수밖에
 없습니다. 감지를 완벽하게 만들려 하지 않고, <strong>틀려도 사용자가
 막히지 않는</strong> 쪽으로 정책을 통일했습니다. 제각각이던 감지
-타임아웃을 <strong>3초로 수렴</strong>하고, 미감지면 미설치로 간주하되
+타임아웃을 <strong>3초로 맞추고</strong>, 미감지면 미설치로 간주하되
 <strong>설치 안내를 항상 비차단(non-trapping)으로 표시해</strong> 어떤
 경우에도 다음 행동(다운로드)이 가능하게 했습니다. 근본 해법으로는
 <strong>감지 판정 자체를 없애고 설치돼 있으면 자동 실행되는
 방식</strong>을 직접 제안해 기획·QA와 합의했습니다(착수 전).</p>
-<h3 id="회고-2">회고</h3>
+</section>
+<section id="회고-2" class="level3">
+<h3>회고</h3>
 <p>처음엔 로컬 서버 방식이 핵심이었지만 정책 변화로 수명이 다했고, 직접
 폐기한 뒤 Custom Protocol 기반으로 옮겼습니다. “되는 방법”이 아니라
 “오래 버티는 방법”을 고른 판단이 이 프로젝트의 핵심이었습니다.
@@ -307,8 +339,11 @@ Protocol로 Linker를 깨우고, Linker가 파일을 받아 변환 후 CAM에
 Linker 앱의 설계·구현·운영과 감지 정책 통일, 그리고 2단계 방향
 제안입니다.)</p>
 <hr />
-<h2 id="b2b-구독결제-프론트엔드-예측-가능불가능-에러-분리">B2B 구독·결제
-프론트엔드 — 예측 가능/불가능 에러 분리</h2>
+</section>
+</section>
+<section id="b2b-구독결제-프론트엔드-예측-가능불가능-에러-분리"
+class="level2">
+<h2>B2B 구독·결제 프론트엔드 — 예측 가능/불가능 에러 분리</h2>
 <p><code>2023.09 ~ 2025.07</code> ·
 <code>React · TypeScript · TanStack Query</code></p>
 <blockquote>
@@ -317,8 +352,8 @@ Linker 앱의 설계·구현·운영과 감지 정책 통일, 그리고 2단계 
 않도록 개선(BusinessLogicError·ErrorBoundary 체계는 모노레포 이관 후에도
 존속)</p>
 </blockquote>
-<h3 id="문제-모든-에러가-한-덩어리였다">문제 — 모든 에러가 한
-덩어리였다</h3>
+<section id="문제-모든-에러가-한-덩어리였다" class="level3">
+<h3>문제 — 모든 에러가 한 덩어리였다</h3>
 <p>일회성 크레딧에서 반복 구독으로 전환하는 시점에 구독·결제 화면(플랜
 업그레이드·좌석 구매·취소·재개·쿠폰·결제수단·히스토리)을 전담했습니다 —
 결제 인프라와 팝업 앱 기반은 팀과 함께였습니다. 그런데 당시 회사에는
@@ -328,17 +363,19 @@ Linker 앱의 설계·구현·운영과 감지 정책 통일, 그리고 2단계 
 SNB도 대시보드도 접근하지 못했습니다.</p>
 <p>근본 원인은 예측 가능한 에러와 예측 불가능한 에러를 구분하지 않은
 것이었습니다. 구분이 없으니, 서버가 의도적으로 내려준 비즈니스 에러든
-정말 예상하지 못한 시스템 실패든 똑같이 폴백 UI로 흡수돼버렸습니다.</p>
-<h3 id="해결-에러를-둘로-나누다">해결 — 에러를 둘로 나누다</h3>
+정말 예상하지 못한 시스템 실패든 똑같이 폴백 UI로 처리돼버렸습니다.</p>
+</section>
+<section id="해결-에러를-둘로-나누다" class="level3">
+<h3>해결 — 에러를 둘로 나누다</h3>
 <p>예측 불가능한 에러는 ErrorBoundary로 격리했습니다. 컴포넌트마다
 분산된 명령형 방어 코드 <code>if (!data) return null</code>을
-ErrorBoundary로 걷어내고, 어디까지 실패를 허용할지를 도메인 의존 관계로
+ErrorBoundary로 대체하고, 어디까지 실패를 허용할지를 도메인 의존 관계로
 구분했습니다. billing 정보를 받지 못해도 결제 내역 조회·구독
 취소·뒤로가기는 살아남습니다. 한 기능의 실패가 전체 페이지를 중단시키지
 않습니다.</p>
 <p>예측 가능한 에러는 코드별로 분기했습니다. 서버는 비즈니스 에러를
 <code>HTTP 200 · success:false · errorCode</code> 형태로 내려줍니다.
-이건 실패가 아니라 의도된 결과라 폴백 UI로 흡수하면 안 됩니다.
+이건 실패가 아니라 의도된 결과라 폴백 UI로 뭉뚱그리면 안 됩니다.
 <code>BusinessLogicError</code> 커스텀 클래스로 throw하고,
 <code>.when(errorCode, action).otherwise()</code> 체인으로 에러 코드별로
 분기했습니다.</p>
@@ -350,11 +387,13 @@ alt="이중 에러 처리 — 예측 불가능한 에러는 ErrorBoundary로 기
 ErrorBoundary로 기능 단위 격리, 예측 가능한 비즈니스 에러는 코드별
 분기</figcaption>
 </figure>
-<h3 id="회고-3">회고</h3>
+</section>
+<section id="회고-3" class="level3">
+<h3>회고</h3>
 <p>에러 처리의 출발점은 정교한 도구가 아니라 에러를 구분 짓는 일이라는
 걸 이 프로젝트에서 배웠습니다. 예측 가능한 실패와 불가능한 실패를 나누지
 않으면, 아무리 잘 만든 ErrorBoundary를 두어도 결국 다 같은 폴백으로
-흡수됩니다.</p>
+처리됩니다.</p>
 <p>이 구조는 모노레포로 이관된 뒤에도 <code>BusinessLogicError</code>와
 <code>withErrorBoundary</code> HOC로 살아남았습니다. 다만 조직 차원의
 에러 처리 정의는 여전히 없고, 무엇이 실패해도 무엇은 살아남아야 하는가를
@@ -367,8 +406,11 @@ ErrorBoundary로 기능 단위 격리, 예측 가능한 비즈니스 에러는 �
 맞춰두지 않으면 응답마다 어떻게 처리할지 다시 논의하는 비용이 계속
 쌓였습니다.</p>
 <hr />
-<h2 id="공통-모듈-micro-frontend-제약-기반-통합-전략">공통 모듈 Micro
-Frontend — 제약 기반 통합 전략</h2>
+</section>
+</section>
+<section id="공통-모듈-micro-frontend-제약-기반-통합-전략"
+class="level2">
+<h2>공통 모듈 Micro Frontend — 제약 기반 통합 전략</h2>
 <p><code>2023.09 ~ 2025.10</code> ·
 <code>NX · Module Federation</code></p>
 <blockquote>
@@ -382,12 +424,15 @@ alt="공통 모듈 Micro Frontend — 4개 서비스 위에 same-origin iframe �
 <figcaption aria-hidden="true">공통 모듈 Micro Frontend — 4개 서비스
 위에 same-origin iframe 모듈 레이어가 얹힌다</figcaption>
 </figure>
-<h3 id="문제-3">문제</h3>
+<section id="문제-3" class="level3">
+<h3>문제</h3>
 <p>4개 서비스(cloud·crown·modeler·milling)가 공유하던 공통 기능
 4개(설정·내보내기·탐색기·뷰어)는, 하나 바뀔 때마다 <strong>각 서비스에
 같은 수정을 반복하고 전부 배포</strong>해야 했습니다. 도메인도 관리팀도
 분리돼 있어 변경 한 번의 비용이 컸습니다.</p>
-<h3 id="해결-써보고-뺀-판단의-연속">해결 — 써보고 뺀 판단의 연속</h3>
+</section>
+<section id="해결-써보고-뺀-판단의-연속" class="level3">
+<h3>해결 — 써보고 뺀 판단의 연속</h3>
 <figure>
 <img src="../../images/portfolio/diagrams/mfe-strategy.svg"
 class="diagram"
@@ -409,7 +454,9 @@ iframe으로 회귀</strong>하되, 이번엔 same-origin으로 서빙해 CORS·
 건에서는 제외했습니다 — 몰라서가 아니라 <strong>써보고 트레이드오프로
 뺀</strong> 판단입니다. (console-client에는 Module Federation을 직접
 적용했습니다.)</p>
-<h3 id="회고-4">회고</h3>
+</section>
+<section id="회고-4" class="level3">
+<h3>회고</h3>
 <p>같은 문제를 라이브러리 → iframe → 빌드타임 통합 → 다시 iframe으로 세
 번 다르게 풀었습니다. iframe 통합과 console-client의 Module Federation은
 제가 주도했고, 빌드 도구 전환은 팀과 함께였습니다. 매번 그때 더 낫다고
@@ -418,17 +465,22 @@ iframe으로 회귀</strong>하되, 이번엔 same-origin으로 서빙해 CORS·
 same-origin iframe으로 돌아왔습니다. 이 과정에서 <strong>“정답 기술”은
 없고 제약에 맞는 선택만 있다는 것</strong>을 배웠습니다. 이 통합은
 4개월간 공통 기능 4종을 단일 구현으로 유지했고, 이후 팀이 Vite로 표준을
-통일하며 그 위로 수렴됐습니다.</p>
+통일하며 그쪽으로 정리됐습니다.</p>
 <p>별개로, 사내 공통 디자인 시스템(MUI 기반)에도 <strong>DatePicker
 확장</strong>(onClose 덮어쓰기 버그 수정·placeholder·onClick 핸들러
 노출) 등 공통 컴포넌트 기여와 v3.0.0 릴리스 관리를 했습니다.</p>
 <hr />
-<h2 id="함께-보기">함께 보기</h2>
+</section>
+</section>
+<section id="함께-보기" class="level2">
+<h2>함께 보기</h2>
 <ul>
 <li><strong><a href="resume.html">이력서</a></strong> — 전체 경력과 기술
 스택</li>
 <li><strong><a href="https://github.com/crowwan">깃허브</a></strong> ·
 <strong><a href="https://crowwan.github.io/">블로그</a></strong></li>
 </ul>
+</section>
+</section>
 </body>
 </html>
