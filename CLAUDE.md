@@ -134,6 +134,8 @@ Claude Code(=메인 Claude in CLI)는 이 룰에 따라 동작합니다.
   - "~에 참여했습니다" → "~를 전담/주도했습니다" (사실이면)
   - "다양한 기술을 사용했습니다" → 구체 기술 + 사용 맥락
   - "팀과 협업했습니다" → 구체 기여 범위와 결과
+  - **구어체(깨지다·걷어내다·매달리다·씨름하다·묶다·손보다·깔다·내가/내 손 등) → WRITING-GUIDE §4-7 교정 규칙 적용** (관용 "전제에 묶인" 등은 예외)
+  - **출처 과시("PR 실측"·"코드 실측"·"소비처 실측(grep)" 등) 금지** — 근거는 서사에 자연스럽게 녹이되 실측 꼬리표는 붙이지 않는다
 - 영문 기술 용어는 원문 유지 (Module Federation, Page Object, LNA 등)
 - **상세 작성 공식·정량 표기·좋은예/나쁜예·선별/정렬·JD 매핑은 [WRITING-GUIDE.md](./WRITING-GUIDE.md) 참조** — career/resume 재작성 시 이 가이드를 기준으로 삼습니다.
 
@@ -157,7 +159,12 @@ Claude Code(=메인 Claude in CLI)는 이 룰에 따라 동작합니다.
 3. 사용자가 명시적으로 다른 Phase로 점프하라고 했는가, 아니면 PLAN 순서를 따르는가
 4. 인터뷰가 필요한 단계라면 `interviews/0X-*.md` 파일을 먼저 열거나 만들었는가
 5. 변경 대상 파일에 사용자가 모르는 사실/수치를 새로 박을 위험이 있는가 → 있으면 멈추고 질문
-6. **커밋 직전 `git config --local user.email`이 `imagoworks.ai`가 아닌지 확인**. 회사 PC 글로벌 config가 회사 이메일이라 local 격리가 풀리면 노출됨. `.git/hooks/pre-commit`이 1차 방어선이지만, 새 워킹트리/클론에는 hook이 없으므로 수동 점검도 필요.
+6. **★ `resume.md`·`portfolio.md`·`applications/**` 본문을 수정하기 전·후 [WRITING-GUIDE.md](./WRITING-GUIDE.md) §4 금지 tic(특히 §4-7 구어체 목록)을 반드시 점검.** 새 문장을 쓸 때 구어체·출처 과시(PR/코드 실측 등)·멋부림이 섞이지 않았는지 확인하고, 수정 후 아래 셀프체크 grep으로 잔존 여부를 검사한다.
+   ```bash
+   grep -nE "깨지|걷어내|매달리|씨름|묶어|묶은|손봤|깔았|내가 |내 손|실측|오판|저울질|체득|흡수|수렴|박제" resume.md portfolio.md applications/*/resume.md applications/*/portfolio.md
+   ```
+   → 결과가 나오면 §4 규칙에 따라 교정(관용 "전제에 묶인" 등 예외는 그대로 둠). 새 금지 표현을 발견하면 WRITING-GUIDE §4-7과 메모리 `resume-voice-preference`에 함께 추가한다.
+7. **커밋 직전 `git config --local user.email`이 `imagoworks.ai`가 아닌지 확인**. 회사 PC 글로벌 config가 회사 이메일이라 local 격리가 풀리면 노출됨. `.git/hooks/pre-commit`이 1차 방어선이지만, 새 워킹트리/클론에는 hook이 없으므로 수동 점검도 필요.
 
 ### Git Identity 셋업 (이 레포 전용)
 

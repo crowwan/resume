@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" font-family="Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+  <defs>
+    <linearGradient id="gIndigoArc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+
+  <text x="60" y="46" font-size="19" font-weight="700" fill="#0f172a">CaseInfo 다이얼로그 코드 (3개 앱 중복)</text>
+
+  <!-- 감소율 게이지 도넛 -->
+  <g transform="translate(240,195)">
+    <circle cx="0" cy="0" r="95" fill="none" stroke="#e2e8f0" stroke-width="34"/>
+    <circle cx="0" cy="0" r="95" fill="none" stroke="url(#gIndigoArc)" stroke-width="34" stroke-linecap="round"
+      stroke-dasharray="394 597" transform="rotate(-90)"/>
+    <text x="0" y="-4" text-anchor="middle" font-size="44" font-weight="800" fill="#4338ca">-66%</text>
+    <text x="0" y="26" text-anchor="middle" font-size="15" fill="#64748b">코드량 감소</text>
+  </g>
+
+  <!-- 우측 설명 -->
+  <text x="470" y="150" font-size="34" font-weight="800"><tspan fill="#dc2626">984줄</tspan><tspan fill="#94a3b8" font-weight="600"> → </tspan><tspan fill="#4338ca">330줄</tspan></text>
+  <text x="470" y="196" font-size="16" fill="#475569">3개 앱에 중복되던 같은 다이얼로그를</text>
+  <text x="470" y="222" font-size="16" fill="#475569">Compound Component로 단일화</text>
+</svg>
