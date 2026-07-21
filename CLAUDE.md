@@ -194,6 +194,7 @@ git config --local user.email "32172056+crowwan@users.noreply.github.com"
 | `claude-project-instructions.md` | 모바일 Claude.ai Project Instructions | 모바일 Claude.ai |
 | `PLAN.md` | 현재 작업 순서·상태 | Claude + 사용자 |
 | `WRITING-GUIDE.md` | **최종 담백 스타일 가이드** — 타이틀·불릿 룰·금지 tic·교정·귀속 | Claude + 사용자 |
+| `REVIEW-CHECKLIST.md` | **제출 전 첨삭 체크리스트(경력직)** — 포맷·내용·포폴 pass/fail + 신입/발명 충돌 제외 항목 명시 | Claude + 사용자 |
 | `findings/README.md` | **사실 발굴 룰** — 4시그널·출처 태그·카드별 레포 지도 | Claude + 사용자 |
 | `findings/0X-*.md` | 카드별 발굴된 raw 사실 (서사 X). 인터뷰의 입력원 | Claude + 사용자 |
 | `interviews/README.md` | 인터뷰 진행 룰과 면접 답변 스크립트 변환 가이드 | Claude + 사용자 |
