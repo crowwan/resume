@@ -232,6 +232,55 @@ Linker 앱의 설계·구현·운영과 감지 정책 통일, 그리고 2단계 
 <hr />
 </section>
 </section>
+<section
+id="medit-소프트웨어-연동-인앱-현대화-방치된-통합을-되살리고-결합을-끊다"
+class="level2">
+<h2>Medit 소프트웨어 연동 인앱 현대화 — 방치된 통합을 되살리고 결합을
+끊다</h2>
+<p><code>2026.07</code> · <code>Electron · TypeScript · MUI</code></p>
+<blockquote>
+<p><strong>성과</strong> — 곧 사용이 끊길 뻔한 협력사 인앱을
+엔진·로그인·의존 정리로 되살리고, 우리 서비스가 바뀌어도 재빌드가 필요
+없는 구조로 전환 (실제 Electron+CDP 검증 완료, 배포 대기)</p>
+</blockquote>
+<section id="문제-1" class="level3">
+<h3>문제</h3>
+<p>협력사 Medit의 소프트웨어 안에서 Dentbird를 쓸 수 있도록 간단한
+Electron 인앱 형태로 제공했지만, 2023년 이후 유지보수되지 않았습니다.
+그사이 우리 서비스는 이 인앱을 고려하지 않고 업데이트를 거듭했고, 로그인
+후 재진입 시 엉뚱한 페이지로 이동하거나 미로그인 상태에서 작업이
+저장되지 않는 식으로 호환성이 어긋나기 시작했습니다. 특히 곧 배포될
+버전에서는 인앱에서 우리 서비스를 아예 사용하지 못할 수 있는
+상황이었습니다.</p>
+</section>
+<section id="해결" class="level3">
+<h3>해결</h3>
+<p>처음에는 인앱을 최대한 건드리지 않고 고치려 했습니다. 하지만 최신 3D
+엔진이 요구하는 WASM 기능(JSPI)이 구버전 Electron에서 동작하지 않아,
+Electron 25를 31로 올려 다시 빌드해야 했습니다.</p>
+<p>로그인 문제의 원인은 인앱이 우리 서비스의 내부 방식에 불필요하게
+결합돼 있던 데 있었습니다. 과거 인앱은 유저 정보
+API(<code>get-user</code>)의 응답이 200이면 로그인 성공으로 판단했는데,
+우리가 이 API를 레거시로 제거하자 그 판단이 통째로 무너졌습니다. 급한
+대로 해당 경로에 <code>get-user</code>라는 이름의 이미지를 항상 내려주는
+임시 대응을 한 뒤, 애초에 확인할 필요도 없던 이 결합을 IPC 기반 흐름으로
+다시 설계해 근본적으로 제거했습니다.</p>
+</section>
+<section id="회고-1" class="level3">
+<h3>회고</h3>
+<p>인앱은 C++ 애드인과 함께 빌드되는 구조라 재빌드 자체가
+부담이었습니다. 그래서 되살리면서 회사 UI 라이브러리 의존까지 MUI로
+대체했습니다(그 라이브러리는 패키지가 GitHub으로 이전되며 설치 경로도
+사라진 상태였습니다). 우리 쪽 구현과의 결합을 줄여, 이제는 우리 서비스의
+구현 아키텍처가 바뀌지 않는 한 인앱을 다시 빌드할 일이 없습니다.</p>
+<p>검증은 브라우저 stub이 불안정해, 실제 Electron에 CDP로 붙어 3D 엔진
+구동까지 확인하는 방식으로 바꿨습니다. 두 문제는 해결됐고, 릴리스는
+협력사 Medit이 맡아 배포를 기다리고 있습니다. 결합을 완전히 없애는 데
+집착하기보다, 큰 변경이 있을 때만 드물게 재빌드하면 되는 선까지 끊는
+것을 택했습니다.</p>
+<hr />
+</section>
+</section>
 <section id="b2b-구독결제-프론트엔드-예측-가능불가능-에러-분리"
 class="level2">
 <h2>B2B 구독·결제 프론트엔드 — 예측 가능/불가능 에러 분리</h2>
@@ -279,7 +328,7 @@ ErrorBoundary로 기능 단위 격리, 예측 가능한 비즈니스 에러는 �
 분기</figcaption>
 </figure>
 </section>
-<section id="회고-1" class="level3">
+<section id="회고-2" class="level3">
 <h3>회고</h3>
 <p>에러 처리의 출발점은 정교한 도구가 아니라 에러를 구분 짓는 일이라는
 걸 이 프로젝트에서 배웠습니다. 예측 가능한 실패와 불가능한 실패를 나누지
@@ -322,7 +371,7 @@ alt="공통화한 4개 모듈 — 설정·내보내기·탐색기·뷰어가 4�
 설정·내보내기·탐색기·뷰어가 4개 서비스에서 같은 구현으로
 재사용된다</figcaption>
 </figure>
-<section id="문제-1" class="level3">
+<section id="문제-2" class="level3">
 <h3>문제</h3>
 <p>4개 서비스(cloud·crown·modeler·milling)가 공유하던 공통 기능
 4개(설정·내보내기·탐색기·뷰어)는, 하나 바뀔 때마다 <strong>각 서비스에
@@ -353,7 +402,7 @@ iframe으로 회귀</strong>하되, 이번엔 same-origin으로 서빙해 CORS·
 뺀</strong> 판단입니다. (console-client에는 Module Federation을 직접
 적용했습니다.)</p>
 </section>
-<section id="회고-2" class="level3">
+<section id="회고-3" class="level3">
 <h3>회고</h3>
 <p>같은 문제를 라이브러리 → iframe → 빌드타임 통합 → 다시 iframe으로 세
 번 다르게 풀었습니다. iframe 통합과 console-client의 Module Federation은
@@ -378,14 +427,14 @@ class="level2">
 보존하며 NX 모노레포로 이관, 잔존 설정이 유발하던 OOM을 진단해 빌드
 태스크 11 → 9로 정리</p>
 </blockquote>
-<section id="문제-2" class="level3">
+<section id="문제-3" class="level3">
 <h3>문제</h3>
 <p>별도 레포로 분산돼 있던 클라이언트 앱·공용 라이브러리가 환경별
 URL·도메인을 <strong>각자 다르게 구성</strong>하고 있었고, 공통 변경을
 여러 곳에 반복해야 했습니다. 다국어 관리도 중복 업로드와 분산된
 스크립트로 파편화돼 있었습니다.</p>
 </section>
-<section id="해결" class="level3">
+<section id="해결-1" class="level3">
 <h3>해결</h3>
 <ul>
 <li><strong>NX 유지 + OOM 해소</strong> — 모노레포 도구를 새로 고르는
@@ -416,7 +465,7 @@ alt="모노레포 통합 전/후 — 분산된 레포들이 단일 NX 모노레�
 절대 URL로 갈라지되 호출부는 <code>UrlHelper.cloud()</code> 한 형태로
 통일됩니다.</p>
 </section>
-<section id="회고-3" class="level3">
+<section id="회고-4" class="level3">
 <h3>회고</h3>
 <p>분산됐던 레포를 하나로 합치니, 여러 곳에 걸친 변경을 한 PR에서 한눈에
 보고 리뷰할 수 있게 됐습니다. npm 패키지나 외부 모듈로 따로 배포되며
@@ -444,7 +493,7 @@ alt="결제 경로 테스트 실패 — 만성 실패하던 약 28건을 원인�
 <figcaption aria-hidden="true">결제 경로 테스트 실패 — 만성 실패하던 약
 28건을 원인별 분리 진단으로 0건까지</figcaption>
 </figure>
-<section id="문제-3" class="level3">
+<section id="문제-4" class="level3">
 <h3>문제</h3>
 <p>테스트·디버깅의 신뢰성이 이 프로젝트의 출발점이었습니다. dev·qa에서는
 멀쩡하던 것이 <strong>prod 배포 시 dev 환경변수가 포함된 채
@@ -520,7 +569,7 @@ alt="AI 변경 감지 파이프라인 — 커밋 diff 분석 → 연관 TC 선�
 <strong>“어떤 테스트가 이 변경에 필요한가”라는 판단 단계</strong>에
 결합했다는 점입니다.</p>
 </section>
-<section id="회고-4" class="level3">
+<section id="회고-5" class="level3">
 <h3>회고</h3>
 <p>“왜 내 PC에선 되는데 CI에선 안 되지”를 매번 디버깅하는 대신, 그 질문
 자체가 나오지 않는 환경을 만드는 게 목표였습니다. 도구가 아니라
