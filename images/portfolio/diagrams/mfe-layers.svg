@@ -56,5 +56,5 @@
   <text x="778" y="321" font-size="13" font-weight="700" fill="#4338ca">4개 서비스</text>
   <text x="778" y="339" font-size="10.5" fill="#94a3b8">도메인·관리팀 분리</text>
 
-  <text x="480" y="412" font-size="11.5" font-weight="600" fill="#64748b" text-anchor="middle">공통 기능 4개를 각 서비스에 복붙·재배포하던 구조를, 모듈 레이어 한 곳으로 모았다</text>
+  <text x="480" y="412" font-size="11.5" font-weight="600" fill="#64748b" text-anchor="middle">공통 기능 4개를 각 서비스에 복제·재배포하던 구조를 모듈 레이어 한 곳으로 통합</text>
 </svg>

@@ -11,7 +11,7 @@
     </marker>
   </defs>
 
-  <text x="440" y="48" font-size="12.5" font-weight="700" fill="#64748b" text-anchor="middle">정답을 한 번에 고르지 않았다 — 제약이 바뀔 때마다 다시 골랐다</text>
+  <text x="440" y="48" font-size="12.5" font-weight="700" fill="#64748b" text-anchor="middle">제약이 바뀔 때마다 통합 방식을 다시 선택</text>
 
   <g filter="url(#fShadow)"><rect x="40" y="92" width="170" height="80" rx="12" fill="#ffffff" stroke="#e2e8f0"/></g>
   <circle cx="62" cy="116" r="4.5" fill="#94a3b8"/>
@@ -51,5 +51,5 @@
   <text x="648" y="217" font-size="10.5" fill="#94a3b8" text-anchor="middle">배포 주기 제약·부담 증가</text>
 
   <rect x="40" y="246" width="430" height="32" rx="16" fill="none" stroke="#e2e8f0" stroke-dasharray="6 5"/>
-  <text x="255" y="267" font-size="10.5" fill="#94a3b8" text-anchor="middle">Module Federation — 써보고 트레이드오프로 제외 (console-client엔 직접 적용)</text>
+  <text x="255" y="267" font-size="10.5" fill="#94a3b8" text-anchor="middle">Module Federation — 적용해 본 뒤 비용 대비 이득이 낮아 이 건에서는 제외</text>
 </svg>

@@ -42,7 +42,7 @@
   <text x="240" y="356" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Root</text>
   <line x1="452" y1="352" x2="530" y2="352" stroke="#cbd5e1" stroke-width="1.2"/>
   <text x="538" y="348" font-size="13" font-weight="700" fill="#4338ca">외부 의존 없는 최후 안전망</text>
-  <text x="538" y="366" font-size="10.5" fill="#94a3b8">안전망이 자기 의존성 때문에 죽지 않게</text>
+  <text x="538" y="366" font-size="10.5" fill="#94a3b8">안전망이 자기 의존성 때문에 실패하지 않도록</text>
 
   <!-- Datadog -->
   <g filter="url(#fShadow)">
@@ -53,7 +53,7 @@
   <text x="730" y="96" font-size="10.5" fill="#64748b" text-anchor="middle">원인별 직렬화 — grep 가능한 단일 라인</text>
 
   <path d="M 440 150 C 500 110, 550 80, 616 80" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
-  <text x="520" y="102" font-size="10.5" fill="#64748b" text-anchor="middle">Error.cause + 구조화된 상세</text>
+  <text x="520" y="102" font-size="10.5" fill="#64748b" text-anchor="middle">표준 Error.cause · 구조화된 실패 상세</text>
 
-  <text x="440" y="424" font-size="11.5" font-weight="600" fill="#64748b" text-anchor="middle">공통 라이브러리 — 한 곳을 고치면 5개 앱에 반영, 한 메시지로 뭉치던 실패 124건이 원인별로 갈라진다</text>
+  <text x="440" y="424" font-size="11.5" font-weight="600" fill="#64748b" text-anchor="middle">공통 라이브러리 — 한 곳을 고치면 5개 앱에 반영, 한 메시지로 뭉쳐 보이던 실패 124건을 원인별로 분리</text>
 </svg>

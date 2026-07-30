@@ -33,7 +33,7 @@
   <circle cx="622" cy="88" r="4.5" fill="url(#gIndigo)"/>
   <text x="636" y="93" font-size="13" font-weight="700" fill="#1e293b">판단 기준</text>
   <text x="620" y="116" font-size="10.5" fill="#64748b">관심사 분리가 목적일 때만</text>
-  <text x="620" y="132" font-size="10.5" fill="#94a3b8">아니면 굳이 안 쓴다</text>
+  <text x="620" y="132" font-size="10.5" fill="#94a3b8">그 외에는 도입하지 않음</text>
 
   <line x1="280" y1="102" x2="316" y2="102" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
   <line x1="560" y1="102" x2="596" y2="102" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arr)"/>
@@ -45,7 +45,7 @@
   <text x="64" y="242" font-size="11" fill="#047857">Viewer·Desktop·Mobile에 흩어진 중복을 Compound + FormProvider 단일 컴포넌트로</text>
   <rect x="600" y="200" width="220" height="48" rx="10" fill="#ffffff" stroke="#a7f3d0"/>
   <text x="710" y="222" font-size="15" font-weight="800" fill="#059669" text-anchor="middle">984줄 → 330줄</text>
-  <text x="710" y="240" font-size="10.5" fill="#64748b" text-anchor="middle">중복 66% 감소 (본인 회고 기준)</text>
+  <text x="710" y="240" font-size="10.5" fill="#64748b" text-anchor="middle">중복 약 66% 감소</text>
 
   <!-- 전제 -->
   <rect x="40" y="296" width="800" height="56" rx="12" fill="#eef2ff" stroke="#c7d2fe"/>
